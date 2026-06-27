@@ -9,8 +9,6 @@ Output: site/ directory ready for Cloudflare Pages deployment.
 """
 
 import json
-import os
-import re
 import shutil
 from pathlib import Path
 
@@ -21,6 +19,8 @@ SITE_DIR = PROJECT_ROOT / "site"
 
 FONTS_DIR = SITE_DIR / "assets" / "fonts"
 REPORTS_DIR = SITE_DIR / "reports"
+
+TEMPLATE_PATH = ASSETS_DIR / "templates" / "landing-news-tools.html"
 
 
 def clean_site():
@@ -77,41 +77,106 @@ def copy_other_report(report_src: Path, report_dst: Path):
     print(f"  ✅ {report_src.name} → {report_dst.relative_to(PROJECT_ROOT)}")
 
 
-def build_landing_page(report_dirs: list[str]):
-    cards = ""
+def load_enriched_json(rd: str) -> dict | None:
+    """Load enriched JSON for a report directory, trying report/ then site/reports/."""
+    enriched_json = REPORT_DIR / rd / "data" / "enriched-trending.json"
+    if not enriched_json.exists():
+        enriched_json = REPORTS_DIR / rd / "data" / "enriched-trending.json"
+    if not enriched_json.exists():
+        return None
+    try:
+        return json.loads(enriched_json.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def format_date(rd: str) -> str:
+    """Format a report directory name into a human-readable Chinese date string."""
+    # rd like "github-trending-weekly-2026-26" (year-week)
+    if rd.startswith("github-trending-weekly-"):
+        parts = rd.replace("github-trending-weekly-", "").split("-")
+        if len(parts) >= 2 and parts[0].isdigit():
+            return f"{parts[0]}年 第{parts[1]}周"
+        return rd
+    # rd like "2026-06-07" (date)
+    parts = rd.split("-")
+    if len(parts) == 3 and parts[0].isdigit():
+        return f"{parts[0]}年{int(parts[1])}月{int(parts[2])}日"
+    return rd
+
+
+def get_month_key(rd: str) -> str:
+    """Extract year-month key from a report directory name.
+    Handles both '2026-06-07' and 'github-trending-weekly-2026-26' formats.
+    Returns string like '2026年06月'.
+    """
+    if rd.startswith("github-trending-weekly-"):
+        parts = rd.replace("github-trending-weekly-", "").split("-")
+        if len(parts) >= 2 and parts[0].isdigit():
+            return f"{parts[0]}年{int(parts[1]):02d}月"
+        return "未知"
+    parts = rd.split("-")
+    if len(parts) >= 2 and parts[0].isdigit():
+        return f"{parts[0]}年{int(parts[1]):02d}月"
+    return "未知"
+
+
+def month_sort_key(mk: str) -> tuple[int, int]:
+    """Sort key for month labels like '2026年06月' -> (2026, 6)."""
+    import re
+    m = re.match(r"(\d{4})年(\d{2})月", mk)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    return (0, 0)
+
+
+def build_landing_page(report_dirs: list[str]) -> tuple[str, int]:
+    """Generate month-grouped report card HTML and compute total project count."""
+    total_projects = 0
+
+    # Group reports by month
+    month_groups: dict[str, list[str]] = {}
     for rd in sorted(report_dirs, reverse=True):
-        date_str = rd
-        enriched_json = (REPORT_DIR / rd / "data" / "enriched-trending.json")
-        if not enriched_json.exists():
-            enriched_json = (REPORTS_DIR / rd / "data" / "enriched-trending.json")
-        total = "?"
-        summary = ""
-        if enriched_json.exists():
-            try:
-                data = json.loads(enriched_json.read_text(encoding="utf-8"))
-                total = str(data.get("total_count", "?"))
+        mk = get_month_key(rd)
+        if mk not in month_groups:
+            month_groups[mk] = []
+        month_groups[mk].append(rd)
+
+    # Sort months descending
+    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
+
+    months_html = ""
+    for mk in sorted_months:
+        rds = month_groups[mk]
+        cards_html = ""
+        for rd in rds:
+            data = load_enriched_json(rd)
+            total = "?"
+            summary = ""
+            if data:
+                count = data.get("total_count", 0)
+                total = str(count) if count else "?"
+                if isinstance(count, int):
+                    total_projects += count
                 summary = data.get("cover_summary", "")
                 if len(summary) > 120:
                     summary = summary[:120] + "…"
-            except Exception:
-                pass
 
-        if rd.startswith("github-trending-weekly-"):
-            # rd like "github-trending-weekly-2026-26" (year-week)
-            parts = rd.replace("github-trending-weekly-", "").split("-")
-            display_date = f"{parts[0]}年 第{parts[1]}周" if len(parts) >= 2 and parts[0].isdigit() else rd
-        else:
-            # rd like "2026-06-07" (date)
-            parts = rd.split("-")
-            display_date = f"{parts[0]}年{int(parts[1])}月{int(parts[2])}日" if len(parts) == 3 and parts[0].isdigit() else rd
+            display_date = format_date(rd)
 
-        cards += f"""    <a href="reports/{date_str}/report.html" class="card">
-      <div class="card-title">{display_date}</div>
-      <div class="card-meta">{total} 个项目</div>
-      <div class="card-desc">{summary}</div>
+            cards_html += f"""    <a href="reports/{rd}/report.html" class="report-card">
+      <p class="card-date">{display_date}</p>
+      <p class="card-meta">{total} 个项目</p>
+      <p class="card-desc">{summary}</p>
     </a>
 """
-    return cards
+        months_html += f"""  <div class="month-group">
+    <h3 class="month-label">{mk}</h3>
+    <div class="report-grid">
+{cards_html}    </div>
+  </div>
+"""
+    return months_html, total_projects
 
 
 def main():
@@ -142,87 +207,22 @@ def main():
                 report_dirs.append(date_str)
         print(f"  📁 {len(report_dirs)} reports available")
 
-    print("\n📄 Generating landing page...")
-    cards_html = build_landing_page(report_dirs)
-    index_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News Tools · GitHub Trending Weekly Reports</title>
-  <style>
-    * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-    body {{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
-      background: #f5f4ed;
-      color: #141413;
-      min-height: 100vh;
-    }}
-    header {{
-      background: #1B365D;
-      color: #fff;
-      padding: 48px 24px 36px;
-      text-align: center;
-    }}
-    header h1 {{ font-size: 28px; margin-bottom: 8px; }}
-    header p {{ font-size: 14px; opacity: .85; max-width: 600px; margin: 0 auto; }}
-    .badge {{
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      border-radius: 4px;
-      padding: 2px 10px;
-      font-size: 12px;
-      margin-top: 10px;
-    }}
-    .content {{ max-width: 720px; margin: 0 auto; padding: 32px 20px; }}
-    .section-title {{ font-size: 18px; font-weight: 600; margin-bottom: 20px; }}
-    .cards {{ display: flex; flex-direction: column; gap: 12px; }}
-    .card {{
-      display: block;
-      background: #faf9f5;
-      border: 1px solid #e8e6dc;
-      border-radius: 8px;
-      padding: 16px 20px;
-      text-decoration: none;
-      color: inherit;
-      transition: box-shadow .15s;
-    }}
-    .card:hover {{ box-shadow: 0 2px 12px rgba(0,0,0,.08); }}
-    .card-title {{ font-size: 16px; font-weight: 600; margin-bottom: 4px; }}
-    .card-meta {{ font-size: 13px; color: #6b6a64; margin-bottom: 6px; }}
-    .card-desc {{ font-size: 13px; color: #3d3d3a; line-height: 1.6; }}
-    footer {{
-      text-align: center;
-      padding: 32px 20px;
-      font-size: 13px;
-      color: #6b6a64;
-    }}
-    footer a {{ color: #1B365D; }}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>GitHub Trending 周报</h1>
-    <p>每周自动生成的 GitHub Trending 中文报告，覆盖当日最热开源项目。</p>
-    <span class="badge">📅 2026年6月</span>
-  </header>
-  <div class="content">
-    <div class="section-title">📊 各期报告</div>
-    <div class="cards">
-{cards_html}
-    </div>
-  </div>
-  <footer>
-    <a href="https://github.com/Mr-nnng/news-tools">News Tools</a> · MIT License
-  </footer>
-</body>
-</html>"""
+    print("\n📄 Generating landing page (Kami design)...")
+    cards_html, total_projects = build_landing_page(report_dirs)
+
+    # Load Kami template
+    template = TEMPLATE_PATH.read_text(encoding="utf-8")
+
+    # Replace placeholders
+    index_html = template.replace("{{MONTH_GROUPS}}", cards_html)
+    index_html = index_html.replace("{{REPORT_COUNT}}", str(len(report_dirs)))
+    index_html = index_html.replace("{{PROJECT_COUNT}}", str(total_projects))
 
     (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ index.html generated")
+    print("  ✅ index.html generated (Kami design system)")
 
     print(f"\n✅ Build complete → {SITE_DIR.relative_to(PROJECT_ROOT)}/")
-    print(f"   📂 {len(report_dirs)} reports, {sum(1 for _ in FONTS_DIR.iterdir())} font files")
+    print(f"   📂 {len(report_dirs)} reports, {total_projects} total projects, {sum(1 for _ in FONTS_DIR.iterdir())} font files")
 
 
 if __name__ == "__main__":

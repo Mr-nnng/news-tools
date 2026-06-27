@@ -273,39 +273,115 @@ a:hover { color: var(--brand-light); }
   margin: 14px 0 0;
 }
 
-/* Month group header */
+/* ========== Timeline ========== */
+
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+/* Vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+  border-radius: 1px;
+}
+
+/* Month group — foldable */
 .month-group {
-  margin-bottom: 40px;
+  position: relative;
+  margin-bottom: 12px;
 }
 .month-group:last-child {
   margin-bottom: 0;
+}
+
+/* Dot on timeline */
+.month-group::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 2px var(--parchment);
+  z-index: 1;
+}
+
+.month-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 1px 0 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+.month-toggle:hover .month-label {
+  color: var(--brand-light);
 }
 .month-label {
   font-family: var(--serif);
   font-weight: 500;
   font-size: 18px;
   color: var(--brand);
-  margin: 0 0 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-soft);
   letter-spacing: 0.4px;
+  transition: color 0.15s;
+}
+.month-arrow {
+  font-family: var(--latin-ui);
+  font-size: 18px;
+  color: var(--stone);
+  transition: transform 0.25s ease;
+  display: inline-block;
+  line-height: 1;
+}
+.month-group.is-collapsed .month-arrow {
+  transform: rotate(-90deg);
 }
 
-/* Report grid */
+/* Report cards inside timeline */
 .report-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  max-height: 2000px;
+  opacity: 1;
 }
+.month-group.is-collapsed .report-grid {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .report-card {
   display: block;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--ivory);
-  padding: 24px 26px;
+  padding: 24px 26px 24px 32px;
   text-decoration: none;
   color: inherit;
+  position: relative;
   transition: box-shadow 0.2s, transform 0.15s;
+}
+/* Small connecting line from timeline to card */
+.report-card::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 28px;
+  width: 20px;
+  height: 2px;
+  background: var(--line);
 }
 .report-card:hover {
   box-shadow: 0 4px 24px rgba(0,0,0,0.05);
@@ -395,7 +471,6 @@ footer.foot {
   .hero h1 { font-size: 56px; letter-spacing: 0; }
   .hero .tagline { font-size: 17px; }
   .section-title { font-size: 30px; letter-spacing: 0.8px; }
-  .report-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   .foot {
     flex-direction: column;
     align-items: flex-start;
@@ -458,13 +533,17 @@ footer.foot {
       <p class="section-lede">点击卡片查看完整报告，涵盖 AI、安全、开发工具等领域的最热开源项目。</p>
     </div>
 
-      <div class="month-group">
-    <h3 class="month-label">2026年06月</h3>
+    <div class="timeline">
+        <div class="month-group">
+    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
+      <span class="month-arrow">▾</span>
+      <span class="month-label">2026年06月</span>
+    </div>
     <div class="report-grid">
     <a href="reports/2026-06-27/report.html" class="report-card">
       <p class="card-date">2026年6月27日</p>
       <p class="card-meta">19 个项目</p>
-      <p class="card-desc">本周 GitHub Trending 收录 19 个热门项目，涵盖 AI Agent 工具 · 视频制作 · 网络安全 · 设计规范 等领域。从智能视频制作系统到代码质量守卫、从全球情报监测到 PDF 全能处理，AI 开发者生态工具链愈发成…</p>
+      <p class="card-desc">本周 GitHub Trending 收录 19 个热门项目，涵盖 AI Agent 工具 · 视频制作 · 网络安全 · 设计规范 等领域。从智能视频制作系统到代码质量守卫、从全球情报监测到 PDF 全能处理，AI 开发者生态工具链愈发成熟。</p>
     </a>
     <a href="reports/2026-06-21/report.html" class="report-card">
       <p class="card-date">2026年6月21日</p>
@@ -474,16 +553,17 @@ footer.foot {
     <a href="reports/2026-06-14/report.html" class="report-card">
       <p class="card-date">2026年6月14日</p>
       <p class="card-meta">18 个项目</p>
-      <p class="card-desc">本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI Agent 技能 · 容器化 · Token 压缩 · 安全扫描 · 知识管理 · 计算机视觉 等领域。AI Agent 技能类项目持续霸榜，last30days 和…</p>
+      <p class="card-desc">本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI Agent 技能 · 容器化 · Token 压缩 · 安全扫描 · 知识管理 · 计算机视觉 等领域。AI Agent 技能类项目持续霸榜，last30days 和 agent-skills 分别以 41k 和 58k Star 领跑；Apple 开源其 macOS 容器化工具 container（36k Star）；Headroom 以 60-95% 的 Token 压缩率成为 AI Agent 基础设施新星。</p>
     </a>
     <a href="reports/2026-06-07/report.html" class="report-card">
       <p class="card-date">2026年6月7日</p>
       <p class="card-meta">20 个项目</p>
-      <p class="card-desc">本周 GitHub Trending 收录 20 个热门仓库，涵盖 AI Agent · 安全 · 文档处理 · 前端设计 · 语音合成 等领域。affaan-m/ECC 以 20.9万 Star 领跑，NousResearch/herme…</p>
+      <p class="card-desc">本周 GitHub Trending 收录 20 个热门仓库，涵盖 AI Agent · 安全 · 文档处理 · 前端设计 · 语音合成 等领域。affaan-m/ECC 以 20.9万 Star 领跑，NousResearch/hermes-agent 达 18.4万 Star；headroom 作为新项目本周暴涨 13308 Star 登顶增长榜首。</p>
     </a>
     </div>
   </div>
 
+    </div>
   </section>
 
   <!-- ============ Footer ============ -->

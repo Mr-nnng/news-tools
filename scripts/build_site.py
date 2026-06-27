@@ -39,30 +39,43 @@ def copy_fonts():
     print(f"  ✅ Fonts → {FONTS_DIR.relative_to(PROJECT_ROOT)}")
 
 
-def copy_report(report_src: Path, report_dst: Path):
+def copy_report(report_src: Path, report_dst: Path, current_rd: str, all_dirs: list[str], skip_dirs: set[str] | None = None):
+    """Copy report directory to site/, optionally skipping certain subdirs.
+    
+    Args:
+        skip_dirs: set of directory names to skip (e.g. {'avatar', 'images'}). Default includes these.
+    """
+    if skip_dirs is None:
+        skip_dirs = {'avatar', 'images'}
     report_dst.mkdir(parents=True, exist_ok=True)
 
     for item in report_src.iterdir():
         if not item.name.startswith("."):
             if item.is_file() and item.suffix == ".html":
-                copy_html_with_font_path_fix(item, report_dst)
-            else:
+                copy_html_with_font_path_fix(item, report_dst, current_rd, all_dirs)
+            elif item.is_dir() and item.name not in skip_dirs:
                 dest = report_dst / item.name
-                if item.is_dir():
-                    shutil.copytree(item, dest, dirs_exist_ok=True)
-                else:
-                    shutil.copy2(item, dest)
+                shutil.copytree(item, dest, dirs_exist_ok=True)
+            elif item.is_file() and item.suffix != ".html" and item.name not in skip_dirs:
+                dest = report_dst / item.name
+                shutil.copy2(item, dest)
 
 
-def copy_html_with_font_path_fix(src: Path, dst_dir: Path):
+def copy_html_with_font_path_fix(src: Path, dst_dir: Path, current_rd: str = "", all_dirs: list[str] | None = None):
     html = src.read_text(encoding="utf-8")
     html = html.replace(
         '../../assets/fonts/',
         '../../../assets/fonts/',
     )
+    # Inject sidebar if we have all_dirs
+    if "{{SIDEBAR}}" in html and all_dirs:
+        sidebar_html = build_sidebar_html(all_dirs, current_rd)
+        html = html.replace("{{SIDEBAR}}", sidebar_html)
+    else:
+        html = html.replace("{{SIDEBAR}}", "")
     dst_path = dst_dir / src.name
     dst_path.write_text(html, encoding="utf-8")
-    print(f"  📄 {src.name} (font path adjusted)")
+    print(f"  📄 {src.name} (paths adjusted)")
 
 
 def copy_other_report(report_src: Path, report_dst: Path):
@@ -130,6 +143,54 @@ def month_sort_key(mk: str) -> tuple[int, int]:
     return (0, 0)
 
 
+def build_sidebar_html(report_dirs: list[str], current_rd: str) -> str:
+    """Generate sidebar timeline HTML for a report page.
+    current_rd is the current report directory name (e.g. '2026-06-27').
+    Links use '../' prefix since report HTMLs are in site/reports/<date>/.
+    """
+    # Group reports by month
+    month_groups: dict[str, list[str]] = {}
+    for rd in sorted(report_dirs, reverse=True):
+        mk = get_month_key(rd)
+        if mk not in month_groups:
+            month_groups[mk] = []
+        month_groups[mk].append(rd)
+
+    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
+
+    sections_html = ""
+    for mk in sorted_months:
+        rds = month_groups[mk]
+        items_html = ""
+        for rd in rds:
+            display_date = format_date(rd)
+            active_class = ' is-active' if rd == current_rd else ''
+            items_html += f"""
+          <a href="../{rd}/report.html" class="sidebar-item{active_class}">{display_date}</a>"""
+
+        sections_html += f"""
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          {mk}
+        </div>
+        <div class="sidebar-month-items">
+          {items_html}
+        </div>
+      </div>"""
+
+    sidebar = f"""<nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      {sections_html}
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>"""
+    return sidebar
+
+
 def build_landing_page(report_dirs: list[str]) -> tuple[str, int]:
     """Generate month-grouped report card HTML and compute total project count."""
     total_projects = 0
@@ -159,8 +220,8 @@ def build_landing_page(report_dirs: list[str]) -> tuple[str, int]:
                 if isinstance(count, int):
                     total_projects += count
                 summary = data.get("cover_summary", "")
-                if len(summary) > 120:
-                    summary = summary[:120] + "…"
+                if len(summary) > 280:
+                    summary = summary[:280] + "…"
 
             display_date = format_date(rd)
 
@@ -171,7 +232,10 @@ def build_landing_page(report_dirs: list[str]) -> tuple[str, int]:
     </a>
 """
         months_html += f"""  <div class="month-group">
-    <h3 class="month-label">{mk}</h3>
+    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
+      <span class="month-arrow">▾</span>
+      <span class="month-label">{mk}</span>
+    </div>
     <div class="report-grid">
 {cards_html}    </div>
   </div>
@@ -197,15 +261,23 @@ def main():
             if item.name.startswith("github-trending-weekly-"):
                 date_str = item.name.replace("github-trending-weekly-", "")
                 report_dirs.append(date_str)
-                report_dst = REPORTS_DIR / date_str
-                print(f"  📁 {item.name} → {report_dst.relative_to(PROJECT_ROOT)}")
-                copy_report(item, report_dst)
     if REPORTS_DIR.exists():
         for item in sorted(REPORTS_DIR.iterdir()):
             date_str = item.name
             if date_str not in report_dirs:
                 report_dirs.append(date_str)
-        print(f"  📁 {len(report_dirs)} reports available")
+
+    # Collect all_dirs for sidebar generation
+    all_dirs = sorted(report_dirs)
+
+    # Copy reports with sidebar injection
+    for rd in all_dirs:
+        report_src = REPORT_DIR / f"github-trending-weekly-{rd}"
+        report_dst = REPORTS_DIR / rd
+        if report_src.exists():
+            print(f"  📁 {report_src.name} → {report_dst.relative_to(PROJECT_ROOT)}")
+            copy_report(report_src, report_dst, rd, all_dirs)
+    print(f"  📁 {len(all_dirs)} reports available")
 
     print("\n📄 Generating landing page (Kami design)...")
     cards_html, total_projects = build_landing_page(report_dirs)

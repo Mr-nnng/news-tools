@@ -17,7 +17,7 @@ import json
 import re
 import argparse
 from pathlib import Path
-from datetime import datetime, timezone, timedelta
+from datetime import date, datetime, timezone, timedelta
 from typing import Optional
 
 import requests
@@ -118,11 +118,27 @@ def build_report(
     # ── 下载头像 ──────────────────────────────────────────
     _download_avatars(repos, avatar_abs, proxies=proxies)
 
-    # ── 日期信息 ──────────────────────────────────────────
-    now = datetime.now(CST)
-    week_num = now.isocalendar()[1]
-    week_label = f"{now.year}年第{week_num}周"
-    week_info = f"{now.year} 年第 {week_num} 周 / {now.strftime('%Y-%m-%d')}"
+    # ── 日期信息（从输出目录名推断） ──────────────────────
+    out_dir = Path(output_dir).resolve()
+    dir_name = out_dir.name  # e.g. "2026-06-07" or "github-trending-weekly-2026-06-07"
+    date_part = dir_name.replace("github-trending-weekly-", "")
+    try:
+        # Try parsing as YYYY-MM-DD
+        parts = date_part.split("-")
+        if len(parts) >= 3 and parts[0].isdigit() and parts[1].isdigit() and parts[2].isdigit():
+            report_date = datetime(int(parts[0]), int(parts[1]), int(parts[2]), tzinfo=CST)
+        elif len(parts) >= 2 and parts[0].isdigit() and parts[1].isdigit():
+            # YYYY-WW format (year-week)
+            from datetime import date
+            iso_date = date.fromisocalendar(int(parts[0]), int(parts[1]), 1)
+            report_date = datetime(iso_date.year, iso_date.month, iso_date.day, tzinfo=CST)
+        else:
+            report_date = datetime.now(CST)
+    except (ValueError, IndexError):
+        report_date = datetime.now(CST)
+    week_num = report_date.isocalendar()[1]
+    week_label = f"{report_date.year}年第{week_num}周"
+    week_info = f"{report_date.year} 年第 {week_num} 周 / {report_date.strftime('%Y-%m-%d')}"
 
     # ── 封面排名表（仅前 10） ─────────────────────────────
     rank_rows = ""
@@ -175,6 +191,7 @@ def build_report(
     html = html.replace("{{RANK_TABLE_ROWS}}", rank_rows)
     html = html.replace("{{REPO_DETAIL_PAGES}}", detail_pages)
     html = html.replace("{{PAGE_NUM}}", f"01 / {total_pages:02d}")
+    # {{SIDEBAR}} is left for build_site.py to inject
 
     # ── 写入输出 ──────────────────────────────────────────
     out_path = out_dir / "report.html"

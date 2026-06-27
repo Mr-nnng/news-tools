@@ -81,9 +81,9 @@ def build_landing_page(report_dirs: list[str]):
     cards = ""
     for rd in sorted(report_dirs, reverse=True):
         date_str = rd
-        report_path = REPORT_DIR / rd
-        data_dir = report_path / "data"
-        enriched_json = data_dir / "enriched-trending.json"
+        enriched_json = (REPORT_DIR / rd / "data" / "enriched-trending.json")
+        if not enriched_json.exists():
+            enriched_json = (REPORTS_DIR / rd / "data" / "enriched-trending.json")
         total = "?"
         summary = ""
         if enriched_json.exists():
@@ -96,7 +96,8 @@ def build_landing_page(report_dirs: list[str]):
             except Exception:
                 pass
 
-        parts = rd.replace("github-trending-weekly-", "").split("-")
+        date_key = rd.replace("github-trending-weekly-", "")
+        parts = date_key.split("-")
         display_date = f"{parts[0]}年 第{parts[1]}周" if len(parts) >= 2 and parts[0].isdigit() else rd
 
         cards += f"""    <a href="reports/{date_str}/report.html" class="card">
@@ -119,13 +120,21 @@ def main():
 
     print("\n📁 Copying weekly reports...")
     report_dirs = []
-    for item in sorted(REPORT_DIR.iterdir()):
-        if item.name.startswith("github-trending-weekly-"):
-            date_str = item.name.replace("github-trending-weekly-", "")
-            report_dirs.append(date_str)
-            report_dst = REPORTS_DIR / date_str
-            print(f"  📁 {item.name} → {report_dst.relative_to(PROJECT_ROOT)}")
-            copy_report(item, report_dst)
+
+    if REPORT_DIR.exists():
+        for item in sorted(REPORT_DIR.iterdir()):
+            if item.name.startswith("github-trending-weekly-"):
+                date_str = item.name.replace("github-trending-weekly-", "")
+                report_dirs.append(date_str)
+                report_dst = REPORTS_DIR / date_str
+                print(f"  📁 {item.name} → {report_dst.relative_to(PROJECT_ROOT)}")
+                copy_report(item, report_dst)
+    elif REPORTS_DIR.exists():
+        for item in sorted(REPORTS_DIR.iterdir()):
+            report_dirs.append(item.name)
+        print(f"  📁 {len(report_dirs)} reports already in {REPORTS_DIR.relative_to(PROJECT_ROOT)} (skipped copy)")
+    else:
+        print("  ⚠️ No reports found (report/ and site/reports/ both missing)")
 
     print("\n📄 Generating landing page...")
     cards_html = build_landing_page(report_dirs)

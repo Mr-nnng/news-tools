@@ -5,6 +5,8 @@
 
 一站式新闻信息获取与报告生成工具集。支持 **GitHub Trending**、**华尔街见闻 7x24 快讯**、**新闻联播** 三个数据源，并提供 HTML 周报生成与静态网站部署能力。
 
+> 🌐 在线站点：自动生成并部署 GitHub Trending 中文周报（每周更新）。
+
 ---
 
 ## 功能特性
@@ -22,26 +24,31 @@
 
 ```
 news/
-├── src/news_tools/          # Python 主包
-│   ├── trending.py          # GitHub Trending 获取
-│   ├── wallstreet.py        # 华尔街见闻 7x24 快讯
-│   ├── xwlb.py              # 新闻联播摘要
-│   ├── screenshot.py        # HTML 元素导出图片
-│   ├── build_report.py      # HTML 周报生成
+├── src/news_tools/            # Python 主包
+│   ├── trending.py            # GitHub Trending 获取
+│   ├── wallstreet.py          # 华尔街见闻 7x24 快讯
+│   ├── xwlb.py                # 新闻联播摘要
+│   ├── screenshot.py          # HTML 元素导出图片
+│   ├── build_report.py        # HTML 周报生成
 │   ├── __init__.py
 │   └── __main__.py
-├── report/                  # 生成的周报
-│   ├── template/            # HTML 模板
-│   ├── github-trending-weekly-*/  # 各期周报
-│   └── xwlb-*/             # 新闻联播报告
-├── assets/fonts/            # 网页字体（woff2）
+├── site/                      # 构建输出的静态站点（可直接部署）
+│   ├── index.html             # 项目主页，列出所有周报
+│   ├── assets/fonts/          # 自托管字体
+│   └── reports/               # 各期周报
+├── assets/fonts/              # 网页字体（woff2）
 ├── scripts/
-│   └── build_site.py        # 构建部署目录
-├── tests/                   # 单元测试
-├── skills/                  # Agent 配置（报告生成工作流）
+│   └── build_site.py          # 构建部署目录
+├── skills/news-tools/         # Agent 配置（报告生成工作流）
+├── tests/                     # 单元测试
+├── .opencode/                 # opencode 配置
+├── .gitattributes
+├── .gitignore
+├── LICENSE
+├── README.md
 ├── pyproject.toml
-├── wrangler.toml            # Cloudflare Pages 配置
-└── requirements.txt
+├── uv.lock
+└── wrangler.toml              # Cloudflare Pages 配置
 ```
 
 ---
@@ -152,7 +159,7 @@ result = get_xwlb(2026, 5, 29)
 从 enriched JSON 生成 HTML 周报：
 
 ```bash
-python -m news_tools.build_report data/enriched-trending.json -o report/github-trending-weekly-YYYY-MM-DD/
+python -m news_tools.build_report data/enriched-trending.json
 ```
 
 生成流程：
@@ -178,15 +185,14 @@ site/
 ├── index.html               ← 项目主页，列出所有周报
 ├── assets/fonts/            ← 自托管字体
 └── reports/
-    ├── YYYY-MM-DD/report.html ← 各期周报
-    └── ...
+    └── YYYY-MM-DD/report.html ← 各期周报
 ```
 
 ### 方式一：Git 集成（推荐）
 
 1. 将代码推送到 GitHub
-2. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Pages
-3. 点击 **Create a project** → **Connect to Git**
+2. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Build → Compute → Workers & Pages
+3. 点击 **Create application** → **Connect to Git** → **Looking to deploy Pages? Get started**
 4. 选择你的仓库
 5. 配置：
    - **Build command**（构建命令）：`python scripts/build_site.py`
@@ -231,4 +237,4 @@ uv run pytest tests/ -v
 
 ## 项目状态
 
-每周自动生成 GitHub Trending 中文周报。查看 [`report/`](report/) 目录获取最新报告。
+每周自动生成 GitHub Trending 中文周报并部署上线。查看 [`site/reports/`](site/reports/) 目录获取最新报告。

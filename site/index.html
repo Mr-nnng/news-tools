@@ -29,6 +29,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("assets/fonts/TsangerJinKai02_W04.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --parchment:    #f5f4ed;
   --ivory:        #faf9f5;
@@ -47,9 +55,9 @@
   --border-soft:  #e5e3d8;
   --line:         #d8d5c8;
 
-  --serif: "PingFang SC", "PingFang TC", "Microsoft YaHei",
+  --serif: "TsangerJinKai02", "Microsoft YaHei",
            system-ui, -apple-system, sans-serif;
-  --sans:  var(--serif);
+  --sans:  "Microsoft YaHei", "Microsoft YaHei UI", system-ui, -apple-system, sans-serif;
   --mono:  "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, monospace;
   --latin-ui: var(--sans);
 }
@@ -389,16 +397,6 @@ a:hover { color: var(--brand-light); }
   color: inherit;
   position: relative;
   transition: box-shadow 0.2s, transform 0.15s;
-}
-/* Small connecting line from timeline to card */
-.report-card::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 28px;
-  width: 20px;
-  height: 2px;
-  background: var(--line);
 }
 .report-card:hover {
   box-shadow: 0 4px 24px rgba(0,0,0,0.05);

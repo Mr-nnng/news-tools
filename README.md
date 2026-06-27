@@ -205,7 +205,7 @@ python -m news_tools.build_report data/enriched-trending.json
 
 ## 部署到 Cloudflare Pages
 
-构建静态站点：
+在本地执行构建命令后，将输出目录 `site/` 部署到 Cloudflare Pages。
 
 ```bash
 python scripts/build_site.py
@@ -240,23 +240,27 @@ report/
 
 ### 方式一：Git 集成（推荐）
 
-1. 将代码推送到 GitHub
-2. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Build → Compute → Workers & Pages
-3. 点击 **Create application** → **Connect to Git** → **Looking to deploy Pages? Get started**
-4. 选择你的仓库
-5. 配置：
-   - **Build command**（构建命令）：`python scripts/build_site.py`
+1. 在本地执行构建命令生成静态站点：
+   ```bash
+   python scripts/build_site.py
+   ```
+2. 将代码（包含 `site/` 目录）推送到 GitHub
+3. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Build → Compute → Workers & Pages
+4. 点击 **Create application** → **Connect to Git** → **Looking to deploy Pages? Get started**
+5. 选择你的仓库
+6. 配置：
+   - **Build command**（构建命令）：留空
    - **Build output directory**（输出目录）：`site`
-6. 点击 **Save and Deploy**
+7. 点击 **Save and Deploy**
 
-之后每次推送代码，Cloudflare Pages 会自动重新构建。
+之后每次推送代码，Cloudflare Pages 会直接部署 `site/` 目录中的静态文件。
 
 ### 方式二：Wrangler CLI
 
 ```bash
+python scripts/build_site.py
 npm install -g wrangler
 wrangler login
-python scripts/build_site.py
 wrangler pages deploy site/
 ```
 

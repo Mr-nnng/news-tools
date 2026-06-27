@@ -46,12 +46,12 @@ def clean_site():
 
 
 def copy_fonts():
-    """Copy JetBrains Mono to site/ for monospace code/metrics display."""
+    """Copy fonts to site/ for serif (TsangerJinKai02) and monospace (JetBrains Mono)."""
     FONTS_DIR.mkdir(parents=True, exist_ok=True)
     src = ASSETS_DIR / "fonts"
     if src.exists():
         for f in src.iterdir():
-            if f.is_file() and f.name.startswith("JetBrains"):
+            if f.is_file():
                 shutil.copy2(f, FONTS_DIR / f.name)
                 print(f"  📄 {f.name}")
     print(f"  ✅ Fonts → {FONTS_DIR.relative_to(PROJECT_ROOT)}")

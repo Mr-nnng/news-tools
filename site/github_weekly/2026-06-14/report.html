@@ -11,6 +11,14 @@
             font-weight: 400;
         }
 
+        @font-face {
+            font-family: "TsangerJinKai02";
+            src: url("../../../assets/fonts/TsangerJinKai02_W04.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -30,9 +38,9 @@
             --border: #e8e6dc;
             --line: #d8d5c8;
         
-            --serif: "PingFang SC", "PingFang TC", "Microsoft YaHei",
+            --serif: "TsangerJinKai02", "Microsoft YaHei",
                      system-ui, -apple-system, sans-serif;
-            --sans: var(--serif);
+            --sans: "Microsoft YaHei", "Microsoft YaHei UI", system-ui, -apple-system, sans-serif;
             --mono: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, monospace;
         
             --sidebar-w: 200px;

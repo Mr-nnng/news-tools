@@ -101,9 +101,13 @@ def build_report(
     output_dir: str,
     avatar_dir_name: str = "avatar",
     proxies: Optional[dict] = None,
+    download_avatars: bool = True,
 ) -> str:
     """生成 HTML 报告并写出到 output_dir/report.html。
 
+    Args:
+        download_avatars: 是否下载 GitHub 头像。site 构建时设为 False 以加速（头像已预复制）。
+    
     Returns:
         HTML 文件的绝对路径。
     """
@@ -116,7 +120,8 @@ def build_report(
     avatar_abs = out_dir / avatar_dir_name
 
     # ── 下载头像 ──────────────────────────────────────────
-    _download_avatars(repos, avatar_abs, proxies=proxies)
+    if download_avatars:
+        _download_avatars(repos, avatar_abs, proxies=proxies)
 
     # ── 日期信息（从输出目录名推断） ──────────────────────
     out_dir = Path(output_dir).resolve()
@@ -165,7 +170,7 @@ def build_report(
         if r2:
             b2 = _build_block(r2, i + 2, avatar_dir_name)
             detail_pages += f"""    <!-- PAGE {page_idx}: #{i+1} {r1['name']} + #{i+2} {r2['name']} -->
-    <div class="page page-detail">
+    <div class="page page-detail" id="page-{page_idx:02d}">
         {b1}
         <hr class="divider">
         {b2}
@@ -173,13 +178,22 @@ def build_report(
     </div>\n\n"""
         else:
             detail_pages += f"""    <!-- PAGE {page_idx}: #{i+1} {r1['name']} -->
-    <div class="page page-detail" style="justify-content:flex-start">
+    <div class="page page-detail" style="justify-content:flex-start" id="page-{page_idx:02d}">
         {b1}
         <div class="page-num">{page_idx:02d} / {total_pages:02d}</div>
     </div>\n\n"""
         page_idx += 1
 
     detail_pages = detail_pages.rstrip()
+
+    # ── 生成右侧索引 ──────────────────────────────────
+    index_items = ""
+    # 封面
+    index_items += f'      <a class="index-item" href="#page-cover"><span class="idx-num">✦</span> 封面</a>\n'
+    for idx, r in enumerate(repos):
+        rank = idx + 1
+        page_idx = idx // 2 + 2  # page-02 onwards
+        index_items += f'      <a class="index-item" href="#page-{page_idx:02d}"><span class="idx-num">#{rank:02d}</span> {r["name"]}</a>\n'
 
     # ── 读取模板并填充 ────────────────────────────────────
     with open(template_path, "r", encoding="utf-8") as f:
@@ -190,6 +204,7 @@ def build_report(
     html = html.replace("{{COVER_SUMMARY}}", _highlight_summary(cover_summary))
     html = html.replace("{{RANK_TABLE_ROWS}}", rank_rows)
     html = html.replace("{{REPO_DETAIL_PAGES}}", detail_pages)
+    html = html.replace("{{REPO_INDEX}}", index_items)
     html = html.replace("{{PAGE_NUM}}", f"01 / {total_pages:02d}")
     # {{SIDEBAR}} is left for build_site.py to inject
 

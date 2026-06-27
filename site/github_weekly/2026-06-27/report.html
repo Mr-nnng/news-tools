@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Trending 周报 · 2026年第26周</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url("../../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+            font-weight: 400;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --parchment: #f5f4ed;
+            --ivory: #faf9f5;
+            --near-black: #141413;
+            --dark-warm: #3d3d3a;
+            --olive: #504e49;
+            --stone: #6b6a64;
+            --brand: #1B365D;
+            --brand-light: #2D5A8A;
+            --brand-tint: #EEF2F7;
+            --border: #e8e6dc;
+            --line: #d8d5c8;
+        
+            --serif: "Noto Serif SC", "Source Han Serif SC", "Noto Serif CJK SC", Georgia, serif;
+            --sans: var(--serif);
+            --mono: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, monospace;
+        
+            --sidebar-w: 200px;
+            --index-w: 260px;
+            --page-w: 640px;
+            --page-h: 800px;
+            --pad: 36px;
+        }
+        
+        body {
+            background: #e8e4d8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px var(--index-w) 20px var(--sidebar-w);
+            font-family: var(--sans);
+            color: var(--near-black);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        
+        .page {
+            width: var(--page-w);
+            height: var(--page-h);
+            background: var(--parchment);
+            border: 1.5px solid #d6d3c8;
+            border-radius: 6px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+            padding: var(--pad);
+            margin-bottom: 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ===== Cover ===== */
+        .page-cover {
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .github-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 12px;
+            fill: var(--near-black);
+        }
+
+        .cover-title {
+            font-family: var(--serif);
+            font-size: 30pt;
+            font-weight: 500;
+            color: var(--near-black);
+            letter-spacing: 1pt;
+            margin-bottom: 4px;
+        }
+
+        .cover-title .accent {
+            color: var(--brand);
+        }
+
+        .cover-sub {
+            font-family: var(--sans);
+            font-size: 11pt;
+            color: var(--stone);
+            letter-spacing: 1.5pt;
+            margin-bottom: 18px;
+        }
+
+        .cover-summary {
+            font-family: var(--sans);
+            font-size: 13pt;
+            line-height: 1.6;
+            color: var(--olive);
+            max-width: 500px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .cover-summary .hl {
+            color: var(--brand);
+            font-weight: 500;
+        }
+
+        .cover-summary strong {
+            color: var(--near-black);
+            font-weight: 500;
+        }
+
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11pt;
+            text-align: left;
+        }
+
+        .rank-table thead th {
+            font-weight: 500;
+            color: var(--brand);
+            padding: 5px 8px;
+            border-bottom: 1.5px solid var(--brand);
+            letter-spacing: 0.5pt;
+            font-size: 9.5pt;
+        }
+
+        .rank-table tbody td {
+            padding: 4px 8px;
+            border-bottom: 0.3pt solid #e5e3d8;
+            color: var(--dark-warm);
+            line-height: 1.45;
+        }
+
+        .rank-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rank-table .td-rank {
+            color: var(--stone);
+            font-family: var(--mono);
+            font-size: 12pt;
+            width: 26px;
+            text-align: center;
+        }
+
+        .rank-table .td-repo {
+            font-weight: 500;
+            color: var(--near-black);
+            font-size: 11pt;
+        }
+
+        .rank-table .td-repo .author {
+            font-weight: 400;
+            color: var(--stone);
+            font-size: 8pt;
+        }
+
+        .rank-table .td-stars,
+        .rank-table .td-forks {
+            font-family: var(--mono);
+            font-size: 10pt;
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+        }
+
+        .rank-table .td-stars {
+            color: var(--brand);
+            font-weight: 500;
+        }
+
+        .rank-table .td-forks {
+            color: var(--stone);
+        }
+
+        /* ===== Detail pages (2 repos per page) ===== */
+        .repo-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 2px dashed #b0ada0;
+            margin: 16px 0 18px 0;
+            flex-shrink: 0;
+        }
+
+        .repo-number {
+            font-family: var(--serif);
+            font-size: 48pt;
+            font-weight: 500;
+            color: var(--brand);
+            line-height: 1;
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            right: 0;
+            pointer-events: none;
+        }
+
+        .repo-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            padding-right: 44px;
+        }
+
+        .repo-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .repo-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .repo-name {
+            font-family: var(--serif);
+            font-size: 18pt;
+            font-weight: 500;
+            color: var(--near-black);
+            line-height: 1.15;
+            word-break: break-all;
+        }
+
+        .repo-name .author-name {
+            font-weight: 400;
+            font-size: 10pt;
+            color: var(--stone);
+            display: block;
+            margin-top: 1px;
+        }
+
+        .repo-metrics {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .repo-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+        }
+
+        .repo-metric .val {
+            font-family: var(--mono);
+            font-size: 13pt;
+            font-weight: 500;
+            color: var(--brand);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .repo-metric .lbl {
+            font-size: 8.5pt;
+            color: var(--stone);
+            letter-spacing: 0.3pt;
+        }
+
+        .repo-metric .lang-dot {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            margin-right: 2px;
+            vertical-align: middle;
+        }
+
+        .repo-desc {
+            font-family: var(--sans);
+            font-size: 12pt;
+            line-height: 1.5;
+            color: var(--olive);
+            margin-bottom: 12px;
+            padding: 7px 10px;
+            background: var(--ivory);
+            border-left: 3px solid var(--brand);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .repo-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+            flex: none;
+        }
+
+        .repo-features li {
+            font-family: var(--sans);
+            font-size: 12pt;
+            line-height: 1.45;
+            color: var(--dark-warm);
+            padding: 1.5px 0 1.5px 16px;
+            position: relative;
+        }
+
+        .repo-features li::before {
+            content: "\25C6";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-size: 6pt;
+            top: 4px;
+        }
+
+        .repo-audience {
+            font-family: var(--sans);
+            font-size: 10pt;
+            line-height: 1.45;
+            color: var(--stone);
+            padding: 5px 10px;
+            background: var(--brand-tint);
+            border-radius: 4px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
+        .repo-audience strong {
+            color: var(--brand);
+            font-weight: 500;
+        }
+
+        .repo-url {
+            font-family: var(--mono);
+            font-size: 10pt;
+            color: var(--stone);
+            word-break: break-all;
+            padding-top: 4px;
+            margin-top: 6px;
+            border-top: 0.3pt solid var(--border);
+            letter-spacing: 0.2pt;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }
+
+        .repo-url a {
+            color: var(--brand);
+            text-decoration: none;
+        }
+
+        .page-num {
+            position: absolute;
+            bottom: 10px;
+            right: var(--pad);
+            font-family: var(--mono);
+            font-size: 8pt;
+            color: var(--stone);
+            letter-spacing: 0.5pt;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== Sidebar ===== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-w);
+            background: var(--parchment);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            overflow-y: auto;
+            padding: 20px 0 16px;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--line);
+            border-radius: 2px;
+        }
+
+        /* Home button */
+        .sidebar-home {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px 18px;
+            margin: 0 0 6px;
+            color: var(--near-black);
+            text-decoration: none;
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 18px;
+            border-bottom: 1px solid var(--line);
+        }
+        .sidebar-home:hover {
+            color: var(--brand);
+        }
+        .sidebar-home .icon {
+            font-size: 20px;
+        }
+
+        /* Timeline section */
+        .sidebar-section {
+            padding: 0 16px;
+            margin-top: 8px;
+        }
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Month header */
+        .sidebar-month-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            padding: 8px 0;
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--brand);
+            letter-spacing: 0.3px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .sidebar-month-toggle:hover {
+            color: var(--brand-light);
+        }
+        .sidebar-month-toggle .arrow {
+            font-size: 13px;
+            color: var(--stone);
+            transition: transform 0.25s ease;
+        }
+        .sidebar-month-group.is-collapsed .sidebar-month-toggle .arrow {
+            transform: rotate(-90deg);
+        }
+
+        /* Report links within month */
+        .sidebar-month-items {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.2s ease;
+            max-height: 600px;
+            opacity: 1;
+        }
+        .sidebar-month-group.is-collapsed .sidebar-month-items {
+            max-height: 0 !important;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 0 7px 18px;
+            color: var(--olive);
+            text-decoration: none;
+            font-family: var(--serif);
+            font-size: 14px;
+            border-radius: 4px;
+            position: relative;
+            transition: color 0.15s, background 0.15s;
+        }
+        .sidebar-item:hover {
+            color: var(--brand);
+            background: var(--brand-tint);
+        }
+        /* Timeline dot */
+        .sidebar-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--line);
+        }
+        /* Active item */
+        .sidebar-item.is-active {
+            color: var(--brand);
+            font-weight: 500;
+        }
+        .sidebar-item.is-active::before {
+            background: var(--brand);
+            width: 9px;
+            height: 9px;
+        }
+
+        /* GitHub link at bottom */
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 16px 16px 0;
+            border-top: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            color: var(--stone);
+            text-decoration: none;
+            font-family: var(--serif);
+            font-size: 13px;
+        }
+        .sidebar-footer a:hover {
+            color: var(--brand);
+        }
+        .sidebar-footer .icon {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== Right index nav ===== */
+        .index-nav {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--index-w);
+            background: var(--parchment);
+            border-left: 1px solid var(--border);
+            z-index: 99;
+            overflow-y: auto;
+            padding: 28px 0 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .index-nav::-webkit-scrollbar { width: 4px; }
+        .index-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+        .index-nav .index-head {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 18px;
+            letter-spacing: 0;
+            color: var(--near-black);
+            padding: 0 16px 14px;
+            margin: 0 0 6px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .index-nav .index-item {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 6px 16px;
+            font-family: var(--serif);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--olive);
+            text-decoration: none;
+            transition: color 0.15s, background 0.15s;
+            border-right: 2px solid transparent;
+        }
+        .index-nav .index-item:hover {
+            color: var(--brand);
+            background: var(--brand-tint);
+        }
+        .index-nav .index-item.is-active {
+            color: var(--brand);
+            font-weight: 500;
+            background: var(--brand-tint);
+            border-right-color: var(--brand);
+        }
+
+        .index-nav .index-item .idx-num {
+            font-family: var(--latin-ui);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--stone);
+            min-width: 22px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .index-nav .index-item.is-active .idx-num {
+            color: var(--brand);
+        }
+
+        @media (max-width: 1200px) {
+            .index-nav { display: none; }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 12px 16px;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                overflow-y: visible;
+                gap: 8px;
+            }
+            .sidebar-home {
+                border-bottom: none;
+                padding: 0;
+                margin: 0;
+            }
+            .sidebar-section {
+                display: none;
+            }
+            .sidebar-footer {
+                margin-top: 0;
+                border-top: none;
+                padding: 0;
+                flex-direction: row;
+            }
+            :root {
+                --page-w: 92vw;
+                --page-h: calc(92vw * 4 / 3);
+                --pad: 16px;
+            }
+            body {
+                padding: 0;
+            }
+
+            .page {
+                margin-bottom: 14px;
+                border-radius: 4px;
+            }
+
+            .cover-title {
+                font-size: 24pt;
+            }
+
+            .github-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .repo-name {
+                font-size: 15pt;
+            }
+
+            .repo-number {
+                font-size: 36pt;
+            }
+
+            .repo-metric .val {
+                font-size: 11pt;
+            }
+
+            .repo-desc {
+                font-size: 14pt;
+            }
+
+            .repo-features li {
+                font-size: 12pt;
+            }
+
+            .rank-table {
+                font-size: 12pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年06月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-06-27/report.html" class="sidebar-item is-active">2026年6月27日</a>
+          <a href="../2026-06-21/report.html" class="sidebar-item">2026年6月21日</a>
+          <a href="../2026-06-14/report.html" class="sidebar-item">2026年6月14日</a>
+          <a href="../2026-06-07/report.html" class="sidebar-item">2026年6月7日</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>
+
+    <nav class="index-nav">
+      <div class="index-head">本页导航</div>
+            <a class="index-item" href="#page-cover"><span class="idx-num">✦</span> 封面</a>
+      <a class="index-item" href="#page-02"><span class="idx-num">#01</span> OpenMontage</a>
+      <a class="index-item" href="#page-02"><span class="idx-num">#02</span> codebase-memory-mcp</a>
+      <a class="index-item" href="#page-03"><span class="idx-num">#03</span> agent-native</a>
+      <a class="index-item" href="#page-03"><span class="idx-num">#04</span> no-mistakes</a>
+      <a class="index-item" href="#page-04"><span class="idx-num">#05</span> penpot</a>
+      <a class="index-item" href="#page-04"><span class="idx-num">#06</span> daily_stock_analysis</a>
+      <a class="index-item" href="#page-05"><span class="idx-num">#07</span> voicebox</a>
+      <a class="index-item" href="#page-05"><span class="idx-num">#08</span> Agent-Reach</a>
+      <a class="index-item" href="#page-06"><span class="idx-num">#09</span> worldmonitor</a>
+      <a class="index-item" href="#page-06"><span class="idx-num">#10</span> orca</a>
+      <a class="index-item" href="#page-07"><span class="idx-num">#11</span> Anthropic-Cybersecurity-Skills</a>
+      <a class="index-item" href="#page-07"><span class="idx-num">#12</span> system_prompts_leaks</a>
+      <a class="index-item" href="#page-08"><span class="idx-num">#13</span> hiring-agent</a>
+      <a class="index-item" href="#page-08"><span class="idx-num">#14</span> design.md</a>
+      <a class="index-item" href="#page-09"><span class="idx-num">#15</span> ai-website-cloner-template</a>
+      <a class="index-item" href="#page-09"><span class="idx-num">#16</span> skills</a>
+      <a class="index-item" href="#page-10"><span class="idx-num">#17</span> agent-toolkit-for-aws</a>
+      <a class="index-item" href="#page-10"><span class="idx-num">#18</span> Stirling-PDF</a>
+      <a class="index-item" href="#page-11"><span class="idx-num">#19</span> insomnia</a>
+
+    </nav>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page page-cover" id="page-cover">
+        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+            <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+        </svg>
+        <h1 class="cover-title">GitHub Trending <span class="accent">周报</span></h1>
+        <div class="cover-sub">2026 年第 26 周 / 2026-06-27</div>
+        <p class="cover-summary">本周 GitHub Trending 收录 <span class="hl">19</span> 个热门项目，涵盖 <strong>AI Agent 工具 </strong>· <strong>视频制作 </strong>· <strong>网络安全 </strong>· <strong>设计规范</strong> 等领域。从智能视频制作系统到代码质量守卫、从全球情报监测到 PDF 全能处理，AI 开发者生态工具链愈发成熟。</p>
+        <table class="rank-table">
+            <thead>
+                <tr>
+                    <th style="width:26px;text-align:center">#</th>
+                    <th>仓库</th>
+                    <th style="width:48px">语言</th>
+                    <th style="width:58px;text-align:right">Star</th>
+                    <th style="width:58px;text-align:right">Fork</th>
+                </tr>
+            </thead>
+            <tbody>
+                                <tr>
+                    <td class="td-rank">1</td>
+                    <td class="td-repo">OpenMontage<span class="author"> / calesthio</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">23.7k</td>
+                    <td class="td-forks">2.6k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">2</td>
+                    <td class="td-repo">codebase-memory-mcp<span class="author"> / DeusData</span></td>
+                    <td>C</td>
+                    <td class="td-stars">15.7k</td>
+                    <td class="td-forks">1.2k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">3</td>
+                    <td class="td-repo">agent-native<span class="author"> / BuilderIO</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">2.5k</td>
+                    <td class="td-forks">254</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">4</td>
+                    <td class="td-repo">no-mistakes<span class="author"> / kunchenguid</span></td>
+                    <td>Go</td>
+                    <td class="td-stars">3.5k</td>
+                    <td class="td-forks">208</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">5</td>
+                    <td class="td-repo">penpot<span class="author"> / penpot</span></td>
+                    <td>Clojure</td>
+                    <td class="td-stars">54.0k</td>
+                    <td class="td-forks">3.5k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">6</td>
+                    <td class="td-repo">daily_stock_analysis<span class="author"> / ZhuLinsen</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">50.1k</td>
+                    <td class="td-forks">43.8k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">7</td>
+                    <td class="td-repo">voicebox<span class="author"> / jamiepine</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">34.5k</td>
+                    <td class="td-forks">4.1k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">8</td>
+                    <td class="td-repo">Agent-Reach<span class="author"> / Panniantong</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">42.4k</td>
+                    <td class="td-forks">3.4k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">9</td>
+                    <td class="td-repo">worldmonitor<span class="author"> / koala73</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">60.1k</td>
+                    <td class="td-forks">9.4k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">10</td>
+                    <td class="td-repo">orca<span class="author"> / stablyai</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">7.9k</td>
+                    <td class="td-forks">557</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="page-num">01 / 11</div>
+    </div>
+
+    <!-- CONTENT: Detail pages (2 repos per page).
+         Repeat the page-detail block for each pair.
+         See references/detail-page-example.md for the block structure. -->
+        <!-- PAGE 2: #1 OpenMontage + #2 codebase-memory-mcp -->
+    <div class="page page-detail" id="page-02">
+                <div class="repo-block">
+            <div class="repo-number">#1</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/calesthio.png" alt="calesthio" loading="lazy" onerror="this.src='https://github.com/calesthio.png'"></div>
+                <div class="repo-name">OpenMontage<span class="author-name">calesthio</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">23,691</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+17,249</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">2,636</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">全球首个开源智能视频制作系统，集成 12 条制作管线与 52 个工具模块。让 AI 编程助手变身完整的视频制作工作室，从创意到成片一条龙完成。</div>
+            <ul class="repo-features">
+                <li>12 条全自动视频制作管线</li>
+                <li>500+ AI 智能体技能库</li>
+                <li>多工具协同创作工作流</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>视频创作者、AI 开发者、内容制作团队</div>
+            <div class="repo-url"><a href="https://github.com/calesthio/OpenMontage" target="_blank">https://github.com/calesthio/OpenMontage</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#2</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/DeusData.png" alt="DeusData" loading="lazy" onerror="this.src='https://github.com/DeusData.png'"></div>
+                <div class="repo-name">codebase-memory-mcp<span class="author-name">DeusData</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#555555"></span><span class="lbl">C</span></div>
+                <div class="repo-metric"><span class="val">15,742</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+7,592</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">1,152</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">高性能代码智能 MCP 服务器，毫秒级索引整个代码库为持久化知识图谱。支持 158 种编程语言，单静态二进制零依赖部署，平均仓库仅需毫秒级查询。</div>
+            <ul class="repo-features">
+                <li>毫秒级代码库知识图谱构建</li>
+                <li>支持 158 种编程语言解析</li>
+                <li>单文件零依赖静态二进制</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AI 编码助手用户、全栈开发者、DevOps 工程师</div>
+            <div class="repo-url"><a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank">https://github.com/DeusData/codebase-memory-mcp</a></div>
+        </div>
+        <div class="page-num">02 / 11</div>
+    </div>
+
+    <!-- PAGE 3: #3 agent-native + #4 no-mistakes -->
+    <div class="page page-detail" id="page-03">
+                <div class="repo-block">
+            <div class="repo-number">#3</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/BuilderIO.png" alt="BuilderIO" loading="lazy" onerror="this.src='https://github.com/BuilderIO.png'"></div>
+                <div class="repo-name">agent-native<span class="author-name">BuilderIO</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">2,550</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,569</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">254</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">构建 Agent 原生应用的开源框架，用统一 Actions 同时驱动 UI、Agent、API 和 MCP 端点。自带 Agent 运行时、SQL 持久化状态和可观测性，开箱即用。</div>
+            <ul class="repo-features">
+                <li>一次定义 Actions 多端使用</li>
+                <li>SQL 持久化状态与身份管理</li>
+                <li>自带 Agent 运行时与可观测性</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>全栈开发者、AI Agent 应用开发者、SaaS 创业者</div>
+            <div class="repo-url"><a href="https://github.com/BuilderIO/agent-native" target="_blank">https://github.com/BuilderIO/agent-native</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#4</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/kunchenguid.png" alt="kunchenguid" loading="lazy" onerror="this.src='https://github.com/kunchenguid.png'"></div>
+                <div class="repo-name">no-mistakes<span class="author-name">kunchenguid</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#00ADD8"></span><span class="lbl">Go</span></div>
+                <div class="repo-metric"><span class="val">3,453</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,744</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">208</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">AI 驱动的 Git 提交质量守卫，在隔离工作目录中自动运行验证流水线。确保每次推送都经过 AI 检查，通过后才推送并自动创建 PR。</div>
+            <ul class="repo-features">
+                <li>隔离工作树非阻塞验证</li>
+                <li>AI 驱动的代码审查流水线</li>
+                <li>自动修复问题并创建 PR</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>开发者、AI 编程用户、团队 Lead、开源维护者</div>
+            <div class="repo-url"><a href="https://github.com/kunchenguid/no-mistakes" target="_blank">https://github.com/kunchenguid/no-mistakes</a></div>
+        </div>
+        <div class="page-num">03 / 11</div>
+    </div>
+
+    <!-- PAGE 4: #5 penpot + #6 daily_stock_analysis -->
+    <div class="page page-detail" id="page-04">
+                <div class="repo-block">
+            <div class="repo-number">#5</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/penpot.png" alt="penpot" loading="lazy" onerror="this.src='https://github.com/penpot.png'"></div>
+                <div class="repo-name">penpot<span class="author-name">penpot</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#DB5855"></span><span class="lbl">Clojure</span></div>
+                <div class="repo-metric"><span class="val">53,972</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,560</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">3,491</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">开源设计与代码协作平台，对标主流商业设计工具的平价开源方案。基于 SVG 原生编辑，支持设计系统管理和无摩擦的开发者交接。</div>
+            <ul class="repo-features">
+                <li>基于 Web 的 SVG 原生设计工具</li>
+                <li>设计与开发无缝交接协作</li>
+                <li>丰富设计系统与组件管理</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>UI/UX 设计师、前端开发者、开源拥护者、设计系统管理者</div>
+            <div class="repo-url"><a href="https://github.com/penpot/penpot" target="_blank">https://github.com/penpot/penpot</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#6</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/ZhuLinsen.png" alt="ZhuLinsen" loading="lazy" onerror="this.src='https://github.com/ZhuLinsen.png'"></div>
+                <div class="repo-name">daily_stock_analysis<span class="author-name">ZhuLinsen</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">50,140</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+6,919</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">43,831</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">LLM 驱动的多市场股票智能分析系统，集成多源行情与实时新闻。每日自动生成决策看板并推送至企业微信、飞书、Telegram 等多渠道。</div>
+            <ul class="repo-features">
+                <li>多源行情实时接入分析</li>
+                <li>每日自动推送决策看板</li>
+                <li>零成本定时运行无需服务器</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>个人投资者、量化交易研究者、A 股港股美股玩家</div>
+            <div class="repo-url"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">https://github.com/ZhuLinsen/daily_stock_analysis</a></div>
+        </div>
+        <div class="page-num">04 / 11</div>
+    </div>
+
+    <!-- PAGE 5: #7 voicebox + #8 Agent-Reach -->
+    <div class="page page-detail" id="page-05">
+                <div class="repo-block">
+            <div class="repo-number">#7</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/jamiepine.png" alt="jamiepine" loading="lazy" onerror="this.src='https://github.com/jamiepine.png'"></div>
+                <div class="repo-name">voicebox<span class="author-name">jamiepine</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">34,519</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,819</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">4,148</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">开源 AI 语音工作室，支持语音克隆、文本转语音和任意应用语音听写。完全本地运行，让你拥有完整的语音 AI 能力。</div>
+            <ul class="repo-features">
+                <li>高保真语音克隆与生成</li>
+                <li>任意应用语音听写输入</li>
+                <li>完全本地运行保护隐私</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>内容创作者、语音研究者、无障碍技术应用者</div>
+            <div class="repo-url"><a href="https://github.com/jamiepine/voicebox" target="_blank">https://github.com/jamiepine/voicebox</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#8</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/Panniantong.png" alt="Panniantong" loading="lazy" onerror="this.src='https://github.com/Panniantong.png'"></div>
+                <div class="repo-name">Agent-Reach<span class="author-name">Panniantong</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">42,408</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+7,199</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">3,370</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">为 AI Agent 一键装上互联网能力，零 API 费用读取 Twitter、Reddit、B 站、小红书等平台。解决 Agent「看不到网页」的核心痛点。</div>
+            <ul class="repo-features">
+                <li>零 API 费用多平台内容读取</li>
+                <li>一行安装即开即用</li>
+                <li>覆盖主流社交媒体平台</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AI Agent 用户、自动化研究爱好者、数据采集者</div>
+            <div class="repo-url"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">https://github.com/Panniantong/Agent-Reach</a></div>
+        </div>
+        <div class="page-num">05 / 11</div>
+    </div>
+
+    <!-- PAGE 6: #9 worldmonitor + #10 orca -->
+    <div class="page page-detail" id="page-06">
+                <div class="repo-block">
+            <div class="repo-number">#9</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/koala73.png" alt="koala73" loading="lazy" onerror="this.src='https://github.com/koala73.png'"></div>
+                <div class="repo-name">worldmonitor<span class="author-name">koala73</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">60,134</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,170</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">9,377</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">实时全球情报仪表盘，AI 驱动的新闻聚合与地缘政治监测。统一态势感知界面，一目了然掌握全球动态，支持金融和技术等变体。</div>
+            <ul class="repo-features">
+                <li>AI 自动聚合全球新闻情报</li>
+                <li>多领域态势感知灵活切换</li>
+                <li>实时更新地缘政治动态</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>国际关系研究者、金融分析师、情报爱好者、技术从业者</div>
+            <div class="repo-url"><a href="https://github.com/koala73/worldmonitor" target="_blank">https://github.com/koala73/worldmonitor</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#10</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/stablyai.png" alt="stablyai" loading="lazy" onerror="this.src='https://github.com/stablyai.png'"></div>
+                <div class="repo-name">orca<span class="author-name">stablyai</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">7,946</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+2,398</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">557</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">AI 开发环境(ADE)，专为并行管理多个编程 Agent 打造。支持 Codex、Claude Code 等同时运行，桌面端和移动端均可使用。</div>
+            <ul class="repo-features">
+                <li>并行运行多个编程 Agent</li>
+                <li>专属工作目录互不干扰</li>
+                <li>移动端远程监控 Agent 状态</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AI 编程重度用户、10x 开发者、团队技术管理者</div>
+            <div class="repo-url"><a href="https://github.com/stablyai/orca" target="_blank">https://github.com/stablyai/orca</a></div>
+        </div>
+        <div class="page-num">06 / 11</div>
+    </div>
+
+    <!-- PAGE 7: #11 Anthropic-Cybersecurity-Skills + #12 system_prompts_leaks -->
+    <div class="page page-detail" id="page-07">
+                <div class="repo-block">
+            <div class="repo-number">#11</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/mukul975.png" alt="mukul975" loading="lazy" onerror="this.src='https://github.com/mukul975.png'"></div>
+                <div class="repo-name">Anthropic-Cybersecurity-Skills<span class="author-name">mukul975</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">21,824</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+5,109</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">2,504</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">最大的开源网络安全 AI 智能体技能库，涵盖 817 个结构化网络安全技能。映射 MITRE ATT&CK、NIST CSF 等六大安全框架，兼容主流 AI 编程平台。</div>
+            <ul class="repo-features">
+                <li>817 个结构化网络安全技能</li>
+                <li>覆盖 6 大安全框架标准</li>
+                <li>兼容 26+ 主流 AI 编程平台</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>安全工程师、AI Agent 开发者、渗透测试人员</div>
+            <div class="repo-url"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank">https://github.com/mukul975/Anthropic-Cybersecurity-Skills</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#12</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/asgeirtj.png" alt="asgeirtj" loading="lazy" onerror="this.src='https://github.com/asgeirtj.png'"></div>
+                <div class="repo-name">system_prompts_leaks<span class="author-name">asgeirtj</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#F1E05A"></span><span class="lbl">JavaScript</span></div>
+                <div class="repo-metric"><span class="val">46,364</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+2,864</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">7,601</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">各大 AI 聊天机器人系统提示词研究合集，收录 Claude、ChatGPT、Gemini 等最新版本指令。持续更新，被华盛顿邮报引用报道。</div>
+            <ul class="repo-features">
+                <li>主流 AI 底层逻辑拆解</li>
+                <li>持续追踪版本差异对比</li>
+                <li>覆盖 Claude Fable 等最新模型</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AI 研究者、提示词工程师、技术报道记者</div>
+            <div class="repo-url"><a href="https://github.com/asgeirtj/system_prompts_leaks" target="_blank">https://github.com/asgeirtj/system_prompts_leaks</a></div>
+        </div>
+        <div class="page-num">07 / 11</div>
+    </div>
+
+    <!-- PAGE 8: #13 hiring-agent + #14 design.md -->
+    <div class="page page-detail" id="page-08">
+                <div class="repo-block">
+            <div class="repo-number">#13</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/interviewstreet.png" alt="interviewstreet" loading="lazy" onerror="this.src='https://github.com/interviewstreet.png'"></div>
+                <div class="repo-name">hiring-agent<span class="author-name">interviewstreet</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">2,929</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,727</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">673</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">简历智能评分 AI Agent，从 PDF 提取结构化信息并融合 GitHub 开源贡献信号。生成公平、可解释的客观人才评估报告。</div>
+            <ul class="repo-features">
+                <li>PDF 简历自动结构化提取</li>
+                <li>融合 GitHub 开源贡献数据</li>
+                <li>公平可解释评分体系</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>HR 技术招聘人员、技术面试官、人才寻访顾问</div>
+            <div class="repo-url"><a href="https://github.com/interviewstreet/hiring-agent" target="_blank">https://github.com/interviewstreet/hiring-agent</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#14</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/google-labs-code.png" alt="google-labs-code" loading="lazy" onerror="this.src='https://github.com/google-labs-code.png'"></div>
+                <div class="repo-name">design.md<span class="author-name">google-labs-code</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">21,323</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+4,618</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">1,727</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">Google 推出的设计规范格式标准，用 YAML 加 Markdown 向 AI 描述视觉身份。让 AI Agent 理解设计系统的完整语义和背后设计理念。</div>
+            <ul class="repo-features">
+                <li>机器可读的设计 Token 规范</li>
+                <li>人机共享的设计理由说明</li>
+                <li>内置 WCAG 对比度校验 CLI</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>前端开发者、UI/UX 设计师、AI 辅助设计工作者</div>
+            <div class="repo-url"><a href="https://github.com/google-labs-code/design.md" target="_blank">https://github.com/google-labs-code/design.md</a></div>
+        </div>
+        <div class="page-num">08 / 11</div>
+    </div>
+
+    <!-- PAGE 9: #15 ai-website-cloner-template + #16 skills -->
+    <div class="page page-detail" id="page-09">
+                <div class="repo-block">
+            <div class="repo-number">#15</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/JCodesMore.png" alt="JCodesMore" loading="lazy" onerror="this.src='https://github.com/JCodesMore.png'"></div>
+                <div class="repo-name">ai-website-cloner-template<span class="author-name">JCodesMore</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">21,397</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,906</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">3,102</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">一键克隆任意网站为干净现代 Next.js 代码库的模板。AI Agent 自动分析站点、提取设计 Token 并并行重建每个页面组件。</div>
+            <ul class="repo-features">
+                <li>一键复制任意网站为 Next.js</li>
+                <li>AI 自动提取设计 Token</li>
+                <li>并行重建页面加速开发</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>全栈开发者、Web 设计师、快速原型制作者</div>
+            <div class="repo-url"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">https://github.com/JCodesMore/ai-website-cloner-template</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#16</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/mattpocock.png" alt="mattpocock" loading="lazy" onerror="this.src='https://github.com/mattpocock.png'"></div>
+                <div class="repo-name">skills<span class="author-name">mattpocock</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#89E051"></span><span class="lbl">Shell</span></div>
+                <div class="repo-metric"><span class="val">147,525</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+11,060</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">12,772</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">知名 TypeScript 专家 Matt Pocock 的 AI Agent 技能集合，专为真实工程场景设计。小巧可组合，与任何 AI 模型兼容，已获近 15 万星。</div>
+            <ul class="repo-features">
+                <li>小巧可组合的实用技能</li>
+                <li>与任意 AI 模型兼容</li>
+                <li>覆盖真实工程开发场景</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AI 编程用户、TypeScript 开发者、工程效率追求者</div>
+            <div class="repo-url"><a href="https://github.com/mattpocock/skills" target="_blank">https://github.com/mattpocock/skills</a></div>
+        </div>
+        <div class="page-num">09 / 11</div>
+    </div>
+
+    <!-- PAGE 10: #17 agent-toolkit-for-aws + #18 Stirling-PDF -->
+    <div class="page page-detail" id="page-10">
+                <div class="repo-block">
+            <div class="repo-number">#17</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/aws.png" alt="aws" loading="lazy" onerror="this.src='https://github.com/aws.png'"></div>
+                <div class="repo-name">agent-toolkit-for-aws<span class="author-name">aws</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+                <div class="repo-metric"><span class="val">1,367</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+349</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">123</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">AWS 官方推出的 AI Agent 工具包，提供认证 MCP 服务器与技能插件。帮助 AI 编程助手在 AWS 上构建、部署和管理云应用。</div>
+            <ul class="repo-features">
+                <li>官方认证 AWS 集成工具集</li>
+                <li>支持 Claude Code 等主流 Agent</li>
+                <li>覆盖核心服务与 DevSecOps</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>AWS 开发者、云原生工程师、DevOps 团队</div>
+            <div class="repo-url"><a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank">https://github.com/aws/agent-toolkit-for-aws</a></div>
+        </div>
+        <hr class="divider">
+                <div class="repo-block">
+            <div class="repo-number">#18</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/Stirling-Tools.png" alt="Stirling-Tools" loading="lazy" onerror="this.src='https://github.com/Stirling-Tools.png'"></div>
+                <div class="repo-name">Stirling-PDF<span class="author-name">Stirling-Tools</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#B07219"></span><span class="lbl">Java</span></div>
+                <div class="repo-metric"><span class="val">84,585</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,250</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">7,360</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">GitHub 上最受欢迎的 PDF 全能处理工具，提供 50+ 种 PDF 编辑功能。支持桌面客户端、浏览器使用或自托管部署，不将文档发送第三方。</div>
+            <ul class="repo-features">
+                <li>50+ 种 PDF 编辑处理功能</li>
+                <li>桌面/Web/自托管三模式</li>
+                <li>自动化工作流与无代码管线</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>日常办公用户、开发者集成需求、企业文档管理</div>
+            <div class="repo-url"><a href="https://github.com/Stirling-Tools/Stirling-PDF" target="_blank">https://github.com/Stirling-Tools/Stirling-PDF</a></div>
+        </div>
+        <div class="page-num">10 / 11</div>
+    </div>
+
+    <!-- PAGE 11: #19 insomnia -->
+    <div class="page page-detail" style="justify-content:flex-start" id="page-11">
+                <div class="repo-block">
+            <div class="repo-number">#19</div>
+            <div class="repo-header">
+                <div class="repo-avatar"><img src="avatar/Kong.png" alt="Kong" loading="lazy" onerror="this.src='https://github.com/Kong.png'"></div>
+                <div class="repo-name">insomnia<span class="author-name">Kong</span></div>
+            </div>
+            <div class="repo-metrics">
+                                <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+                <div class="repo-metric"><span class="val">39,793</span><span class="lbl">Star</span></div>
+                <div class="repo-metric"><span class="val" style="color:var(--near-black)">+981</span><span class="lbl">本周</span></div>
+                <div class="repo-metric"><span class="val">2,348</span><span class="lbl">Fork</span></div>
+            </div>
+            <div class="repo-desc">开源跨平台 API 客户端，支持 GraphQL、REST、WebSocket 和 gRPC 等协议。提供本地存储、Git 同步和云端三种数据存储方式。</div>
+            <ul class="repo-features">
+                <li>多协议 API 调试与测试</li>
+                <li>支持本地/Git/云端存储</li>
+                <li>内置 OpenAPI 设计与测试框架</li>
+            </ul>
+            <div class="repo-audience"><strong>推荐：</strong>API 开发者、后端工程师、质量测试人员</div>
+            <div class="repo-url"><a href="https://github.com/Kong/insomnia" target="_blank">https://github.com/Kong/insomnia</a></div>
+        </div>
+        <div class="page-num">11 / 11</div>
+    </div>
+
+<script>
+(function() {
+    // Sidebar month collapse
+    var toggles = document.querySelectorAll('.sidebar-month-toggle');
+    toggles.forEach(function(t) {
+        t.addEventListener('click', function() {
+            this.parentElement.classList.toggle('is-collapsed');
+        });
+    });
+
+    // Active index tracking
+    var indexItems = document.querySelectorAll('.index-nav .index-item');
+    if (!indexItems.length) return;
+    var sections = [];
+    indexItems.forEach(function(item) {
+        var href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            var el = document.querySelector(href);
+            if (el) sections.push({ el: el, link: item });
+        }
+    });
+    if (!sections.length) return;
+
+    function updateActive() {
+        var bestIdx = -1;
+        var bestDist = Infinity;
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var dist = Math.abs(rect.top - 80);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0) {
+            var activeId = '#' + sections[bestIdx].el.getAttribute('id');
+            indexItems.forEach(function(item) {
+                item.classList.toggle('is-active', item.getAttribute('href') === activeId);
+            });
+        }
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    updateActive();
+})();
+</script>
+</body>
+
+</html>

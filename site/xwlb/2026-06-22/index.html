@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     XWLB PAGE · 新闻联播文字摘要
+     Kami design system: warm parchment, ink-blue accent, serif-led
+     Font paths: ../../assets/fonts/ (when deployed to site/xwlb/{date}/)
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>6月22日周一《新闻联播》 · 新闻联播文字摘要</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="6月22日周一《新闻联播》 新闻联播文字摘要，共 13 条新闻。">
+<meta property="og:title" content="6月22日周一《新闻联播》 · 新闻联播文字摘要">
+<meta property="og:description" content="6月22日周一《新闻联播》 新闻联播文字摘要，共 13 条新闻。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://news-tools.pages.dev">
+<link rel="canonical" href="https://news-tools.pages.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== Tokens ========== */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+
+  --brand:        #1B365D;
+  --brand-light:  #2D5A8A;
+  --brand-tint:   #EEF2F7;
+
+  --near-black:   #141413;
+  --dark-warm:    #3d3d3a;
+  --olive:        #504e49;
+  --stone:        #6b6a64;
+
+  --border:       #e8e6dc;
+  --border-soft:  #e5e3d8;
+  --line:         #d8d5c8;
+
+  --serif: "Noto Serif SC", "LXGW WenKai",
+           "Source Han Serif SC", "Noto Serif CJK SC",
+           Georgia, serif;
+  --sans:  "Noto Sans SC", "PingFang SC", system-ui, -apple-system, sans-serif;
+  --mono:  "JetBrains Mono", "SF Mono", Consolas,
+           "Noto Sans SC", monospace;
+  --latin-ui: "PingFang SC", system-ui, -apple-system, sans-serif;
+
+  --sidebar-w: 200px;
+  --index-w: 260px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.58;
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: var(--sidebar-w);
+  padding-right: var(--index-w);
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover { color: var(--brand-light); }
+
+/* ========== Sidebar ========== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--parchment);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 20px 0 16px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 18px;
+  margin: 0 0 6px;
+  color: var(--near-black);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sidebar-home:hover { color: var(--brand); }
+.sidebar-home .icon { font-size: 20px; }
+
+.sidebar-section {
+  padding: 0 16px;
+  margin-top: 8px;
+}
+.sidebar-section:last-child { margin-bottom: 0; }
+
+.sidebar-month-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+.sidebar-month-toggle:hover { color: var(--brand-light); }
+.sidebar-month-toggle .arrow {
+  font-size: 13px;
+  color: var(--stone);
+  transition: transform 0.25s ease;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-toggle .arrow {
+  transform: rotate(-90deg);
+}
+
+.sidebar-month-items {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: 600px;
+  opacity: 1;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-items {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0 7px 18px;
+  color: var(--olive);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 14px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.15s;
+}
+.sidebar-item:hover { color: var(--brand); background: var(--brand-tint); }
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sidebar-item.is-active { color: var(--brand); font-weight: 500; }
+.sidebar-item.is-active::before { background: var(--brand); width: 9px; height: 9px; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 16px 0;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: var(--stone);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.sidebar-footer a:hover { color: var(--brand); }
+.sidebar-footer .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* ========== Layout ========== */
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 56px 64px 80px;
+}
+
+/* ========== Header ========== */
+
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page-header .eyebrow {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--stone);
+  margin: 0 0 16px;
+}
+
+.page-header .eyebrow a { color: var(--brand); }
+
+.page-header h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  color: var(--near-black);
+  margin: 0 0 12px;
+}
+
+.page-header .meta {
+  font-family: var(--latin-ui);
+  font-size: 14px;
+  color: var(--stone);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.page-header .meta .xwlb-source { display: inline-flex; align-items: center; gap: 6px; }
+.page-header .meta .xwlb-source .tag {
+  display: inline-block;
+  background: var(--brand);
+  color: var(--ivory);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.page-header .meta .xwlb-count { color: var(--olive); }
+
+/* ========== Summary section ========== */
+
+.section-head {
+  margin-bottom: 20px;
+}
+
+.section-num {
+  font-family: var(--latin-ui);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--brand);
+  letter-spacing: 0.4px;
+  margin: 0 0 4px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--near-black);
+  margin: 0;
+  letter-spacing: 0.6px;
+}
+
+/* ========== Summary items ========== */
+
+.summary-label {
+  font-family: var(--latin-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  color: var(--brand);
+  padding: 8px 0 6px 24px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.summary-label::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--brand);
+  font-size: 8px;
+}
+
+/* subitem overrides must beat .summary-list li specificity */
+.summary-list li.summary-subitem {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--stone);
+  padding: 2px 0 2px 11px;
+  position: relative;
+  list-style: none;
+}
+
+.summary-list li.summary-subitem::before {
+  content: "\25CB" !important;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  color: var(--line);
+  font-size: 8px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px;
+}
+
+.summary-list li {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark-warm);
+  padding: 3px 0 3px 24px;
+  position: relative;
+}
+
+.summary-list li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  color: var(--brand);
+  font-size: 8px;
+}
+/* ========== Right index nav ========== */
+
+.index-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--index-w);
+  background: var(--parchment);
+  border-left: 1px solid var(--border);
+  z-index: 99;
+  overflow-y: auto;
+  padding: 28px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+.index-nav::-webkit-scrollbar { width: 4px; }
+.index-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+.index-nav .index-head {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--near-black);
+  padding: 0 16px 14px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.index-nav .index-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--olive);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-right: 2px solid transparent;
+}
+
+.index-nav .index-item:hover {
+  color: var(--brand);
+  background: var(--brand-tint);
+}
+
+.index-nav .index-item.is-active {
+  color: var(--brand);
+  font-weight: 500;
+  background: var(--brand-tint);
+  border-right-color: var(--brand);
+}
+
+.index-nav .index-item .idx-num {
+  font-family: var(--latin-ui);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--stone);
+  min-width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.index-nav .index-item.is-active .idx-num {
+  color: var(--brand);
+}
+
+.index-nav .index-summary {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.index-nav .index-summary .idx-num {
+  color: var(--brand);
+  font-size: 11px;
+}
+
+.index-nav .index-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 6px 16px 8px;
+}
+
+
+/* ========== News items ========== */
+
+.news-section { margin-top: 40px; }
+
+.news-item {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.news-item .item-number {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+
+.news-item .item-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--near-black);
+  margin: 0 0 14px;
+  letter-spacing: 0.3px;
+}
+
+.news-item .item-title a { color: inherit; }
+.news-item .item-title a:hover { color: var(--brand); }
+
+.news-item .item-content {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--olive);
+  padding: 14px 18px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.news-item .item-content p {
+  margin: 0 0 10px;
+  text-indent: 2em;
+}
+
+.news-item .item-content p:last-child { margin-bottom: 0; }
+
+.news-item .item-content .express-title {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.news-item .item-content .express-body {
+  padding-left: 16px;
+  margin-bottom: 8px;
+  color: var(--dark-warm);
+}
+
+/* ========== Footer ========== */
+
+footer.foot {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.foot .mark { display: grid; grid-template-columns: auto; gap: 2px; }
+
+.foot .mark .wm-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--near-black);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.foot .mark .wm-line { font-size: 13px; color: var(--olive); margin-top: 2px; }
+
+.foot .colophon { text-align: right; max-width: 420px; }
+
+.foot .colophon .links {
+  font-family: var(--latin-ui);
+  color: var(--dark-warm);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.foot .colophon .links a { color: var(--dark-warm); }
+.foot .colophon .links a:hover { color: var(--brand); }
+.foot .colophon .ethos { color: var(--olive); line-height: 1.55; max-width: 320px; margin-left: auto; }
+
+/* ========== Responsive ========== */
+
+@media (max-width: 1200px) {
+  .index-nav { display: none; }
+}
+
+@media (max-width: 880px) {
+  .page { padding: 40px 28px 60px; }
+  .page-header h1 { font-size: 34px; letter-spacing: 0.4px; }
+  .page-header { margin-bottom: 32px; padding-bottom: 24px; }
+  .section-title { font-size: 22px; }
+  .news-item .item-title { font-size: 18px; }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+    gap: 8px;
+  }
+  .sidebar-home { border-bottom: none; padding: 0; margin: 0; }
+  .sidebar-section { display: none; }
+  .sidebar-footer { margin-top: 0; border-top: none; padding: 0; flex-direction: row; }
+  body { padding-left: 0; }
+  .page { padding: 32px 20px 48px; }
+  .page-header h1 { font-size: 28px; }
+  .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .summary-list li { font-size: 15px; }
+  .news-item .item-content { padding: 12px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header h1 { animation: none; opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年06月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-06-27/index.html" class="sidebar-item">2026年6月27日</a>
+          <a href="../2026-06-26/index.html" class="sidebar-item">2026年6月26日</a>
+          <a href="../2026-06-25/index.html" class="sidebar-item">2026年6月25日</a>
+          <a href="../2026-06-24/index.html" class="sidebar-item">2026年6月24日</a>
+          <a href="../2026-06-23/index.html" class="sidebar-item">2026年6月23日</a>
+          <a href="../2026-06-22/index.html" class="sidebar-item is-active">2026年6月22日</a>
+          <a href="../2026-06-21/index.html" class="sidebar-item">2026年6月21日</a>
+          <a href="../2026-06-20/index.html" class="sidebar-item">2026年6月20日</a>
+          <a href="../2026-06-19/index.html" class="sidebar-item">2026年6月19日</a>
+          <a href="../2026-06-18/index.html" class="sidebar-item">2026年6月18日</a>
+          <a href="../2026-06-17/index.html" class="sidebar-item">2026年6月17日</a>
+          <a href="../2026-06-16/index.html" class="sidebar-item">2026年6月16日</a>
+          <a href="../2026-06-15/index.html" class="sidebar-item">2026年6月15日</a>
+          <a href="../2026-06-14/index.html" class="sidebar-item">2026年6月14日</a>
+          <a href="../2026-06-13/index.html" class="sidebar-item">2026年6月13日</a>
+          <a href="../2026-06-12/index.html" class="sidebar-item">2026年6月12日</a>
+          <a href="../2026-06-11/index.html" class="sidebar-item">2026年6月11日</a>
+          <a href="../2026-06-10/index.html" class="sidebar-item">2026年6月10日</a>
+          <a href="../2026-06-09/index.html" class="sidebar-item">2026年6月9日</a>
+          <a href="../2026-06-08/index.html" class="sidebar-item">2026年6月8日</a>
+          <a href="../2026-06-07/index.html" class="sidebar-item">2026年6月7日</a>
+          <a href="../2026-06-06/index.html" class="sidebar-item">2026年6月6日</a>
+          <a href="../2026-06-05/index.html" class="sidebar-item">2026年6月5日</a>
+          <a href="../2026-06-04/index.html" class="sidebar-item">2026年6月4日</a>
+          <a href="../2026-06-03/index.html" class="sidebar-item">2026年6月3日</a>
+          <a href="../2026-06-02/index.html" class="sidebar-item">2026年6月2日</a>
+          <a href="../2026-06-01/index.html" class="sidebar-item">2026年6月1日</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>
+<nav class="index-nav">
+  <div class="index-head">本页导航</div>
+  <a class="index-item index-summary" href="#xwlb-summary">
+    <span class="idx-num">◈</span> 摘要
+  </a>
+  <div class="index-divider"></div>
+        <a class="index-item" href="#item-01"><span class="idx-num">01</span> 【牢记初心使命，奋进复兴征程】赓续延安精神，书写时代新篇</a>
+      <a class="index-item" href="#item-02"><span class="idx-num">02</span> 李强在辽宁大连调研</a>
+      <a class="index-item" href="#item-03"><span class="idx-num">03</span> 李强将出席第十七届夏季达沃斯论坛</a>
+      <a class="index-item" href="#item-04"><span class="idx-num">04</span> 王沪宁主持召开全国政协主席会议</a>
+      <a class="index-item" href="#item-05"><span class="idx-num">05</span> 丁薛祥出席第四届中国国际供应链促进博览会开幕式并作主旨讲话</a>
+      <a class="index-item" href="#item-06"><span class="idx-num">06</span> 国家出台多项举措推动利用外资固稳促优</a>
+      <a class="index-item" href="#item-07"><span class="idx-num">07</span> 【在希望的田野上】全国夏播进入高峰，科技赋能提质增效</a>
+      <a class="index-item" href="#item-08"><span class="idx-num">08</span> 海军辽宁舰编队完成远海实战化训练</a>
+      <a class="index-item" href="#item-09"><span class="idx-num">09</span> 全国人大常委会启动青藏高原生态保护法执法检查</a>
+      <a class="index-item" href="#item-10"><span class="idx-num">10</span> 南方多地强降雨，各部门多举措应对</a>
+      <a class="index-item" href="#item-11"><span class="idx-num">11</span> 国内联播快讯</a>
+      <a class="index-item" href="#item-12"><span class="idx-num">12</span> 伊美比尔根山首轮谈判结束，建立技术性谈判机制；以称将依自身需要在黎南部长期驻留，黎真主党称侵略者必须撤离</a>
+      <a class="index-item" href="#item-13"><span class="idx-num">13</span> 国际联播快讯</a>
+</nav>
+
+<main class="page">
+
+  <!-- ============ Header ============ -->
+  <header class="page-header">
+    <div class="eyebrow">
+      <a href="../../index.html">← 返回主页</a>
+      <span style="margin-left:12px;color:var(--stone)">News Tools</span>
+    </div>
+
+    <h1>6月22日周一《新闻联播》</h1>
+
+    <div class="meta">
+      <span class="xwlb-source"><span class="tag">新闻联播</span></span>
+      <span class="xwlb-count">13 条新闻</span>
+      <span>来源：<a href="https://tv.cctv.com/2026/06/23/VIDENHAJLNNyfsF6rwSu96tn260623.shtml" target="_blank" rel="noopener">央视网</a></span>
+      <span>2026-06-22</span>
+    </div>
+  </header>
+
+  <!-- ============ Summary ============ -->
+  <section id="xwlb-summary">
+    <div class="section-head">
+      <p class="section-num">摘要</p>
+      <h2 class="section-title">本期要闻</h2>
+    </div>
+    <ol class="summary-list">
+            <div class="summary-label">本期节目主要内容：</div>
+      <li>【牢记初心使命 奋进复兴征程】赓续延安精神 书写时代新篇；</li>
+      <li>李强在辽宁大连调研；</li>
+      <li>李强将出席第十七届夏季达沃斯论坛；</li>
+      <li>王沪宁主持召开全国政协主席会议；</li>
+      <li>丁薛祥出席第四届中国国际供应链促进博览会开幕式并作主旨讲话；</li>
+      <li>国家出台多项举措推动利用外资固稳促优；</li>
+      <li>【在希望的田野上】全国夏播进入高峰 科技赋能提质增效；</li>
+      <li>海军辽宁舰编队完成远海实战化训练；</li>
+      <li>全国人大常委会启动青藏高原生态保护法执法检查；</li>
+      <li>南方多地强降雨 各部门多举措应对；</li>
+      <div class="summary-label">国内联播快讯：</div>
+      <li class="summary-subitem">（1）中央财政下达农业生产防灾救灾资金2.19亿元；</li>
+      <li class="summary-subitem">（2）“十五五”时期全国公共机构单位建筑面积碳排放将力争下降8.5%；</li>
+      <li class="summary-subitem">（3）端午假期全国各口岸出入境人员666.7万人次；</li>
+      <li class="summary-subitem">（4）端午假期全国食品安全总体平稳；</li>
+      <li class="summary-subitem">（5）广肇高速新建金马大桥合龙；</li>
+      <li class="summary-subitem">（6）第31届上海电视节开幕；</li>
+      <li>伊美比尔根山首轮谈判结束 建立技术性谈判机制 以称将依自身需要在黎南部长期驻留 黎真主党称侵略者必须撤离；</li>
+      <div class="summary-label">国际联播快讯：</div>
+      <li class="summary-subitem">（1）英国首相斯塔默宣布辞职；</li>
+      <li class="summary-subitem">（2）俄称打击乌物流中心 乌称持续跨境打击；</li>
+      <li class="summary-subitem">（3）美芝加哥发生数十起枪击 至少8人死亡；</li>
+      <li class="summary-subitem">（4）欧洲多国发布高温警报。</li>
+    </ol>
+  </section>
+
+
+  <!-- ============ News Detail ============ -->
+  <section class="news-section">
+    <div class="section-head">
+      <p class="section-num">详细内容</p>
+      <h2 class="section-title">逐条新闻</h2>
+    </div>
+
+        <div class="news-item" id="item-01">
+          <div class="item-number">第 01 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEAyu3ulUyAv1CT6KIYoiO260622.shtml" target="_blank" rel="noopener">【牢记初心使命，奋进复兴征程】赓续延安精神，书写时代新篇</a></h3>
+          <div class="item-content">
+          <p>
+        延安，中国革命的圣地。1935年至1948年，党中央在这里领导了抗日战争和解放战争，培育了以“坚定正确的政治方向、解放思想实事求是的思想路线、全心全意为人民服务的根本宗旨、自力更生艰苦奋斗的创业精神”为主要内容的延安精神。习近平总书记指出，延安精神是党的宝贵精神财富，要代代传承下去。新征程上，延安精神跨越时空、历久弥新，激励着一代又一代共产党人奋勇前行，为全面建设社会主义现代化强国提供强大精神动力。
+      </p>
+      <p>
+        巍巍宝塔山，承载着不灭的信仰；滚滚延河水，流淌着红色的血脉。临近“七一”，延安这片承载着无数人精神向往的红色热土，再次迎来全国各地的参观者。在杨家岭、枣园等革命旧址，一件件实物、一段段史料生动再现了党中央在延安十三年艰苦奋斗的光辉岁月。
+      </p>
+      <p>
+        党的十八大以来，习近平总书记多次踏上延安这片红色热土。2015年春节前夕，他到陕西考察调研，强调老一辈革命家和老一代共产党人在延安时期留下的优良传统和作风，培育形成的延安精神，是我们党的宝贵精神财富。2022年，党的二十大闭幕不到一周，习近平总书记再次回到延安，带领二十届中共中央政治局常委瞻仰革命圣地，强调要弘扬伟大建党精神，弘扬延安精神，坚定历史自信，增强历史主动，发扬斗争精神，为实现党的二十大提出的目标任务而团结奋斗。
+      </p>
+      <p>
+        总书记对延安精神的深刻阐释与时代擘画，为三秦大地的发展注入了不竭动力。他指出，老区和老区人民为我们党领导的中国革命作出了重大牺牲和贡献，我们要永远珍惜、永远铭记。各级党委和政府要增强使命感和责任感，把老区发展和老区人民生活改善时刻放在心上，加大投入支持力度，加快老区发展步伐，让老区人民都过上幸福美满的日子。他殷殷嘱托，陕西在推进中国式现代化建设中要有勇立潮头、争当时代弄潮儿的志向和气魄，奋力追赶、敢于超越，在西部地区发挥示范作用。
+      </p>
+      <p>
+        循着总书记指引的方向，延安精神正化作老区人民改变命运的生动实践。“全心全意为人民服务”的根本宗旨如今正深深扎根在黄土高原的田间地头。
+      </p>
+      <p>
+        十多年前，延安市安塞区高桥镇南沟村还是一个典型的“空壳村”，面临着出行难、娶媳难、干事难的“三难”困境。面对困难，村党支部主动担当作为，盘活闲置土地，将发展苹果产业作为破局的关键。如今，这个曾经“晴天一身灰，雨天一脚泥”的贫困村落，已建起3000多亩现代化山地苹果园，蹚出了持续增收的致富路，全村人均可支配收入由2014年的4653元增加到2025年的24500元。
+      </p>
+      <p>
+        从南沟村的优质苹果到洛川的标准化果园，再到眉县的猕猴桃，如今，立足资源禀赋做强特色农业，正成为三秦大地乡村振兴的生动缩影。一条条特色产业链拔节生长，正化作老区群众稳定增收的“硬核”支撑。
+      </p>
+      <p>
+        如果说“为民造福”是延安精神的初心所在，那么“自力更生、艰苦奋斗”则是延安精神最鲜明的底色。在新时代，这份底色正转化为陕西科技自立自强的坚实力量。
+      </p>
+      <p>
+        在西安光机所的洁净室里，研发团队历经无数个日夜的毫厘校准，成功拼接出国内领先的“光创-2”相机焦面组件，让这台“太空千里眼”多项技术指标达到国际先进水平；在全球最大的商用车变速器生产基地——法士特高智新智慧工厂，连续6小时无人“黑灯生产”的极致自动化不仅将生产效率提升了70%以上，更锻造出支撑中国商用车驰骋世界的坚实根基。
+      </p>
+      <p>
+        从“从0到1”的原创性突破到传统制造业向“智能制造”的跃升，陕西正以数智赋能、绿色引领，不断将自力更生的精神坐标转化为高质量发展的生动实践。
+      </p>
+      <p>
+        初心永固，再谱新篇。站在新的历史起点上，全体中华儿女正不断传承红色基因、激扬奋斗精神，在中国式现代化的壮阔征程上，奋力书写强国建设、民族复兴的崭新篇章。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-02">
+          <div class="item-number">第 02 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEqfgxP9zOXuw30H4zE0h9260622.shtml" target="_blank" rel="noopener">李强在辽宁大连调研</a></h3>
+          <div class="item-content">
+          <p>
+        中共中央政治局常委、国务院总理李强6月22日在辽宁省大连市调研。他强调，要深入贯彻落实习近平总书记关于新时代东北全面振兴和建设现代化产业体系的重要指示精神，坚持智能化、绿色化、融合化方向，加强原创性、引领性科技攻关，强化产业基础再造，大力发展高端装备制造业，加快建设现代化产业体系，为高质量发展不断注入新动能。
+      </p>
+      <p>
+        李强首先来到大连船舶重工集团有限公司，听取企业业务发展等介绍和大连市船舶工业发展汇报，登上在建船只，了解液化天然气运输船等船舶建造情况。他指出，高端船舶制造具有高技术、高难度、高附加值的特点。要强化企业创新主体地位，加快关键技术研发突破，培养造就一批掌握精湛技艺、具有丰富经验的技术骨干和产业工人，进一步提升自主创新能力，通过经营理念创新和产品、服务迭代升级来创造市场、引领市场。大连造船业在发展高端装备制造业方面有比较好的基础，要紧盯国际前沿，聚焦关键领域持续攻坚，加强行业内交流合作，着力打造先进制造业集群、建设世界一流造船基地。
+      </p>
+      <p>
+        在一重集团大连核电石化有限公司，李强详细了解核电、石化等装备研制情况，走进车间察看核反应堆压力容器加工制造。他强调，先进核电等高端装备对国家能源、产业、科技安全意义重大。要强化科技创新和产业创新深度融合，加快科技成果转化，提升原创设计能力和精工制造能力，推进新一代核电技术的安全应用。李强指出，建设现代化产业体系，不仅要培育壮大新兴产业和未来产业，也要优化提升传统产业。高端石化装备研发生产对相关产业提质增效具有重要的基础性作用，要强化数智技术赋能，推进标准更新升级，严格环保、能效等规范管理，突破一批标志性重大技术装备，不断增强核心竞争力。李强还与现场技术人员交流，勉励他们发扬工匠精神，为企业发展和国家建设贡献力量。
+      </p>
+      <p>
+        吴政隆陪同调研。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-03">
+          <div class="item-number">第 03 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDELZtWzYCcES2o4zRnEXNo260622.shtml" target="_blank" rel="noopener">李强将出席第十七届夏季达沃斯论坛</a></h3>
+          <div class="item-content">
+          <p>
+        国务院总理李强将于6月23日至24日出席在大连举行的第十七届夏季达沃斯论坛。其间，李强总理将出席开幕式并发表特别致辞，会见来华出席论坛的外方嘉宾，并同工商界代表座谈交流。
+      </p>
+      <p>
+        孟加拉国总理塔里克、几内亚总理乌里·巴、哈萨克斯坦总理别克捷诺夫、韩国总理金民锡、蒙古国总理乌其尔勒、黑山总理斯帕伊奇将出席论坛。来自90多个国家和地区的1700余名政、商、学、媒体界代表将参会。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-04">
+          <div class="item-number">第 04 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEMK1yLaQ5lNgKK2n73w1U260622.shtml" target="_blank" rel="noopener">王沪宁主持召开全国政协主席会议</a></h3>
+          <div class="item-content">
+          <p>
+        政协第十四届全国委员会第五十二次主席会议22日在京召开。中共中央政治局常委、全国政协主席王沪宁主持并讲话。
+      </p>
+      <p>
+        会议传达学习贯彻习近平总书记近期重要讲话和重要指示精神。王沪宁表示，习近平党建思想对强党强国具有重大现实意义和长远指导意义，在习近平新时代中国特色社会主义思想中有着特殊重要的地位，要持续推动学习贯彻习近平党建思想走深走实，把学习成效体现到坚持人民政协性质定位、充分发挥专门协商机构作用、聚焦党和国家中心任务履职尽责的实际行动和工作成效上。要深入学习贯彻习近平总书记对常态化做好东西部协作工作的重要指示精神，围绕促进区域协调发展、推进乡村全面振兴、推动全体人民共同富裕等积极建言献策。要深入学习贯彻习近平总书记关于前瞻布局和发展未来产业的重要论述，引导经济界、科技界等相关界别政协委员通过视察考察调研、提案、社情民意信息等提出意见和建议。要深入学习贯彻习近平总书记关于一体推进教育科技人才发展的重要论述，聚焦建立健全教育科技人才一体推进协调机制、加快建设国家战略人才力量等重点问题，深入调查研究、协商议政，助力推动科技自主创新和人才自主培养。
+      </p>
+      <p>
+        会议审议通过政协第十四届全国委员会常务委员会第十八次会议议程（草案）和日程，决定8月下旬在北京召开全国政协十四届常委会第十八次会议。
+      </p>
+      <p>
+        会议审议通过关于撤销魏小东、侯贵松政协第十四届全国委员会委员资格的决定，提请政协第十四届全国委员会常务委员会第十七次会议追认。
+      </p>
+      <p>
+        全国政协副主席穆虹、姜信治、朱永新、杨震围绕学习贯彻习近平总书记近期重要讲话和重要指示精神作发言。全国政协副主席兼秘书长王东峰等就有关议题作说明。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-05">
+          <div class="item-number">第 05 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDE5xp4VBVbsQ8jasQ9BU2Z260622.shtml" target="_blank" rel="noopener">丁薛祥出席第四届中国国际供应链促进博览会开幕式并作主旨讲话</a></h3>
+          <div class="item-content">
+          <p>
+        第四届中国国际供应链促进博览会22日在北京开幕，中共中央政治局常委、国务院副总理丁薛祥出席并作主旨讲话。
+      </p>
+      <p>
+        丁薛祥表示，当前世界形势复杂多变，产业链供应链碎片化风险增加。习近平主席指出，维护全球产业链供应链韧性和稳定是推动世界经济发展的重要保障，符合世界各国人民共同利益。中国作为负责任大国，有效发挥完整产业体系、超大规模市场等优势，努力畅通世界经济运行脉络，以实际行动坚定维护全球产业链供应链稳定畅通。
+      </p>
+      <p>
+        丁薛祥对各方共同维护产业链供应链稳定畅通提出四点建议。一是加强相互信任，防止将经贸问题政治化、武器化、泛安全化，共同维护产业链供应链的全球公共产品属性。二是加强贸易畅通，维护和践行真正的多边主义，反对以绿色低碳为名、行保护主义之实，促进贸易投资自由化便利化。三是加强融合发展，齐心协力推动创新链与产供链深度融合，共同打造优势互补、互利共赢的产业生态。四是加强资源共享，积极维护全球能源和关键矿产市场平稳运行，为保障全球产业链供应链稳定畅通创造良好条件。
+      </p>
+      <p>
+        随后，丁薛祥宣布第四届中国国际供应链促进博览会开幕。
+      </p>
+      <p>
+        南非副总统马沙蒂莱，以及国际商会等机构负责人出席开幕式并致辞。
+      </p>
+      <p>
+        开幕式前，丁薛祥到链博会展馆巡馆并同有关企业负责人互动交流。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-06">
+          <div class="item-number">第 06 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEhInGJqTWUzXitAx95j8h260622.shtml" target="_blank" rel="noopener">国家出台多项举措推动利用外资固稳促优</a></h3>
+          <div class="item-content">
+          <p>
+        国务院新闻办公室今天（6月22日）举行新闻发布会，商务部、国家发展改革委、财政部有关负责人介绍，将通过多项举措推动我国利用外资稳存量、扩增量、提质量。
+      </p>
+      <p>
+        据介绍，近日发布的《利用外资固稳促优行动方案》共包括五方面，主要为：进一步扩大市场准入，围绕深化服务业领域开放，增加了稳步扩大职业技能培训机构、职业院校、高水平理工农医类大学对外开放试点；提升金融业服务开放水平，进一步扩大生物技术、外商独资医院开放试点的区域范围。
+      </p>
+      <p>
+        提升投资便利度，优化数据跨境流动管理，落实好境外投资者以分配利润直接投资税收优惠政策，促进外资境内再投资，完善外资研发中心支持政策举措。
+      </p>
+      <p>
+        提高投资促进水平，优化外资管理，健全服务保障体系，加强对政府采购、招标投标等领域的公平竞争审查，强化重大和重点外资项目的服务保障。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-07">
+          <div class="item-number">第 07 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEK2Z0hY1MugdfwxllhS6v260622.shtml" target="_blank" rel="noopener">【在希望的田野上】全国夏播进入高峰，科技赋能提质增效</a></h3>
+          <div class="item-content">
+          <p>
+        农业农村部最新农情调度显示，目前全国夏播粮食进度过七成。得益于新技术和新装备的使用，今年粮食主产区的夏播品质和效率大幅提升。
+      </p>
+      <p>
+        夏播粮食面积占全年粮食面积的四分之一，目前中稻播栽、玉米播种已接近尾声。
+      </p>
+      <p>
+        黄淮海地区是我国最大的夏玉米主产区。在山东邹平的连片高标准农田里，旋耕机、整地机、播种机“接力奔跑”。
+      </p>
+      <p>
+        今年夏播期间，新技术、新装备成为提质增效的突出亮点。眼下，河南夏季大宗作物集中播种基本结束。河南大力推广花生起垄种植、秋作物水肥一体化等新技术，应用面积超700万亩。在全国花生核心产区，河南正阳县今年示范推广花生肽肥，依托种肥同播技术，有效提升种植质量。
+      </p>
+      <p>
+        在江苏阜宁，经过标准化温室培育的水稻秧苗整齐装载至智能插秧机。相较于传统人工插秧和普通机械化插秧，北斗智能插秧模式有效提升栽插平整度，大幅降低后期田间管护难度。
+      </p>
+      <p>
+        今年，安徽秋粮计划播种面积约6470万亩，较上年稳中有增。眼下，各地紧扣播种关键环节，组织好绿色高产高效创建、大豆玉米单产提升工程等项目实施，大力推广病虫草害绿色综合防治等关键技术，实现播种质量、效率双提升，筑牢丰产增收基础。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-08">
+          <div class="item-number">第 08 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDE6fgaHShHvTvYSHqXZ9Oo260622.shtml" target="_blank" rel="noopener">海军辽宁舰编队完成远海实战化训练</a></h3>
+          <div class="item-content">
+          <p>
+        今天（6月22日）上午，海军辽宁舰编队圆满完成远海实战化训练，安全顺利返回青岛母港。40余天的训练中，编队赴南海、西太平洋等海空域，深入开展实战运用验证，有力提升了航母编队履行使命任务能力。
+      </p>
+      <p>
+        这次训练，辽宁舰航母编队连续转战多个训练海空域，严密构建预警探测体系，精心筹划组织岸海联合体系对抗、舰载机战术飞行、编队搜救等多项科目训练，练指挥、研战法、摸底数、强能力，不断打磨提升编队实战化训练水平。在西太平洋某海域，辽宁舰编队与两栖攻击舰编队开展联合演练，双方精心筹划组织体系融合训练，充分锤炼了航母编队联动两栖攻击舰编队远海实战行动效能。
+      </p>
+      <p>
+        训练期间，日方舰艇、飞机多次近距离跟踪监视、滋扰挑衅。辽宁舰编队全程保持高度戒备状态，连续组织舰载机战斗起飞，灵活变换战斗队形，专业稳妥处置应对日方危险行径。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-09">
+          <div class="item-number">第 09 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEZEurbb9p90n10RE8mHAE260622.shtml" target="_blank" rel="noopener">全国人大常委会启动青藏高原生态保护法执法检查</a></h3>
+          <div class="item-content">
+          <p>
+        全国人大常委会6月22日启动青藏高原生态保护法执法检查。
+      </p>
+      <p>
+        7月至8月，执法检查组将赴四川、西藏、甘肃、青海、新疆等5省（区）开展实地检查。各检查小组赴地方工作时，将采取听取汇报、召开座谈会、实地检查、随机抽查、问卷调查等多种形式，全面了解法律实施情况和存在的问题。
+      </p>
+      <p>
+        执法检查中，将重点检查8方面内容：法律宣传普及和配套法规制度建设情况；协调机制建立和相关专项规划编制情况；生态安全布局情况；生态保护修复情况；生态风险防控情况；保障与监督情况；法律实施中的主要困难和问题，深入推进法律实施的意见建议；对修改完善青藏高原生态保护法的意见和建议。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-10">
+          <div class="item-number">第 10 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEIpdw8D37gbpK7mVhoawp260622.shtml" target="_blank" rel="noopener">南方多地强降雨，各部门多举措应对</a></h3>
+          <div class="item-content">
+          <p>
+        南方多地近日持续强降雨，各地各部门采取多措施保障群众生活。
+      </p>
+      <p>
+        昨天（6月21日）起，安徽马鞍山、明光、滁州等地出现大范围强降雨，城市低洼地段积水，部分地区水库水位持续上涨，各部门启动应急预案，迅速全力抢排积水。今天上午，马鞍山市开启多座闸口增强城市蓄洪排涝能力，明光市东风湖排涝站五台机组满负荷排涝。
+      </p>
+      <p>
+        江苏泰州张甸镇蔬菜生产基地的农民正在抢排积水、疏通沟渠；华港镇的高标准农田开启了配套的主排渠闸门，并增开临时排水口。
+      </p>
+      <p>
+        贵州黎平县、荔波县等地近日遭遇暴雨，引发局部洪涝灾害。黎平县3000多人受灾，当地投入消防、民兵等救援力量36支677人，昼夜奋战清淤排障。截至目前，黎平县2380人已紧急转移避险，灾区电力、通信等基础设施正在抢修，预计今晚恢复。
+      </p>
+      <p>
+        中央气象台预计，今天到24日，西南地区、江淮等地将有大到暴雨，局地特大暴雨。气象部门提醒，广西、贵州、湖南等局地发生山洪、地质灾害风险高，公众应及时关注当地天气情况，注意出行安全。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-11">
+          <div class="item-number">第 11 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEASGzx52tcVROKt8tboCW260622.shtml" target="_blank" rel="noopener">国内联播快讯</a></h3>
+          <div class="item-content">
+          <p><span class="express-title">中央财政下达农业生产防灾救灾资金2.19亿元</span></p>
+        <div class="express-body">近日，财政部会同农业农村部下达农业生产防灾救灾资金2.19亿元，支持内蒙古、湖北、湖南、广东、重庆、贵州、云南等7省份开展农业生产救灾相关工作，重点对农作物改种补种、水毁农业设施修复等给予适当补助。</div>
+
+      <p><span class="express-title">“十五五”时期全国公共机构单位建筑面积碳排放将力争下降8.5%</span></p>
+        <div class="express-body">记者从国家机关事务管理局了解到，到2030年，全国公共机构单位建筑面积碳排放将力争下降8.5%，单位建筑面积能耗力争下降5%。“十五五”时期，全国公共机构绿色低碳发展进入提质增效新阶段。</div>
+
+      <p><span class="express-title">端午假期全国各口岸出入境人员666.7万人次</span></p>
+        <div class="express-body">国家移民管理局今天（6月22日）发布，今年端午假期共计666.7万人次中外人员出入境，较去年端午期间增长12.9%。其中，内地居民出入境292.1万人次，增长5.5%；港澳台居民出入境296.9万人次，增长18.4%；外国人入出境77.7万人次，增长23.3%。</div>
+
+      <p><span class="express-title">端午假期全国食品安全总体平稳</span></p>
+        <div class="express-body">端午假期，全国市场监管系统累计检查食品生产经营主体42.3万余家次，抽检粽子、肉制品等重点食品1.52万余批次，整改风险隐患3.68万余项，节日市场总体平稳有序。</div>
+
+      <p><span class="express-title">广肇高速新建金马大桥合龙</span></p>
+        <div class="express-body">今天（6月22日），广肇高速改扩建工程新建金马大桥顺利合龙。大桥全长超1936米，为双向四车道，与老金马大桥并行，是佛山、肇庆间跨西江又一快速通道。广州至肇庆高速改扩建项目全长51.1公里，预计2027年底建成通车。</div>
+
+      <p><span class="express-title">第31届上海电视节开幕</span></p>
+        <div class="express-body">第31届上海电视节今天（6月22日）开幕，来自60个国家和地区的千余部作品将参与电视剧、纪录片、动画片等多赛道角逐，“白玉兰绽放”颁奖典礼将于本月26日举行。其间，还将举办白玉兰论坛等系列活动。</div>
+
+          </div>
+        </div>
+    <div class="news-item" id="item-12">
+          <div class="item-number">第 12 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEyEGZEoy5L0j4Ue3q8kgc260622.shtml" target="_blank" rel="noopener">伊美比尔根山首轮谈判结束，建立技术性谈判机制；以称将依自身需要在黎南部长期驻留，黎真主党称侵略者必须撤离</a></h3>
+          <div class="item-content">
+          <p>
+        21日，伊朗和美国签署谅解备忘录后的首轮谈判在瑞士比尔根山举行。
+      </p>
+      <p>
+        调解方卡塔尔和巴基斯坦今天（6月22日）在谈判结束后发表联合声明说，谈判取得令人鼓舞的进展，包括建立开展进一步技术性谈判的机制。
+      </p>
+      <p>
+        本周内，技术性谈判将在比尔根山继续进行。联合声明说，在谅解备忘录的基础上，各方同意设立一个高级别委员会，负责监督谈判进程。该委员会已就伊美60天内达成最终协议出台路线图。伊美还建立了沟通渠道，确保在谈判期间，商业船舶安全通过霍尔木兹海峡。此外，各方同意由调解方协助设立一个冲突化解小组，以确保在黎巴嫩的军事行动停止。
+      </p>
+      <p>
+        伊朗外交部方面今天称，本轮谈判讨论了启动最终协议谈判的基础工作、结束在黎巴嫩的战争、允许伊朗石油销售、解冻伊朗资产等议题，取得了良好进展。伊朗重建和发展计划也得以启动。
+      </p>
+      <p>
+        美国方面称，谈判议题包括建立确保霍尔木兹海峡开放的机制、在黎巴嫩南部实现停火等。美伊双方还就核协议所有要素进行了充分讨论。
+      </p>
+      <p>
+        21日伊美谈判开始时，美国总统特朗普在社交媒体上发帖，警告伊朗立即停止在黎巴嫩的所谓“代理人”行动，否则美国将再次对伊朗发起打击，“而且会更猛烈”。伊方随即提出抗议离开会场，谈判一度暂停。
+      </p>
+      <p>
+        以称将依自身需要在黎南部长期驻留 黎真主党称侵略者必须撤离
+      </p>
+      <p>
+        21日，以色列总理内塔尼亚胡称，以军将根据自身需要，在黎巴嫩南部的所谓“安全区”长期驻留。黎巴嫩真主党领导人卡西姆21日称，黎真主党将对以色列的任何侵犯行为作出回应，侵略者必须撤出黎巴嫩。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-13">
+          <div class="item-number">第 13 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/22/VIDEu5BQNIdM6V5ri7nlVmVg260622.shtml" target="_blank" rel="noopener">国际联播快讯</a></h3>
+          <div class="item-content">
+          <p><span class="express-title">英国首相斯塔默宣布辞职</span></p>
+        <div class="express-body">英国首相斯塔默今天（6月22日）在首相府表示，将辞去执政党工党党首职务。他将继续担任英国首相，直到新党首选出。</div>
+        <div class="express-body">据英国媒体报道，随着斯塔默辞职，英国将在10余年里迎来第7位首相。英国大曼彻斯特市前市长安迪·伯纳姆被认为是角逐工党党首、进而担任首相的有力竞争者。伯纳姆今天表示将参选工党党首。</div>
+        <div class="express-body">今年5月，工党在地方选举中惨败。此前，斯塔默因其任命的驻美大使彼得·曼德尔森卷入美国已故富商爱泼斯坦丑闻，已备受舆论压力。</div>
+
+      <p><span class="express-title">俄称打击乌物流中心 乌称持续跨境打击</span></p>
+        <div class="express-body">俄罗斯国防部今天（6月22日）称，俄军防空部队在别尔哥罗德州、布良斯克州、莫斯科地区等上空拦截并摧毁301架乌克兰无人机。俄方还称，使用无人机打击了哈尔科夫地区一处乌军储存武器、无人机的大型物流中心。</div>
+        <div class="express-body">乌克兰武装部队总参谋部今天称，乌军打击了多个俄军指挥所、人员集结区等。乌方还称，已锁定俄境内军工厂、油库、储气设施等核心目标，将持续实施跨境打击行动。</div>
+
+      <p><span class="express-title">美芝加哥发生数十起枪击 至少8人死亡</span></p>
+        <div class="express-body">美国芝加哥市警方21日称，在刚刚过去的这个周末，芝加哥发生数十起枪击事件，累计造成至少8人死亡、38人受伤。其中一起发生在芝加哥南部一个节日庆祝活动现场，枪手驾车向人群开枪，13人中枪受伤。美国枪支暴力档案网的数据显示，近半年来，美国各类枪击事件已造成5990人死亡。</div>
+
+      <p><span class="express-title">欧洲多国发布高温警报</span></p>
+        <div class="express-body">西班牙国家气象局21日表示，今夏首轮热浪自当天起席卷伊比利亚半岛等地，预计将持续至25日。西班牙多地21日最高气温达到40—42℃。法国巴黎和48个省也就是法国本土约一半省份今天（6月22日）发布最高级别的高温红色警报，覆盖范围创历史纪录。法国多地记录到超40℃的高温，800多所学校停课。英国气象局21日向英格兰和威尔士部分地区发布为期四天的高温警报。意大利卫生部21日将面临高温红色警报的城市增加至8个。</div>
+
+          </div>
+        </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="foot">
+    <div class="mark">
+      <span class="wm-name">News Tools</span>
+      <span class="wm-line">新闻联播文字摘要</span>
+    </div>
+    <div class="colophon">
+      <div class="links">
+        <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://github.com/Mr-nnng/news-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+      <p class="ethos">每日精选央视《新闻联播》文字摘要</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+    // Sidebar collapse
+    var toggles = document.querySelectorAll('.sidebar-month-toggle');
+    toggles.forEach(function(t) {
+        t.addEventListener('click', function() {
+            this.parentElement.classList.toggle('is-collapsed');
+        });
+    });
+
+    // Active index tracking: highlight the section whose top is closest to 120px from viewport top
+    var indexItems = document.querySelectorAll('.index-nav .index-item');
+    if (!indexItems.length) return;
+
+    // Build a list of { id, link } pairs
+    var sections = [];
+    indexItems.forEach(function(item) {
+        var href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            var el = document.querySelector(href);
+            if (el) sections.push({ el: el, link: item });
+        }
+    });
+    if (!sections.length) return;
+
+    function updateActive() {
+        var scrollY = window.scrollY;
+        var bestIdx = -1;
+        var bestDist = Infinity;
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var dist = Math.abs(rect.top - 100);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0) {
+            var activeId = '#' + sections[bestIdx].el.getAttribute('id');
+            indexItems.forEach(function(item) {
+                item.classList.toggle('is-active', item.getAttribute('href') === activeId);
+            });
+        }
+    }
+
+    // Throttled scroll listener
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    updateActive();
+})();
+</script>
+</body>
+</html>

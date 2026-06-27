@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     XWLB PAGE · 新闻联播文字摘要
+     Kami design system: warm parchment, ink-blue accent, serif-led
+     Font paths: ../../assets/fonts/ (when deployed to site/xwlb/{date}/)
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>6月8日周一《新闻联播》 · 新闻联播文字摘要</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="6月8日周一《新闻联播》 新闻联播文字摘要，共 9 条新闻。">
+<meta property="og:title" content="6月8日周一《新闻联播》 · 新闻联播文字摘要">
+<meta property="og:description" content="6月8日周一《新闻联播》 新闻联播文字摘要，共 9 条新闻。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://news-tools.pages.dev">
+<link rel="canonical" href="https://news-tools.pages.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== Tokens ========== */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+
+  --brand:        #1B365D;
+  --brand-light:  #2D5A8A;
+  --brand-tint:   #EEF2F7;
+
+  --near-black:   #141413;
+  --dark-warm:    #3d3d3a;
+  --olive:        #504e49;
+  --stone:        #6b6a64;
+
+  --border:       #e8e6dc;
+  --border-soft:  #e5e3d8;
+  --line:         #d8d5c8;
+
+  --serif: "Noto Serif SC", "LXGW WenKai",
+           "Source Han Serif SC", "Noto Serif CJK SC",
+           Georgia, serif;
+  --sans:  "Noto Sans SC", "PingFang SC", system-ui, -apple-system, sans-serif;
+  --mono:  "JetBrains Mono", "SF Mono", Consolas,
+           "Noto Sans SC", monospace;
+  --latin-ui: "PingFang SC", system-ui, -apple-system, sans-serif;
+
+  --sidebar-w: 200px;
+  --index-w: 260px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.58;
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: var(--sidebar-w);
+  padding-right: var(--index-w);
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover { color: var(--brand-light); }
+
+/* ========== Sidebar ========== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--parchment);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 20px 0 16px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 18px;
+  margin: 0 0 6px;
+  color: var(--near-black);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sidebar-home:hover { color: var(--brand); }
+.sidebar-home .icon { font-size: 20px; }
+
+.sidebar-section {
+  padding: 0 16px;
+  margin-top: 8px;
+}
+.sidebar-section:last-child { margin-bottom: 0; }
+
+.sidebar-month-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+.sidebar-month-toggle:hover { color: var(--brand-light); }
+.sidebar-month-toggle .arrow {
+  font-size: 13px;
+  color: var(--stone);
+  transition: transform 0.25s ease;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-toggle .arrow {
+  transform: rotate(-90deg);
+}
+
+.sidebar-month-items {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: 600px;
+  opacity: 1;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-items {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0 7px 18px;
+  color: var(--olive);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 14px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.15s;
+}
+.sidebar-item:hover { color: var(--brand); background: var(--brand-tint); }
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sidebar-item.is-active { color: var(--brand); font-weight: 500; }
+.sidebar-item.is-active::before { background: var(--brand); width: 9px; height: 9px; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 16px 0;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: var(--stone);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.sidebar-footer a:hover { color: var(--brand); }
+.sidebar-footer .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* ========== Layout ========== */
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 56px 64px 80px;
+}
+
+/* ========== Header ========== */
+
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page-header .eyebrow {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--stone);
+  margin: 0 0 16px;
+}
+
+.page-header .eyebrow a { color: var(--brand); }
+
+.page-header h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  color: var(--near-black);
+  margin: 0 0 12px;
+}
+
+.page-header .meta {
+  font-family: var(--latin-ui);
+  font-size: 14px;
+  color: var(--stone);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.page-header .meta .xwlb-source { display: inline-flex; align-items: center; gap: 6px; }
+.page-header .meta .xwlb-source .tag {
+  display: inline-block;
+  background: var(--brand);
+  color: var(--ivory);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.page-header .meta .xwlb-count { color: var(--olive); }
+
+/* ========== Summary section ========== */
+
+.section-head {
+  margin-bottom: 20px;
+}
+
+.section-num {
+  font-family: var(--latin-ui);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--brand);
+  letter-spacing: 0.4px;
+  margin: 0 0 4px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--near-black);
+  margin: 0;
+  letter-spacing: 0.6px;
+}
+
+/* ========== Summary items ========== */
+
+.summary-label {
+  font-family: var(--latin-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  color: var(--brand);
+  padding: 8px 0 6px 24px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.summary-label::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--brand);
+  font-size: 8px;
+}
+
+/* subitem overrides must beat .summary-list li specificity */
+.summary-list li.summary-subitem {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--stone);
+  padding: 2px 0 2px 11px;
+  position: relative;
+  list-style: none;
+}
+
+.summary-list li.summary-subitem::before {
+  content: "\25CB" !important;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  color: var(--line);
+  font-size: 8px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px;
+}
+
+.summary-list li {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark-warm);
+  padding: 3px 0 3px 24px;
+  position: relative;
+}
+
+.summary-list li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  color: var(--brand);
+  font-size: 8px;
+}
+/* ========== Right index nav ========== */
+
+.index-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--index-w);
+  background: var(--parchment);
+  border-left: 1px solid var(--border);
+  z-index: 99;
+  overflow-y: auto;
+  padding: 28px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+.index-nav::-webkit-scrollbar { width: 4px; }
+.index-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+.index-nav .index-head {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--near-black);
+  padding: 0 16px 14px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.index-nav .index-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--olive);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-right: 2px solid transparent;
+}
+
+.index-nav .index-item:hover {
+  color: var(--brand);
+  background: var(--brand-tint);
+}
+
+.index-nav .index-item.is-active {
+  color: var(--brand);
+  font-weight: 500;
+  background: var(--brand-tint);
+  border-right-color: var(--brand);
+}
+
+.index-nav .index-item .idx-num {
+  font-family: var(--latin-ui);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--stone);
+  min-width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.index-nav .index-item.is-active .idx-num {
+  color: var(--brand);
+}
+
+.index-nav .index-summary {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.index-nav .index-summary .idx-num {
+  color: var(--brand);
+  font-size: 11px;
+}
+
+.index-nav .index-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 6px 16px 8px;
+}
+
+
+/* ========== News items ========== */
+
+.news-section { margin-top: 40px; }
+
+.news-item {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.news-item .item-number {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+
+.news-item .item-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--near-black);
+  margin: 0 0 14px;
+  letter-spacing: 0.3px;
+}
+
+.news-item .item-title a { color: inherit; }
+.news-item .item-title a:hover { color: var(--brand); }
+
+.news-item .item-content {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--olive);
+  padding: 14px 18px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.news-item .item-content p {
+  margin: 0 0 10px;
+  text-indent: 2em;
+}
+
+.news-item .item-content p:last-child { margin-bottom: 0; }
+
+.news-item .item-content .express-title {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.news-item .item-content .express-body {
+  padding-left: 16px;
+  margin-bottom: 8px;
+  color: var(--dark-warm);
+}
+
+/* ========== Footer ========== */
+
+footer.foot {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.foot .mark { display: grid; grid-template-columns: auto; gap: 2px; }
+
+.foot .mark .wm-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--near-black);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.foot .mark .wm-line { font-size: 13px; color: var(--olive); margin-top: 2px; }
+
+.foot .colophon { text-align: right; max-width: 420px; }
+
+.foot .colophon .links {
+  font-family: var(--latin-ui);
+  color: var(--dark-warm);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.foot .colophon .links a { color: var(--dark-warm); }
+.foot .colophon .links a:hover { color: var(--brand); }
+.foot .colophon .ethos { color: var(--olive); line-height: 1.55; max-width: 320px; margin-left: auto; }
+
+/* ========== Responsive ========== */
+
+@media (max-width: 1200px) {
+  .index-nav { display: none; }
+}
+
+@media (max-width: 880px) {
+  .page { padding: 40px 28px 60px; }
+  .page-header h1 { font-size: 34px; letter-spacing: 0.4px; }
+  .page-header { margin-bottom: 32px; padding-bottom: 24px; }
+  .section-title { font-size: 22px; }
+  .news-item .item-title { font-size: 18px; }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+    gap: 8px;
+  }
+  .sidebar-home { border-bottom: none; padding: 0; margin: 0; }
+  .sidebar-section { display: none; }
+  .sidebar-footer { margin-top: 0; border-top: none; padding: 0; flex-direction: row; }
+  body { padding-left: 0; }
+  .page { padding: 32px 20px 48px; }
+  .page-header h1 { font-size: 28px; }
+  .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .summary-list li { font-size: 15px; }
+  .news-item .item-content { padding: 12px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header h1 { animation: none; opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年06月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-06-27/index.html" class="sidebar-item">2026年6月27日</a>
+          <a href="../2026-06-26/index.html" class="sidebar-item">2026年6月26日</a>
+          <a href="../2026-06-25/index.html" class="sidebar-item">2026年6月25日</a>
+          <a href="../2026-06-24/index.html" class="sidebar-item">2026年6月24日</a>
+          <a href="../2026-06-23/index.html" class="sidebar-item">2026年6月23日</a>
+          <a href="../2026-06-22/index.html" class="sidebar-item">2026年6月22日</a>
+          <a href="../2026-06-21/index.html" class="sidebar-item">2026年6月21日</a>
+          <a href="../2026-06-20/index.html" class="sidebar-item">2026年6月20日</a>
+          <a href="../2026-06-19/index.html" class="sidebar-item">2026年6月19日</a>
+          <a href="../2026-06-18/index.html" class="sidebar-item">2026年6月18日</a>
+          <a href="../2026-06-17/index.html" class="sidebar-item">2026年6月17日</a>
+          <a href="../2026-06-16/index.html" class="sidebar-item">2026年6月16日</a>
+          <a href="../2026-06-15/index.html" class="sidebar-item">2026年6月15日</a>
+          <a href="../2026-06-14/index.html" class="sidebar-item">2026年6月14日</a>
+          <a href="../2026-06-13/index.html" class="sidebar-item">2026年6月13日</a>
+          <a href="../2026-06-12/index.html" class="sidebar-item">2026年6月12日</a>
+          <a href="../2026-06-11/index.html" class="sidebar-item">2026年6月11日</a>
+          <a href="../2026-06-10/index.html" class="sidebar-item">2026年6月10日</a>
+          <a href="../2026-06-09/index.html" class="sidebar-item">2026年6月9日</a>
+          <a href="../2026-06-08/index.html" class="sidebar-item is-active">2026年6月8日</a>
+          <a href="../2026-06-07/index.html" class="sidebar-item">2026年6月7日</a>
+          <a href="../2026-06-06/index.html" class="sidebar-item">2026年6月6日</a>
+          <a href="../2026-06-05/index.html" class="sidebar-item">2026年6月5日</a>
+          <a href="../2026-06-04/index.html" class="sidebar-item">2026年6月4日</a>
+          <a href="../2026-06-03/index.html" class="sidebar-item">2026年6月3日</a>
+          <a href="../2026-06-02/index.html" class="sidebar-item">2026年6月2日</a>
+          <a href="../2026-06-01/index.html" class="sidebar-item">2026年6月1日</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>
+<nav class="index-nav">
+  <div class="index-head">本页导航</div>
+  <a class="index-item index-summary" href="#xwlb-summary">
+    <span class="idx-num">◈</span> 摘要
+  </a>
+  <div class="index-divider"></div>
+        <a class="index-item" href="#item-01"><span class="idx-num">01</span> 习近平离京对朝鲜进行国事访问</a>
+      <a class="index-item" href="#item-02"><span class="idx-num">02</span> 习近平抵达平壤开始对朝鲜进行国事访问</a>
+      <a class="index-item" href="#item-03"><span class="idx-num">03</span> 习近平出席金正恩举行的欢迎仪式</a>
+      <a class="index-item" href="#item-04"><span class="idx-num">04</span> 习近平同金正恩举行会谈</a>
+      <a class="index-item" href="#item-05"><span class="idx-num">05</span> 习近平在朝鲜媒体发表署名文章</a>
+      <a class="index-item" href="#item-06"><span class="idx-num">06</span> 丁薛祥出席三峡水运新通道工程开工仪式</a>
+      <a class="index-item" href="#item-07"><span class="idx-num">07</span> 国务院印发《现代化应急体系建设“十五五”规划》</a>
+      <a class="index-item" href="#item-08"><span class="idx-num">08</span> 我国海洋生态状况稳中向好</a>
+      <a class="index-item" href="#item-09"><span class="idx-num">09</span> 联播快讯</a>
+</nav>
+
+<main class="page">
+
+  <!-- ============ Header ============ -->
+  <header class="page-header">
+    <div class="eyebrow">
+      <a href="../../index.html">← 返回主页</a>
+      <span style="margin-left:12px;color:var(--stone)">News Tools</span>
+    </div>
+
+    <h1>6月8日周一《新闻联播》</h1>
+
+    <div class="meta">
+      <span class="xwlb-source"><span class="tag">新闻联播</span></span>
+      <span class="xwlb-count">9 条新闻</span>
+      <span>来源：<a href="https://tv.cctv.com/2026/06/08/VIDEO52tKHJTSDyMZlCuHDOt260608.shtml" target="_blank" rel="noopener">央视网</a></span>
+      <span>2026-06-08</span>
+    </div>
+  </header>
+
+  <!-- ============ Summary ============ -->
+  <section id="xwlb-summary">
+    <div class="section-head">
+      <p class="section-num">摘要</p>
+      <h2 class="section-title">本期要闻</h2>
+    </div>
+    <ol class="summary-list">
+            <div class="summary-label">本期节目主要内容：</div>
+      <li>习近平离京对朝鲜进行国事访问；</li>
+      <li>习近平抵达平壤开始对朝鲜进行国事访问；</li>
+      <li>习近平出席金正恩举行的欢迎仪式；</li>
+      <li>习近平同金正恩举行会谈；</li>
+      <li>习近平在朝鲜媒体发表署名文章；</li>
+      <li>丁薛祥出席三峡水运新通道工程开工仪式；</li>
+      <li>国务院印发《现代化应急体系建设“十五五”规划》；</li>
+      <li>我国海洋生态状况稳中向好；</li>
+      <div class="summary-label">联播快讯：</div>
+      <li class="summary-subitem">（1）我国出台实施方案推进行业高质量数据集建设；</li>
+      <li class="summary-subitem">（2）国家网信办 市场监管总局联合印发《网络测评活动规范》；</li>
+      <li class="summary-subitem">（3）新版《药物临床试验质量管理规范》发布 9月起实施；</li>
+      <li class="summary-subitem">（4）伊朗和以色列互相发动新打击行动；</li>
+      <li class="summary-subitem">（5）主要产油国宣布7月继续保持增产；</li>
+      <li class="summary-subitem">（6）菲律宾南部发生7.9级强震 19人死亡。</li>
+    </ol>
+  </section>
+
+
+  <!-- ============ News Detail ============ -->
+  <section class="news-section">
+    <div class="section-head">
+      <p class="section-num">详细内容</p>
+      <h2 class="section-title">逐条新闻</h2>
+    </div>
+
+        <div class="news-item" id="item-01">
+          <div class="item-number">第 01 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDECC0jmvGvWVMlkxnawjpd260608.shtml" target="_blank" rel="noopener">习近平离京对朝鲜进行国事访问</a></h3>
+          <div class="item-content">
+          <p>
+        6月8日上午，中共中央总书记、国家主席习近平乘专机离开北京，应朝鲜劳动党总书记、朝鲜民主主义人民共和国国务委员长金正恩邀请，对朝鲜进行国事访问。
+      </p>
+      <p>
+        陪同出访的有：习近平总书记、国家主席夫人彭丽媛，中共中央政治局常委、中央办公厅主任蔡奇，中共中央政治局委员、外交部部长王毅等。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-02">
+          <div class="item-number">第 02 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEhpj4Z4APgEqA8ttWGr1i260608.shtml" target="_blank" rel="noopener">习近平抵达平壤开始对朝鲜进行国事访问</a></h3>
+          <div class="item-content">
+          <p>
+        6月8日中午，中共中央总书记、国家主席习近平乘专机抵达平壤，开始对朝鲜进行国事访问。
+      </p>
+      <p>
+        当地时间12时许，习近平乘坐的专机抵达机场。朝鲜劳动党总书记、国务委员长金正恩和夫人李雪主到机场迎接。习近平和夫人彭丽媛步出舱门，走下舷梯。金正恩与习近平热情握手。朝鲜少年儿童向习近平和夫人彭丽媛献花。
+      </p>
+      <p>
+        蔡奇、王毅等陪同人员同机抵达。
+      </p>
+      <p>
+        中国驻朝鲜大使王亚军也到机场迎接。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-03">
+          <div class="item-number">第 03 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEERWuxUKOoThkpAYbMqIA260608.shtml" target="_blank" rel="noopener">习近平出席金正恩举行的欢迎仪式</a></h3>
+          <div class="item-content">
+          <p>
+        当地时间6月8日中午，朝鲜劳动党总书记、国务委员长金正恩在平壤金日成广场为中共中央总书记、国家主席习近平举行盛大欢迎仪式。
+      </p>
+      <p>
+        金日成广场正中悬挂着中朝两党两国最高领导人巨幅肖像，两旁以中朝双语书写的“朝中友谊万古长青”“牢不可破的朝中友谊团结万岁”标语格外醒目。两国国旗迎风飘展，欢迎人群兴高采烈、翘首以盼。
+      </p>
+      <p>
+        习近平和夫人彭丽媛乘车抵达时，马队骑兵列队迎接，军乐团奏欢迎曲。金正恩和夫人李雪主在广场迎接。习近平夫妇和金正恩夫妇分别同对方陪同人员握手致意。两党两国最高领导人共同登上检阅台，军乐团奏中朝两国国歌，鸣放礼炮21响。习近平在金正恩陪同下，检阅朝鲜人民军三军仪仗队，仪仗队员用朝语高呼“祝习近平同志身体健康”。此后，习近平同金正恩一起观看分列式。
+      </p>
+      <p>
+        平壤各界群众和少年儿童身着节日盛装，手持旗帜、鲜花和气球，高喊中朝友好口号，以热烈的掌声和欢呼声向到访的中国贵宾表达最诚挚的欢迎。习近平和金正恩沿着红毯前行，向欢迎群众和少年儿童挥手致意。
+      </p>
+      <p>
+        欢迎仪式结束时，广场上放飞悬挂中朝双语欢迎标语的缤纷气球。随后，习近平和彭丽媛乘车前往锦绣山迎宾馆下榻，金正恩和夫人李雪主亲自送至迎宾馆。
+      </p>
+      <p>
+        从机场到金日成广场和从金日成广场到锦绣山迎宾馆途中，朝鲜民众自发在道路两旁挥手欢迎习近平到访。
+      </p>
+      <p>
+        蔡奇、王毅等参加。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-04">
+          <div class="item-number">第 04 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDE1PCryEXC67mzAWtN7Z4A260608.shtml" target="_blank" rel="noopener">习近平同金正恩举行会谈</a></h3>
+          <div class="item-content">
+          <p>
+        当地时间6月8日下午，中共中央总书记、国家主席习近平在平壤锦绣山迎宾馆同朝鲜劳动党总书记、国务委员长金正恩举行会谈。
+      </p>
+      <p>
+        习近平指出，时隔7年再次到访美丽的平壤，我感到十分高兴，也格外亲切。我愿同总书记同志一道，以这次访问为契机，加强对新时期中朝关系的顶层设计和战略指引，推动中朝关系与时俱进、得到更大发展，更好造福两国和两国人民，为地区乃至世界和平稳定和发展繁荣作出积极贡献。
+      </p>
+      <p>
+        习近平强调，中朝两国同为共产党领导的社会主义国家。中朝传统友谊植根于双方共同的理想信念和奋斗目标，有深厚历史积淀、坚实政治基础、牢固情感纽带，世代友好、命运与共、守望相助始终是中朝关系的鲜明特征。无论国际形势如何变化，中国党和政府高度重视中朝传统友好的坚定立场不会改变，对金正恩总书记同志领导朝鲜社会主义事业的坚定支持不会改变，维护中朝双方共同利益和良好战略环境的坚定决心不会改变。
+      </p>
+      <p>
+        习近平指出，面对加速演进的世界百年变局，双方要登高望远、继往开来，从两党两国关系发展历程中汲取智慧，在人类历史发展大势中把握机遇，为中朝传统友谊注入新的时代内涵和强劲动力，开辟两国社会主义事业和地区和平与发展更加美好的前景。
+      </p>
+      <p>
+        习近平就发展中朝关系提出4点意见。
+      </p>
+      <p>
+        第一，坚持以高层交往为引领，夯实政治互信根基。最高领导人战略引领是中朝关系的最大优势。我愿同总书记同志保持密切战略沟通，引领中朝关系不断迈向新高度。今年是《中朝友好合作互助条约》签订65周年，双方要隆重举办纪念活动。两党关系对中朝关系发展发挥重要引领作用，要进一步拓展和活跃两党各层级各领域友好交往，深化治党治国经验交流互鉴。双方要加强外交、执法、军队等交流，落实好我和总书记同志达成的重要共识，为中朝关系发展汇聚智慧和力量。
+      </p>
+      <p>
+        第二，坚持以为民造福为目标，提升务实合作水平。中方愿同朝方加强发展战略对接，扩大经贸、农业、建筑、科技、医疗卫生等务实合作，更好造福两国人民。双方要以边境口岸全面复通、民航航班和国际客运列车恢复运营为契机，扩大人员往来，实现双向奔赴。
+      </p>
+      <p>
+        第三，坚持以友谊传承为动力，拉紧民心相通纽带。中朝用鲜血凝成的传统友谊是两国人民共同的宝贵财富。中方愿同朝方一道，共同维护好、管理好在朝志愿军烈士纪念设施，开展富有特色的革命传统教育、青少年思想教育，传承好两国红色基因和传统友谊。中方愿同朝方用好各自优势资源，加强教育、文艺、旅游、体育、媒体、青年、地方、友城等交流合作，让中朝传统友谊更加深入人心。
+      </p>
+      <p>
+        第四，坚持以公平正义为理念，丰富战略协作内涵。面对人类向何处去这一重大课题，我提出构建人类命运共同体理念和四大全球倡议，希望推动全球治理朝着更加公正合理的方向发展，得到包括朝方在内的国际社会广泛支持和积极响应。亚洲是中朝等地区国家的安身立命之所。中朝两国应加强战略协调和配合，坚定捍卫各自主权、安全、发展利益，共同维护地区和平与发展。
+      </p>
+      <p>
+        金正恩表示，习近平总书记同志时隔7年再次访问朝鲜，是朝鲜人民最尊重的贵宾，我们表示最隆重、最热烈的欢迎。习近平总书记今年首次出访就来到平壤，体现了对朝中关系的高度重视和友好情谊，对朝方是莫大的鼓舞。此访再次清晰表明，久经考验的、始终站在自主和正义的历史正确一边的朝中关系是多么牢不可破。朝中两国的特殊性不仅在于我们互为邻国，更在于双方具有深厚传统友谊和共同的理想信念，并对此彼此珍视和代代传承。
+      </p>
+      <p>
+        金正恩表示，去年9月我同习近平总书记在北京会晤后，两国关系在各领域活跃发展，给两国人民带来实实在在的福祉。由衷感谢习近平总书记同志就新时代朝中关系发展提出的重要意见，朝方各部门将同中方同志一道全力以赴全面落实，推动双方在经贸、基础设施、科技、教育、人文等广泛领域的交流合作取得新发展，通过党际渠道加强经验交流互鉴为朝方社会主义建设事业发展提供宝贵助力，帮助朝鲜人民同中国人民一道迈向现代化之路。
+      </p>
+      <p>
+        金正恩表示，朝方高兴地看到，在习近平总书记同志领导下，中国取得令世界惊叹的发展成就，国际地位极大提升。习近平总书记提出的人类命运共同体理念和四大全球倡议对促进世界和平与发展具有深远意义，得到世界人民的支持和赞赏。近年来国际社会正经历前所未有的巨大变化，朝方将始终不渝地坚持一个中国原则，坚定支持中国维护核心利益的政策和立场。巩固和发展新时代朝中友谊是人民的选择、时代的需要，是朝方始终不变的战略选择和坚定不移的战略意志。我们会一如既往将发展朝中关系作为国家最重大的第一战略事业，为把朝中关系建设成国家关系的典范而竭尽全力，共同为地区和世界的和平繁荣作出贡献。
+      </p>
+      <p>
+        蔡奇、王毅等参加会谈。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-05">
+          <div class="item-number">第 05 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDENVElayHpBe7r8jdln6uu260608.shtml" target="_blank" rel="noopener">习近平在朝鲜媒体发表署名文章</a></h3>
+          <div class="item-content">
+          <p>
+        6月8日，在赴平壤对朝鲜民主主义人民共和国进行国事访问之际，中共中央总书记、国家主席习近平在朝鲜《劳动新闻》发表题为《继往开来、砥砺同行　续写中朝传统友谊崭新篇章》的署名文章。文章全文如下：
+      </p>
+      <p>
+        继往开来、砥砺同行
+      </p>
+      <p>
+        续写中朝传统友谊崭新篇章
+      </p>
+      <p>
+        中共中央总书记、中华人民共和国主席　习近平
+      </p>
+      <p>
+        今年是《中朝友好合作互助条约》签订65周年。应朝鲜劳动党总书记、国务委员长金正恩同志邀请，我即将对朝鲜进行国事访问。这是我时隔7年再次访问美丽的朝鲜。我期待同金正恩总书记共话中朝传统友谊，共商中朝关系发展大计。
+      </p>
+      <p>
+        中朝两国是守望相助、命运与共的社会主义友好邻邦。中朝传统友谊是两党两国和两国人民共同的宝贵财富。无论时代如何变迁、国际形势如何变化，中朝传统友谊始终牢不可破、历久弥坚，不断焕发蓬勃生机活力。
+      </p>
+      <p>
+        最高层战略引领是中朝关系的最大优势。历史上，中朝老一辈领导人相交相知、亲密无间。近年来，我同金正恩总书记6次会晤，保持密切战略沟通，共同擘画中朝关系发展蓝图。我坚信，中朝关系这艘航船有最高领导人领航掌舵，必将乘风破浪、勇往直前。
+      </p>
+      <p>
+        社会主义共同理想是中朝关系的鲜明底色。中国共产党和朝鲜劳动党同为马克思主义执政党，中朝两国是社会主义道路上的同行者。我坚信，两党两国携手推动各自党和国家事业发展，持续加强务实交流合作，必将有力促进国家繁荣富强和人民幸福安康，不断彰显社会主义的显著优势和光明前景。
+      </p>
+      <p>
+        命运与共的传统友谊是中朝关系的深厚根基。在争取国家独立和民族解放的峥嵘岁月中，中朝两国人民休戚与共、生死相依，用鲜血凝结了伟大的战斗友谊。在各自社会主义事业发展中，两国人民携手并肩、同甘共苦，生动诠释了彼此信赖、团结互助的同志情谊。我坚信，历经时代变迁和国际风云变幻考验的中朝传统友谊，必将薪火相传、万古长青。
+      </p>
+      <p>
+        高水平战略协作是中朝关系的时代内涵。促进地区长治久安、世界和平稳定是两党两国和两国人民的共同追求。双方坚定支持彼此维护国家主权、安全、发展利益，携手维护地区和平安宁、国际公平正义和战后国际秩序。我坚信，中朝双方持续深化战略协作，必将共同走好和平发展、合作共赢的人间正道。
+      </p>
+      <p>
+        近年来，面对加速演进的世界百年变局和变乱交织的国际形势，中朝双方坚持集中精力办好自己的事，在社会主义道路上砥砺前行、不懈奋斗。中国实现“十五五”良好开局，正在奋力开创中国式现代化建设新局面，向着第二个百年奋斗目标阔步迈进。朝鲜劳动党胜利召开第九次代表大会，对朝鲜党和国家事业发展作出战略规划和重大部署，开启社会主义全面发展新时期。
+      </p>
+      <p>
+        维护好、巩固好、发展好中朝关系始终是中国党和政府坚定不移的方针。当前，中朝关系站在新的历史起点，面临新的发展机遇，肩负新的时代使命。中方愿同朝方一道，从战略高度把握中朝关系，推动中朝关系与时俱进、得到更大发展。
+      </p>
+      <p>
+        ——深化战略沟通，牢牢把握中朝关系发展正确方向。我们要保持两党两国高层交往优良传统，像亲戚一样常来往、多走动。以《中朝友好合作互助条约》签订65周年为契机，加强党政军各部门各层级沟通交往，落实好双方重要共识，为中朝关系发展注入强劲动力。
+      </p>
+      <p>
+        ——加强交流互鉴，共同推动两国社会主义事业行稳致远。我们要坚持道不变、志不改，相互支持彼此走符合自身国情的社会主义道路，坚定维护两国政治安全。坚持和加强党的全面领导，拓展两党交往合作，深化治党治国经验交流互鉴，引领两国社会主义事业不断从胜利走向胜利。
+      </p>
+      <p>
+        ——拓展务实合作，持续增进两国人民福祉和友谊。我们要加强两国发展战略对接，挖掘各领域合作潜力，共享机遇，共促发展，更好惠及两国人民。通过灵活多样的形式，持续活跃友好往来，深化相互了解，拉紧情感纽带，把中朝友好的接力棒一代一代传下去。
+      </p>
+      <p>
+        ——密切多边协作，坚定捍卫国际公平正义。我们要顺应时代潮流，加强战略沟通和协调配合，共同维护以联合国为核心的国际体系和以国际法为基础的国际秩序，反对霸权主义和强权政治，反对一切复活军国主义、危害地区安全稳定的图谋和行径。共同推进平等有序的世界多极化、普惠包容的经济全球化，落实四大全球倡议，携手推动构建人类命运共同体。
+      </p>
+      <p>
+        岁月共磨砺，烈火见真金。我们愿同朝鲜同志携手前行、续写新篇，让中朝传统友谊焕发更加璀璨的时代光辉，为促进地区乃至世界和平稳定和发展繁荣作出更大贡献。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-06">
+          <div class="item-number">第 06 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEsjsYU1Vb4nU4RfDlIfCG260608.shtml" target="_blank" rel="noopener">丁薛祥出席三峡水运新通道工程开工仪式</a></h3>
+          <div class="item-content">
+          <p>
+        三峡水运新通道工程开工仪式8日上午在湖北省宜昌市举行。中共中央政治局常委、国务院副总理丁薛祥出席开工仪式，并宣布工程正式开工。
+      </p>
+      <p>
+        开工仪式上，项目业主中国三峡集团、湖北省主要负责同志先后发言。10时12分，丁薛祥宣布三峡水运新通道工程开工，工程建设正式启动。
+      </p>
+      <p>
+        中央和国家机关有关部门、有关中央企业负责同志，咨询、设计和建设单位代表，当地群众代表等参加开工仪式。
+      </p>
+      <p>
+        三峡水运新通道工程集水利、航运、生态等功能于一体，是三峡工程之后长江干线上最大的综合性工程。工程建成后，三峡枢纽、葛洲坝枢纽都将形成四线船闸格局，有利于提升长江黄金水道通航能力，更好支撑长江经济带高质量发展。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-07">
+          <div class="item-number">第 07 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEO2kKXEnWkoCOF3AJJMNC260608.shtml" target="_blank" rel="noopener">国务院印发《现代化应急体系建设“十五五”规划》</a></h3>
+          <div class="item-content">
+          <p>
+        国务院日前印发《现代化应急体系建设“十五五”规划》，对“十五五”时期安全生产、防灾减灾救灾等工作作出部署。
+      </p>
+      <p>
+        《规划》强调，坚持以习近平新时代中国特色社会主义思想为指导，坚持人民至上、生命至上，坚持总体国家安全观，以高水平安全保障高质量发展为主题，以推动治理模式向事前预防转型为主线，以改革创新为根本动力，一体提升减灾预防、抗灾设防、救灾保障能力，“一件事”全链条推动重点行业领域安全整治，坚决遏制重特大事故，有效防范重大涉险和较大事故，最大限度降低自然灾害损失，坚决维护人民群众生命财产安全和社会大局稳定。
+      </p>
+      <p>
+        《规划》部署了深化应急管理改革创新、推动构建大安全大应急格局等五方面重点任务，安排了五大类共17项重点工程。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-08">
+          <div class="item-number">第 08 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEYootUoAGwzFCeqWkC4IV260608.shtml" target="_blank" rel="noopener">我国海洋生态状况稳中向好</a></h3>
+          <div class="item-content">
+          <p>
+        记者今天（6月8日）从自然资源部了解到，我国海洋生态状况总体稳中向好。
+      </p>
+      <p>
+        自然资源部今天发布的《中国海洋生态预警监测公报》显示，2025年，我国珊瑚礁、海草床、红树林、海岛生态系统状况以优良为主。
+      </p>
+      <p>
+        在广西涠洲岛生态修复海域，培育成活的珊瑚群落，今年首次实现规模化自然排卵繁育，标志着人工修复海域已构建完整生态自愈体系。
+      </p>
+      <p>
+        今年以来，我国“蓝色海湾”整治、珊瑚礁修复等一批重点生态工程建设提速；与此同时，“和美海岛”创建示范也稳步推进，首批33个“和美海岛”初步形成岛绿、滩净、水清、物丰的“和美”新格局。
+      </p>
+      <p>
+        良好的滨海生态资源，促进了海洋新兴产业发展。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-09">
+          <div class="item-number">第 09 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/06/08/VIDEZjy75yyD6OG9XxATBUnA260608.shtml" target="_blank" rel="noopener">联播快讯</a></h3>
+          <div class="item-content">
+          <p><span class="express-title">我国出台实施方案推进行业高质量数据集建设</span></p>
+        <div class="express-body">今天（6月8日），国家数据局发布《关于推进行业高质量数据集建设行动的实施方案》，对数据赋能人工智能发展作出系统部署。《方案》明确，面向人工智能应用需求，持续推进文本、图像、音视频等多模态高质量数据集建设；聚焦科学研究、工业制造、低空经济、具身智能等重点领域，加快推进行业高质量数据集建设；引导具备条件的地区因地制宜开展数据标注创新试验区建设。</div>
+
+      <p><span class="express-title">国家网信办 市场监管总局联合印发《网络测评活动规范》</span></p>
+        <div class="express-body">国家网信办、市场监管总局日前联合印发《网络测评活动规范》，要求网络测评涉及对产品功能、性能等项目测试，应当委托具有法定检验检测资质的机构开展；未对产品开展测试，仅凭主观感受对产品进行评价，应当进行说明。</div>
+
+      <p><span class="express-title">新版《药物临床试验质量管理规范》发布 9月起实施</span></p>
+        <div class="express-body">新修订的《药物临床试验质量管理规范》今天（6月8日）发布。此次修订强调，试验参与者的安全和临床试验数据可靠性是不可逾越的红线，鼓励和支持AI智能化等新技术新方法规范应用。新规将于9月1日起实施。</div>
+
+      <p><span class="express-title">伊朗和以色列互相发动新打击行动</span></p>
+        <div class="express-body">当地时间7日晚，北京时间今天（6月8日）凌晨，伊朗伊斯兰革命卫队宣布，使用弹道导弹打击了位于以色列北部的拉马特戴维空军基地。伊朗称，这是对以色列近期持续袭击黎巴嫩南部和首都贝鲁特南郊的警告性打击。几个小时后，以色列国防军称对位于伊朗西部和中部地区的军事目标发动打击。此后，伊朗和以色列又先后对对方发动了一轮打击行动。</div>
+        <div class="express-body">此外，也门胡塞武装今天宣布，向以色列特拉维夫多个目标发射了多枚导弹，并全面禁止以色列在红海的航行活动。</div>
+
+      <p><span class="express-title">主要产油国宣布7月继续保持增产</span></p>
+        <div class="express-body">石油输出国组织（欧佩克）7日发表声明说，沙特、俄罗斯等7个“欧佩克+”主要产油国决定7月日均增产原油18.8万桶。至此，主要产油国已连续四个月宣布增产。声明说，为维护石油市场稳定，7国将根据市场情况灵活调整增产节奏。</div>
+
+      <p><span class="express-title">菲律宾南部发生7.9级强震 19人死亡</span></p>
+        <div class="express-body">今天（6月8日）7时37分，在菲律宾群岛地区发生7.9级强震，震源深度40公里。菲律宾民防部门称，强震已造成19人死亡、134人受伤。当地已发生多次余震，其中一次震级达到6.7级。菲律宾国家减灾委说，强震造成多地基础设施严重受损，电力和通信服务受影响，震中附近的桑托斯将军城机场已暂时关闭。</div>
+
+          </div>
+        </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="foot">
+    <div class="mark">
+      <span class="wm-name">News Tools</span>
+      <span class="wm-line">新闻联播文字摘要</span>
+    </div>
+    <div class="colophon">
+      <div class="links">
+        <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://github.com/Mr-nnng/news-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+      <p class="ethos">每日精选央视《新闻联播》文字摘要</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+    // Sidebar collapse
+    var toggles = document.querySelectorAll('.sidebar-month-toggle');
+    toggles.forEach(function(t) {
+        t.addEventListener('click', function() {
+            this.parentElement.classList.toggle('is-collapsed');
+        });
+    });
+
+    // Active index tracking: highlight the section whose top is closest to 120px from viewport top
+    var indexItems = document.querySelectorAll('.index-nav .index-item');
+    if (!indexItems.length) return;
+
+    // Build a list of { id, link } pairs
+    var sections = [];
+    indexItems.forEach(function(item) {
+        var href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            var el = document.querySelector(href);
+            if (el) sections.push({ el: el, link: item });
+        }
+    });
+    if (!sections.length) return;
+
+    function updateActive() {
+        var scrollY = window.scrollY;
+        var bestIdx = -1;
+        var bestDist = Infinity;
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var dist = Math.abs(rect.top - 100);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0) {
+            var activeId = '#' + sections[bestIdx].el.getAttribute('id');
+            indexItems.forEach(function(item) {
+                item.classList.toggle('is-active', item.getAttribute('href') === activeId);
+            });
+        }
+    }
+
+    // Throttled scroll listener
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    updateActive();
+})();
+</script>
+</body>
+</html>

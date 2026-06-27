@@ -3,9 +3,9 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-一站式新闻信息获取与报告生成工具集。支持 **GitHub Trending**、**华尔街见闻 7x24 快讯**、**新闻联播** 三个数据源，并提供 HTML 周报生成与静态网站部署能力。
+一站式新闻信息获取与报告生成工具集。支持 **GitHub Trending**、**华尔街见闻 7x24 快讯**、**新闻联播** 三个数据源，并提供 HTML 周报/新闻联播页面生成与静态网站部署能力。
 
-> 🌐 在线站点：自动生成并部署 GitHub Trending 中文周报（每周更新）。
+> 🌐 在线站点：自动生成并部署 GitHub Trending 中文周报（每周更新）+ 新闻联播文字摘要（每日更新）。
 
 ---
 
@@ -14,9 +14,10 @@
 - **GitHub Trending** — 获取每日/每周趋势仓库，支持语言过滤和代理
 - **华尔街见闻** — 按日期和重要度获取 7x24 快讯
 - **新闻联播** — 获取文字摘要，支持 JSON / Markdown 输出
-- **HTML 周报生成** — 从模板自动生成中文 GitHub Trending 周报（封面 + 排名表 + 详情页）
+- **HTML 周报生成** — 从模板自动生成中文 GitHub Trending 周报（封面 + 排名表 + 详情页 + 侧边栏导航 + 右侧索引）
+- **新闻联播 HTML 页面生成** — 从 JSON 生成精美排版的新闻联播文字摘要页（含摘要、索引导航、侧边栏日期切换）
 - **截图工具** — 基于 Playwright 的 HTML 元素截图，适用于报告封面/卡片导出
-- **静态网站部署** — 一键构建可部署到 Cloudflare Pages 的静态站点
+- **静态网站部署** — 一键构建可部署到 Cloudflare Pages 的静态站点（双 Tab 布局：GitHub 周报 + 新闻联播）
 
 ---
 
@@ -24,31 +25,43 @@
 
 ```
 news/
-├── src/news_tools/            # Python 主包
-│   ├── trending.py            # GitHub Trending 获取
-│   ├── wallstreet.py          # 华尔街见闻 7x24 快讯
-│   ├── xwlb.py                # 新闻联播摘要
-│   ├── screenshot.py          # HTML 元素导出图片
-│   ├── build_report.py        # HTML 周报生成
+├── src/news_tools/                # Python 主包
+│   ├── trending.py                # GitHub Trending 获取
+│   ├── wallstreet.py              # 华尔街见闻 7x24 快讯
+│   ├── xwlb.py                    # 新闻联播摘要
+│   ├── screenshot.py              # HTML 元素导出图片
+│   ├── build_report.py            # HTML 周报生成（含详情页索引）
+│   ├── build_xwlb_html.py         # 新闻联播 HTML 页面生成
 │   ├── __init__.py
 │   └── __main__.py
-├── site/                      # 构建输出的静态站点（可直接部署）
-│   ├── index.html             # 项目主页，列出所有周报
-│   ├── assets/fonts/          # 自托管字体
-│   └── reports/               # 各期周报
-├── assets/fonts/              # 网页字体（woff2）
+├── site/                          # 构建输出的静态站点（可直接部署）
+│   ├── index.html                 # 项目主页（双 Tab：GitHub 周报 + 新闻联播）
+│   ├── assets/fonts/              # 自托管字体
+│   ├── github_weekly/             # GitHub 周报各期（原 reports/）
+│   │   └── YYYY-MM-DD/report.html
+│   └── xwlb/                      # 新闻联播各期
+│       └── YYYY-MM-DD/index.html
+├── assets/
+│   ├── fonts/                     # 网页字体（woff2）
+│   └── templates/                 # HTML 模板
+│       ├── landing-news-tools.html # 主页模板（双 Tab）
+│       └── xwlb-page.html         # 新闻联播详情页模板
 ├── scripts/
-│   └── build_site.py          # 构建部署目录
-├── skills/news-tools/         # Agent 配置（报告生成工作流）
-├── tests/                     # 单元测试
-├── .opencode/                 # opencode 配置
+│   └── build_site.py              # 构建部署目录
+├── skills/news-tools/             # Agent 配置（报告生成工作流）
+│   ├── SKILL.md
+│   ├── agents/                    # 各平台 agent 配置
+│   ├── references/                # 参考文档
+│   └── scripts/
+├── tests/                         # 单元测试
+├── .opencode/                     # opencode 配置
 ├── .gitattributes
 ├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── pyproject.toml
 ├── uv.lock
-└── wrangler.toml              # Cloudflare Pages 配置
+└── wrangler.toml                  # Cloudflare Pages 配置
 ```
 
 ---
@@ -112,6 +125,13 @@ python -m news_tools.xwlb --compact                # 仅输出 items 数组
 python -m news_tools.xwlb --markdown               # Markdown 格式输出
 ```
 
+### 生成新闻联播 HTML 页面
+
+```bash
+python -m news_tools.build_xwlb_html report/xwlb-2026-06-27/data/xwlb.json \
+  -o site/xwlb/2026-06-27
+```
+
 ### 截图工具
 
 ```bash
@@ -139,6 +159,7 @@ news-xwlb --date 2026-05-29
 from news_tools.trending import fetch_trending
 from news_tools.wallstreet import fetch_live_by_date
 from news_tools.xwlb import get_xwlb
+from news_tools.build_xwlb_html import build_xwlb_page
 from datetime import datetime
 
 # GitHub Trending
@@ -150,6 +171,12 @@ result = fetch_live_by_date(target_date=datetime(2026, 5, 29))
 
 # 新闻联播
 result = get_xwlb(2026, 5, 29)
+
+# 生成新闻联播 HTML 页面
+html_path = build_xwlb_page(
+    "report/xwlb-2026-06-27/data/xwlb.json",
+    output_dir="site/xwlb/2026-06-27",
+)
 ```
 
 ---
@@ -166,7 +193,13 @@ python -m news_tools.build_report data/enriched-trending.json
 
 1. `fetch_trending()` → 获取原始趋势数据
 2. LLM 加工 → enriched JSON（中文描述、特点、受众）
-3. `build_report()` → 填充模板 → `report.html` + 下载头像
+3. `build_report()` → 填充模板 → `report.html`（含封面排名表、详情页、右侧索引导航）+ 下载头像
+
+生成的报告包含：
+- **封面页**：周次信息、封面摘要（数字高亮+领域关键词加粗）、前 10 排名表
+- **详情页**：每页 2 个仓库，含头像、仓库名、Star/Fork/本周增量、中文描述、特点列表、推荐受众
+- **右侧索引**：可点击跳转的仓库目录
+- **侧边栏**：各期历史报告导航（由 `build_site.py` 注入）
 
 ---
 
@@ -182,10 +215,27 @@ python scripts/build_site.py
 
 ```
 site/
-├── index.html               ← 项目主页，列出所有周报
-├── assets/fonts/            ← 自托管字体
-└── reports/
-    └── YYYY-MM-DD/report.html ← 各期周报
+├── index.html                    ← 项目主页（双 Tab：GitHub 周报 + 新闻联播）
+├── assets/fonts/                 ← 自托管字体
+├── github_weekly/
+│   └── YYYY-MM-DD/report.html    ← 各期 GitHub 周报
+└── xwlb/
+    └── YYYY-MM-DD/index.html     ← 各期新闻联播
+```
+
+### 新闻联播数据预处理
+
+部署前需要将新闻联播 JSON 数据按以下结构放入 `report/` 目录：
+
+```
+report/
+├── github-trending-weekly-YYYY-MM-DD/   # GitHub 周报数据
+│   └── data/
+│       ├── trending-weekly.json
+│       └── enriched-trending.json
+└── xwlb-YYYY-MM-DD/                     # 新闻联播数据
+    └── data/
+        └── xwlb.json
 ```
 
 ### 方式一：Git 集成（推荐）
@@ -237,4 +287,4 @@ uv run pytest tests/ -v
 
 ## 项目状态
 
-每周自动生成 GitHub Trending 中文周报并部署上线。查看 [`site/reports/`](site/reports/) 目录获取最新报告。
+每周自动生成 GitHub Trending 中文周报并部署上线，每日自动生成新闻联播文字摘要页面。查看 [`site/github_weekly/`](site/github_weekly/) 获取最新 GitHub 周报，[`site/xwlb/`](site/xwlb/) 获取新闻联播。

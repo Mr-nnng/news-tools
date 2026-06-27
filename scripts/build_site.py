@@ -46,18 +46,12 @@ def clean_site():
 
 
 def copy_fonts():
-    """Copy required font files to site/.
-
-    - JetBrainsMono.woff2 — monospace for code / metrics
-
-    Noto Serif SC is loaded via Google Fonts CDN (0 MB deploy size).
-    """
+    """Copy JetBrains Mono to site/ for monospace code/metrics display."""
     FONTS_DIR.mkdir(parents=True, exist_ok=True)
     src = ASSETS_DIR / "fonts"
-    required_prefixes = ("JetBrains",)
     if src.exists():
         for f in src.iterdir():
-            if f.is_file() and f.name.startswith(required_prefixes):
+            if f.is_file() and f.name.startswith("JetBrains"):
                 shutil.copy2(f, FONTS_DIR / f.name)
                 print(f"  📄 {f.name}")
     print(f"  ✅ Fonts → {FONTS_DIR.relative_to(PROJECT_ROOT)}")
@@ -95,7 +89,7 @@ def build_gh_pages():
                 avatar_dir_name="avatar",
                 download_avatars=False,
             )
-            # Read back and fix font paths / inject sidebar
+            # Read back, fix font paths, and inject sidebar
             report_path = out_dir / "report.html"
             if report_path.exists():
                 html = report_path.read_text(encoding="utf-8")
@@ -104,7 +98,6 @@ def build_gh_pages():
                     '../../assets/fonts/',
                     '../../../assets/fonts/',
                 )
-                # Sidebar will be injected in a second pass once all dates are known
                 html = html.replace("{{SIDEBAR}}", "__SIDEBAR_PLACEHOLDER__")
                 report_path.write_text(html, encoding="utf-8")
             print(f"  ✅ {item.name} → {out_dir.relative_to(PROJECT_ROOT)}/")

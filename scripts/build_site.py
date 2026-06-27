@@ -110,7 +110,8 @@ def build_landing_page(report_dirs: list[str]):
 
 
 def main():
-    clean_site()
+    if REPORT_DIR.exists():
+        clean_site()
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
     print("🔨 Building site directory...\n")
@@ -129,12 +130,12 @@ def main():
                 report_dst = REPORTS_DIR / date_str
                 print(f"  📁 {item.name} → {report_dst.relative_to(PROJECT_ROOT)}")
                 copy_report(item, report_dst)
-    elif REPORTS_DIR.exists():
+    if REPORTS_DIR.exists():
         for item in sorted(REPORTS_DIR.iterdir()):
-            report_dirs.append(item.name)
-        print(f"  📁 {len(report_dirs)} reports already in {REPORTS_DIR.relative_to(PROJECT_ROOT)} (skipped copy)")
-    else:
-        print("  ⚠️ No reports found (report/ and site/reports/ both missing)")
+            date_str = item.name
+            if date_str not in report_dirs:
+                report_dirs.append(date_str)
+        print(f"  📁 {len(report_dirs)} reports available")
 
     print("\n📄 Generating landing page...")
     cards_html = build_landing_page(report_dirs)

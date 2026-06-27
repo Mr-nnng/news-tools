@@ -110,4 +110,4 @@ report/
 .temp/
 
 # --- data ---
-data
+/data

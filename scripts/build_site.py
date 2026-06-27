@@ -96,9 +96,14 @@ def build_landing_page(report_dirs: list[str]):
             except Exception:
                 pass
 
-        date_key = rd.replace("github-trending-weekly-", "")
-        parts = date_key.split("-")
-        display_date = f"{parts[0]}年 第{parts[1]}周" if len(parts) >= 2 and parts[0].isdigit() else rd
+        if rd.startswith("github-trending-weekly-"):
+            # rd like "github-trending-weekly-2026-26" (year-week)
+            parts = rd.replace("github-trending-weekly-", "").split("-")
+            display_date = f"{parts[0]}年 第{parts[1]}周" if len(parts) >= 2 and parts[0].isdigit() else rd
+        else:
+            # rd like "2026-06-07" (date)
+            parts = rd.split("-")
+            display_date = f"{parts[0]}年{int(parts[1])}月{int(parts[2])}日" if len(parts) == 3 and parts[0].isdigit() else rd
 
         cards += f"""    <a href="reports/{date_str}/report.html" class="card">
       <div class="card-title">{display_date}</div>

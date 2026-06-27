@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "news-tools"
+version = "2.0.0"
+description = "新闻信息获取工具集 — GitHub Trending / 华尔街见闻 7x24 / 新闻联播摘要"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+
+dependencies = [
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "pydantic>=2.0.0",
+    "playwright>=1.60.0",
+]
+
+[project.scripts]
+news-trending = "news_tools.trending:main"
+news-wallstreet = "news_tools.wallstreet:main"
+news-xwlb = "news_tools.xwlb:main"
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["news_tools*"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]

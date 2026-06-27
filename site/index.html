@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Tools · GitHub Trending Weekly Reports</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      background: #f5f4ed;
+      color: #141413;
+      min-height: 100vh;
+    }
+    header {
+      background: #1B365D;
+      color: #fff;
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    header h1 { font-size: 28px; margin-bottom: 8px; }
+    header p { font-size: 14px; opacity: .85; max-width: 600px; margin: 0 auto; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .content { max-width: 720px; margin: 0 auto; padding: 32px 20px; }
+    .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+    .cards { display: flex; flex-direction: column; gap: 12px; }
+    .card {
+      display: block;
+      background: #faf9f5;
+      border: 1px solid #e8e6dc;
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .15s;
+    }
+    .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .card-meta { font-size: 13px; color: #6b6a64; margin-bottom: 6px; }
+    .card-desc { font-size: 13px; color: #3d3d3a; line-height: 1.6; }
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 13px;
+      color: #6b6a64;
+    }
+    footer a { color: #1B365D; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GitHub Trending 周报</h1>
+    <p>每周自动生成的 GitHub Trending 中文报告，覆盖当日最热开源项目。</p>
+    <span class="badge">📅 2026年6月</span>
+  </header>
+  <div class="content">
+    <div class="section-title">📊 各期报告</div>
+    <div class="cards">
+    <a href="reports/2026-06-27/report.html" class="card">
+      <div class="card-title">2026年 第06周</div>
+      <div class="card-meta">? 个项目</div>
+      <div class="card-desc"></div>
+    </a>
+    <a href="reports/2026-06-21/report.html" class="card">
+      <div class="card-title">2026年 第06周</div>
+      <div class="card-meta">? 个项目</div>
+      <div class="card-desc"></div>
+    </a>
+    <a href="reports/2026-06-14/report.html" class="card">
+      <div class="card-title">2026年 第06周</div>
+      <div class="card-meta">? 个项目</div>
+      <div class="card-desc"></div>
+    </a>
+    <a href="reports/2026-06-07/report.html" class="card">
+      <div class="card-title">2026年 第06周</div>
+      <div class="card-meta">? 个项目</div>
+      <div class="card-desc"></div>
+    </a>
+
+    </div>
+  </div>
+  <footer>
+    <a href="https://github.com/Mr-nnng/news-tools">News Tools</a> · MIT License
+  </footer>
+</body>
+</html>

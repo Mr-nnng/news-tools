@@ -1,0 +1,9 @@
+# OpenAI GPTs / Assistants API
+interface:
+  display_name: "News Tools"
+  short_description: "GitHub 趋势 / 华尔街见闻 / 新闻联播数据获取与 HTML 周报生成"
+  description: "支持 GitHub Trending 趋势获取、华尔街见闻 7x24 快讯、新闻联播文字摘要、HTML 周报生成、截图导出。"
+  default_prompt: "使用 news-tools 获取 GitHub Trending 本周趋势报告"
+  instructions: "skills/news-tools/SKILL.md"
+policy:
+  allow_implicit_invocation: false

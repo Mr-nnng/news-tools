@@ -1,0 +1,8 @@
+# opencode — 自动发现
+# 技能已放置在 .opencode/skills/news-tools/SKILL.md，opencode 会自动加载。
+# Agent 配置在 .opencode/agents/news-tools.md。
+name: news-tools
+description: GitHub 趋势 / 华尔街见闻 / 新闻联播数据获取与 HTML 周报生成
+trigger_paths:
+  - .opencode/skills/news-tools/SKILL.md
+  - .opencode/agents/news-tools.md

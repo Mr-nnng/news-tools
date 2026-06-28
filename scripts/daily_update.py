@@ -238,39 +238,97 @@ def rebuild_xwlb_sidebars(xwlb_dates: list[str]) -> None:
 # ═══════════════════════════════════════════════════════════════════
 
 
+def _load_enriched_json(rd: str) -> dict | None:
+    """从 report/github-trending-weekly-{rd}/data/enriched-trending.json 读取。"""
+    path = REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def build_gh_landing_cards(report_dirs: list[str]) -> tuple[str, int]:
+    """生成 GitHub 周报着陆卡片 HTML（复制自 build_site.py）。"""
+    total_projects = 0
+    month_groups: dict[str, list[str]] = {}
+    for rd in sorted(report_dirs, reverse=True):
+        mk = get_month_key(rd)
+        if mk not in month_groups:
+            month_groups[mk] = []
+        month_groups[mk].append(rd)
+
+    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
+
+    months_html = ""
+    for mk in sorted_months:
+        rds = month_groups[mk]
+        cards_html = ""
+        for rd in rds:
+            data = _load_enriched_json(rd)
+            total = "?"
+            summary = ""
+            if data:
+                count = data.get("total_count", 0)
+                total = str(count) if count else "?"
+                if isinstance(count, int):
+                    total_projects += count
+                summary = data.get("cover_summary", "")
+                if len(summary) > 280:
+                    summary = summary[:280] + "…"
+
+            display_date = format_date(rd)
+            cards_html += f"""    <a href="github_weekly/{rd}/report.html" class="report-card">
+      <p class="card-date">{display_date}</p>
+      <p class="card-meta">{total} 个项目</p>
+      <p class="card-desc">{summary}</p>
+    </a>
+"""
+        months_html += f"""  <div class="month-group">
+    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
+      <span class="month-arrow">▾</span>
+      <span class="month-label">{mk}</span>
+    </div>
+    <div class="report-grid">
+{cards_html}    </div>
+  </div>
+"""
+    return months_html, total_projects
+
+
+def get_gh_dates() -> list[str]:
+    """扫描 report/ 获取所有 GitHub 周报日期。"""
+    if not REPORT_DIR.exists():
+        return []
+    return sorted(
+        d.name.replace("github-trending-weekly-", "")
+        for d in REPORT_DIR.iterdir()
+        if d.name.startswith("github-trending-weekly-")
+    )
+
+
 def rebuild_landing_page() -> None:
-    """重新生成 site/index.html，保留 GitHub 周报部分，仅刷新 XWLB 部分。"""
+    """重新生成 site/index.html，从 report/ 数据重建两个 Tab。"""
     index_path = SITE_DIR / "index.html"
 
-    # —— 从现有页面提取 GitHub 周报部分 ——
-    gh_cards_html = ""
-    gh_count = "0"
-    if index_path.exists():
-        content = index_path.read_text(encoding="utf-8")
-        m = re.search(
-            r'<section id="tab-github"[^>]*role="tabpanel">(.*?)</section>',
-            content,
-            re.DOTALL,
-        )
-        if m:
-            gh_cards_html = m.group(1).strip()
-        m2 = re.search(r"<b>(\d+)</b>\s*期\s*GitHub\s*周报", content)
-        if m2:
-            gh_count = m2.group(1)
+    # —— GitHub 部分 ——
+    gh_dates = get_gh_dates()
+    gh_cards_html, total_projects = build_gh_landing_cards(gh_dates)
 
-    # —— 构建 XWLB 卡片 HTML ——
+    # —— XWLB 部分 ——
     xwlb_dates = get_xwlb_dates()
     xwlb_cards_html, total_xwlb_days = build_xwlb_landing_html(xwlb_dates)
 
-    # —— 从模板重新生成着陆页 ——
+    # —— 从模板生成着陆页 ——
     template = LANDING_TEMPLATE.read_text(encoding="utf-8")
+    html = template.replace("{{GH_MONTH_GROUPS}}", gh_cards_html)
     html = template.replace("{{XWLB_MONTH_GROUPS}}", xwlb_cards_html)
-    html = html.replace("{{XWLB_COUNT}}", str(total_xwlb_days))
-    html = html.replace("{{GH_MONTH_GROUPS}}", gh_cards_html)
-    html = html.replace("{{REPORT_COUNT}}", gh_count)
+    html = template.replace("{{REPORT_COUNT}}", str(len(gh_dates)))
+    html = template.replace("{{XWLB_COUNT}}", str(total_xwlb_days))
 
     index_path.write_text(html, encoding="utf-8")
-    print(f"  ✅ Landing page → site/index.html (XWLB: {total_xwlb_days} days)")
+    print(f"  ✅ Landing page → site/index.html (GH: {len(gh_dates)}, XWLB: {total_xwlb_days})")
 
 
 # ═══════════════════════════════════════════════════════════════════

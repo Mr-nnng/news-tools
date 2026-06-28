@@ -46,7 +46,8 @@ def get_xwlb_dates() -> list[str]:
     if not XWLB_DIR.exists():
         return []
     return sorted(
-        d.name for d in XWLB_DIR.iterdir()
+        d.name
+        for d in XWLB_DIR.iterdir()
         if d.is_dir() and re.match(r"^\d{4}-\d{2}-\d{2}$", d.name)
     )
 
@@ -100,7 +101,9 @@ def build_xwlb_landing_html(xwlb_dates: list[str]) -> tuple[str, int]:
             month_groups[mk] = []
         month_groups[mk].append(rd)
 
-    sorted_months = sorted(month_groups.keys(), key=build_site.month_sort_key, reverse=True)
+    sorted_months = sorted(
+        month_groups.keys(), key=build_site.month_sort_key, reverse=True
+    )
     months_html = ""
     for mk in sorted_months:
         rds = month_groups[mk]
@@ -189,7 +192,9 @@ def rebuild_landing_page() -> None:
     html = html.replace("{{XWLB_COUNT}}", str(total_xwlb_days))
 
     index_path.write_text(html, encoding="utf-8")
-    print(f"  ✅ Landing page → site/index.html (GH: {gh_count}, XWLB: {total_xwlb_days})")
+    print(
+        f"  ✅ Landing page → site/index.html (GH: {gh_count}, XWLB: {total_xwlb_days})"
+    )
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -199,15 +204,20 @@ def rebuild_landing_page() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="每日新闻联播自动更新脚本")
-    parser.add_argument("--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天")
+    parser.add_argument(
+        "--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天"
+    )
     args = parser.parse_args()
 
     # —— 确定目标日期（北京时间） ——
+    bj_tz = timezone(timedelta(hours=8))
     if args.date:
         dt = datetime.strptime(args.date, "%Y-%m-%d")
     else:
-        bj_tz = timezone(timedelta(hours=8))
         dt = datetime.now(bj_tz)
+        # 19:00 之前新闻联播尚未播出，默认获取昨天
+        if dt.hour < 19 or (dt.hour == 19 and dt.minute < 10):
+            dt = dt - timedelta(days=1)
 
     date_str = dt.strftime("%Y-%m-%d")
     print(f"🔍 目标日期: {date_str}\n")
@@ -228,22 +238,22 @@ def main() -> None:
         rebuild_landing_page()
         return
 
-    # 保存数据到 site/xwlb/{date}/xwlb.json
-    data_dir = XWLB_DIR / date_str
-    data_dir.mkdir(parents=True, exist_ok=True)
-    data_path = data_dir / "xwlb.json"
+    # 保存数据到 report/xwlb-{date}/data/xwlb.json（与 build_site 一致）
+    report_data_dir = REPORT_DIR / f"xwlb-{date_str}" / "data"
+    report_data_dir.mkdir(parents=True, exist_ok=True)
+    data_path = report_data_dir / "xwlb.json"
     data_path.write_text(
         json.dumps(result.model_dump(), indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    print(f"  ✅ 数据保存 → site/xwlb/{date_str}/xwlb.json")
+    print(f"  ✅ 数据保存 → {data_path.relative_to(PROJECT_ROOT)}")
     print(f"     共 {len(result.items)} 条新闻")
 
     # Step 3: 生成 HTML 页面
     print(f"\n📄 生成 HTML 页面...")
     out = build_xwlb_page(
         json_path=str(data_path),
-        output_dir=str(data_dir),
+        output_dir=str(XWLB_DIR / date_str),
         template_path=str(XWLB_TEMPLATE),
     )
     print(f"  ✅ HTML 页面 → {Path(out).relative_to(PROJECT_ROOT)}")

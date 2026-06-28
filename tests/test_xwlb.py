@@ -10,7 +10,6 @@ from news_tools.xwlb import (
     XwlbResult,
 )
 
-
 # ── XwlbItem JSON 序列化 ────────────────────────────────────────
 
 
@@ -62,6 +61,7 @@ def test_xwlb_result_json():
     assert data["items"][1]["title"].startswith("习近平")
     assert data["items"][1]["url"] == "https://tv.cctv.com/2"
 
+
 # ── XwlbResult to_markdown ─────────────────────────────────
 
 
@@ -104,8 +104,13 @@ def test_xwlb_result_to_markdown():
     assert "### 2." in md
     assert "习近平主持召开" in md
     assert "中共中央总书记" in md
-    assert "[习近平主持召开中央全面深化改革委员会第五次会议](https://tv.cctv.com/1)" in md
-    assert "[习近平向联合国贸易和发展会议成立60周年庆祝活动开幕式发表视频致辞](https://tv.cctv.com/2)" in md
+    assert (
+        "[习近平主持召开中央全面深化改革委员会第五次会议](https://tv.cctv.com/1)" in md
+    )
+    assert (
+        "[习近平向联合国贸易和发展会议成立60周年庆祝活动开幕式发表视频致辞](https://tv.cctv.com/2)"
+        in md
+    )
 
     # 不应有空列表当 items 非空时
     assert "### 0." not in md
@@ -117,4 +122,3 @@ def test_xwlb_result_to_markdown():
 
     # summary items 应保持原样（编号）
     assert md.index("1、习近平") < md.index("2、习近平")
-

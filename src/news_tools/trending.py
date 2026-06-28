@@ -31,7 +31,6 @@ import requests
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
 
-
 # ── 时区 ───────────────────────────────────────────────────────────
 CST = timezone(timedelta(hours=8))
 
@@ -83,7 +82,9 @@ class TrendingResult(BaseModel):
 
 HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " "AppleWebKit/537.36 (KHTML, like Gecko) " "Chrome/125.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/125.0.0.0 Safari/537.36"
     ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
@@ -175,7 +176,9 @@ def _parse_article(article) -> Optional[TrendingRepo]:
     lang_elem = article.select_one("span[itemprop='programmingLanguage']")
     language = lang_elem.get_text(strip=True) if lang_elem else None
     color_elem = article.select_one("span.repo-language-color")
-    language_color = _extract_language_color(color_elem.get("style")) if color_elem else None
+    language_color = (
+        _extract_language_color(color_elem.get("style")) if color_elem else None
+    )
 
     stars_total = 0
     forks = 0
@@ -203,7 +206,11 @@ def _parse_article(article) -> Optional[TrendingRepo]:
         avatar_url = img.get("src", "").strip()
         if username and avatar_url:
             profile_url = f"https://github.com/{username}"
-            built_by.append(Contributor(username=username, avatar_url=avatar_url, profile_url=profile_url))
+            built_by.append(
+                Contributor(
+                    username=username, avatar_url=avatar_url, profile_url=profile_url
+                )
+            )
 
     return TrendingRepo(
         author=author,
@@ -325,14 +332,20 @@ def fetch_trending(
         url = f"{TRENDING_URL}/{language.lower()}"
 
     proxies = _get_proxies(proxy)
-    resp = requests.get(url, params=params, headers=HEADERS, proxies=proxies, timeout=timeout)
+    resp = requests.get(
+        url, params=params, headers=HEADERS, proxies=proxies, timeout=timeout
+    )
     resp.raise_for_status()
     resp.encoding = "utf-8"
 
     repos = parse_trending_page(resp.text)
 
     repos = _enrich_repos(
-        repos, proxies=proxies, timeout=max(8, timeout), fetch_readme=fetch_readme, readme_max_length=readme_max_length
+        repos,
+        proxies=proxies,
+        timeout=max(8, timeout),
+        fetch_readme=fetch_readme,
+        readme_max_length=readme_max_length,
     )
 
     now_cst = datetime.now(CST)
@@ -365,13 +378,28 @@ def build_parser(period: str = "daily") -> argparse.ArgumentParser:
         choices=["daily", "weekly"],
         help=f"趋势周期: daily / weekly (默认: {period})",
     )
-    parser.add_argument("-o", "--output", default=None, help="输出文件路径（默认输出到终端）")
-    parser.add_argument("--proxy", default=None, help="代理地址，如 http://127.0.0.1:7890")
-    parser.add_argument("-l", "--language", default=None, help="按语言过滤，如 python、javascript")
-    parser.add_argument("--compact", action="store_true", help="紧凑模式：只输出 repos 数组")
-    parser.add_argument("--timeout", type=int, default=15, help="请求超时秒数（默认 15）")
+    parser.add_argument(
+        "-o", "--output", default=None, help="输出文件路径（默认输出到终端）"
+    )
+    parser.add_argument(
+        "--proxy", default=None, help="代理地址，如 http://127.0.0.1:7890"
+    )
+    parser.add_argument(
+        "-l", "--language", default=None, help="按语言过滤，如 python、javascript"
+    )
+    parser.add_argument(
+        "--compact", action="store_true", help="紧凑模式：只输出 repos 数组"
+    )
+    parser.add_argument(
+        "--timeout", type=int, default=15, help="请求超时秒数（默认 15）"
+    )
     parser.add_argument("--no-readme", action="store_true", help="不抓取 README 内容")
-    parser.add_argument("--readme-max-length", type=int, default=0, help="README 最大截取字符数（0=不截断，默认 0）")
+    parser.add_argument(
+        "--readme-max-length",
+        type=int,
+        default=0,
+        help="README 最大截取字符数（0=不截断，默认 0）",
+    )
     return parser
 
 
@@ -413,7 +441,12 @@ def main() -> None:
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(json_str)
             f.write("\n")
-        print(json.dumps({"status": "saved", "path": args.output, "count": result.total_count}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": "saved", "path": args.output, "count": result.total_count},
+                ensure_ascii=False,
+            )
+        )
     else:
         print(json_str)
 

@@ -109,13 +109,17 @@ def _render_express_as_html(text: str, sub_titles: list[str]) -> str:
             body_html = ""
             for b in current_bodies:
                 if b.strip():
-                    body_html += f'        <div class="express-body">{b.strip()}</div>\n'
+                    body_html += (
+                        f'        <div class="express-body">{b.strip()}</div>\n'
+                    )
             if body_html:
                 html_parts.append(
                     f'      <p><span class="express-title">{current_title}</span></p>\n{body_html}'
                 )
             else:
-                html_parts.append(f'      <p><span class="express-title">{current_title}</span></p>')
+                html_parts.append(
+                    f'      <p><span class="express-title">{current_title}</span></p>'
+                )
             current_title = None
             current_bodies = []
 
@@ -137,7 +141,7 @@ def _render_express_as_html(text: str, sub_titles: list[str]) -> str:
         if matched:
             _flush()
             current_title = matched
-            rest = stripped[len(matched):].strip()
+            rest = stripped[len(matched) :].strip()
             rest = re.sub(r"^[。：:\s]+", "", rest)
             if rest:
                 current_bodies.append(rest)
@@ -179,7 +183,9 @@ def _build_summary_html(summary_text: str) -> str:
             cleaned = re.sub(r"^\d+[.、]\s*", "", stripped)
             parts.append(f'      <div class="summary-label">{cleaned}</div>')
         # "（《新闻联播》..." 跳过，不显示
-        elif stripped.startswith("（《新闻联播》") or stripped.startswith("(《新闻联播》"):
+        elif stripped.startswith("（《新闻联播》") or stripped.startswith(
+            "(《新闻联播》"
+        ):
             continue
         # "（..." 开头的都是子项
         elif stripped.startswith("（") or stripped.startswith("("):
@@ -227,17 +233,19 @@ def _build_items_html(items: list[dict]) -> str:
         if not content_html:
             content_html = "      <p>（暂无详细文字内容）</p>"
 
-        title_html = f'<a href="{url}" target="_blank" rel="noopener">{clean_title}</a>' if url else clean_title
+        title_html = (
+            f'<a href="{url}" target="_blank" rel="noopener">{clean_title}</a>'
+            if url
+            else clean_title
+        )
 
-        html_parts.append(
-                f"""    <div class="news-item" id="item-{i:02d}">
+        html_parts.append(f"""    <div class="news-item" id="item-{i:02d}">
           <div class="item-number">第 {i:02d} 条</div>
           <h3 class="item-title">{title_html}</h3>
           <div class="item-content">
     {content_html}
           </div>
-        </div>"""
-            )
+        </div>""")
 
     return "\n".join(html_parts)
 
@@ -303,7 +311,6 @@ def build_xwlb_page(
     html = html.replace("{{XWLB_INDEX}}", index_html)
 
     # Sidebar placeholder — kept as {{SIDEBAR}} for build_site.py to inject
-    pass
 
     # ── 写入输出 ────────────────────────────────────────────
     out_dir = Path(output_dir).resolve()
@@ -327,8 +334,14 @@ def main() -> None:
         description="从 xwlb.json 生成新闻联播 HTML 页面",
     )
     parser.add_argument("json_path", help="xwlb.json 文件路径")
-    parser.add_argument("-o", "--output-dir", default=None, help="输出目录（默认与 JSON 同目录的上级）")
-    parser.add_argument("--template", default=None, help="HTML 模板路径（默认 assets/templates/xwlb-page.html）")
+    parser.add_argument(
+        "-o", "--output-dir", default=None, help="输出目录（默认与 JSON 同目录的上级）"
+    )
+    parser.add_argument(
+        "--template",
+        default=None,
+        help="HTML 模板路径（默认 assets/templates/xwlb-page.html）",
+    )
     args = parser.parse_args()
 
     json_path = Path(args.json_path)

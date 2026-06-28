@@ -12,7 +12,6 @@ from news_tools.trending import (
     TrendingResult,
 )
 
-
 # ── _parse_stars_count ──────────────────────────────────────────
 
 

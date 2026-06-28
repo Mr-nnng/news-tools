@@ -26,7 +26,6 @@ from typing import Optional
 import requests
 from pydantic import BaseModel
 
-
 # ── 时区 ───────────────────────────────────────────────────────────
 CST = timezone(timedelta(hours=8))
 
@@ -34,7 +33,9 @@ CST = timezone(timedelta(hours=8))
 API_URL = "https://api-one-wscn.awtmt.com/apiv1/search/live"
 HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " "AppleWebKit/537.36 (KHTML, like Gecko) " "Chrome/141.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/141.0.0.0 Safari/537.36"
     ),
     "Origin": "https://wallstreetcn.com",
     "Referer": "https://wallstreetcn.com/",
@@ -106,7 +107,9 @@ def _fetch_page(
     return resp.json()
 
 
-def _get_first_page_data(limit: int = BINARY_SEARCH_LIMIT, score: int = 2) -> tuple[list[dict], int, int]:
+def _get_first_page_data(
+    limit: int = BINARY_SEARCH_LIMIT, score: int = 2
+) -> tuple[list[dict], int, int]:
     """获取第一页（最新）数据，同时获取 total_count 和 next_cursor。"""
     data = _fetch_page(cursor=None, limit=limit, score=score)
     d = data.get("data", {})
@@ -221,8 +224,12 @@ def fetch_live_by_date(
     else:
         target_date = target_date.astimezone(CST)
 
-    target_start = datetime(target_date.year, target_date.month, target_date.day, tzinfo=CST)
-    target_end_exclusive = datetime(target_date.year, target_date.month, target_date.day + 1, tzinfo=CST)
+    target_start = datetime(
+        target_date.year, target_date.month, target_date.day, tzinfo=CST
+    )
+    target_end_exclusive = datetime(
+        target_date.year, target_date.month, target_date.day + 1, tzinfo=CST
+    )
 
     start_ts = int(target_start.timestamp())
     end_ts_exclusive = int(target_end_exclusive.timestamp())
@@ -241,7 +248,13 @@ def fetch_live_by_date(
 
     if total_count == 0:
         log("无数据")
-        return LiveResult(date=date_str, score=score, fetched_at=datetime.now(CST).isoformat(), total_count=0, items=[])
+        return LiveResult(
+            date=date_str,
+            score=score,
+            fetched_at=datetime.now(CST).isoformat(),
+            total_count=0,
+            items=[],
+        )
 
     # 2. 二分查找最大 cursor
     log("正在确定最大 cursor...")
@@ -250,22 +263,35 @@ def fetch_live_by_date(
 
     # 3. 二分查找起始 cursor
     log("正在定位起始位置...")
-    start_cursor = _find_cursor_for_time(target_ts=end_ts_exclusive, max_cursor=max_cursor, score=score, find_newest=True)
+    start_cursor = _find_cursor_for_time(
+        target_ts=end_ts_exclusive, max_cursor=max_cursor, score=score, find_newest=True
+    )
 
     check_ts = _get_first_item_time(start_cursor, limit, score)
     if check_ts is None or check_ts < start_ts:
         # 二分找到的 cursor 数据已早于目标日，但最新页（cursor 1）可能已跨越目标日范围
         first_page = _fetch_page(cursor=1, limit=limit, score=score)
         cursor1_items = first_page.get("data", {}).get("items", [])
-        if any(start_ts <= item["display_time"] < end_ts_exclusive for item in cursor1_items):
+        if any(
+            start_ts <= item["display_time"] < end_ts_exclusive
+            for item in cursor1_items
+        ):
             start_cursor = 1
         else:
             log(f"目标日期 {date_str} 在该频道中无数据")
-            return LiveResult(date=date_str, score=score, fetched_at=datetime.now(CST).isoformat(), total_count=0, items=[])
+            return LiveResult(
+                date=date_str,
+                score=score,
+                fetched_at=datetime.now(CST).isoformat(),
+                total_count=0,
+                items=[],
+            )
 
     log(f"起始 cursor: {start_cursor}")
     if check_ts:
-        log(f"  该页最新: {datetime.fromtimestamp(check_ts, tz=CST).strftime('%Y-%m-%d %H:%M:%S')}")
+        log(
+            f"  该页最新: {datetime.fromtimestamp(check_ts, tz=CST).strftime('%Y-%m-%d %H:%M:%S')}"
+        )
 
     # 4. 顺序翻页收集数据
     all_items: list[dict] = []
@@ -305,7 +331,11 @@ def fetch_live_by_date(
         first_ts = items[0]["display_time"]
         last_ts = items[-1]["display_time"]
 
-        page_items = [item for item in items if start_ts <= item["display_time"] < end_ts_exclusive]
+        page_items = [
+            item
+            for item in items
+            if start_ts <= item["display_time"] < end_ts_exclusive
+        ]
         all_items.extend(page_items)
 
         log(
@@ -351,12 +381,32 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="获取华尔街见闻 7x24 快讯（按日期筛选重要新闻），输出 JSON。",
     )
-    parser.add_argument("--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天")
-    parser.add_argument("--score", "-s", type=int, default=2, choices=[2, 3], help="新闻重要度: 2=重要 (默认), 3=最重要")
-    parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT, help=f"每页条数 (默认 {DEFAULT_LIMIT})")
-    parser.add_argument("--output", "-o", default=None, help="输出文件路径（默认输出到终端）")
-    parser.add_argument("--compact", action="store_true", help="紧凑模式：仅输出 items 数组")
-    parser.add_argument("--verbose", "-v", action="store_true", help="显示进度信息到 stderr")
+    parser.add_argument(
+        "--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天"
+    )
+    parser.add_argument(
+        "--score",
+        "-s",
+        type=int,
+        default=2,
+        choices=[2, 3],
+        help="新闻重要度: 2=重要 (默认), 3=最重要",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=DEFAULT_LIMIT,
+        help=f"每页条数 (默认 {DEFAULT_LIMIT})",
+    )
+    parser.add_argument(
+        "--output", "-o", default=None, help="输出文件路径（默认输出到终端）"
+    )
+    parser.add_argument(
+        "--compact", action="store_true", help="紧凑模式：仅输出 items 数组"
+    )
+    parser.add_argument(
+        "--verbose", "-v", action="store_true", help="显示进度信息到 stderr"
+    )
 
     args = parser.parse_args()
 
@@ -378,7 +428,10 @@ def main() -> None:
             verbose=args.verbose,
         )
     except requests.RequestException as e:
-        print(json.dumps({"error": f"请求 API 失败: {e}"}, ensure_ascii=False), file=sys.stderr)
+        print(
+            json.dumps({"error": f"请求 API 失败: {e}"}, ensure_ascii=False),
+            file=sys.stderr,
+        )
         sys.exit(1)
     except Exception as e:
         print(json.dumps({"error": str(e)}, ensure_ascii=False), file=sys.stderr)
@@ -395,7 +448,12 @@ def main() -> None:
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(json_str)
             f.write("\n")
-        print(json.dumps({"status": "saved", "path": args.output, "count": result.total_count}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": "saved", "path": args.output, "count": result.total_count},
+                ensure_ascii=False,
+            )
+        )
     else:
         print(json_str)
 

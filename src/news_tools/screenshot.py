@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import os
 import sys
+import argparse
 from pathlib import Path
 from typing import Optional
 
@@ -80,7 +81,7 @@ def _wait_for_images(page, timeout: int = 15000) -> None:
 
 def _wait_for_fonts(page, timeout: int = 10000) -> None:
     """等待所有 @font-face 字体加载完成，避免截图时 fallback 字体。
-    
+
     使用 document.fonts.ready 确保自定义字体渲染完毕。
     """
     try:
@@ -214,7 +215,9 @@ def element_screenshot(
         # ── 逐个元素截图 ────────────────────────────────
         elements = page.query_selector_all(selector)
         if not elements:
-            raise ValueError(f"页面中未找到匹配选择器 {selector!r} 的元素，请检查 HTML 结构。")
+            raise ValueError(
+                f"页面中未找到匹配选择器 {selector!r} 的元素，请检查 HTML 结构。"
+            )
 
         result: list[str] = []
         for i, el in enumerate(elements, start=1):
@@ -298,8 +301,6 @@ def main() -> None:
         python -m news_tools.screenshot report.html --selector .page -o screenshots/
         python -m news_tools.screenshot report.html --full-page -o fullpage.png
     """
-    import argparse
-
     parser = argparse.ArgumentParser(
         description="将 HTML 中指定元素导出为 PNG 图片",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -310,18 +311,26 @@ def main() -> None:
         ),
     )
     parser.add_argument("html", help="HTML 文件路径")
-    parser.add_argument("-s", "--selector", default=".page", help="CSS 选择器（默认 .page）")
+    parser.add_argument(
+        "-s", "--selector", default=".page", help="CSS 选择器（默认 .page）"
+    )
     parser.add_argument(
         "-o",
         "--output",
         default=".",
         help="输出目录（元素模式）或文件路径（整页模式）",
     )
-    parser.add_argument("--prefix", default="page", help="输出文件前缀（元素模式，默认 page）")
+    parser.add_argument(
+        "--prefix", default="page", help="输出文件前缀（元素模式，默认 page）"
+    )
     parser.add_argument("--full-page", action="store_true", help="整页截图模式")
     parser.add_argument("--width", type=int, default=1920, help="视口宽度（默认 1920）")
-    parser.add_argument("--height", type=int, default=1080, help="视口高度（默认 1080）")
-    parser.add_argument("--scale", type=float, default=3.0, help="设备像素比，越高越清晰（默认 3.0）")
+    parser.add_argument(
+        "--height", type=int, default=1080, help="视口高度（默认 1080）"
+    )
+    parser.add_argument(
+        "--scale", type=float, default=3.0, help="设备像素比，越高越清晰（默认 3.0）"
+    )
     parser.add_argument("--chrome", default=None, help="Chrome 可执行文件路径")
 
     args = parser.parse_args()

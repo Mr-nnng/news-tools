@@ -21,6 +21,7 @@ from datetime import datetime
 
 # ── Ensure news_tools modules are importable ─────────────────
 import sys
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from news_tools.build_xwlb_html import build_xwlb_page
@@ -32,8 +33,8 @@ ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 
 FONTS_DIR = SITE_DIR / "assets" / "fonts"
-GH_DIR = SITE_DIR / "github_weekly"       # was SITE_DIR / "reports"
-XWLB_DIR = SITE_DIR / "xwlb"               # new
+GH_DIR = SITE_DIR / "github_weekly"  # was SITE_DIR / "reports"
+XWLB_DIR = SITE_DIR / "xwlb"  # new
 
 TEMPLATE_PATH = ASSETS_DIR / "templates" / "landing-news-tools.html"
 XWLB_TEMPLATE_PATH = ASSETS_DIR / "templates" / "xwlb-page.html"
@@ -117,7 +118,7 @@ def build_gh_pages():
 
 def build_gh_sidebar_html(report_dirs: list[str], current_rd: str) -> str:
     """Generate sidebar timeline HTML for a GitHub report page.
-    
+
     Sidebar links: ../{rd}/report.html because sidebar is in site/github_weekly/{rd}/report.html
     and linked reports are at site/github_weekly/{other_rd}/report.html
     """
@@ -136,7 +137,7 @@ def build_gh_sidebar_html(report_dirs: list[str], current_rd: str) -> str:
         items_html = ""
         for rd in rds:
             display_date = format_date(rd)
-            active_class = ' is-active' if rd == current_rd else ''
+            active_class = " is-active" if rd == current_rd else ""
             items_html += f"""
           <a href="../{rd}/report.html" class="sidebar-item{active_class}">{display_date}</a>"""
 
@@ -185,7 +186,7 @@ def build_xwlb_sidebar_html(xwlb_dates: list[str], current_rd: str) -> str:
         items_html = ""
         for rd in rds:
             display_date = format_date(rd)
-            active_class = ' is-active' if rd == current_rd else ''
+            active_class = " is-active" if rd == current_rd else ""
             items_html += f"""
           <a href="../{rd}/index.html" class="sidebar-item{active_class}">{display_date}</a>"""
         sections_html += f"""
@@ -271,7 +272,9 @@ def load_xwlb_data(rd: str) -> dict | None:
 
 def load_enriched_json(rd: str) -> dict | None:
     """Load enriched JSON for a GitHub report directory."""
-    enriched_json = REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
+    enriched_json = (
+        REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
+    )
     if not enriched_json.exists():
         return None
     try:

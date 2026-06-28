@@ -21,6 +21,7 @@ news_tools/xwlb.py — 新闻联播文字摘要获取工具
 import re
 import sys
 import json
+import time
 import argparse
 from datetime import datetime
 from typing import Optional
@@ -28,7 +29,6 @@ from typing import Optional
 import requests
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
-
 
 # ═══════════════════════════════════════════════════════════════════
 # 数据模型
@@ -76,7 +76,9 @@ class XwlbResult(BaseModel):
         return re.sub(r"\n+", "\n\n", text)
 
     @staticmethod
-    def _match_line_to_subtitle(line: str, titles: list[str]) -> tuple[Optional[str], str]:
+    def _match_line_to_subtitle(
+        line: str, titles: list[str]
+    ) -> tuple[Optional[str], str]:
         """尝试将一行匹配到某个子标题。
 
         返回 (matched_title, rest_text)，无匹配时 (None, '')。
@@ -117,7 +119,9 @@ class XwlbResult(BaseModel):
             if not stripped:
                 continue
 
-            matched_title, rest_text = XwlbResult._match_line_to_subtitle(stripped, clean_titles)
+            matched_title, rest_text = XwlbResult._match_line_to_subtitle(
+                stripped, clean_titles
+            )
             if matched_title:
                 _flush_pending()
                 result_md.append(f"- {matched_title}")
@@ -215,7 +219,9 @@ class XwlbResult(BaseModel):
 # ─── 公共 HTTP 头 ────────────────────────────────────────────────
 HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " "AppleWebKit/537.36 (KHTML, like Gecko) " "Chrome/125.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/125.0.0.0 Safari/537.36"
     ),
     "Referer": "https://tv.cctv.com/lm/xwlb/index.shtml",
 }
@@ -374,10 +380,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="获取《新闻联播》文字摘要，输出 JSON。",
     )
-    parser.add_argument("--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天")
-    parser.add_argument("--output", "-o", default=None, help="输出文件路径（默认输出到终端）")
-    parser.add_argument("--markdown", "--md", action="store_true", help="Markdown 格式输出（替代 JSON）")
-    parser.add_argument("--compact", action="store_true", help="紧凑模式：仅输出 items 数组")
+    parser.add_argument(
+        "--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天"
+    )
+    parser.add_argument(
+        "--output", "-o", default=None, help="输出文件路径（默认输出到终端）"
+    )
+    parser.add_argument(
+        "--markdown", "--md", action="store_true", help="Markdown 格式输出（替代 JSON）"
+    )
+    parser.add_argument(
+        "--compact", action="store_true", help="紧凑模式：仅输出 items 数组"
+    )
 
     args = parser.parse_args()
 
@@ -393,10 +407,12 @@ def main() -> None:
         today = datetime.now()
         year_num, month_num, day_num = today.year, today.month, today.day
         if today.hour < 19 or (today.hour == 19 and today.minute < 10):
-            import time as _time
-
-            yesterday = datetime.fromtimestamp(_time.time() - 86400)
-            year_num, month_num, day_num = yesterday.year, yesterday.month, yesterday.day
+            yesterday = datetime.fromtimestamp(time.time() - 86400)
+            year_num, month_num, day_num = (
+                yesterday.year,
+                yesterday.month,
+                yesterday.day,
+            )
 
     result = get_xwlb(year_num, month_num, day_num)
 
@@ -418,7 +434,12 @@ def main() -> None:
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(output_str)
             f.write("\n")
-        print(json.dumps({"status": "saved", "path": args.output, "count": len(result.items)}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": "saved", "path": args.output, "count": len(result.items)},
+                ensure_ascii=False,
+            )
+        )
     else:
         print(output_str)
 

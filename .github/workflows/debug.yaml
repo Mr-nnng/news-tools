@@ -4,6 +4,8 @@ on:
   schedule:
     # 每 3 分钟触发一次，用于验证 schedule 事件是否被 GitHub 调度器发送到仓库
     - cron: '*/3 * * * *'
+  workflow_dispatch:
+    # 支持手动触发
 
 jobs:
   debug:

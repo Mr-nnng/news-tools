@@ -12,6 +12,8 @@ jobs:
     # 只在主仓库运行，避免 Fork 浪费 Actions 额度
     if: github.repository == 'Mr-nnng/news-tools'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4

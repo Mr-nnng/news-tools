@@ -9,8 +9,6 @@ on:
 
 jobs:
   update-xwlb:
-    # 只在主仓库运行，避免 Fork 浪费 Actions 额度
-    if: github.repository == 'Mr-nnng/news-tools'
     runs-on: ubuntu-latest
     permissions:
       contents: write

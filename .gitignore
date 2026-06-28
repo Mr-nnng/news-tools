@@ -105,8 +105,10 @@ plans
 
 # --- Report (generated) ---
 report/*/*.html
+report/*.md
 report/*/avatar
 report/*/images
+report/scripts/*
 
 !report/*/
 !report/*/data/

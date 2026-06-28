@@ -30,6 +30,7 @@ from news_tools.build_xwlb_html import build_xwlb_page
 
 ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
+REPORT_DIR = PROJECT_ROOT / "report"
 XWLB_DIR = SITE_DIR / "xwlb"
 XWLB_TEMPLATE = ASSETS_DIR / "templates" / "xwlb-page.html"
 LANDING_TEMPLATE = ASSETS_DIR / "templates" / "landing-news-tools.html"
@@ -89,8 +90,8 @@ def get_xwlb_dates() -> list[str]:
 
 
 def load_xwlb_data(date_str: str) -> dict | None:
-    """从 site/xwlb/{date_str}/xwlb.json 读取数据。"""
-    path = XWLB_DIR / date_str / "xwlb.json"
+    """从 report/xwlb-{date_str}/data/xwlb.json 读取数据。"""
+    path = REPORT_DIR / f"xwlb-{date_str}" / "data" / "xwlb.json"
     if not path.exists():
         return None
     try:

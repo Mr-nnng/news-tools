@@ -2,8 +2,8 @@ name: 每日新闻联播自动更新
 
 on:
   schedule:
-    # UTC 13:00 = 北京时间 21:00
-    - cron: '0 13 * * *'
+    # UTC 12:47 = 北京时间 20:47
+    - cron: '47 12 * * *'
   workflow_dispatch:
     # 支持手动触发，可指定日期（通过 inputs）
 

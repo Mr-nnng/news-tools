@@ -35,7 +35,7 @@ jobs:
           echo "date=$TODAY" >> "$GITHUB_OUTPUT"
 
           echo "🚀 开始更新 $TODAY 新闻联播..."
-          python scripts/daily_update.py --date "$TODAY" 2>&1
+          uv run python scripts/daily_update.py --date "$TODAY" 2>&1
 
       - name: 检查是否生成了新数据
         id: check

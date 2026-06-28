@@ -46,8 +46,11 @@ news/
 │   └── templates/                 # HTML 模板
 │       ├── landing-news-tools.html # 主页模板（双 Tab）
 │       └── xwlb-page.html         # 新闻联播详情页模板
+├── .github/workflows/
+│   └── daily-xwlb.yml             # 每日新闻联播自动更新（GitHub Actions）
 ├── scripts/
-│   └── build_site.py              # 构建部署目录
+│   ├── build_site.py              # 构建部署目录
+│   └── daily_update.py            # GitHub Actions 每日更新入口
 ├── skills/news-tools/             # Agent 配置（报告生成工作流）
 │   ├── SKILL.md
 │   ├── agents/                    # 各平台 agent 配置
@@ -292,3 +295,30 @@ uv run pytest tests/ -v
 ## 项目状态
 
 每周自动生成 GitHub Trending 中文周报并部署上线，每日自动生成新闻联播文字摘要页面。查看 [`site/github_weekly/`](site/github_weekly/) 获取最新 GitHub 周报，[`site/xwlb/`](site/xwlb/) 获取新闻联播。
+
+---
+
+## GitHub Actions 自动化
+
+### 每日新闻联播自动更新
+
+[`.github/workflows/daily-xwlb.yml`](.github/workflows/daily-xwlb.yml) 工作流实现：
+
+| 配置项 | 说明 |
+|--------|------|
+| **触发时间** | 每晚 21:00（北京时间 `UTC 13:00`） |
+| **手动触发** | 支持 `workflow_dispatch` 在 GitHub 页面手动运行 |
+| **流程** | 获取数据 → 生成 HTML → 重建着陆页 → 更新侧边栏 → 自动提交 |
+| **部署** | 提交后自动触发 Cloudflare Pages 重新部署 |
+
+工作流执行步骤：
+1. 检出代码 → 安装 Python + uv 依赖
+2. 运行 [`scripts/daily_update.py`](scripts/daily_update.py)：
+   - 调用央视网 API 获取当日《新闻联播》文字数据
+   - 生成 HTML 详情页到 `site/xwlb/{date}/`
+   - 保留 JSON 数据到 `site/xwlb/{date}/xwlb.json`
+   - 重建所有已有 XWLB 页面的侧边栏导航
+   - 重建 `site/index.html` 着陆页（保留 GitHub 周报部分）
+3. 自动 `git commit + push`，触发 Cloudflare Pages 部署
+
+> 💡 若当日新闻联播尚未发布（如遇周末或节假日），脚本跳过数据获取，仅重建着陆页，不产生空提交。

@@ -104,7 +104,13 @@ docker-compose.override.yml
 plans
 
 # --- Report (generated) ---
-report/
+report/*/*.html
+report/*/avatar
+report/*/images
+
+!report/*/
+!report/*/data/
+!report/*/data/**
 
 # --- Temp / Experimental ---
 .temp/

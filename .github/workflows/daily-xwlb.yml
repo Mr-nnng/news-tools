@@ -1,0 +1,66 @@
+name: 每日新闻联播自动更新
+
+on:
+  schedule:
+    # UTC 13:00 = 北京时间 21:00
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    # 支持手动触发，可指定日期（通过 inputs）
+
+jobs:
+  update-xwlb:
+    # 只在主仓库运行，避免 Fork 浪费 Actions 额度
+    if: github.repository == 'Mr-nnng/news-tools'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: 安装依赖
+        run: uv sync
+
+      - name: 运行每日更新脚本
+        id: update
+        continue-on-error: true
+        run: |
+          TODAY=$(TZ=Asia/Shanghai date +'%Y-%m-%d')
+          echo "date=$TODAY" >> "$GITHUB_OUTPUT"
+
+          echo "🚀 开始更新 $TODAY 新闻联播..."
+          python scripts/daily_update.py --date "$TODAY" 2>&1
+
+      - name: 检查是否生成了新数据
+        id: check
+        run: |
+          DATE="${{ steps.update.outputs.date }}"
+          if [ -f "site/xwlb/$DATE/index.html" ]; then
+            echo "has_new=true" >> "$GITHUB_OUTPUT"
+            echo "✅ 新数据已生成: site/xwlb/$DATE/index.html"
+          else
+            echo "has_new=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️  $DATE 暂无新数据，但可能已有历史页面变更需要提交"
+          fi
+
+      - name: 提交并推送变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add site/
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "ℹ️  没有新的变更需要提交"
+          else
+            DATE="${{ steps.update.outputs.date }}"
+            git commit -m "chore(xwlb): auto-update 新闻联播 $DATE"
+            git push
+            echo "✅ 已提交并推送新闻联播更新"
+          fi

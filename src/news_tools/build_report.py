@@ -158,7 +158,13 @@ def build_report(
                 </tr>\n"""
     rank_rows = rank_rows.rstrip("\n")
 
-    # ── 详情页（全部仓库，每页 2 个） ────────────────────
+    # ── 连续滚动：逐个项目块（新版模板 {{REPO_ITEMS}}） ──
+    repo_items = ""
+    for idx, r in enumerate(repos):
+        rank = idx + 1
+        repo_items += _build_item_block(r, rank, avatar_dir_name)
+
+    # ── 翻页卡片：详情块（旧版模板 {{REPO_DETAIL_PAGES}}） ──
     total_pages = (len(repos) + 1) // 2 + 1  # 封面 + 详情页数
     detail_pages = ""
     page_idx = 2
@@ -183,17 +189,26 @@ def build_report(
         <div class="page-num">{page_idx:02d} / {total_pages:02d}</div>
     </div>\n\n"""
         page_idx += 1
-
     detail_pages = detail_pages.rstrip()
 
-    # ── 生成右侧索引 ──────────────────────────────────
-    index_items = ""
-    # 封面
-    index_items += f'      <a class="index-item" href="#page-cover"><span class="idx-num">✦</span> 封面</a>\n'
+    repo_count = len(repos)
+
+    # ── 生成右侧索引（兼容新旧模板） ─────────────────
+    # 旧版索引：指向翻页卡片
+    index_items_old = ""
+    index_items_old += f'      <a class="index-item" href="#page-cover"><span class="idx-num">✦</span> 封面</a>\n'
     for idx, r in enumerate(repos):
         rank = idx + 1
-        page_idx = idx // 2 + 2  # page-02 onwards
-        index_items += f'      <a class="index-item" href="#page-{page_idx:02d}"><span class="idx-num">#{rank:02d}</span> {r["name"]}</a>\n'
+        page_idx = idx // 2 + 2
+        index_items_old += f'      <a class="index-item" href="#page-{page_idx:02d}"><span class="idx-num">#{rank:02d}</span> {r["name"]}</a>\n'
+
+    # 新版索引：指向连续滚动 repo
+    index_items_new = ""
+    index_items_new += f'      <a class="index-item" href="#gh-cover"><span class="idx-num">✦</span> 排行榜</a>\n'
+    index_items_new += '      <div class="index-divider"></div>\n'
+    for idx, r in enumerate(repos):
+        rank = idx + 1
+        index_items_new += f'      <a class="index-item" href="#repo-{rank:02d}"><span class="idx-num">#{rank:02d}</span> {r["name"]}</a>\n'
 
     # ── 读取模板并填充 ────────────────────────────────────
     with open(template_path, "r", encoding="utf-8") as f:
@@ -201,11 +216,13 @@ def build_report(
 
     html = html.replace("{{WEEK_LABEL}}", week_label)
     html = html.replace("{{WEEK_INFO}}", week_info)
+    html = html.replace("{{REPO_COUNT}}", str(repo_count))
     html = html.replace("{{COVER_SUMMARY}}", _highlight_summary(cover_summary))
     html = html.replace("{{RANK_TABLE_ROWS}}", rank_rows)
+    html = html.replace("{{REPO_ITEMS}}", repo_items)
     html = html.replace("{{REPO_DETAIL_PAGES}}", detail_pages)
-    html = html.replace("{{REPO_INDEX}}", index_items)
     html = html.replace("{{PAGE_NUM}}", f"01 / {total_pages:02d}")
+    html = html.replace("{{REPO_INDEX}}", index_items_new)
     # {{SIDEBAR}} is left for build_site.py to inject
 
     # ── 写入输出 ──────────────────────────────────────────
@@ -218,13 +235,7 @@ def build_report(
 
 
 def _build_block(r: dict, rank: int, avatar_rel: str) -> str:
-    """构建单个 repo-block HTML。
-
-    数据取自 enriched JSON：
-    - zh_desc: 中文简介
-    - features: 特点列表（3-5 条）
-    - audience: 推荐受众
-    """
+    """构建单个卡片翻页 repo-block HTML（旧版模板用）。"""
     zh_desc = r.get("zh_desc") or r.get("description") or ""
     features = r.get("features", [])
     audience = r.get("audience", "")
@@ -236,9 +247,8 @@ def _build_block(r: dict, rank: int, avatar_rel: str) -> str:
     avatar_path = f"{avatar_rel}/{r['author']}.png"
     repo_url = r["url"]
 
-    # 生成特点列表 HTML
     feat_lines = ""
-    for feat in features[:3]:  # 固定 3 条
+    for feat in features[:3]:
         feat_lines += f"                <li>{feat}</li>\n"
 
     lang_metric = (
@@ -263,6 +273,54 @@ def _build_block(r: dict, rank: int, avatar_rel: str) -> str:
             <div class="repo-audience"><strong>推荐：</strong>{audience}</div>
             <div class="repo-url"><a href="{repo_url}" target="_blank">{repo_url}</a></div>
         </div>"""
+
+
+def _build_item_block(r: dict, rank: int, avatar_rel: str) -> str:
+    """构建单个 repo 连续滚动 HTML 块。
+
+    数据取自 enriched JSON：
+    - zh_desc: 中文简介
+    - features: 特点列表（3-5 条）
+    - audience: 推荐受众
+    """
+    zh_desc = r.get("zh_desc") or r.get("description") or ""
+    features = r.get("features", [])
+    audience = r.get("audience", "")
+    lang = r.get("language") or ""
+    lang_color = r.get("language_color") or "#888"
+    stars_fmt = _fmt_comma(r["stars_total"])
+    weekly_fmt = _fmt_weekly(r["stars_today"])
+    forks_fmt = _fmt_comma(r["forks"])
+    avatar_path = f"{avatar_rel}/{r['author']}.png"
+    repo_url = r["url"]
+
+    # 生成特点列表 HTML
+    feat_lines = ""
+    for feat in features[:3]:  # 固定 3 条
+        feat_lines += f"            <li>{feat}</li>\n"
+
+    lang_metric = (
+        f'          <div class="repo-metric"><span class="lang-dot" style="background:{lang_color}"></span>'
+        f'<span class="lbl">{lang or "—"}</span></div>\n'
+    )
+
+    return f"""    <div class="repo-item" id="repo-{rank:02d}">
+      <div class="repo-number">#{rank}</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="{avatar_path}" alt="{r['author']}" loading="lazy" onerror="this.src='https://github.com/{r['author']}.png'"></div>
+        <div class="repo-name">{r["name"]}<span class="author-name">{r["author"]}</span></div>
+      </div>
+      <div class="repo-metrics">
+        {lang_metric}        <div class="repo-metric"><span class="val">{stars_fmt}</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">{weekly_fmt}</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">{forks_fmt}</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">{zh_desc}</div>
+      <ul class="repo-features">
+{feat_lines}      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>{audience}</div>
+      <div class="repo-url"><a href="{repo_url}" target="_blank">{repo_url}</a></div>
+    </div>"""
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -309,7 +367,7 @@ def main() -> None:
         template_path = args.template
     else:
         root = _detect_project_root()
-        template_path = str(root / "report" / "template" / "github-trending.html")
+        template_path = str(root / "assets" / "templates" / "github-trending.html")
 
     # ── 代理设置 ──────────────────────────────────────────
     proxies = None

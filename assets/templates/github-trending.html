@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <!-- ==================================================================
-     XWLB PAGE · 新闻联播文字摘要
+     GITHUB TRENDING WEEKLY · 连续滚动风格 (与 XWLB 一致)
      Kami design system: warm parchment, ink-blue accent, serif-led
-     Font paths: ../../assets/fonts/ (when deployed to site/xwlb/{date}/)
+     Font paths: ../../assets/fonts/ (when deployed to site/github_weekly/{date}/)
      ================================================================== -->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>{{XWLB_TITLE}} · 新闻联播文字摘要</title>
+<title>GitHub Trending 周报 · {{WEEK_LABEL}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{{XWLB_TITLE}} 新闻联播文字摘要，共 {{XWLB_ITEM_COUNT}} 条新闻。">
-<meta property="og:title" content="{{XWLB_TITLE}} · 新闻联播文字摘要">
-<meta property="og:description" content="{{XWLB_TITLE}} 新闻联播文字摘要，共 {{XWLB_ITEM_COUNT}} 条新闻。">
+<meta name="description" content="GitHub Trending 中文周报，{{WEEK_LABEL}}，共 {{REPO_COUNT}} 个项目。">
+<meta property="og:title" content="GitHub Trending 周报 · {{WEEK_LABEL}}">
+<meta property="og:description" content="GitHub Trending 中文周报，{{WEEK_LABEL}}。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://news-tools.pages.dev">
 <link rel="canonical" href="https://news-tools.pages.dev">
@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+  src: url("../../../assets/fonts/JetBrainsMono.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -28,7 +28,7 @@
 
 @font-face {
   font-family: "TsangerJinKai02";
-  src: url("../../assets/fonts/TsangerJinKai02_W04.ttf") format("truetype");
+  src: url("../../../assets/fonts/TsangerJinKai02_W04.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -85,7 +85,7 @@ a {
 }
 a:hover { color: var(--brand-light); }
 
-/* ========== Sidebar ========== */
+/* ========== Sidebar (same as XWLB) ========== */
 
 .sidebar {
   position: fixed;
@@ -264,8 +264,7 @@ a:hover { color: var(--brand-light); }
   align-items: center;
 }
 
-.page-header .meta .xwlb-source { display: inline-flex; align-items: center; gap: 6px; }
-.page-header .meta .xwlb-source .tag {
+.page-header .meta .tag {
   display: inline-block;
   background: var(--brand);
   color: var(--ivory);
@@ -275,9 +274,32 @@ a:hover { color: var(--brand-light); }
   padding: 2px 10px;
   border-radius: 999px;
 }
-.page-header .meta .xwlb-count { color: var(--olive); }
 
-/* ========== Summary section ========== */
+/* ========== Cover: summary ========== */
+
+.cover-summary {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--olive);
+  margin: 0 0 28px;
+  padding: 16px 20px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.cover-summary .hl {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.cover-summary strong {
+  color: var(--near-black);
+  font-weight: 500;
+}
+
+/* ========== Cover: rank table ========== */
 
 .section-head {
   margin-bottom: 20px;
@@ -302,71 +324,250 @@ a:hover { color: var(--brand-light); }
   letter-spacing: 0.6px;
 }
 
-/* ========== Summary items ========== */
-
-.summary-label {
-  font-family: var(--latin-ui);
-  font-weight: 600;
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 14px;
-  letter-spacing: 0.6px;
-  color: var(--brand);
-  padding: 8px 0 6px 24px;
-  position: relative;
-  margin-top: 6px;
+  text-align: left;
+  margin-bottom: 48px;
 }
 
-.summary-label::before {
+.rank-table thead th {
+  font-weight: 500;
+  color: var(--brand);
+  padding: 6px 10px;
+  border-bottom: 1.5px solid var(--brand);
+  letter-spacing: 0.4px;
+  font-size: 14px;
+}
+
+.rank-table tbody td {
+  padding: 5px 10px;
+  border-bottom: 0.5px solid var(--border-soft);
+  color: var(--dark-warm);
+  line-height: 1.45;
+}
+
+.rank-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-table .td-rank {
+  color: var(--stone);
+  font-family: var(--mono);
+  font-size: 16px;
+  width: 30px;
+  text-align: center;
+}
+
+.rank-table .td-repo {
+  font-weight: 500;
+  color: var(--near-black);
+  font-size: 16px;
+}
+
+.rank-table .td-repo .author {
+  font-weight: 400;
+  color: var(--stone);
+  font-size: 13px;
+}
+
+.rank-table .td-stars,
+.rank-table .td-forks {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.rank-table .td-stars {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.rank-table .td-forks {
+  color: var(--stone);
+}
+
+/* ========== Repo items (continuous scroll) ========== */
+
+.repo-section { margin-top: 24px; }
+
+.repo-item {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 2px solid var(--line);
+  position: relative;
+}
+
+.repo-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+/* Decorative big number */
+.repo-item .repo-number {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 500;
+  color: var(--brand);
+  line-height: 1;
+  opacity: 0.06;
+  position: absolute;
+  top: -6px;
+  right: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.repo-item .repo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-right: 64px;
+}
+
+.repo-item .repo-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.repo-item .repo-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.repo-item .repo-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.3;
+  color: var(--near-black);
+  word-break: break-all;
+}
+
+.repo-item .repo-name .author-name {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--stone);
+  display: block;
+  margin-top: 1px;
+}
+
+.repo-item .repo-name a { color: inherit; }
+.repo-item .repo-name a:hover { color: var(--brand); }
+
+.repo-item .repo-metrics {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.repo-item .repo-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 13px;
+}
+
+.repo-item .repo-metric .val {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.repo-item .repo-metric .lbl {
+  font-size: 11px;
+  color: var(--stone);
+  letter-spacing: 0.3px;
+}
+
+.repo-item .repo-metric .lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.repo-item .repo-desc {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--olive);
+  margin-bottom: 10px;
+  padding: 10px 16px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.repo-item .repo-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.repo-item .repo-features li {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--dark-warm);
+  padding: 2px 0 2px 18px;
+  position: relative;
+}
+
+.repo-item .repo-features li::before {
   content: "\25C6";
   position: absolute;
   left: 0;
-  top: 8px;
   color: var(--brand);
-  font-size: 8px;
+  font-size: 7px;
+  top: 6px;
 }
 
-/* subitem overrides must beat .summary-list li specificity */
-.summary-list li.summary-subitem {
-  font-family: var(--serif);
+.repo-item .repo-audience {
+  font-family: var(--sans);
   font-size: 15px;
   line-height: 1.5;
   color: var(--stone);
-  padding: 2px 0 2px 11px;
-  position: relative;
-  list-style: none;
+  padding: 6px 12px;
+  background: var(--brand-tint);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 
-.summary-list li.summary-subitem::before {
-  content: "\25CB" !important;
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  color: var(--line);
-  font-size: 8px;
-}
-
-.summary-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 48px;
-}
-
-.summary-list li {
-  font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--dark-warm);
-  padding: 3px 0 3px 24px;
-  position: relative;
-}
-
-.summary-list li::before {
-  content: "\25C6";
-  position: absolute;
-  left: 0;
-  top: 9px;
+.repo-item .repo-audience strong {
   color: var(--brand);
-  font-size: 8px;
+  font-weight: 500;
 }
+
+.repo-item .repo-url {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--stone);
+  word-break: break-all;
+  padding-top: 6px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+}
+
+.repo-item .repo-url a {
+  color: var(--brand);
+  text-decoration: none;
+}
+
 /* ========== Right index nav ========== */
 
 .index-nav {
@@ -437,86 +638,6 @@ a:hover { color: var(--brand-light); }
   color: var(--brand);
 }
 
-.index-nav .index-summary {
-  font-weight: 500;
-  color: var(--near-black);
-}
-
-.index-nav .index-summary .idx-num {
-  color: var(--brand);
-  font-size: 11px;
-}
-
-.index-nav .index-divider {
-  height: 1px;
-  background: var(--border-soft);
-  margin: 6px 16px 8px;
-}
-
-
-/* ========== News items ========== */
-
-.news-section { margin-top: 40px; }
-
-.news-item {
-  margin-bottom: 40px;
-  padding-bottom: 36px;
-  border-bottom: 1px solid var(--border);
-}
-
-.news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-.news-item .item-number {
-  font-family: var(--latin-ui);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--brand);
-  letter-spacing: 0.3px;
-  margin-bottom: 6px;
-}
-
-.news-item .item-title {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.35;
-  color: var(--near-black);
-  margin: 0 0 14px;
-  letter-spacing: 0.3px;
-}
-
-.news-item .item-title a { color: inherit; }
-.news-item .item-title a:hover { color: var(--brand); }
-
-.news-item .item-content {
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--olive);
-  padding: 14px 18px;
-  background: var(--ivory);
-  border-left: 3px solid var(--brand);
-  border-radius: 3px;
-}
-
-.news-item .item-content p {
-  margin: 0 0 10px;
-  text-indent: 2em;
-}
-
-.news-item .item-content p:last-child { margin-bottom: 0; }
-
-.news-item .item-content .express-title {
-  font-weight: 500;
-  color: var(--near-black);
-}
-
-.news-item .item-content .express-body {
-  padding-left: 16px;
-  margin-bottom: 8px;
-  color: var(--dark-warm);
-}
-
 /* ========== Footer ========== */
 
 footer.foot {
@@ -569,7 +690,7 @@ footer.foot {
   .page-header h1 { font-size: 34px; letter-spacing: 0.4px; }
   .page-header { margin-bottom: 32px; padding-bottom: 24px; }
   .section-title { font-size: 22px; }
-  .news-item .item-title { font-size: 18px; }
+  .repo-item .repo-name { font-size: 18px; }
 }
 
 @media (max-width: 800px) {
@@ -591,8 +712,9 @@ footer.foot {
   .page { padding: 32px 20px 48px; }
   .page-header h1 { font-size: 28px; }
   .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
-  .summary-list li { font-size: 15px; }
-  .news-item .item-content { padding: 12px 14px; }
+  .repo-item { margin-bottom: 28px; padding-bottom: 24px; }
+  .repo-item .repo-desc { padding: 8px 12px; font-size: 14px; }
+  .rank-table { font-size: 13px; }
 }
 
 @media (max-width: 480px) {
@@ -601,14 +723,26 @@ footer.foot {
   .page-header h1 { font-size: 22px; letter-spacing: 0.2px; }
   .page-header .meta { font-size: 12px; gap: 6px; }
   .section-title { font-size: 18px; }
-  .news-item { margin-bottom: 28px; padding-bottom: 24px; }
-  .news-item .item-title { font-size: 16px; }
-  .news-item .item-content { padding: 10px 12px; font-size: 14px; }
-  .summary-list { margin-bottom: 32px; }
-  .summary-list li { font-size: 14px; padding: 2px 0 2px 18px; }
+  .cover-summary { font-size: 14px; padding: 12px 14px; }
+  .repo-item .repo-name { font-size: 16px; }
+  .repo-item .repo-name .author-name { font-size: 12px; }
+  .repo-item .repo-header { gap: 8px; }
+  .repo-item .repo-avatar { width: 32px; height: 32px; }
+  .repo-item .repo-metrics { gap: 10px; }
+  .repo-item .repo-metric { font-size: 12px; }
+  .repo-item .repo-metric .val { font-size: 13px; }
+  .repo-item .repo-desc { font-size: 14px; padding: 8px 12px; }
+  .repo-item .repo-features li { font-size: 13px; }
+  .repo-item .repo-audience { font-size: 12px; }
+  .repo-item .repo-url { font-size: 11px; }
+  .repo-item .repo-number { font-size: 48px; }
+  .rank-table { font-size: 12px; }
+  .rank-table thead th { font-size: 11px; padding: 4px 6px; }
+  .rank-table tbody td { padding: 3px 6px; }
+  .rank-table .td-repo { font-size: 13px; }
+  .rank-table .td-repo .author { font-size: 10px; }
   footer.foot { margin-top: 40px; padding-top: 24px; flex-direction: column; gap: 24px; }
   footer.foot .colophon { text-align: left; max-width: 100%; }
-  .sidebar-month-toggle { font-size: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -621,11 +755,7 @@ footer.foot {
 {{SIDEBAR}}
 <nav class="index-nav">
   <div class="index-head">本页导航</div>
-  <a class="index-item index-summary" href="#xwlb-summary">
-    <span class="idx-num">◈</span> 摘要
-  </a>
-  <div class="index-divider"></div>
-  {{XWLB_INDEX}}
+  {{REPO_INDEX}}
 </nav>
 
 <main class="page">
@@ -637,50 +767,64 @@ footer.foot {
       <span style="margin-left:12px;color:var(--stone)">News Tools</span>
     </div>
 
-    <h1>{{XWLB_TITLE}}</h1>
+    <h1>GitHub Trending <span style="color:var(--brand)">周报</span></h1>
 
     <div class="meta">
-      <span class="xwlb-source"><span class="tag">新闻联播</span></span>
-      <span class="xwlb-count">{{XWLB_ITEM_COUNT}} 条新闻</span>
-      <span>来源：<a href="{{XWLB_URL}}" target="_blank" rel="noopener">央视网</a></span>
-      <span>{{XWLB_DATE}}</span>
+      <span><span class="tag">GitHub Trending</span></span>
+      <span>{{REPO_COUNT}} 个项目</span>
+      <span>{{WEEK_INFO}}</span>
     </div>
   </header>
 
-  <!-- ============ Summary ============ -->
-  <section id="xwlb-summary">
+  <!-- ============ Cover Summary ============ -->
+  <div class="cover-summary">
+    {{COVER_SUMMARY}}
+  </div>
+
+  <!-- ============ Top 10 Rank Table ============ -->
+  <section id="gh-cover">
     <div class="section-head">
-      <p class="section-num">摘要</p>
-      <h2 class="section-title">本期要闻</h2>
+      <p class="section-num">排行榜</p>
+      <h2 class="section-title">本周热门项目 Top 10</h2>
     </div>
-    <ol class="summary-list">
-      {{XWLB_SUMMARY}}
-    </ol>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th style="width:30px;text-align:center">#</th>
+          <th>仓库</th>
+          <th style="width:48px">语言</th>
+          <th style="width:64px;text-align:right">Star</th>
+          <th style="width:64px;text-align:right">Fork</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{RANK_TABLE_ROWS}}
+      </tbody>
+    </table>
   </section>
 
-
-  <!-- ============ News Detail ============ -->
-  <section class="news-section">
+  <!-- ============ Repo Detail Items ============ -->
+  <section class="repo-section">
     <div class="section-head">
       <p class="section-num">详细内容</p>
-      <h2 class="section-title">逐条新闻</h2>
+      <h2 class="section-title">逐个项目介绍</h2>
     </div>
 
-    {{XWLB_ITEMS}}
+    {{REPO_ITEMS}}
   </section>
 
   <!-- ============ Footer ============ -->
   <footer class="foot">
     <div class="mark">
       <span class="wm-name">News Tools</span>
-      <span class="wm-line">新闻联播文字摘要</span>
+      <span class="wm-line">GitHub Trending 中文周报</span>
     </div>
     <div class="colophon">
       <div class="links">
         <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener">GitHub</a> ·
         <a href="https://github.com/Mr-nnng/news-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
       </div>
-      <p class="ethos">每日精选央视《新闻联播》文字摘要</p>
+      <p class="ethos">每周为你发现开源世界的好项目</p>
     </div>
   </footer>
 
@@ -696,11 +840,10 @@ footer.foot {
         });
     });
 
-    // Active index tracking: highlight the section whose top is closest to 120px from viewport top
+    // Active index tracking
     var indexItems = document.querySelectorAll('.index-nav .index-item');
     if (!indexItems.length) return;
 
-    // Build a list of { id, link } pairs
     var sections = [];
     indexItems.forEach(function(item) {
         var href = item.getAttribute('href');
@@ -731,7 +874,6 @@ footer.foot {
         }
     }
 
-    // Throttled scroll listener
     var ticking = false;
     window.addEventListener('scroll', function() {
         if (!ticking) {

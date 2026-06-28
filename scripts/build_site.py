@@ -37,7 +37,7 @@ XWLB_DIR = SITE_DIR / "xwlb"               # new
 
 TEMPLATE_PATH = ASSETS_DIR / "templates" / "landing-news-tools.html"
 XWLB_TEMPLATE_PATH = ASSETS_DIR / "templates" / "xwlb-page.html"
-GH_TEMPLATE_PATH = REPORT_DIR / "template" / "github-trending.html"
+GH_TEMPLATE_PATH = ASSETS_DIR / "templates" / "github-trending.html"
 
 
 def clean_site():
@@ -93,11 +93,6 @@ def build_gh_pages():
             report_path = out_dir / "report.html"
             if report_path.exists():
                 html = report_path.read_text(encoding="utf-8")
-                # site/github_weekly/{date}/report.html is 3 levels deep
-                html = html.replace(
-                    '../../assets/fonts/',
-                    '../../../assets/fonts/',
-                )
                 html = html.replace("{{SIDEBAR}}", "__SIDEBAR_PLACEHOLDER__")
                 report_path.write_text(html, encoding="utf-8")
             print(f"  ✅ {item.name} → {out_dir.relative_to(PROJECT_ROOT)}/")

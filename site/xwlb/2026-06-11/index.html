@@ -561,6 +561,7 @@ footer.foot {
 
 @media (max-width: 1200px) {
   .index-nav { display: none; }
+  body { padding-right: 0; }
 }
 
 @media (max-width: 880px) {
@@ -586,12 +587,28 @@ footer.foot {
   .sidebar-home { border-bottom: none; padding: 0; margin: 0; }
   .sidebar-section { display: none; }
   .sidebar-footer { margin-top: 0; border-top: none; padding: 0; flex-direction: row; }
-  body { padding-left: 0; }
+  body { padding: 0; }
   .page { padding: 32px 20px 48px; }
   .page-header h1 { font-size: 28px; }
   .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
   .summary-list li { font-size: 15px; }
   .news-item .item-content { padding: 12px 14px; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 24px 16px 40px; }
+  .page-header { margin-bottom: 20px; padding-bottom: 16px; }
+  .page-header h1 { font-size: 22px; letter-spacing: 0.2px; }
+  .page-header .meta { font-size: 12px; gap: 6px; }
+  .section-title { font-size: 18px; }
+  .news-item { margin-bottom: 28px; padding-bottom: 24px; }
+  .news-item .item-title { font-size: 16px; }
+  .news-item .item-content { padding: 10px 12px; font-size: 14px; }
+  .summary-list { margin-bottom: 32px; }
+  .summary-list li { font-size: 14px; padding: 2px 0 2px 18px; }
+  footer.foot { margin-top: 40px; padding-top: 24px; flex-direction: column; gap: 24px; }
+  footer.foot .colophon { text-align: left; max-width: 100%; }
+  .sidebar-month-toggle { font-size: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -64,11 +64,7 @@ def _ensure_dir(dir_path: str) -> str:
 
 
 def _wait_for_images(page, timeout: int = 15000) -> None:
-    """等待页面上所有 img 元素加载完成（包括懒加载头像）。
-
-    轮询检查所有 img 的 complete 属性为 true 且 naturalWidth > 0，
-    确保图片实际渲染完成而非仅占位。
-    """
+    """等待页面上所有 img 元素加载完成（包括懒加载头像）。"""
     try:
         page.wait_for_function(
             """() => {
@@ -79,7 +75,29 @@ def _wait_for_images(page, timeout: int = 15000) -> None:
             timeout=timeout,
         )
     except Exception:
-        # 超时不抛错，falback 到 networkidle 已等待的内容
+        pass
+
+
+def _wait_for_fonts(page, timeout: int = 10000) -> None:
+    """等待所有 @font-face 字体加载完成，避免截图时 fallback 字体。
+    
+    使用 document.fonts.ready 确保自定义字体渲染完毕。
+    """
+    try:
+        page.wait_for_function(
+            """() => {
+                if (!document.fonts || !document.fonts.ready) return true;
+                return document.fonts.ready.then(() => {
+                    // 额外检查每个 @font-face 是否已加载
+                    for (const f of document.fonts) {
+                        if (f.status !== 'loaded' && f.status !== 'ready') return false;
+                    }
+                    return true;
+                });
+            }""",
+            timeout=timeout,
+        )
+    except Exception:
         pass
 
 

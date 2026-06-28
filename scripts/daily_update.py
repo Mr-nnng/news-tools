@@ -211,10 +211,18 @@ def main() -> None:
 
     # —— 确定目标日期（北京时间） ——
     bj_tz = timezone(timedelta(hours=8))
+    now_bj = datetime.now(bj_tz)
+    today_bj = now_bj.strftime("%Y-%m-%d")
+
     if args.date:
         dt = datetime.strptime(args.date, "%Y-%m-%d")
+        # 如果传入的日期是今天，且当前北京时间 < 20:30，则使用昨天
+        if args.date == today_bj and (now_bj.hour < 20 or (now_bj.hour == 20 and now_bj.minute < 30)):
+            dt = dt - timedelta(days=1)
+            print(f"  ℹ️  当前北京时间 {now_bj.hour:02d}:{now_bj.minute:02d}，尚未到 20:30")
+            print(f"  ℹ️  回退到前一天: {dt.strftime('%Y-%m-%d')}")
     else:
-        dt = datetime.now(bj_tz)
+        dt = now_bj
         # 19:00 之前新闻联播尚未播出，默认获取昨天
         if dt.hour < 19 or (dt.hour == 19 and dt.minute < 10):
             dt = dt - timedelta(days=1)

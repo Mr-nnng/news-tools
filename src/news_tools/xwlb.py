@@ -241,8 +241,15 @@ def get_video_list_by_date(year: int, month: int, day: int) -> list[DetailItem]:
     date_str = f"{year:04d}{month:02d}{day:02d}"
     url = f"https://tv.cctv.com/lm/xwlb/day/{date_str}.shtml"
 
-    resp = requests.get(url, headers=HEADERS, timeout=15)
-    resp.raise_for_status()
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print(f"  ⚠️  页面不存在: {url}")
+        return []
+    except requests.exceptions.ConnectionError:
+        print(f"  ⚠️  连接失败: {url}")
+        return []
     resp.encoding = "utf-8"
 
     soup = BeautifulSoup(resp.text, "html.parser")

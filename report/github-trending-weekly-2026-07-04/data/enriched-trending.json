@@ -1,0 +1,363 @@
+{
+  "cover_summary": "本周 GitHub Trending 收录 21 个热门仓库，涵盖 AI 代理·开发者工具·安全渗透·隐私通信·代码智能·视频制作·旅行规划·身份认证·3D 重建·招聘自动化·设计系统·Git 验证·网页自动化·投资研究·AI 网关·并行计算·Agent 工作台·自托管应用等领域。AI 驱动的智能体和工作流自动化工具占据主流。",
+  "total_count": 21,
+  "repos": [
+    {
+      "author": "xbtlin",
+      "name": "ai-berkshire",
+      "stars_total": 9387,
+      "stars_today": 6230,
+      "forks": 1195,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/xbtlin/ai-berkshire",
+      "zh_desc": "基于Claude Code与Codex的AI价值投资研究框架，系统化巴芒段李四大师方法论。通过多Agent并行对抗分析，强制输出通过/不通过结论与价格区间，解决传统AI分析缺乏决策纪律问题。实盘验证连续两年大幅跑赢全球指数，累计收益超146万元。",
+      "features": [
+        "多Agent并行对抗四大师投资逻辑研究机制",
+        "投资决策内置结构化反偏见机制确保纪律",
+        "实盘账户连续两年大幅跑赢全球主要指数"
+      ],
+      "audience": "个人投资者、投资分析师、量化研究员、AI开发者"
+    },
+    {
+      "author": "simplex-chat",
+      "name": "simplex-chat",
+      "stars_total": 17781,
+      "stars_today": 5971,
+      "forks": 1043,
+      "language": "Haskell",
+      "language_color": "#5E5086",
+      "url": "https://github.com/simplex-chat/simplex-chat",
+      "zh_desc": "全球首个无用户标识的隐私优先消息网络，通过去中心化路由和端到端加密实现百分百匿名。解决传统聊天应用需手机号或ID注册、存在数据泄露风险的核心痛点。iOS、Android和桌面端全覆盖，由Trail of Bits审计认可。",
+      "features": [
+        "全球首个完全匿名无任何用户标识的消息网络",
+        "跨平台端到端加密通信且无法追踪用户",
+        "通过去中心化路由网络实现百分百隐私"
+      ],
+      "audience": "隐私爱好者、安全研究员、加密通信用户、技术极客"
+    },
+    {
+      "author": "usestrix",
+      "name": "strix",
+      "stars_total": 35335,
+      "stars_today": 7567,
+      "forks": 3611,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/usestrix/strix",
+      "zh_desc": "开源AI渗透测试工具，通过自主AI Agent模拟真实黑客执行代码动态分析，发现并验证漏洞。解决传统安全扫描误报率高、手动渗透耗时长的问题。多Agent协作自动生成PoC并修复，无缝集成CI/CD，安全测试效率大幅提升。",
+      "features": [
+        "多AI Agent自主协同执行全面渗透测试工作",
+        "自动验证漏洞并生成真实可用的PoC报告",
+        "与CI/CD管道无缝集成实现持续安全扫描"
+      ],
+      "audience": "安全工程师、DevOps团队、渗透测试人员、应用安全负责人"
+    },
+    {
+      "author": "Robbyant",
+      "name": "lingbot-map",
+      "stars_total": 9639,
+      "stars_today": 2171,
+      "forks": 943,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/Robbyant/lingbot-map",
+      "zh_desc": "面向流式数据的前馈3D场景重建基础模型，通过几何上下文变换器统一坐标定位与漂移校正。解决现有方法迭代优化慢、长序列不稳定问题。支持10万帧以上序列以20FPS稳定推理，在多个基准上达到领先重建质量。",
+      "features": [
+        "面向流式数据的高效三维场景前馈重建",
+        "长序列推理稳定无误差积累和漂移问题",
+        "单一模型在多个基准数据集上达到SOTA"
+      ],
+      "audience": "计算机视觉研究员、自动驾驶工程师、机器人开发者、3D建模师"
+    },
+    {
+      "author": "DeusData",
+      "name": "codebase-memory-mcp",
+      "stars_total": 25795,
+      "stars_today": 10186,
+      "forks": 1913,
+      "language": "C",
+      "language_color": "#555555",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "zh_desc": "基于纯C语言构建的高性能代码智能MCP服务器，将代码库索引为持久化知识图谱。毫秒级响应158种语言的语义查询，大幅降低AI Agent的Token消耗。零依赖单二进制部署，5分钟即可接入现有工具链。",
+      "features": [
+        "支持158种语言代码知识图谱毫秒索引",
+        "相比传统文件探索方法减少99%Token消耗",
+        "单静态二进制零依赖跨平台一键部署使用"
+      ],
+      "audience": "AI Agent开发者、代码分析工具研究者、软件工程师、DevOps"
+    },
+    {
+      "author": "diegosouzapw",
+      "name": "OmniRoute",
+      "stars_total": 11034,
+      "stars_today": 3631,
+      "forks": 1603,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "zh_desc": "聚合237家AI提供商（含90多家免费层）的免费AI网关，通过统一端点连接Claude、GPT、Gemini等。解决AI开发者多提供商管理和成本高昂问题。智能自动故障转移与RTK+Caveman压缩节省15-95%令牌，大幅降低使用门槛。",
+      "features": [
+        "聚合超过231家AI提供商统一接口调用",
+        "智能自动故障转移确保AI服务持续可用",
+        "RTK+Caveman双重压缩令牌节省15-95%"
+      ],
+      "audience": "AI开发者、提示工程师、独立开发者、技术创业者"
+    },
+    {
+      "author": "browser-use",
+      "name": "video-use",
+      "stars_total": 14520,
+      "stars_today": 4056,
+      "forks": 1738,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/browser-use/video-use",
+      "zh_desc": "利用Claude Code等AI Agent进行视频编辑的开源工具，通过自然语言描述即可完成剪辑、调色、字幕添加。解决传统视频编辑软件操作复杂耗时的问题。自动去除填充词和空白，支持动画叠加和会话记忆，成品视频一键生成。",
+      "features": [
+        "AI驱动自动剪辑去除填充词和空白部分",
+        "智能自动调色字幕生成以及动画叠加功能",
+        "通过自然语言描述控制整个视频编辑流程"
+      ],
+      "audience": "内容创作者、视频编辑师、AI爱好者、社交媒体经理"
+    },
+    {
+      "author": "topoteretes",
+      "name": "cognee",
+      "stars_total": 26877,
+      "stars_today": 4001,
+      "forks": 2494,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/topoteretes/cognee",
+      "zh_desc": "为AI Agent提供持久化长期记忆的开源平台，通过自托管知识图谱引擎存储跨会话上下文。解决AI Agent无状态、无法保持连续理解的问题。支持多格式数据接入，让每个Agent都能回忆和连接历史对话与知识。",
+      "features": [
+        "为AI Agent提供持久化知识图谱记忆存储",
+        "跨会话自动关联上下文保持AI Agent理解",
+        "支持多种数据格式无缝接入灵活扩展使用"
+      ],
+      "audience": "AI Agent开发者、知识图谱工程研究人员、机器学习工程师、ChatBot开发者"
+    },
+    {
+      "author": "ogulcancelik",
+      "name": "herdr",
+      "stars_total": 11038,
+      "stars_today": 3024,
+      "forks": 648,
+      "language": "Rust",
+      "language_color": "#DEA584",
+      "url": "https://github.com/ogulcancelik/herdr",
+      "zh_desc": "在终端中运行所有编码Agent的会话管理器，为每个Agent提供真实终端视图。解决同时管理多个Agent会话的混乱和断开问题。实时状态面板展示阻塞/工作/完成，支持持久化后台运行和SSH远程重连。",
+      "features": [
+        "多Agent实时状态看板清晰监控运行状态",
+        "持久化后台会话支持随时断开和重连服务",
+        "轻量级单二进制终端工具无任何运行依赖"
+      ],
+      "audience": "开发者、AI Agent用户、系统管理员、运维工程师"
+    },
+    {
+      "author": "JCodesMore",
+      "name": "ai-website-cloner-template",
+      "stars_total": 25393,
+      "stars_today": 4205,
+      "forks": 3574,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "zh_desc": "基于AI编码Agent的网站反向工程模板，可一键将任何网站克隆为Next.js代码。解决手动重写网站设计的重复劳动问题。自动提取设计Token和资源，并行构建所有模块，快速获得可定制的现代代码库。",
+      "features": [
+        "一键AI反向工程任何网站到Next.js代码",
+        "自动提取网站设计Token和所有相关资源",
+        "并行构建各模块快速完成整个网站克隆"
+      ],
+      "audience": "前端开发者、设计师、创业者、AI使用者"
+    },
+    {
+      "author": "google-labs-code",
+      "name": "design.md",
+      "stars_total": 24729,
+      "stars_today": 4101,
+      "forks": 1917,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/google-labs-code/design.md",
+      "zh_desc": "面向编码Agent的设计系统规范格式，以YAML front matter定义色彩、字体等Token值。解决AI Agent缺乏结构化理解导致输出不一致的问题。支持WCAG对比度检测和版本差异对比，确保生成UI符合设计系统。",
+      "features": [
+        "结构化设计Token定义精确色彩和字体数值",
+        "自动检查WCAG对比度确保设计可达性合规",
+        "多版本设计系统差异自动比较与分析报告"
+      ],
+      "audience": "设计师、前端工程师、AI Agent开发者、设计系统维护者"
+    },
+    {
+      "author": "kunchenguid",
+      "name": "no-mistakes",
+      "stars_total": 5145,
+      "stars_today": 1868,
+      "forks": 306,
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "url": "https://github.com/kunchenguid/no-mistakes",
+      "zh_desc": "本地Git推送代理，在隔离工作树中运行AI驱动的验证管道才向远程推送。解决开发者误推不完整代码的痛点。管道自动运行测试lint文档检查，并可自动修复问题，最终自动创建干净PR。",
+      "features": [
+        "AI驱动的Git推送前自动验证管道检查",
+        "在隔离工作树中非阻塞检查不影响工作流",
+        "自动修复检查发现的问题并生成干净PR请求"
+      ],
+      "audience": "开发者、DevOps工程师、技术团队负责人、开源维护者"
+    },
+    {
+      "author": "logto-io",
+      "name": "logto",
+      "stars_total": 13658,
+      "stars_today": 1368,
+      "forks": 940,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/logto-io/logto",
+      "zh_desc": "面向SaaS和AI应用的开源身份认证基础设施，基于OIDC和OAuth 2.1标准。解决自建认证系统的安全性和复杂度问题。内置多租户、企业SSO和RBAC，预构建登录UI和30+框架SDK，开箱即用。",
+      "features": [
+        "开箱即用支持OIDC和OAuth 2.1认证协议",
+        "提供企业级SSO单点登录和RBAC权限控制",
+        "多租户SaaS身份基础设施零配置快速启动"
+      ],
+      "audience": "后端开发者、SaaS创业者、安全工程师、产品经理"
+    },
+    {
+      "author": "msitarzewski",
+      "name": "agency-agents",
+      "stars_total": 126763,
+      "stars_today": 10483,
+      "forks": 20570,
+      "language": "Shell",
+      "language_color": "#89E051",
+      "url": "https://github.com/msitarzewski/agency-agents",
+      "zh_desc": "包含多种专业化AI代理的集合库，从前端专家到Reddit达人应有尽有。解决通用Agent缺乏深度领域知识的问题。每个代理具有独特个性和交付物，可通过桌面应用一键安装到Claude Code等主流工具。",
+      "features": [
+        "专业化领域AI代理覆盖多种不同专家角色",
+        "每个代理拥有独特个性和明确可衡量的交付物",
+        "一键安装到Claude Code等主流AI编码工具"
+      ],
+      "audience": "AI使用者、提示工程师、开发者、创意人员"
+    },
+    {
+      "author": "stablyai",
+      "name": "orca",
+      "stars_total": 11828,
+      "stars_today": 3700,
+      "forks": 783,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/stablyai/orca",
+      "zh_desc": "并行运行多个编码Agent的AI编排桌面应用，每个Agent拥有独立工作树。解决单Agent效率低下和多Agent难以管理的痛点。支持Codex、Claude Code等主流Agent，移动端可监控和下发指令，支持自有订阅。",
+      "features": [
+        "在独立工作树中并行运行多个编码Agent",
+        "通过移动端应用实时监控Agent运行状态",
+        "支持开发者使用自有订阅无需额外付费服务"
+      ],
+      "audience": "开发者、AI Agent用户、项目管理、技术负责人"
+    },
+    {
+      "author": "calesthio",
+      "name": "OpenMontage",
+      "stars_total": 32711,
+      "stars_today": 9213,
+      "forks": 3736,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/calesthio/OpenMontage",
+      "zh_desc": "首个开源智能视频制作系统，将AI编码助手转变为完整视频工作室。解决从脚本到成品全流程的低效问题。拥有12个生产管道和52个工具，可通过自然语言描述生成含真实剪辑、动画和音效的成品视频。",
+      "features": [
+        "全自动视频制作流程从脚本到最终成品输出",
+        "免费开源素材检索和AI生成内容完美结合",
+        "提供12个专业生产管道和52个工具支持"
+      ],
+      "audience": "视频制作人、内容创作者、开源爱好者、AI研究者"
+    },
+    {
+      "author": "craft-ai-agents",
+      "name": "craft-agents-oss",
+      "stars_total": 6688,
+      "stars_today": 354,
+      "forks": 919,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/craft-ai-agents/craft-agents-oss",
+      "zh_desc": "以文档为中心、支持自然语言连接任何API的AI Agent工作台。解决CLI Agent配置复杂和体验不佳问题。Agent可自主发现和配置外部服务如Linear、Slack，无需手动写配置文件。",
+      "features": [
+        "通过自然语言直接连接外部服务和API接口",
+        "以文档为中心的工作流管理界面使用体验",
+        "高度可定制开源框架用户自由修改和扩展"
+      ],
+      "audience": "知识工作者、开发者、项目经理、AI Agent用户"
+    },
+    {
+      "author": "interviewstreet",
+      "name": "hiring-agent",
+      "stars_total": 4591,
+      "stars_today": 1643,
+      "forks": 887,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "url": "https://github.com/interviewstreet/hiring-agent",
+      "zh_desc": "从PDF简历中提取结构化数据并基于LLM和GitHub信号进行客观评分的招聘助手。解决简历筛选费时且主观的问题。自动解析简历，获取候选者GitHub项目信息，输出包含证据的可解释评分报告。",
+      "features": [
+        "自动解析PDF简历为结构化数据用于评估",
+        "通过GitHub行为信号增强候选者技术画像",
+        "公平性约束确保评分客观且可解释可追溯"
+      ],
+      "audience": "招聘人员、HR、技术面试官、人才分析师"
+    },
+    {
+      "author": "mauriceboe",
+      "name": "TREK",
+      "stars_total": 9112,
+      "stars_today": 1771,
+      "forks": 752,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/mauriceboe/TREK",
+      "zh_desc": "自托管的实时协作旅行规划平台，集成交互式地图、预算和行李清单。解决旅行计划分散、团队协作不便的问题。支持PWA离线使用、SSO单点登录，以及AI辅助建议，数据完全由用户掌控。",
+      "features": [
+        "实时协作规划旅行集成交互式3D地图",
+        "预算管理和行李清单一站式服务方便使用",
+        "自托管PWA应用支持SSO单点登录便于部署"
+      ],
+      "audience": "旅行爱好者、背包客、团队旅行组织者、数字游民"
+    },
+    {
+      "author": "openai",
+      "name": "codex-plugin-cc",
+      "stars_total": 23498,
+      "stars_today": 1296,
+      "forks": 1438,
+      "language": "JavaScript",
+      "language_color": "#F1E05A",
+      "url": "https://github.com/openai/codex-plugin-cc",
+      "zh_desc": "OpenAI官方开发的Claude Code插件，让你在Claude Code中直接使用Codex代码审查。解决无法在Claude Code内利用Codex能力的问题。支持后台审查、对抗审查和任务委托，提升代码质量流程。",
+      "features": [
+        "在Claude Code内直接使用Codex代码审查功能",
+        "支持后台运行审查和对抗审查两种模式",
+        "无缝委托任务给Codex并管理后台运行结果"
+      ],
+      "audience": "开发者、AI Agent用户、代码审查者、Claude Code用户"
+    },
+    {
+      "author": "alibaba",
+      "name": "page-agent",
+      "stars_total": 22649,
+      "stars_today": 1901,
+      "forks": 1960,
+      "language": "TypeScript",
+      "language_color": "#3178C6",
+      "url": "https://github.com/alibaba/page-agent",
+      "zh_desc": "注入网页的纯JavaScript GUI Agent，通过自然语言直接操作DOM元素。解决无API网页自动化控制困难的问题。无需浏览器扩展或多模态模型，支持多种LLM，可轻松集成到任何SaaS产品中。",
+      "features": [
+        "纯文本方式操作DOM无需截图或浏览器扩展",
+        "通过一行JavaScript代码集成到任何网页中",
+        "支持多种LLM后端灵活切换满足不同需求"
+      ],
+      "audience": "网页开发者、AI Agent构建者、自动化工程师、SaaS产品经理"
+    }
+  ]
+}

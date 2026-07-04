@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     GITHUB TRENDING WEEKLY · 连续滚动风格 (与 XWLB 一致)
+     Kami design system: warm parchment, ink-blue accent, serif-led
+     Font paths: ../../assets/fonts/ (when deployed to site/github_weekly/{date}/)
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>GitHub Trending 周报 · 2026年第27周</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GitHub Trending 中文周报，2026年第27周，共 21 个项目。">
+<meta property="og:title" content="GitHub Trending 周报 · 2026年第27周">
+<meta property="og:description" content="GitHub Trending 中文周报，2026年第27周。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://news-tools.pages.dev">
+<link rel="canonical" href="https://news-tools.pages.dev">
+<style>
+/* ========== Tokens ========== */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("../../../assets/fonts/TsangerJinKai02_W04.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+
+  --brand:        #1B365D;
+  --brand-light:  #2D5A8A;
+  --brand-tint:   #EEF2F7;
+
+  --near-black:   #141413;
+  --dark-warm:    #3d3d3a;
+  --olive:        #504e49;
+  --stone:        #6b6a64;
+
+  --border:       #e8e6dc;
+  --border-soft:  #e5e3d8;
+  --line:         #d8d5c8;
+
+  --serif: "TsangerJinKai02", "PingFang SC", "PingFang TC", "Microsoft YaHei",
+           system-ui, -apple-system, sans-serif;
+  --sans:  var(--serif);
+  --mono:  "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, monospace;
+  --latin-ui: var(--sans);
+
+  --sidebar-w: 200px;
+  --index-w: 260px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.58;
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: var(--sidebar-w);
+  padding-right: var(--index-w);
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover { color: var(--brand-light); }
+
+/* ========== Sidebar (same as XWLB) ========== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--parchment);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 20px 0 16px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 18px;
+  margin: 0 0 6px;
+  color: var(--near-black);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sidebar-home:hover { color: var(--brand); }
+.sidebar-home .icon { font-size: 20px; }
+
+.sidebar-section {
+  padding: 0 16px;
+  margin-top: 8px;
+}
+.sidebar-section:last-child { margin-bottom: 0; }
+
+.sidebar-month-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+.sidebar-month-toggle:hover { color: var(--brand-light); }
+.sidebar-month-toggle .arrow {
+  font-size: 13px;
+  color: var(--stone);
+  transition: transform 0.25s ease;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-toggle .arrow {
+  transform: rotate(-90deg);
+}
+
+.sidebar-month-items {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: none;
+  opacity: 1;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-items {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0 7px 18px;
+  color: var(--olive);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 14px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.15s;
+}
+.sidebar-item:hover { color: var(--brand); background: var(--brand-tint); }
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sidebar-item.is-active { color: var(--brand); font-weight: 500; }
+.sidebar-item.is-active::before { background: var(--brand); width: 9px; height: 9px; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 16px 0;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: var(--stone);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.sidebar-footer a:hover { color: var(--brand); }
+.sidebar-footer .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* ========== Layout ========== */
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 56px 64px 80px;
+}
+
+/* ========== Header ========== */
+
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page-header .eyebrow {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--stone);
+  margin: 0 0 16px;
+}
+
+.page-header .eyebrow a { color: var(--brand); }
+
+.page-header h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  color: var(--near-black);
+  margin: 0 0 12px;
+}
+
+.page-header .meta {
+  font-family: var(--latin-ui);
+  font-size: 14px;
+  color: var(--stone);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.page-header .meta .tag {
+  display: inline-block;
+  background: var(--brand);
+  color: var(--ivory);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+/* ========== Cover: summary ========== */
+
+.cover-summary {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--olive);
+  margin: 0 0 28px;
+  padding: 16px 20px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.cover-summary .hl {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.cover-summary strong {
+  color: var(--near-black);
+  font-weight: 500;
+}
+
+/* ========== Cover: rank table ========== */
+
+.section-head {
+  margin-bottom: 20px;
+}
+
+.section-num {
+  font-family: var(--latin-ui);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--brand);
+  letter-spacing: 0.4px;
+  margin: 0 0 4px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--near-black);
+  margin: 0;
+  letter-spacing: 0.6px;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 48px;
+}
+
+.rank-table thead th {
+  font-weight: 500;
+  color: var(--brand);
+  padding: 6px 10px;
+  border-bottom: 1.5px solid var(--brand);
+  letter-spacing: 0.4px;
+  font-size: 14px;
+}
+
+.rank-table tbody td {
+  padding: 5px 10px;
+  border-bottom: 0.5px solid var(--border-soft);
+  color: var(--dark-warm);
+  line-height: 1.45;
+}
+
+.rank-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-table .td-rank {
+  color: var(--stone);
+  font-family: var(--mono);
+  font-size: 16px;
+  width: 30px;
+  text-align: center;
+}
+
+.rank-table .td-repo {
+  font-weight: 500;
+  color: var(--near-black);
+  font-size: 16px;
+}
+
+.rank-table .td-repo .author {
+  font-weight: 400;
+  color: var(--stone);
+  font-size: 13px;
+}
+
+.rank-table .td-stars,
+.rank-table .td-forks {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.rank-table .td-stars {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.rank-table .td-forks {
+  color: var(--stone);
+}
+
+/* ========== Repo items (continuous scroll) ========== */
+
+.repo-section { margin-top: 24px; }
+
+.repo-item {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 2px solid var(--line);
+  position: relative;
+}
+
+.repo-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+/* Decorative big number */
+.repo-item .repo-number {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 500;
+  color: var(--brand);
+  line-height: 1;
+  opacity: 0.06;
+  position: absolute;
+  top: -6px;
+  right: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.repo-item .repo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-right: 64px;
+}
+
+.repo-item .repo-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.repo-item .repo-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.repo-item .repo-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.3;
+  color: var(--near-black);
+  word-break: break-all;
+}
+
+.repo-item .repo-name .author-name {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--stone);
+  display: block;
+  margin-top: 1px;
+}
+
+.repo-item .repo-name a { color: inherit; }
+.repo-item .repo-name a:hover { color: var(--brand); }
+
+.repo-item .repo-metrics {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.repo-item .repo-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 13px;
+}
+
+.repo-item .repo-metric .val {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.repo-item .repo-metric .lbl {
+  font-size: 11px;
+  color: var(--stone);
+  letter-spacing: 0.3px;
+}
+
+.repo-item .repo-metric .lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.repo-item .repo-desc {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--olive);
+  margin-bottom: 10px;
+  padding: 10px 16px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.repo-item .repo-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.repo-item .repo-features li {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--dark-warm);
+  padding: 2px 0 2px 18px;
+  position: relative;
+}
+
+.repo-item .repo-features li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+  font-size: 7px;
+  top: 6px;
+}
+
+.repo-item .repo-audience {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--stone);
+  padding: 6px 12px;
+  background: var(--brand-tint);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.repo-item .repo-audience strong {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.repo-item .repo-url {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--stone);
+  word-break: break-all;
+  padding-top: 6px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+}
+
+.repo-item .repo-url a {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+/* ========== Right index nav ========== */
+
+.index-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--index-w);
+  background: var(--parchment);
+  border-left: 1px solid var(--border);
+  z-index: 99;
+  overflow-y: auto;
+  padding: 28px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+.index-nav::-webkit-scrollbar { width: 4px; }
+.index-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+.index-nav .index-head {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--near-black);
+  padding: 0 16px 14px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.index-nav .index-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--olive);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-right: 2px solid transparent;
+}
+
+.index-nav .index-item:hover {
+  color: var(--brand);
+  background: var(--brand-tint);
+}
+
+.index-nav .index-item.is-active {
+  color: var(--brand);
+  font-weight: 500;
+  background: var(--brand-tint);
+  border-right-color: var(--brand);
+}
+
+.index-nav .index-item .idx-num {
+  font-family: var(--latin-ui);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--stone);
+  min-width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.index-nav .index-item.is-active .idx-num {
+  color: var(--brand);
+}
+
+/* ========== Footer ========== */
+
+footer.foot {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.foot .mark { display: grid; grid-template-columns: auto; gap: 2px; }
+
+.foot .mark .wm-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--near-black);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.foot .mark .wm-line { font-size: 13px; color: var(--olive); margin-top: 2px; }
+
+.foot .colophon { text-align: right; max-width: 420px; }
+
+.foot .colophon .links {
+  font-family: var(--latin-ui);
+  color: var(--dark-warm);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.foot .colophon .links a { color: var(--dark-warm); }
+.foot .colophon .links a:hover { color: var(--brand); }
+.foot .colophon .ethos { color: var(--olive); line-height: 1.55; max-width: 320px; margin-left: auto; }
+
+/* ========== Responsive ========== */
+
+@media (max-width: 1200px) {
+  .index-nav { display: none; }
+  body { padding-right: 0; }
+}
+
+@media (max-width: 880px) {
+  .page { padding: 40px 28px 60px; }
+  .page-header h1 { font-size: 34px; letter-spacing: 0.4px; }
+  .page-header { margin-bottom: 32px; padding-bottom: 24px; }
+  .section-title { font-size: 22px; }
+  .repo-item .repo-name { font-size: 18px; }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+    gap: 8px;
+  }
+  .sidebar-home { border-bottom: none; padding: 0; margin: 0; }
+  .sidebar-section { display: none; }
+  .sidebar-footer { margin-top: 0; border-top: none; padding: 0; flex-direction: row; }
+  body { padding: 0; }
+  .page { padding: 32px 20px 48px; }
+  .page-header h1 { font-size: 28px; }
+  .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .repo-item { margin-bottom: 28px; padding-bottom: 24px; }
+  .repo-item .repo-desc { padding: 8px 12px; font-size: 14px; }
+  .rank-table { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 24px 16px 40px; }
+  .page-header { margin-bottom: 20px; padding-bottom: 16px; }
+  .page-header h1 { font-size: 22px; letter-spacing: 0.2px; }
+  .page-header .meta { font-size: 12px; gap: 6px; }
+  .section-title { font-size: 18px; }
+  .cover-summary { font-size: 14px; padding: 12px 14px; }
+  .repo-item .repo-name { font-size: 16px; }
+  .repo-item .repo-name .author-name { font-size: 12px; }
+  .repo-item .repo-header { gap: 8px; }
+  .repo-item .repo-avatar { width: 32px; height: 32px; }
+  .repo-item .repo-metrics { gap: 10px; }
+  .repo-item .repo-metric { font-size: 12px; }
+  .repo-item .repo-metric .val { font-size: 13px; }
+  .repo-item .repo-desc { font-size: 14px; padding: 8px 12px; }
+  .repo-item .repo-features li { font-size: 13px; }
+  .repo-item .repo-audience { font-size: 12px; }
+  .repo-item .repo-url { font-size: 11px; }
+  .repo-item .repo-number { font-size: 48px; }
+  .rank-table { font-size: 12px; }
+  .rank-table thead th { font-size: 11px; padding: 4px 6px; }
+  .rank-table tbody td { padding: 3px 6px; }
+  .rank-table .td-repo { font-size: 13px; }
+  .rank-table .td-repo .author { font-size: 10px; }
+  footer.foot { margin-top: 40px; padding-top: 24px; flex-direction: column; gap: 24px; }
+  footer.foot .colophon { text-align: left; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header h1 { animation: none; opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年07月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-07-04/report.html" class="sidebar-item is-active">2026年7月4日</a>
+        </div>
+      </div>
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年06月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-06-28/report.html" class="sidebar-item">2026年6月28日</a>
+          <a href="../2026-06-21/report.html" class="sidebar-item">2026年6月21日</a>
+          <a href="../2026-06-14/report.html" class="sidebar-item">2026年6月14日</a>
+          <a href="../2026-06-07/report.html" class="sidebar-item">2026年6月7日</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>
+<nav class="index-nav">
+  <div class="index-head">本页导航</div>
+        <a class="index-item" href="#gh-cover"><span class="idx-num">✦</span> 排行榜</a>
+      <div class="index-divider"></div>
+      <a class="index-item" href="#repo-01"><span class="idx-num">#01</span> ai-berkshire</a>
+      <a class="index-item" href="#repo-02"><span class="idx-num">#02</span> simplex-chat</a>
+      <a class="index-item" href="#repo-03"><span class="idx-num">#03</span> strix</a>
+      <a class="index-item" href="#repo-04"><span class="idx-num">#04</span> lingbot-map</a>
+      <a class="index-item" href="#repo-05"><span class="idx-num">#05</span> codebase-memory-mcp</a>
+      <a class="index-item" href="#repo-06"><span class="idx-num">#06</span> OmniRoute</a>
+      <a class="index-item" href="#repo-07"><span class="idx-num">#07</span> video-use</a>
+      <a class="index-item" href="#repo-08"><span class="idx-num">#08</span> cognee</a>
+      <a class="index-item" href="#repo-09"><span class="idx-num">#09</span> herdr</a>
+      <a class="index-item" href="#repo-10"><span class="idx-num">#10</span> ai-website-cloner-template</a>
+      <a class="index-item" href="#repo-11"><span class="idx-num">#11</span> design.md</a>
+      <a class="index-item" href="#repo-12"><span class="idx-num">#12</span> no-mistakes</a>
+      <a class="index-item" href="#repo-13"><span class="idx-num">#13</span> logto</a>
+      <a class="index-item" href="#repo-14"><span class="idx-num">#14</span> agency-agents</a>
+      <a class="index-item" href="#repo-15"><span class="idx-num">#15</span> orca</a>
+      <a class="index-item" href="#repo-16"><span class="idx-num">#16</span> OpenMontage</a>
+      <a class="index-item" href="#repo-17"><span class="idx-num">#17</span> craft-agents-oss</a>
+      <a class="index-item" href="#repo-18"><span class="idx-num">#18</span> hiring-agent</a>
+      <a class="index-item" href="#repo-19"><span class="idx-num">#19</span> TREK</a>
+      <a class="index-item" href="#repo-20"><span class="idx-num">#20</span> codex-plugin-cc</a>
+      <a class="index-item" href="#repo-21"><span class="idx-num">#21</span> page-agent</a>
+
+</nav>
+
+<main class="page">
+
+  <!-- ============ Header ============ -->
+  <header class="page-header">
+    <div class="eyebrow">
+      <a href="../../index.html">← 返回主页</a>
+      <span style="margin-left:12px;color:var(--stone)">News Tools</span>
+    </div>
+
+    <h1>GitHub Trending <span style="color:var(--brand)">周报</span></h1>
+
+    <div class="meta">
+      <span><span class="tag">GitHub Trending</span></span>
+      <span>21 个项目</span>
+      <span>2026 年第 27 周 / 2026-07-04</span>
+    </div>
+  </header>
+
+  <!-- ============ Cover Summary ============ -->
+  <div class="cover-summary">
+    本周 GitHub Trending 收录 <span class="hl">21</span> 个热门仓库，涵盖 <strong>AI 代理</strong>·<strong>开发者工具</strong>·<strong>安全渗透</strong>·<strong>隐私通信</strong>·<strong>代码智能</strong>·<strong>视频制作</strong>·<strong>旅行规划</strong>·<strong>身份认证</strong>·<strong><span class="hl">3</span>D 重建</strong>·<strong>招聘自动化</strong>·<strong>设计系统</strong>·<strong>Git 验证</strong>·<strong>网页自动化</strong>·<strong>投资研究</strong>·<strong>AI 网关</strong>·<strong>并行计算</strong>·<strong>Agent 工作台</strong>·<strong>自托管应用</strong>等领域。AI 驱动的智能体和工作流自动化工具占据主流。
+  </div>
+
+  <!-- ============ Top 10 Rank Table ============ -->
+  <section id="gh-cover">
+    <div class="section-head">
+      <p class="section-num">排行榜</p>
+      <h2 class="section-title">本周热门项目 Top 10</h2>
+    </div>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th style="width:30px;text-align:center">#</th>
+          <th>仓库</th>
+          <th style="width:48px">语言</th>
+          <th style="width:64px;text-align:right">Star</th>
+          <th style="width:64px;text-align:right">Fork</th>
+        </tr>
+      </thead>
+      <tbody>
+                        <tr>
+                    <td class="td-rank">1</td>
+                    <td class="td-repo">ai-berkshire<span class="author"> / xbtlin</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">9.4k</td>
+                    <td class="td-forks">1.2k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">2</td>
+                    <td class="td-repo">simplex-chat<span class="author"> / simplex-chat</span></td>
+                    <td>Haskell</td>
+                    <td class="td-stars">17.8k</td>
+                    <td class="td-forks">1.0k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">3</td>
+                    <td class="td-repo">strix<span class="author"> / usestrix</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">35.3k</td>
+                    <td class="td-forks">3.6k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">4</td>
+                    <td class="td-repo">lingbot-map<span class="author"> / Robbyant</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">9.6k</td>
+                    <td class="td-forks">943</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">5</td>
+                    <td class="td-repo">codebase-memory-mcp<span class="author"> / DeusData</span></td>
+                    <td>C</td>
+                    <td class="td-stars">25.8k</td>
+                    <td class="td-forks">1.9k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">6</td>
+                    <td class="td-repo">OmniRoute<span class="author"> / diegosouzapw</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">11.0k</td>
+                    <td class="td-forks">1.6k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">7</td>
+                    <td class="td-repo">video-use<span class="author"> / browser-use</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">14.5k</td>
+                    <td class="td-forks">1.7k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">8</td>
+                    <td class="td-repo">cognee<span class="author"> / topoteretes</span></td>
+                    <td>Python</td>
+                    <td class="td-stars">26.9k</td>
+                    <td class="td-forks">2.5k</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">9</td>
+                    <td class="td-repo">herdr<span class="author"> / ogulcancelik</span></td>
+                    <td>Rust</td>
+                    <td class="td-stars">11.0k</td>
+                    <td class="td-forks">648</td>
+                </tr>
+                <tr>
+                    <td class="td-rank">10</td>
+                    <td class="td-repo">ai-website-cloner-template<span class="author"> / JCodesMore</span></td>
+                    <td>TypeScript</td>
+                    <td class="td-stars">25.4k</td>
+                    <td class="td-forks">3.6k</td>
+                </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ Repo Detail Items ============ -->
+  <section class="repo-section">
+    <div class="section-head">
+      <p class="section-num">详细内容</p>
+      <h2 class="section-title">逐个项目介绍</h2>
+    </div>
+
+        <div class="repo-item" id="repo-01">
+      <div class="repo-number">#1</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/xbtlin.png" alt="xbtlin" loading="lazy" onerror="this.src='https://github.com/xbtlin.png'"></div>
+        <div class="repo-name">ai-berkshire<span class="author-name">xbtlin</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">9,387</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+6,230</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,195</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">基于Claude Code与Codex的AI价值投资研究框架，系统化巴芒段李四大师方法论。通过多Agent并行对抗分析，强制输出通过/不通过结论与价格区间，解决传统AI分析缺乏决策纪律问题。实盘验证连续两年大幅跑赢全球指数，累计收益超146万元。</div>
+      <ul class="repo-features">
+            <li>多Agent并行对抗四大师投资逻辑研究机制</li>
+            <li>投资决策内置结构化反偏见机制确保纪律</li>
+            <li>实盘账户连续两年大幅跑赢全球主要指数</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>个人投资者、投资分析师、量化研究员、AI开发者</div>
+      <div class="repo-url"><a href="https://github.com/xbtlin/ai-berkshire" target="_blank">https://github.com/xbtlin/ai-berkshire</a></div>
+    </div>    <div class="repo-item" id="repo-02">
+      <div class="repo-number">#2</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/simplex-chat.png" alt="simplex-chat" loading="lazy" onerror="this.src='https://github.com/simplex-chat.png'"></div>
+        <div class="repo-name">simplex-chat<span class="author-name">simplex-chat</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#5E5086"></span><span class="lbl">Haskell</span></div>
+        <div class="repo-metric"><span class="val">17,781</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+5,971</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,043</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">全球首个无用户标识的隐私优先消息网络，通过去中心化路由和端到端加密实现百分百匿名。解决传统聊天应用需手机号或ID注册、存在数据泄露风险的核心痛点。iOS、Android和桌面端全覆盖，由Trail of Bits审计认可。</div>
+      <ul class="repo-features">
+            <li>全球首个完全匿名无任何用户标识的消息网络</li>
+            <li>跨平台端到端加密通信且无法追踪用户</li>
+            <li>通过去中心化路由网络实现百分百隐私</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>隐私爱好者、安全研究员、加密通信用户、技术极客</div>
+      <div class="repo-url"><a href="https://github.com/simplex-chat/simplex-chat" target="_blank">https://github.com/simplex-chat/simplex-chat</a></div>
+    </div>    <div class="repo-item" id="repo-03">
+      <div class="repo-number">#3</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/usestrix.png" alt="usestrix" loading="lazy" onerror="this.src='https://github.com/usestrix.png'"></div>
+        <div class="repo-name">strix<span class="author-name">usestrix</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">35,335</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+7,567</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">3,611</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">开源AI渗透测试工具，通过自主AI Agent模拟真实黑客执行代码动态分析，发现并验证漏洞。解决传统安全扫描误报率高、手动渗透耗时长的问题。多Agent协作自动生成PoC并修复，无缝集成CI/CD，安全测试效率大幅提升。</div>
+      <ul class="repo-features">
+            <li>多AI Agent自主协同执行全面渗透测试工作</li>
+            <li>自动验证漏洞并生成真实可用的PoC报告</li>
+            <li>与CI/CD管道无缝集成实现持续安全扫描</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>安全工程师、DevOps团队、渗透测试人员、应用安全负责人</div>
+      <div class="repo-url"><a href="https://github.com/usestrix/strix" target="_blank">https://github.com/usestrix/strix</a></div>
+    </div>    <div class="repo-item" id="repo-04">
+      <div class="repo-number">#4</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/Robbyant.png" alt="Robbyant" loading="lazy" onerror="this.src='https://github.com/Robbyant.png'"></div>
+        <div class="repo-name">lingbot-map<span class="author-name">Robbyant</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">9,639</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+2,171</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">943</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">面向流式数据的前馈3D场景重建基础模型，通过几何上下文变换器统一坐标定位与漂移校正。解决现有方法迭代优化慢、长序列不稳定问题。支持10万帧以上序列以20FPS稳定推理，在多个基准上达到领先重建质量。</div>
+      <ul class="repo-features">
+            <li>面向流式数据的高效三维场景前馈重建</li>
+            <li>长序列推理稳定无误差积累和漂移问题</li>
+            <li>单一模型在多个基准数据集上达到SOTA</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>计算机视觉研究员、自动驾驶工程师、机器人开发者、3D建模师</div>
+      <div class="repo-url"><a href="https://github.com/Robbyant/lingbot-map" target="_blank">https://github.com/Robbyant/lingbot-map</a></div>
+    </div>    <div class="repo-item" id="repo-05">
+      <div class="repo-number">#5</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/DeusData.png" alt="DeusData" loading="lazy" onerror="this.src='https://github.com/DeusData.png'"></div>
+        <div class="repo-name">codebase-memory-mcp<span class="author-name">DeusData</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#555555"></span><span class="lbl">C</span></div>
+        <div class="repo-metric"><span class="val">25,795</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+10,186</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,913</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">基于纯C语言构建的高性能代码智能MCP服务器，将代码库索引为持久化知识图谱。毫秒级响应158种语言的语义查询，大幅降低AI Agent的Token消耗。零依赖单二进制部署，5分钟即可接入现有工具链。</div>
+      <ul class="repo-features">
+            <li>支持158种语言代码知识图谱毫秒索引</li>
+            <li>相比传统文件探索方法减少99%Token消耗</li>
+            <li>单静态二进制零依赖跨平台一键部署使用</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>AI Agent开发者、代码分析工具研究者、软件工程师、DevOps</div>
+      <div class="repo-url"><a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank">https://github.com/DeusData/codebase-memory-mcp</a></div>
+    </div>    <div class="repo-item" id="repo-06">
+      <div class="repo-number">#6</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/diegosouzapw.png" alt="diegosouzapw" loading="lazy" onerror="this.src='https://github.com/diegosouzapw.png'"></div>
+        <div class="repo-name">OmniRoute<span class="author-name">diegosouzapw</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">11,034</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,631</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,603</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">聚合237家AI提供商（含90多家免费层）的免费AI网关，通过统一端点连接Claude、GPT、Gemini等。解决AI开发者多提供商管理和成本高昂问题。智能自动故障转移与RTK+Caveman压缩节省15-95%令牌，大幅降低使用门槛。</div>
+      <ul class="repo-features">
+            <li>聚合超过231家AI提供商统一接口调用</li>
+            <li>智能自动故障转移确保AI服务持续可用</li>
+            <li>RTK+Caveman双重压缩令牌节省15-95%</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>AI开发者、提示工程师、独立开发者、技术创业者</div>
+      <div class="repo-url"><a href="https://github.com/diegosouzapw/OmniRoute" target="_blank">https://github.com/diegosouzapw/OmniRoute</a></div>
+    </div>    <div class="repo-item" id="repo-07">
+      <div class="repo-number">#7</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/browser-use.png" alt="browser-use" loading="lazy" onerror="this.src='https://github.com/browser-use.png'"></div>
+        <div class="repo-name">video-use<span class="author-name">browser-use</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">14,520</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+4,056</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,738</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">利用Claude Code等AI Agent进行视频编辑的开源工具，通过自然语言描述即可完成剪辑、调色、字幕添加。解决传统视频编辑软件操作复杂耗时的问题。自动去除填充词和空白，支持动画叠加和会话记忆，成品视频一键生成。</div>
+      <ul class="repo-features">
+            <li>AI驱动自动剪辑去除填充词和空白部分</li>
+            <li>智能自动调色字幕生成以及动画叠加功能</li>
+            <li>通过自然语言描述控制整个视频编辑流程</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>内容创作者、视频编辑师、AI爱好者、社交媒体经理</div>
+      <div class="repo-url"><a href="https://github.com/browser-use/video-use" target="_blank">https://github.com/browser-use/video-use</a></div>
+    </div>    <div class="repo-item" id="repo-08">
+      <div class="repo-number">#8</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/topoteretes.png" alt="topoteretes" loading="lazy" onerror="this.src='https://github.com/topoteretes.png'"></div>
+        <div class="repo-name">cognee<span class="author-name">topoteretes</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">26,877</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+4,001</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">2,494</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">为AI Agent提供持久化长期记忆的开源平台，通过自托管知识图谱引擎存储跨会话上下文。解决AI Agent无状态、无法保持连续理解的问题。支持多格式数据接入，让每个Agent都能回忆和连接历史对话与知识。</div>
+      <ul class="repo-features">
+            <li>为AI Agent提供持久化知识图谱记忆存储</li>
+            <li>跨会话自动关联上下文保持AI Agent理解</li>
+            <li>支持多种数据格式无缝接入灵活扩展使用</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>AI Agent开发者、知识图谱工程研究人员、机器学习工程师、ChatBot开发者</div>
+      <div class="repo-url"><a href="https://github.com/topoteretes/cognee" target="_blank">https://github.com/topoteretes/cognee</a></div>
+    </div>    <div class="repo-item" id="repo-09">
+      <div class="repo-number">#9</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/ogulcancelik.png" alt="ogulcancelik" loading="lazy" onerror="this.src='https://github.com/ogulcancelik.png'"></div>
+        <div class="repo-name">herdr<span class="author-name">ogulcancelik</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#DEA584"></span><span class="lbl">Rust</span></div>
+        <div class="repo-metric"><span class="val">11,038</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,024</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">648</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">在终端中运行所有编码Agent的会话管理器，为每个Agent提供真实终端视图。解决同时管理多个Agent会话的混乱和断开问题。实时状态面板展示阻塞/工作/完成，支持持久化后台运行和SSH远程重连。</div>
+      <ul class="repo-features">
+            <li>多Agent实时状态看板清晰监控运行状态</li>
+            <li>持久化后台会话支持随时断开和重连服务</li>
+            <li>轻量级单二进制终端工具无任何运行依赖</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>开发者、AI Agent用户、系统管理员、运维工程师</div>
+      <div class="repo-url"><a href="https://github.com/ogulcancelik/herdr" target="_blank">https://github.com/ogulcancelik/herdr</a></div>
+    </div>    <div class="repo-item" id="repo-10">
+      <div class="repo-number">#10</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/JCodesMore.png" alt="JCodesMore" loading="lazy" onerror="this.src='https://github.com/JCodesMore.png'"></div>
+        <div class="repo-name">ai-website-cloner-template<span class="author-name">JCodesMore</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">25,393</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+4,205</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">3,574</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">基于AI编码Agent的网站反向工程模板，可一键将任何网站克隆为Next.js代码。解决手动重写网站设计的重复劳动问题。自动提取设计Token和资源，并行构建所有模块，快速获得可定制的现代代码库。</div>
+      <ul class="repo-features">
+            <li>一键AI反向工程任何网站到Next.js代码</li>
+            <li>自动提取网站设计Token和所有相关资源</li>
+            <li>并行构建各模块快速完成整个网站克隆</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>前端开发者、设计师、创业者、AI使用者</div>
+      <div class="repo-url"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">https://github.com/JCodesMore/ai-website-cloner-template</a></div>
+    </div>    <div class="repo-item" id="repo-11">
+      <div class="repo-number">#11</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/google-labs-code.png" alt="google-labs-code" loading="lazy" onerror="this.src='https://github.com/google-labs-code.png'"></div>
+        <div class="repo-name">design.md<span class="author-name">google-labs-code</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">24,729</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+4,101</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,917</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">面向编码Agent的设计系统规范格式，以YAML front matter定义色彩、字体等Token值。解决AI Agent缺乏结构化理解导致输出不一致的问题。支持WCAG对比度检测和版本差异对比，确保生成UI符合设计系统。</div>
+      <ul class="repo-features">
+            <li>结构化设计Token定义精确色彩和字体数值</li>
+            <li>自动检查WCAG对比度确保设计可达性合规</li>
+            <li>多版本设计系统差异自动比较与分析报告</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>设计师、前端工程师、AI Agent开发者、设计系统维护者</div>
+      <div class="repo-url"><a href="https://github.com/google-labs-code/design.md" target="_blank">https://github.com/google-labs-code/design.md</a></div>
+    </div>    <div class="repo-item" id="repo-12">
+      <div class="repo-number">#12</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/kunchenguid.png" alt="kunchenguid" loading="lazy" onerror="this.src='https://github.com/kunchenguid.png'"></div>
+        <div class="repo-name">no-mistakes<span class="author-name">kunchenguid</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#00ADD8"></span><span class="lbl">Go</span></div>
+        <div class="repo-metric"><span class="val">5,145</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,868</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">306</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">本地Git推送代理，在隔离工作树中运行AI驱动的验证管道才向远程推送。解决开发者误推不完整代码的痛点。管道自动运行测试lint文档检查，并可自动修复问题，最终自动创建干净PR。</div>
+      <ul class="repo-features">
+            <li>AI驱动的Git推送前自动验证管道检查</li>
+            <li>在隔离工作树中非阻塞检查不影响工作流</li>
+            <li>自动修复检查发现的问题并生成干净PR请求</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>开发者、DevOps工程师、技术团队负责人、开源维护者</div>
+      <div class="repo-url"><a href="https://github.com/kunchenguid/no-mistakes" target="_blank">https://github.com/kunchenguid/no-mistakes</a></div>
+    </div>    <div class="repo-item" id="repo-13">
+      <div class="repo-number">#13</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/logto-io.png" alt="logto-io" loading="lazy" onerror="this.src='https://github.com/logto-io.png'"></div>
+        <div class="repo-name">logto<span class="author-name">logto-io</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">13,658</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,368</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">940</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">面向SaaS和AI应用的开源身份认证基础设施，基于OIDC和OAuth 2.1标准。解决自建认证系统的安全性和复杂度问题。内置多租户、企业SSO和RBAC，预构建登录UI和30+框架SDK，开箱即用。</div>
+      <ul class="repo-features">
+            <li>开箱即用支持OIDC和OAuth 2.1认证协议</li>
+            <li>提供企业级SSO单点登录和RBAC权限控制</li>
+            <li>多租户SaaS身份基础设施零配置快速启动</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>后端开发者、SaaS创业者、安全工程师、产品经理</div>
+      <div class="repo-url"><a href="https://github.com/logto-io/logto" target="_blank">https://github.com/logto-io/logto</a></div>
+    </div>    <div class="repo-item" id="repo-14">
+      <div class="repo-number">#14</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/msitarzewski.png" alt="msitarzewski" loading="lazy" onerror="this.src='https://github.com/msitarzewski.png'"></div>
+        <div class="repo-name">agency-agents<span class="author-name">msitarzewski</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#89E051"></span><span class="lbl">Shell</span></div>
+        <div class="repo-metric"><span class="val">126,763</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+10,483</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">20,570</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">包含多种专业化AI代理的集合库，从前端专家到Reddit达人应有尽有。解决通用Agent缺乏深度领域知识的问题。每个代理具有独特个性和交付物，可通过桌面应用一键安装到Claude Code等主流工具。</div>
+      <ul class="repo-features">
+            <li>专业化领域AI代理覆盖多种不同专家角色</li>
+            <li>每个代理拥有独特个性和明确可衡量的交付物</li>
+            <li>一键安装到Claude Code等主流AI编码工具</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>AI使用者、提示工程师、开发者、创意人员</div>
+      <div class="repo-url"><a href="https://github.com/msitarzewski/agency-agents" target="_blank">https://github.com/msitarzewski/agency-agents</a></div>
+    </div>    <div class="repo-item" id="repo-15">
+      <div class="repo-number">#15</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/stablyai.png" alt="stablyai" loading="lazy" onerror="this.src='https://github.com/stablyai.png'"></div>
+        <div class="repo-name">orca<span class="author-name">stablyai</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">11,828</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+3,700</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">783</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">并行运行多个编码Agent的AI编排桌面应用，每个Agent拥有独立工作树。解决单Agent效率低下和多Agent难以管理的痛点。支持Codex、Claude Code等主流Agent，移动端可监控和下发指令，支持自有订阅。</div>
+      <ul class="repo-features">
+            <li>在独立工作树中并行运行多个编码Agent</li>
+            <li>通过移动端应用实时监控Agent运行状态</li>
+            <li>支持开发者使用自有订阅无需额外付费服务</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>开发者、AI Agent用户、项目管理、技术负责人</div>
+      <div class="repo-url"><a href="https://github.com/stablyai/orca" target="_blank">https://github.com/stablyai/orca</a></div>
+    </div>    <div class="repo-item" id="repo-16">
+      <div class="repo-number">#16</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/calesthio.png" alt="calesthio" loading="lazy" onerror="this.src='https://github.com/calesthio.png'"></div>
+        <div class="repo-name">OpenMontage<span class="author-name">calesthio</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">32,711</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+9,213</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">3,736</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">首个开源智能视频制作系统，将AI编码助手转变为完整视频工作室。解决从脚本到成品全流程的低效问题。拥有12个生产管道和52个工具，可通过自然语言描述生成含真实剪辑、动画和音效的成品视频。</div>
+      <ul class="repo-features">
+            <li>全自动视频制作流程从脚本到最终成品输出</li>
+            <li>免费开源素材检索和AI生成内容完美结合</li>
+            <li>提供12个专业生产管道和52个工具支持</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>视频制作人、内容创作者、开源爱好者、AI研究者</div>
+      <div class="repo-url"><a href="https://github.com/calesthio/OpenMontage" target="_blank">https://github.com/calesthio/OpenMontage</a></div>
+    </div>    <div class="repo-item" id="repo-17">
+      <div class="repo-number">#17</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/craft-ai-agents.png" alt="craft-ai-agents" loading="lazy" onerror="this.src='https://github.com/craft-ai-agents.png'"></div>
+        <div class="repo-name">craft-agents-oss<span class="author-name">craft-ai-agents</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">6,688</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+354</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">919</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">以文档为中心、支持自然语言连接任何API的AI Agent工作台。解决CLI Agent配置复杂和体验不佳问题。Agent可自主发现和配置外部服务如Linear、Slack，无需手动写配置文件。</div>
+      <ul class="repo-features">
+            <li>通过自然语言直接连接外部服务和API接口</li>
+            <li>以文档为中心的工作流管理界面使用体验</li>
+            <li>高度可定制开源框架用户自由修改和扩展</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>知识工作者、开发者、项目经理、AI Agent用户</div>
+      <div class="repo-url"><a href="https://github.com/craft-ai-agents/craft-agents-oss" target="_blank">https://github.com/craft-ai-agents/craft-agents-oss</a></div>
+    </div>    <div class="repo-item" id="repo-18">
+      <div class="repo-number">#18</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/interviewstreet.png" alt="interviewstreet" loading="lazy" onerror="this.src='https://github.com/interviewstreet.png'"></div>
+        <div class="repo-name">hiring-agent<span class="author-name">interviewstreet</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3572A5"></span><span class="lbl">Python</span></div>
+        <div class="repo-metric"><span class="val">4,591</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,643</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">887</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">从PDF简历中提取结构化数据并基于LLM和GitHub信号进行客观评分的招聘助手。解决简历筛选费时且主观的问题。自动解析简历，获取候选者GitHub项目信息，输出包含证据的可解释评分报告。</div>
+      <ul class="repo-features">
+            <li>自动解析PDF简历为结构化数据用于评估</li>
+            <li>通过GitHub行为信号增强候选者技术画像</li>
+            <li>公平性约束确保评分客观且可解释可追溯</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>招聘人员、HR、技术面试官、人才分析师</div>
+      <div class="repo-url"><a href="https://github.com/interviewstreet/hiring-agent" target="_blank">https://github.com/interviewstreet/hiring-agent</a></div>
+    </div>    <div class="repo-item" id="repo-19">
+      <div class="repo-number">#19</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/mauriceboe.png" alt="mauriceboe" loading="lazy" onerror="this.src='https://github.com/mauriceboe.png'"></div>
+        <div class="repo-name">TREK<span class="author-name">mauriceboe</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">9,112</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,771</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">752</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">自托管的实时协作旅行规划平台，集成交互式地图、预算和行李清单。解决旅行计划分散、团队协作不便的问题。支持PWA离线使用、SSO单点登录，以及AI辅助建议，数据完全由用户掌控。</div>
+      <ul class="repo-features">
+            <li>实时协作规划旅行集成交互式3D地图</li>
+            <li>预算管理和行李清单一站式服务方便使用</li>
+            <li>自托管PWA应用支持SSO单点登录便于部署</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>旅行爱好者、背包客、团队旅行组织者、数字游民</div>
+      <div class="repo-url"><a href="https://github.com/mauriceboe/TREK" target="_blank">https://github.com/mauriceboe/TREK</a></div>
+    </div>    <div class="repo-item" id="repo-20">
+      <div class="repo-number">#20</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/openai.png" alt="openai" loading="lazy" onerror="this.src='https://github.com/openai.png'"></div>
+        <div class="repo-name">codex-plugin-cc<span class="author-name">openai</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#F1E05A"></span><span class="lbl">JavaScript</span></div>
+        <div class="repo-metric"><span class="val">23,498</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,296</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,438</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">OpenAI官方开发的Claude Code插件，让你在Claude Code中直接使用Codex代码审查。解决无法在Claude Code内利用Codex能力的问题。支持后台审查、对抗审查和任务委托，提升代码质量流程。</div>
+      <ul class="repo-features">
+            <li>在Claude Code内直接使用Codex代码审查功能</li>
+            <li>支持后台运行审查和对抗审查两种模式</li>
+            <li>无缝委托任务给Codex并管理后台运行结果</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>开发者、AI Agent用户、代码审查者、Claude Code用户</div>
+      <div class="repo-url"><a href="https://github.com/openai/codex-plugin-cc" target="_blank">https://github.com/openai/codex-plugin-cc</a></div>
+    </div>    <div class="repo-item" id="repo-21">
+      <div class="repo-number">#21</div>
+      <div class="repo-header">
+        <div class="repo-avatar"><img src="avatar/alibaba.png" alt="alibaba" loading="lazy" onerror="this.src='https://github.com/alibaba.png'"></div>
+        <div class="repo-name">page-agent<span class="author-name">alibaba</span></div>
+      </div>
+      <div class="repo-metrics">
+                  <div class="repo-metric"><span class="lang-dot" style="background:#3178C6"></span><span class="lbl">TypeScript</span></div>
+        <div class="repo-metric"><span class="val">22,649</span><span class="lbl">Star</span></div>
+        <div class="repo-metric"><span class="val" style="color:var(--near-black)">+1,901</span><span class="lbl">本周</span></div>
+        <div class="repo-metric"><span class="val">1,960</span><span class="lbl">Fork</span></div>
+      </div>
+      <div class="repo-desc">注入网页的纯JavaScript GUI Agent，通过自然语言直接操作DOM元素。解决无API网页自动化控制困难的问题。无需浏览器扩展或多模态模型，支持多种LLM，可轻松集成到任何SaaS产品中。</div>
+      <ul class="repo-features">
+            <li>纯文本方式操作DOM无需截图或浏览器扩展</li>
+            <li>通过一行JavaScript代码集成到任何网页中</li>
+            <li>支持多种LLM后端灵活切换满足不同需求</li>
+      </ul>
+      <div class="repo-audience"><strong>推荐：</strong>网页开发者、AI Agent构建者、自动化工程师、SaaS产品经理</div>
+      <div class="repo-url"><a href="https://github.com/alibaba/page-agent" target="_blank">https://github.com/alibaba/page-agent</a></div>
+    </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="foot">
+    <div class="mark">
+      <span class="wm-name">News Tools</span>
+      <span class="wm-line">GitHub Trending 中文周报</span>
+    </div>
+    <div class="colophon">
+      <div class="links">
+        <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://github.com/Mr-nnng/news-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+      <p class="ethos">每周为你发现开源世界的好项目</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+    // Sidebar collapse
+    var toggles = document.querySelectorAll('.sidebar-month-toggle');
+    toggles.forEach(function(t) {
+        t.addEventListener('click', function() {
+            this.parentElement.classList.toggle('is-collapsed');
+        });
+    });
+
+    // Active index tracking
+    var indexItems = document.querySelectorAll('.index-nav .index-item');
+    if (!indexItems.length) return;
+
+    var sections = [];
+    indexItems.forEach(function(item) {
+        var href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            var el = document.querySelector(href);
+            if (el) sections.push({ el: el, link: item });
+        }
+    });
+    if (!sections.length) return;
+
+    function updateActive() {
+        var scrollY = window.scrollY;
+        var bestIdx = -1;
+        var bestDist = Infinity;
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var dist = Math.abs(rect.top - 100);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0) {
+            var activeId = '#' + sections[bestIdx].el.getAttribute('id');
+            indexItems.forEach(function(item) {
+                item.classList.toggle('is-active', item.getAttribute('href') === activeId);
+            });
+        }
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    updateActive();
+})();
+</script>
+</body>
+</html>

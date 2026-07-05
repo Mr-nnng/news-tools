@@ -47,7 +47,7 @@ def clean_site():
 
 
 def copy_fonts():
-    """Copy fonts to site/ for serif (TsangerJinKai02) and monospace (JetBrains Mono)."""
+    """Copy fonts to site/ for monospace (JetBrains Mono)."""
     FONTS_DIR.mkdir(parents=True, exist_ok=True)
     src = ASSETS_DIR / "fonts"
     if src.exists():

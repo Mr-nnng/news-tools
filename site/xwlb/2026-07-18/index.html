@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     XWLB PAGE · 新闻联播文字摘要
+     Kami design system: warm parchment, ink-blue accent, serif-led
+     Font paths: ../../assets/fonts/ (when deployed to site/xwlb/{date}/)
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>7月18日周六《新闻联播》 · 新闻联播文字摘要</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="7月18日周六《新闻联播》 新闻联播文字摘要，共 13 条新闻。">
+<meta property="og:title" content="7月18日周六《新闻联播》 · 新闻联播文字摘要">
+<meta property="og:description" content="7月18日周六《新闻联播》 新闻联播文字摘要，共 13 条新闻。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://news-tools.pages.dev">
+<link rel="canonical" href="https://news-tools.pages.dev">
+<style>
+/* ========== Tokens ========== */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+
+  --brand:        #1B365D;
+  --brand-light:  #2D5A8A;
+  --brand-tint:   #EEF2F7;
+
+  --near-black:   #141413;
+  --dark-warm:    #3d3d3a;
+  --olive:        #504e49;
+  --stone:        #6b6a64;
+
+  --border:       #e8e6dc;
+  --border-soft:  #e5e3d8;
+  --line:         #d8d5c8;
+
+  --serif: "PingFang SC", "PingFang TC", "Microsoft YaHei",
+           system-ui, -apple-system, sans-serif;
+  --sans:  var(--serif);
+  --mono:  "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, monospace;
+  --latin-ui: var(--sans);
+
+  --sidebar-w: 200px;
+  --index-w: 260px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.58;
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: var(--sidebar-w);
+  padding-right: var(--index-w);
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover { color: var(--brand-light); }
+
+/* ========== Sidebar ========== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--parchment);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 20px 0 16px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.sidebar-home {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 18px;
+  margin: 0 0 6px;
+  color: var(--near-black);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sidebar-home:hover { color: var(--brand); }
+.sidebar-home .icon { font-size: 20px; }
+
+.sidebar-section {
+  padding: 0 16px;
+  margin-top: 8px;
+}
+.sidebar-section:last-child { margin-bottom: 0; }
+
+.sidebar-month-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+.sidebar-month-toggle:hover { color: var(--brand-light); }
+.sidebar-month-toggle .arrow {
+  font-size: 13px;
+  color: var(--stone);
+  transition: transform 0.25s ease;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-toggle .arrow {
+  transform: rotate(-90deg);
+}
+
+.sidebar-month-items {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: none;
+  opacity: 1;
+}
+.sidebar-month-group.is-collapsed .sidebar-month-items {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0 7px 18px;
+  color: var(--olive);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 14px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.15s;
+}
+.sidebar-item:hover { color: var(--brand); background: var(--brand-tint); }
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sidebar-item.is-active { color: var(--brand); font-weight: 500; }
+.sidebar-item.is-active::before { background: var(--brand); width: 9px; height: 9px; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 16px 0;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: var(--stone);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.sidebar-footer a:hover { color: var(--brand); }
+.sidebar-footer .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* ========== Layout ========== */
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 56px 64px 80px;
+}
+
+/* ========== Header ========== */
+
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.page-header .eyebrow {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--stone);
+  margin: 0 0 16px;
+}
+
+.page-header .eyebrow a { color: var(--brand); }
+
+.page-header h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  color: var(--near-black);
+  margin: 0 0 12px;
+}
+
+.page-header .meta {
+  font-family: var(--latin-ui);
+  font-size: 14px;
+  color: var(--stone);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.page-header .meta .xwlb-source { display: inline-flex; align-items: center; gap: 6px; }
+.page-header .meta .xwlb-source .tag {
+  display: inline-block;
+  background: var(--brand);
+  color: var(--ivory);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.page-header .meta .xwlb-count { color: var(--olive); }
+
+/* ========== Summary section ========== */
+
+.section-head {
+  margin-bottom: 20px;
+}
+
+.section-num {
+  font-family: var(--latin-ui);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--brand);
+  letter-spacing: 0.4px;
+  margin: 0 0 4px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--near-black);
+  margin: 0;
+  letter-spacing: 0.6px;
+}
+
+/* ========== Summary items ========== */
+
+.summary-label {
+  font-family: var(--latin-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  color: var(--brand);
+  padding: 8px 0 6px 24px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.summary-label::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--brand);
+  font-size: 8px;
+}
+
+/* subitem overrides must beat .summary-list li specificity */
+.summary-list li.summary-subitem {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--stone);
+  padding: 2px 0 2px 11px;
+  position: relative;
+  list-style: none;
+}
+
+.summary-list li.summary-subitem::before {
+  content: "\25CB" !important;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  color: var(--line);
+  font-size: 8px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px;
+}
+
+.summary-list li {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark-warm);
+  padding: 3px 0 3px 24px;
+  position: relative;
+}
+
+.summary-list li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  color: var(--brand);
+  font-size: 8px;
+}
+/* ========== Right index nav ========== */
+
+.index-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--index-w);
+  background: var(--parchment);
+  border-left: 1px solid var(--border);
+  z-index: 99;
+  overflow-y: auto;
+  padding: 28px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+.index-nav::-webkit-scrollbar { width: 4px; }
+.index-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+.index-nav .index-head {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--near-black);
+  padding: 0 16px 14px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.index-nav .index-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--olive);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-right: 2px solid transparent;
+}
+
+.index-nav .index-item:hover {
+  color: var(--brand);
+  background: var(--brand-tint);
+}
+
+.index-nav .index-item.is-active {
+  color: var(--brand);
+  font-weight: 500;
+  background: var(--brand-tint);
+  border-right-color: var(--brand);
+}
+
+.index-nav .index-item .idx-num {
+  font-family: var(--latin-ui);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--stone);
+  min-width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.index-nav .index-item.is-active .idx-num {
+  color: var(--brand);
+}
+
+.index-nav .index-summary {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.index-nav .index-summary .idx-num {
+  color: var(--brand);
+  font-size: 11px;
+}
+
+.index-nav .index-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 6px 16px 8px;
+}
+
+
+/* ========== News items ========== */
+
+.news-section { margin-top: 40px; }
+
+.news-item {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.news-item .item-number {
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+
+.news-item .item-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--near-black);
+  margin: 0 0 14px;
+  letter-spacing: 0.3px;
+}
+
+.news-item .item-title a { color: inherit; }
+.news-item .item-title a:hover { color: var(--brand); }
+
+.news-item .item-content {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--olive);
+  padding: 14px 18px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+}
+
+.news-item .item-content p {
+  margin: 0 0 10px;
+  text-indent: 2em;
+}
+
+.news-item .item-content p:last-child { margin-bottom: 0; }
+
+.news-item .item-content .express-title {
+  font-weight: 500;
+  color: var(--near-black);
+}
+
+.news-item .item-content .express-body {
+  padding-left: 16px;
+  margin-bottom: 8px;
+  color: var(--dark-warm);
+}
+
+/* ========== Footer ========== */
+
+footer.foot {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.foot .mark { display: grid; grid-template-columns: auto; gap: 2px; }
+
+.foot .mark .wm-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--near-black);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.foot .mark .wm-line { font-size: 13px; color: var(--olive); margin-top: 2px; }
+
+.foot .colophon { text-align: right; max-width: 420px; }
+
+.foot .colophon .links {
+  font-family: var(--latin-ui);
+  color: var(--dark-warm);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.foot .colophon .links a { color: var(--dark-warm); }
+.foot .colophon .links a:hover { color: var(--brand); }
+.foot .colophon .ethos { color: var(--olive); line-height: 1.55; max-width: 320px; margin-left: auto; }
+
+/* ========== Responsive ========== */
+
+@media (max-width: 1200px) {
+  .index-nav { display: none; }
+  body { padding-right: 0; }
+}
+
+@media (max-width: 880px) {
+  .page { padding: 40px 28px 60px; }
+  .page-header h1 { font-size: 34px; letter-spacing: 0.4px; }
+  .page-header { margin-bottom: 32px; padding-bottom: 24px; }
+  .section-title { font-size: 22px; }
+  .news-item .item-title { font-size: 18px; }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+    gap: 8px;
+  }
+  .sidebar-home { border-bottom: none; padding: 0; margin: 0; }
+  .sidebar-section { display: none; }
+  .sidebar-footer { margin-top: 0; border-top: none; padding: 0; flex-direction: row; }
+  body { padding: 0; }
+  .page { padding: 32px 20px 48px; }
+  .page-header h1 { font-size: 28px; }
+  .page-header .meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .summary-list li { font-size: 15px; }
+  .news-item .item-content { padding: 12px 14px; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 24px 16px 40px; }
+  .page-header { margin-bottom: 20px; padding-bottom: 16px; }
+  .page-header h1 { font-size: 22px; letter-spacing: 0.2px; }
+  .page-header .meta { font-size: 12px; gap: 6px; }
+  .section-title { font-size: 18px; }
+  .news-item { margin-bottom: 28px; padding-bottom: 24px; }
+  .news-item .item-title { font-size: 16px; }
+  .news-item .item-content { padding: 10px 12px; font-size: 14px; }
+  .summary-list { margin-bottom: 32px; }
+  .summary-list li { font-size: 14px; padding: 2px 0 2px 18px; }
+  footer.foot { margin-top: 40px; padding-top: 24px; flex-direction: column; gap: 24px; }
+  footer.foot .colophon { text-align: left; max-width: 100%; }
+  .sidebar-month-toggle { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header h1 { animation: none; opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
+    <div class="sidebar-section">
+      
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年07月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-07-18/index.html" class="sidebar-item is-active">2026年7月18日</a>
+          <a href="../2026-07-17/index.html" class="sidebar-item">2026年7月17日</a>
+          <a href="../2026-07-16/index.html" class="sidebar-item">2026年7月16日</a>
+          <a href="../2026-07-15/index.html" class="sidebar-item">2026年7月15日</a>
+          <a href="../2026-07-14/index.html" class="sidebar-item">2026年7月14日</a>
+          <a href="../2026-07-13/index.html" class="sidebar-item">2026年7月13日</a>
+          <a href="../2026-07-12/index.html" class="sidebar-item">2026年7月12日</a>
+          <a href="../2026-07-11/index.html" class="sidebar-item">2026年7月11日</a>
+          <a href="../2026-07-10/index.html" class="sidebar-item">2026年7月10日</a>
+          <a href="../2026-07-09/index.html" class="sidebar-item">2026年7月9日</a>
+          <a href="../2026-07-08/index.html" class="sidebar-item">2026年7月8日</a>
+          <a href="../2026-07-07/index.html" class="sidebar-item">2026年7月7日</a>
+          <a href="../2026-07-06/index.html" class="sidebar-item">2026年7月6日</a>
+          <a href="../2026-07-05/index.html" class="sidebar-item">2026年7月5日</a>
+          <a href="../2026-07-04/index.html" class="sidebar-item">2026年7月4日</a>
+          <a href="../2026-07-03/index.html" class="sidebar-item">2026年7月3日</a>
+          <a href="../2026-07-02/index.html" class="sidebar-item">2026年7月2日</a>
+          <a href="../2026-07-01/index.html" class="sidebar-item">2026年7月1日</a>
+        </div>
+      </div>
+      <div class="sidebar-month-group">
+        <div class="sidebar-month-toggle">
+          <span class="arrow">▾</span>
+          2026年06月
+        </div>
+        <div class="sidebar-month-items">
+          
+          <a href="../2026-06-30/index.html" class="sidebar-item">2026年6月30日</a>
+          <a href="../2026-06-29/index.html" class="sidebar-item">2026年6月29日</a>
+          <a href="../2026-06-28/index.html" class="sidebar-item">2026年6月28日</a>
+          <a href="../2026-06-27/index.html" class="sidebar-item">2026年6月27日</a>
+          <a href="../2026-06-26/index.html" class="sidebar-item">2026年6月26日</a>
+          <a href="../2026-06-25/index.html" class="sidebar-item">2026年6月25日</a>
+          <a href="../2026-06-24/index.html" class="sidebar-item">2026年6月24日</a>
+          <a href="../2026-06-23/index.html" class="sidebar-item">2026年6月23日</a>
+          <a href="../2026-06-22/index.html" class="sidebar-item">2026年6月22日</a>
+          <a href="../2026-06-21/index.html" class="sidebar-item">2026年6月21日</a>
+          <a href="../2026-06-20/index.html" class="sidebar-item">2026年6月20日</a>
+          <a href="../2026-06-19/index.html" class="sidebar-item">2026年6月19日</a>
+          <a href="../2026-06-18/index.html" class="sidebar-item">2026年6月18日</a>
+          <a href="../2026-06-17/index.html" class="sidebar-item">2026年6月17日</a>
+          <a href="../2026-06-16/index.html" class="sidebar-item">2026年6月16日</a>
+          <a href="../2026-06-15/index.html" class="sidebar-item">2026年6月15日</a>
+          <a href="../2026-06-14/index.html" class="sidebar-item">2026年6月14日</a>
+          <a href="../2026-06-13/index.html" class="sidebar-item">2026年6月13日</a>
+          <a href="../2026-06-12/index.html" class="sidebar-item">2026年6月12日</a>
+          <a href="../2026-06-11/index.html" class="sidebar-item">2026年6月11日</a>
+          <a href="../2026-06-10/index.html" class="sidebar-item">2026年6月10日</a>
+          <a href="../2026-06-09/index.html" class="sidebar-item">2026年6月9日</a>
+          <a href="../2026-06-08/index.html" class="sidebar-item">2026年6月8日</a>
+          <a href="../2026-06-07/index.html" class="sidebar-item">2026年6月7日</a>
+          <a href="../2026-06-06/index.html" class="sidebar-item">2026年6月6日</a>
+          <a href="../2026-06-05/index.html" class="sidebar-item">2026年6月5日</a>
+          <a href="../2026-06-04/index.html" class="sidebar-item">2026年6月4日</a>
+          <a href="../2026-06-03/index.html" class="sidebar-item">2026年6月3日</a>
+          <a href="../2026-06-02/index.html" class="sidebar-item">2026年6月2日</a>
+          <a href="../2026-06-01/index.html" class="sidebar-item">2026年6月1日</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
+    </div>
+  </nav>
+<nav class="index-nav">
+  <div class="index-head">本页导航</div>
+  <a class="index-item index-summary" href="#xwlb-summary">
+    <span class="idx-num">◈</span> 摘要
+  </a>
+  <div class="index-divider"></div>
+        <a class="index-item" href="#item-01"><span class="idx-num">01</span> 习近平对重庆彭水县山体崩塌作出重要指示强调：科学组织搜救，加强监测预警和巡查排险，切实保障人民群众生命财产安全；李强…</a>
+      <a class="index-item" href="#item-02"><span class="idx-num">02</span> 让人工智能更好造福人类——习近平主席在2026世界人工智能大会暨人工智能全球治理高级别会议开幕式上的主旨讲话引发热烈反响</a>
+      <a class="index-item" href="#item-03"><span class="idx-num">03</span> 央视快评：共同促进全球人工智能向上向善、造福人类</a>
+      <a class="index-item" href="#item-04"><span class="idx-num">04</span> 张国清赶赴重庆彭水县指导山体崩塌灾害现场搜救和应急处置工作</a>
+      <a class="index-item" href="#item-05"><span class="idx-num">05</span> 重庆彭水山体崩塌救援安置工作加紧进行</a>
+      <a class="index-item" href="#item-06"><span class="idx-num">06</span> 上半年我国邮政行业寄递业务量同比增长4.2%</a>
+      <a class="index-item" href="#item-07"><span class="idx-num">07</span> 上半年全国铁路完成固定资产投资3632亿元</a>
+      <a class="index-item" href="#item-08"><span class="idx-num">08</span> 多项首发技术和创新成果亮相世界人工智能大会</a>
+      <a class="index-item" href="#item-09"><span class="idx-num">09</span> 【活力中国调研行】开在制造业重镇里的“AI超市”</a>
+      <a class="index-item" href="#item-10"><span class="idx-num">10</span> “废品”变“资源”，以旧换新激发循环经济新活力</a>
+      <a class="index-item" href="#item-11"><span class="idx-num">11</span> 国内联播快讯</a>
+      <a class="index-item" href="#item-12"><span class="idx-num">12</span> 美媒称美或扩大对伊朗军事行动，伊朗称打击多处美军基地</a>
+      <a class="index-item" href="#item-13"><span class="idx-num">13</span> 国际联播快讯</a>
+</nav>
+
+<main class="page">
+
+  <!-- ============ Header ============ -->
+  <header class="page-header">
+    <div class="eyebrow">
+      <a href="../../index.html">← 返回主页</a>
+      <span style="margin-left:12px;color:var(--stone)">News Tools</span>
+    </div>
+
+    <h1>7月18日周六《新闻联播》</h1>
+
+    <div class="meta">
+      <span class="xwlb-source"><span class="tag">新闻联播</span></span>
+      <span class="xwlb-count">13 条新闻</span>
+      <span>来源：<a href="https://tv.cctv.com/2026/07/18/VIDEuDgFjNWQSHo4JOxH3eti260718.shtml" target="_blank" rel="noopener">央视网</a></span>
+      <span>2026-07-18</span>
+    </div>
+  </header>
+
+  <!-- ============ Summary ============ -->
+  <section id="xwlb-summary">
+    <div class="section-head">
+      <p class="section-num">摘要</p>
+      <h2 class="section-title">本期要闻</h2>
+    </div>
+    <ol class="summary-list">
+            <div class="summary-label">本期节目主要内容：</div>
+      <li>习近平对重庆彭水县山体崩塌作出重要指示强调 科学组织搜救 加强监测预警和巡查排险 切实保障人民群众生命财产安全 李强作出批示；</li>
+      <li>让人工智能更好造福人类——习近平主席在2026世界人工智能大会暨人工智能全球治理高级别会议开幕式上的主旨讲话引发热烈反响；</li>
+      <li>央视快评：共同促进全球人工智能向上向善、造福人类；</li>
+      <li>张国清赶赴重庆彭水县指导山体崩塌灾害现场搜救和应急处置工作；</li>
+      <li>重庆彭水山体崩塌救援安置工作加紧进行；</li>
+      <li>上半年我国邮政行业寄递业务量同比增长4.2%；</li>
+      <li>上半年全国铁路完成固定资产投资3632亿元；</li>
+      <li>多项首发技术和创新成果亮相世界人工智能大会；</li>
+      <li>【活力中国调研行】开在制造业重镇里的“AI超市”；</li>
+      <li>“废品”变“资源” 以旧换新激发循环经济新活力；</li>
+      <div class="summary-label">国内联播快讯：</div>
+      <li class="summary-subitem">（1）“十五五”时期有效保障农用地和建设用地土壤环境安全；</li>
+      <li class="summary-subitem">（2）全国已建成高质量数据集12万个；</li>
+      <li class="summary-subitem">（3）上半年我国民航旅客运输量达3.8亿人次；</li>
+      <li class="summary-subitem">（4）我国部署七大行动促进海水淡化产业发展；</li>
+      <li class="summary-subitem">（5）新疆双口岸2026年中欧班列通行量突破1万列；</li>
+      <li class="summary-subitem">（6）“共青团·伙伴计划”启动实施；</li>
+      <li class="summary-subitem">（7）CMG小喇叭夏令营活动启动；</li>
+      <li>美媒称美或扩大对伊朗军事行动 伊朗称打击多处美军基地；</li>
+      <div class="summary-label">国际联播快讯：</div>
+      <li class="summary-subitem">（1）4架无人机在美驻伊拉克领馆附近被击落；</li>
+      <li class="summary-subitem">（2）俄称打击乌港口 乌称实施多轮远程打击；</li>
+      <li class="summary-subitem">（3）德总理称德常规部队将首次参加法核演习；</li>
+      <li class="summary-subitem">（4）伯纳姆当选英国工党党首 将出任首相；</li>
+      <li class="summary-subitem">（5）加拿大林火烟霾影响美国 美威胁征税。</li>
+    </ol>
+  </section>
+
+
+  <!-- ============ News Detail ============ -->
+  <section class="news-section">
+    <div class="section-head">
+      <p class="section-num">详细内容</p>
+      <h2 class="section-title">逐条新闻</h2>
+    </div>
+
+        <div class="news-item" id="item-01">
+          <div class="item-number">第 01 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEMeYtV11dhO9KnoEGb4DI260718.shtml" target="_blank" rel="noopener">习近平对重庆彭水县山体崩塌作出重要指示强调：科学组织搜救，加强监测预警和巡查排险，切实保障人民群众生命财产安全；李强作出批示</a></h3>
+          <div class="item-content">
+          <p>
+        7月17日9时10分许，重庆彭水县汉葭街道发生一起山体崩塌，造成多人被埋失联。
+      </p>
+      <p>
+        灾害发生后，中共中央总书记、国家主席、中央军委主席习近平高度重视并作出重要指示指出，重庆彭水县发生山体崩塌造成多人失联，要科学组织搜救，防止发生次生灾害，妥善做好伤员救治、善后处置等工作。要查明原因，举一反三，深入排查消除地质灾害等隐患。
+      </p>
+      <p>
+        习近平强调，各地区各有关部门要进一步落实安全工作责任，加强监测预警和巡查排险，抓实抓细各项工作，切实保障人民群众生命财产安全。
+      </p>
+      <p>
+        中共中央政治局常委、国务院总理李强作出批示指出，要指导帮助重庆市全力开展救援处置、伤员救治、受灾群众安置等工作，并严防次生灾害。要进一步压实各地各有关方面责任，全面排查风险隐患，扎实做好灾害防范应对。
+      </p>
+      <p>
+        根据习近平重要指示和李强要求，中共中央政治局委员、国务院副总理张国清率有关部门负责同志赶赴现场指导救援处置工作。重庆已组织力量全力做好现场搜救、伤员救治和善后处置等工作。目前，有关工作正在进行中。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-02">
+          <div class="item-number">第 02 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEtGwuPJnmJ2GW8wQKMVCI260718.shtml" target="_blank" rel="noopener">让人工智能更好造福人类——习近平主席在2026世界人工智能大会暨人工智能全球治理高级别会议开幕式上的主旨讲话引发热烈反响</a></h3>
+          <div class="item-content">
+          <p>
+        习近平主席在上海出席2026世界人工智能大会暨人工智能全球治理高级别会议开幕式并发表主旨讲话，全面系统阐述中国对于人工智能发展和治理的政策立场和理念主张。
+      </p>
+      <p>
+        与会嘉宾表示，中国对推动全球人工智能治理作出重要贡献。习近平主席提出倡议和举措，为弥合全球数智鸿沟、促进全球人工智能向善普惠发展提供中国方案。
+      </p>
+      <p>
+        当前，世界百年变局加速演进，新一轮科技革命和产业变革加速突破，全球人工智能技术创新既蕴含巨大机遇，也面临治理挑战。面对时代之问，习近平主席提出全球人工智能治理四点意见，强调要坚持开放共赢，驱动创新发展；要强化风险意识，确保安全可控；要鼓励包容并蓄，促进文明互鉴；要倡导和衷共济，完善全球治理。与会嘉宾表示，这四点意见从发展、安全、文明和治理等维度，全面系统阐述了中国对全球人工智能治理的理念主张，将有力引领全球人工智能治理。
+      </p>
+      <p>
+        习近平主席指出，在各方共同努力下，世界人工智能合作组织在上海应运而生。这是中方响应全球南方呼声、团结国际社会积极推动人工智能发展和治理的重大举措，将成为人工智能发展史上的一个重要里程碑。与会嘉宾表示，这是中国为世界贡献的又一重要公共产品，它将有助于各国对接需求和规则标准、加强合作。
+      </p>
+      <p>
+        理念的力量，要靠行动来彰显。
+      </p>
+      <p>
+        为进一步支持全球人工智能发展、推进全球人工智能能力建设，习近平主席宣布一系列重大举措：未来5年，中国将面向发展中国家提供5000个人工智能专题研修培训名额；面向东盟、阿盟、非盟、拉共体、上合组织、金砖国家建设国际人工智能应用合作中心；推动气象智能预警方案“妈祖”在30个国家落地应用。与会嘉宾表示，中国倡导智能向善、普惠包容、安全可控，积极帮助发展中国家加强相关能力建设，推动人工智能国际合作，彰显了负责任的大国担当。
+      </p>
+      <p>
+        站在新的历史起点上，中国愿以更加开放的姿态、更加务实的行动、更加长远的目光，同各方一道把握和应对人工智能发展的机遇和挑战，携手共创人类社会更加美好的未来。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-03">
+          <div class="item-number">第 03 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEYXPkfGYEnVrAitrvDZjw260718.shtml" target="_blank" rel="noopener">央视快评：共同促进全球人工智能向上向善、造福人类</a></h3>
+          <div class="item-content">
+          <p>
+        本台今天（7月18日）播发央视快评《共同促进全球人工智能向上向善、造福人类》。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-04">
+          <div class="item-number">第 04 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDECWm8BDMpvlGDTYaDi7HM260718.shtml" target="_blank" rel="noopener">张国清赶赴重庆彭水县指导山体崩塌灾害现场搜救和应急处置工作</a></h3>
+          <div class="item-content">
+          <p>
+        根据习近平总书记重要指示和李强总理要求，中共中央政治局委员、国务院副总理张国清代表党中央、国务院，17日晚率有关部门负责同志赶赴重庆彭水县指导山体崩塌灾害现场搜救和应急处置工作。
+      </p>
+      <p>
+        张国清抵达后立即前往山体崩塌灾害现场，详细了解救援进展和困难。18日早晨，张国清再次来到灾害现场研究优化救援方案，并到县人民医院、临时安置点看望受伤人员和转移安置群众，转达习近平总书记的关怀牵挂。随后主持召开会议，传达习近平总书记重要指示批示精神和李强总理批示、视频通话要求，研究部署支持帮助重庆抢险救援工作。他指出，习近平总书记十分关心遇险群众安危，十分关注抢险救援进展，反复强调要把保障人民生命安全放在第一位，就科学组织搜救、防止发生次生灾害、妥善做好伤员救治和善后处置、举一反三深入排查消除地质灾害等隐患、进一步落实安全工作责任、加强监测预警和巡查排险等作出重要指示。李强总理对科学开展救援处置、受灾群众安置和生活保障、做好地质灾害监测预警和防范应对等工作提出明确要求。重庆市和有关方面要坚决贯彻落实习近平总书记重要指示精神和李强总理要求，抓实抓细各项工作。
+      </p>
+      <p>
+        张国清强调，近期防灾减灾救灾形势严峻，极端天气多发频发，各地区各有关方面要树牢底线思维、极限思维，进一步压紧压实隐患排查、预警叫应、转移避险、救援救助等各环节责任措施。充分发挥基层网格员作用，发现险情坚决果断转移，切实保障人民群众生命财产安全。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-05">
+          <div class="item-number">第 05 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDE1zk8TJAJlbUHHvOHEA1s260718.shtml" target="_blank" rel="noopener">重庆彭水山体崩塌救援安置工作加紧进行</a></h3>
+          <div class="item-content">
+          <p>
+        重庆市彭水县汉葭街道乌江三桥附近山体崩塌发生后，专业救援力量第一时间抵达现场，展开救援。今天（7月18日），人员搜救、医疗救治、群众安置等工作加紧进行。
+      </p>
+      <p>
+        救援人员携带生命探测仪、搜救犬等进行搜救排查。针对山体崩塌滚落的巨石，指挥部制定多点分层控制爆破方案，择机进行实施。
+      </p>
+      <p>
+        伤员救治也在全力展开。国家卫生健康委调派重症医学、骨科、神外等专家到达彭水指导救治，重庆市级胸外、普外、创伤外科等专家会同当地医院对危重及重症伤员采取“一人一策”加强救治。
+      </p>
+      <p>
+        此次山体崩塌紧急转移安置受灾群众1100多人，其中集中安置723人。安置点里配备了食品、夏凉被、饮用水等生活必需品，全力做好群众生活保障。
+      </p>
+      <p>
+        针对重庆彭水县山体崩塌，应急管理部迅速启动国家地质灾害二级应急响应，国家防灾减灾救灾委员会启动国家四级救灾应急响应，会同相关部门向重庆调拨8000件中央救灾物资；国家发展改革委安排中央预算内投资3000万元，支持当地基础设施和公共服务设施灾后应急恢复建设；财政部、应急管理部紧急预拨5000万元中央自然灾害救灾资金，支持救援救灾和受灾群众安置救助工作。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-06">
+          <div class="item-number">第 06 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEWB9xfSNGF9hxEaKgrLrD260718.shtml" target="_blank" rel="noopener">上半年我国邮政行业寄递业务量同比增长4.2%</a></h3>
+          <div class="item-content">
+          <p>
+        国家邮政局最新数据显示，上半年，邮政行业寄递业务量累计完成1088.9亿件，同比增长4.2%。其中，快递业务量超千亿件，累计完成1003.8亿件，同比增长5.0%。
+      </p>
+      <p>
+        今年以来，邮政行业加大与现代农业、先进制造业协同发展力度，快递进村、进厂，延伸拓展多元的服务场景，同时加快无人化应用，提升效率，精准匹配不同消费群体差异化寄递需求，有力推动了快递业务量稳步增长。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-07">
+          <div class="item-number">第 07 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDE24yglpnW0QXslwvXsp7G260718.shtml" target="_blank" rel="noopener">上半年全国铁路完成固定资产投资3632亿元</a></h3>
+          <div class="item-content">
+          <p>
+        记者从国铁集团获悉，今年上半年，铁路建设优质高效推进，全国铁路完成固定资产投资3632亿元，同比增长2.1%。全国铁路累计投产新线355.2公里。西安至十堰高铁、金华至建德高铁兰溪东至建德段等一批新线新站开通运营，进一步织密路网。
+      </p>
+      <p>
+        上半年，一批“八纵八横”高铁网主通道在建项目有序推进。雄安新区至商丘高铁山东段等项目进入运行试验阶段，成渝中线、合肥至武汉、南昌至九江高铁等项目的重点控制性工程建设取得积极进展，今年全国铁路将投产新线2000公里以上。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-08">
+          <div class="item-number">第 08 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEgMG3OKUJViWykmN4MyGA260718.shtml" target="_blank" rel="noopener">多项首发技术和创新成果亮相世界人工智能大会</a></h3>
+          <div class="item-content">
+          <p>
+        正在上海举行的2026世界人工智能大会上，多项重要举措和创新成果公布。同时，一批前沿技术集中首发，展现我国人工智能领域的最新突破。
+      </p>
+      <p>
+        大会上，国家发展改革委会同中央广播电视总台等部门共同发布了两项成果。其中，《人工智能合作发展行动计划》提出优质数据供给、智能算力普惠、人工智能向善等8项行动。《中国智·惠世界（2026）》案例集收录了我国在人工智能领域开展国际合作的10个生动故事。此外，《国际人工智能伦理治理行动计划》《智能体互信互联互操作全球合作倡议》等创新成果也相继发布。
+      </p>
+      <p>
+        今天（7月18日），本届大会多项首发前沿技术集中亮相。这是一个设计蛋白质研发的智能体，过去设计一个性能优异的蛋白质得进行成千上万次试验。
+      </p>
+      <p>
+        不仅有瞄准源头突破的原创科研成果，丰富的AI应用场景也不断涌现。
+      </p>
+      <p>
+        今天，本届大会的多场分论坛陆续举行。论坛聚焦AI全球治理、具身智能、智能算力等热点，开展了一系列高端对话、成果发布等活动。首次创办的高水平国际学术会议——世界人工智能大会·学术，由图灵奖得主领衔，打造具有国际影响力的世界级AI学术主场。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-09">
+          <div class="item-number">第 09 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDERXV0l3FJiwpunVIj9c0F260718.shtml" target="_blank" rel="noopener">【活力中国调研行】开在制造业重镇里的“AI超市”</a></h3>
+          <div class="item-content">
+          <p>
+        广东东莞是全国制造业重镇，企业中90%以上是中小企业。他们如何抓住智能化改造的机遇，实现转型升级？来看今天（7月18日）的《活力中国调研行》。
+      </p>
+      <p>
+        不久前，全国首个消费领域移动终端方向的国家人工智能应用中试基地落户广东，记者到基地采访时，遇到了要开车去工厂的项目经理姚寒。
+      </p>
+      <p>
+        姚寒说，今年，他大部分时间都扎在东莞各镇街的制造车间，从电子厂的产品质检到玩具厂的产品设计，他记下每家企业对于智能化改造的真实诉求，把效率低、误差大的环节一一梳理汇总。
+      </p>
+      <p>
+        制造业中小企业的痛点，正是国家科创服务的发力点。几十个像姚寒这样的项目经理调研收集的企业需求，最终汇入国家人工智能应用中试基地，经过分析处理并定向开发，变成“AI超市”里一个个可以按需选择的人工智能应用。
+      </p>
+      <p>
+        负责人告诉记者，因为有政策资金支持，加上可以多家企业共享应用，分摊了开发成本，单个企业的AI使用费用大幅降低。不仅如此，基于对制造业痛点的理解，“AI超市”里的各种智能工具既可以下沉到车间优化生产工序，也能帮传统商品完成智能化蜕变。眼前这款普通的毛绒玩具，加上软硬件一体的智能模块后，就成了能说话、会互动的智能玩具，产品毛利率直接从5%左右大幅跃升到70%左右。
+      </p>
+      <p>
+        瞄准“人工智能+制造”方向，今年，广东正加紧创建一批人工智能领域制造业创新中心，将分散的技术资源整合到一起；推出机械、化工、钢铁等10大行业应用典型场景，帮助广大中小企业轻装上阵，实现人工智能赋能，加快形成新质生产力。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-10">
+          <div class="item-number">第 10 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEf3CwHu967kBp9xSIoyaJ260718.shtml" target="_blank" rel="noopener">“废品”变“资源”，以旧换新激发循环经济新活力</a></h3>
+          <div class="item-content">
+          <p>
+        今年以来，以旧换新政策推动消费增长的同时，一条围绕回收、拆解和再利用的产业链也随之活跃起来。
+      </p>
+      <p>
+        在北京的这个社区服务点，许多居民推着自己刚刚换下来的旧空调、旧洗衣机等来折价回收。
+      </p>
+      <p>
+        今年上半年，以旧换新政策带动相关商品销售额突破1万亿元，带动手机、智能穿戴设备等数码产品换新销量快速增长。消费活力充分释放的同时，大批旧家电、报废车辆进入专业回收渠道。记者来到一家再循环互联工厂，看到这里的自动化拆解生产线正有序运转，废旧家电、笔记本电脑等产品都能分类处置。
+      </p>
+      <p>
+        当前，以旧换新释放的需求，正有力推动再生资源回收利用产业向规模化、规范化、精细化、高值化方向转型升级。
+      </p>
+      <p>
+        在手机数码领域，原本最难处理的电路板可以高效分离贵金属，金属综合回收率超98%。
+      </p>
+      <p>
+        在新能源领域，动力电池全国全年预计退役总量近50万吨。在湖南的这家回收企业，旧电池经过精密的检测与分选，性能较好的经过加工后，会重新用到储能系统、通信基站备用电源等场景；性能不足的则进入材料回收环节。
+      </p>
+      <p>
+        目前，我国废弃电器电子产品回收处理市场规模已突破1500亿元。今年，全国各类废旧家电规范回收总量有望突破2亿台。
+      </p>
+      <p>
+        下一步，我国将加快织密覆盖城乡的回收网络，引导旧品流入合规拆解企业。同时，加大力度支持技术创新，推动再生资源更好循环利用。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-11">
+          <div class="item-number">第 11 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEBYifrRRUIM6qY1dOcTkP260718.shtml" target="_blank" rel="noopener">国内联播快讯</a></h3>
+          <div class="item-content">
+          <p><span class="express-title">“十五五”时期有效保障农用地和建设用地土壤环境安全</span></p>
+        <div class="express-body">《土壤、地下水和农业农村生态环境保护“十五五”规划》日前出台。到2030年，我国农用地和建设用地土壤环境安全得到有效保障，土壤和地下水环境质量稳中向好，农业绿色发展水平明显提高，美丽乡村建设取得新的重大进展。</div>
+
+      <p><span class="express-title">全国已建成高质量数据集12万个</span></p>
+        <div class="express-body">记者今天（7月18日）从国家数据局了解到，我国持续加大优质数据供给，截至今年6月底，已建成高质量数据集12万个，涵盖科研、工业等领域；总体量超1565拍字节，较一季度末增长超60%，现有体量相当于中国国家图书馆数字资源总量的547倍左右。</div>
+
+      <p><span class="express-title">上半年我国民航旅客运输量达3.8亿人次</span></p>
+        <div class="express-body">记者从民航局了解到，今年上半年，我国民航总体保持安全稳健发展态势，全行业完成运输总周转量833.7亿吨公里、旅客运输量3.8亿人次、货邮运输量507.3万吨，同比分别增长6.4%、1%、6%。</div>
+
+      <p><span class="express-title">我国部署七大行动促进海水淡化产业发展</span></p>
+        <div class="express-body">记者从国家发展改革委了解到，我国将部署实施七大行动，促进海水淡化产业发展。到2030年，全国海水淡化工程总规模提升至450万吨/日以上，城市应急供水保障能力进一步增强，沿海工业园区海水淡化水利用比例进一步提高。</div>
+
+      <p><span class="express-title">新疆双口岸2026年中欧班列通行量突破1万列</span></p>
+        <div class="express-body">截至17日，2026年新疆阿拉山口、霍尔果斯双口岸中欧班列通行量累计突破1万列。当前，阿拉山口口岸中欧班列通行线路达129条，覆盖21个国家；霍尔果斯口岸班列线路91条，通达18个国家。</div>
+
+      <p><span class="express-title">“共青团·伙伴计划”启动实施</span></p>
+        <div class="express-body">今年暑假，共青团中央启动实施“共青团·伙伴计划”，各级团组织持续加大暑期托管服务供给，将在全国开设1.8万余个爱心托管服务站点，动员大学生志愿者等各界力量，开展红色教育、科技探索等特色实践活动，缓解双职工家庭等看护陪伴难题。</div>
+
+      <p><span class="express-title">CMG小喇叭夏令营活动启动</span></p>
+        <div class="express-body">CMG小喇叭夏令营今天（7月18日）启动，首站活动走进中央广播电视总台，营员们深入探访节目制作现场，观看运用最新高清修复技术焕新的影片《闪闪的红星》，感受红色文化，并实地体验广播电视前沿技术。</div>
+
+          </div>
+        </div>
+    <div class="news-item" id="item-12">
+          <div class="item-number">第 12 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDE1vIp7TP7VBnGyX0ubFz4260718.shtml" target="_blank" rel="noopener">美媒称美或扩大对伊朗军事行动，伊朗称打击多处美军基地</a></h3>
+          <div class="item-content">
+          <p>
+        美国中央司令部17日称，美军当天打击了伊朗多地的军事基础设施、地下武器储存设施等目标，并正在对伊朗实施全面海上封锁。
+      </p>
+      <p>
+        伊朗方面今天（7月18日）称，伊朗武装力量摧毁了美军驻巴林的无人艇存放基地，并打击了位于科威特、约旦和叙利亚的美军目标。伊朗伊斯兰革命卫队警告称，如果美国继续袭击伊朗的交通基础设施，伊朗将对与美国有关的经济和技术资产展开更大规模的报复。此外，伊朗表示，两艘油轮在通过霍尔木兹海峡南部一处雷区时发生爆炸并引发大火。美军对此予以否认。
+      </p>
+      <p>
+        另据美国媒体17日报道，美国已通知以色列，将向以色列增派数十架空中加油机，后续可能进一步扩大对伊朗的军事行动。伊朗最高领袖军事顾问雷扎伊17日表示，如果美国继续对伊朗发动袭击，伊朗武装部队将转向全面进攻。
+      </p>
+      <p>
+        由于美伊冲突升级，国际原油期货价格17日收盘时涨幅超4%，纽约原油期货价格过去一个月来首次重回每桶80美元上方。
+      </p>
+          </div>
+        </div>
+    <div class="news-item" id="item-13">
+          <div class="item-number">第 13 条</div>
+          <h3 class="item-title"><a href="https://tv.cctv.com/2026/07/18/VIDEYqBGT0WX7U7ggDjuDlIa260718.shtml" target="_blank" rel="noopener">国际联播快讯</a></h3>
+          <div class="item-content">
+          <p><span class="express-title">4架无人机在美驻伊拉克领馆附近被击落</span></p>
+        <div class="express-body">伊拉克媒体17日援引消息人士的话报道称，当天4架无人机试图袭击美国驻伊拉克埃尔比勒领馆，均被击落。目前没有组织或个人宣称对袭击负责。美国官方暂未发布相关信息。此前在15日，美国驻埃尔比勒领馆附近就曾传出爆炸声，多架无人机被击落。</div>
+
+      <p><span class="express-title">俄称打击乌港口 乌称实施多轮远程打击</span></p>
+        <div class="express-body">俄罗斯国防部17日称，俄军持续对乌克兰港口及乌军相关船只实施打击，摧毁能源储备罐、乌军无人艇等。乌克兰方面17日称，乌军近期对俄实施多轮远程打击，在对俄罗斯萨拉托夫州恩格斯空军基地打击行动中，重创俄一架图-95战略轰炸机。</div>
+
+      <p><span class="express-title">德总理称德常规部队将首次参加法核演习</span></p>
+        <div class="express-body">德国总理默茨17日在与到访的法国总统马克龙会面后称，德国今年将首次派遣常规部队参与法国武装部队核演习。德国还将参与支持乌克兰的“意愿联盟”拟于今年秋季举行的军事演习。俄罗斯外长拉夫罗夫此前表示，当前局势显示存在北约与俄罗斯直接对抗的风险，这种对抗可能迅速升级为相互核打击。</div>
+
+      <p><span class="express-title">伯纳姆当选英国工党党首 将出任首相</span></p>
+        <div class="express-body">英国执政党工党17日宣布，安迪·伯纳姆当选该党新任党首。按计划，伯纳姆将于20日接替此前宣布辞职的斯塔默出任英国首相。伯纳姆当选党首后表示，新一届政府将打造新政治格局，推动英国整体发展。现年56岁的伯纳姆曾担任英国文化大臣、卫生大臣、大曼彻斯特市长等职。</div>
+
+      <p><span class="express-title">加拿大林火烟霾影响美国 美威胁征税</span></p>
+        <div class="express-body">17日，加拿大林火产生的烟霾持续影响美国多地。美国媒体称，当天华盛顿特区、芝加哥、底特律等多个城市空气质量继续恶化。美国总统特朗普17日发文说，类似情况每年发生，给美国带来“数十亿美元”损失，美方损失必须加到加拿大支付的关税上。加方对此暂未回应。</div>
+
+          </div>
+        </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="foot">
+    <div class="mark">
+      <span class="wm-name">News Tools</span>
+      <span class="wm-line">新闻联播文字摘要</span>
+    </div>
+    <div class="colophon">
+      <div class="links">
+        <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://github.com/Mr-nnng/news-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+      <p class="ethos">每日精选央视《新闻联播》文字摘要</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+    // Sidebar collapse
+    var toggles = document.querySelectorAll('.sidebar-month-toggle');
+    toggles.forEach(function(t) {
+        t.addEventListener('click', function() {
+            this.parentElement.classList.toggle('is-collapsed');
+        });
+    });
+
+    // Active index tracking: highlight the section whose top is closest to 120px from viewport top
+    var indexItems = document.querySelectorAll('.index-nav .index-item');
+    if (!indexItems.length) return;
+
+    // Build a list of { id, link } pairs
+    var sections = [];
+    indexItems.forEach(function(item) {
+        var href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            var el = document.querySelector(href);
+            if (el) sections.push({ el: el, link: item });
+        }
+    });
+    if (!sections.length) return;
+
+    function updateActive() {
+        var scrollY = window.scrollY;
+        var bestIdx = -1;
+        var bestDist = Infinity;
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].el.getBoundingClientRect();
+            var dist = Math.abs(rect.top - 100);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+            }
+        }
+        if (bestIdx >= 0) {
+            var activeId = '#' + sections[bestIdx].el.getAttribute('id');
+            indexItems.forEach(function(item) {
+                item.classList.toggle('is-active', item.getAttribute('href') === activeId);
+            });
+        }
+    }
+
+    // Throttled scroll listener
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    updateActive();
+})();
+</script>
+</body>
+</html>

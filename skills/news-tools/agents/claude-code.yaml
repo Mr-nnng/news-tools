@@ -1,8 +1,0 @@
-# Claude Code — Project Knowledge
-# Place skills/news-tools/SKILL.md in ~/.claude/skills/news-tools/SKILL.md
-# or add to .claude/settings.jsonc:
-# {
-#   "skills": ["skills/news-tools/SKILL.md"]
-# }
-name: news-tools
-description: GitHub 趋势 / 华尔街见闻 / 新闻联播数据获取与 HTML 周报生成

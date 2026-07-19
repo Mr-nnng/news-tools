@@ -20,7 +20,7 @@ import argparse
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
-from openai import OpenAI
+import httpx
 
 # 确保 src/ 和 scripts/ 可导入
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -37,12 +37,51 @@ GH_DATA_DIR = DATA_DIR / "github"
 # ── LLM 配置 ───────────────────────────────────────────────────────
 LLM_BASE_URL = "https://opencode.ai/zen/v1"
 LLM_MODEL = "deepseek-v4-flash-free"
-LLM_API_KEY = None  # free model 无需 key，传 None 则不发送 Authorization Header
 
 
 # ═══════════════════════════════════════════════════════════════════
 # LLM 调用
 # ═══════════════════════════════════════════════════════════════════
+
+
+def _call_llm(prompt: str, system_prompt: str | None = None, max_retries: int = 3) -> str | None:
+    """调用 LLM 并返回原始响应文本，失败重试直到 max_retries 次。
+
+    使用 httpx 直接请求，不依赖 OpenAI SDK，避免强制 api_key 校验。
+    """
+    last_exception = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            messages = []
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.append({"role": "user", "content": prompt})
+
+            payload = {
+                "model": LLM_MODEL,
+                "messages": messages,
+                "temperature": 0.1,
+            }
+            resp = httpx.post(
+                f"{LLM_BASE_URL}/chat/completions",
+                json=payload,
+                timeout=120,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            content = data["choices"][0]["message"]["content"].strip()
+            if content:
+                return content
+            print(f"  ⚠️  LLM 返回空内容（第{attempt}次）")
+            last_exception = ValueError("Empty response")
+        except Exception as e:
+            print(f"  ⚠️  LLM 调用异常（第{attempt}次）: {e}")
+            last_exception = e
+            if attempt < max_retries:
+                print(f"  🔄 准备重试...")
+
+    print(f"  ❌ LLM 已重试 {max_retries} 次均失败，error={last_exception}")
+    return None
 
 
 def _call_llm_for_repo(repo: TrendingRepo, max_retries: int = 3) -> dict | None:
@@ -81,50 +120,46 @@ README 内容:
   "audience": "AI开发者、前端设计师、产品经理、提示工程师"
 }}"""
 
-    last_exception = None
     for attempt in range(1, max_retries + 1):
-        try:
-            client = OpenAI(base_url=LLM_BASE_URL, api_key=LLM_API_KEY)
-            resp = client.chat.completions.create(
-                model=LLM_MODEL,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
-                temperature=0.1,
-            )
-            content = resp.choices[0].message.content.strip()
-            print(content)
-            # 提取 JSON 对象
-            json_match = re.search(r"\{.*\}", content, re.DOTALL)
-            if not json_match:
-                print(f"  ⚠️  {name} LLM 返回无有效 JSON（第{attempt}次）")
-                last_exception = ValueError("No valid JSON in LLM response")
-                continue
-            data = json.loads(json_match.group())
-
-            # 兼容 zhDesc（历史字段名）与 zh_desc（SKILL.md 规范）
-            zh_desc = data.get("zh_desc") or data.get("zhDesc", "") or ""
-            features = data.get("features") or data.get("features_list") or []
-            audience = data.get("audience") or data.get("audience_list") or ""
-
-            # 补足 / 截断 features
-            while len(features) < 3:
-                features.append("")
-            features = features[:3]
-
-            return {
-                "zhDesc": zh_desc.strip(),
-                "features": [f.strip() for f in features],
-                "audience": (audience.strip() if isinstance(audience, str) else "、".join(audience)),
-            }
-        except Exception as e:
-            print(f"  ⚠️  {name} LLM 调用异常（第{attempt}次）: {e}")
-            last_exception = e
+        content = _call_llm(user_prompt, system_prompt=system_prompt, max_retries=1)
+        if content is None:
             if attempt < max_retries:
                 print(f"  🔄 准备重试...")
+            continue
 
-    print(f"  ❌  {name} 已重试 {max_retries} 次均失败，error={last_exception}")
+        # 提取 JSON 对象
+        json_match = re.search(r"\{.*\}", content, re.DOTALL)
+        if not json_match:
+            print(f"  ⚠️  {name} LLM 返回无有效 JSON（第{attempt}次）")
+            if attempt < max_retries:
+                print(f"  🔄 准备重试...")
+            continue
+
+        try:
+            data = json.loads(json_match.group())
+        except json.JSONDecodeError as e:
+            print(f"  ⚠️  {name} JSON 解析失败（第{attempt}次）: {e}")
+            if attempt < max_retries:
+                print(f"  🔄 准备重试...")
+            continue
+
+        # 兼容 zhDesc（历史字段名）与 zh_desc（SKILL.md 规范）
+        zh_desc = data.get("zh_desc") or data.get("zhDesc", "") or ""
+        features = data.get("features") or data.get("features_list") or []
+        audience = data.get("audience") or data.get("audience_list") or ""
+
+        # 补足 / 截断 features
+        while len(features) < 3:
+            features.append("")
+        features = features[:3]
+
+        return {
+            "zhDesc": zh_desc.strip(),
+            "features": [f.strip() for f in features],
+            "audience": (audience.strip() if isinstance(audience, str) else "、".join(audience)),
+        }
+
+    print(f"  ❌  {name} 已重试 {max_retries} 次均失败")
     return None
 
 
@@ -142,28 +177,7 @@ def _call_llm_for_cover_summary(repos_info: list[dict], max_retries: int = 3) ->
 其中 ··· 之间用中文领域关键词分隔。
 不要包含其他内容。"""
 
-    last_exception = None
-    for attempt in range(1, max_retries + 1):
-        try:
-            client = OpenAI(base_url=LLM_BASE_URL, api_key=LLM_API_KEY)
-            resp = client.chat.completions.create(
-                model=LLM_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-            )
-            text = resp.choices[0].message.content.strip()
-            if text:
-                return text
-            print(f"  ⚠️  coverSummary 返回空（第{attempt}次）")
-            last_exception = ValueError("Empty response")
-        except Exception as e:
-            print(f"  ⚠️  coverSummary 生成失败（第{attempt}次）: {e}")
-            last_exception = e
-            if attempt < max_retries:
-                print(f"  🔄 准备重试...")
-
-    print(f"  ❌  coverSummary 已重试 {max_retries} 次均失败，error={last_exception}")
-    return None
+    return _call_llm(prompt, max_retries=max_retries)
 
 
 # ═══════════════════════════════════════════════════════════════════

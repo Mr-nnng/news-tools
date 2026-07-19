@@ -4,61 +4,61 @@
   "date": "2026-07-19",
   "count": 14,
   "totalCount": 14,
-  "coverSummary": "本周 GitHub Trending 收录 14 个热门仓库，涵盖 C#·CSS·Python·Rust·Shell·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 14 个热门仓库，涵盖 AI 开发工具、AI 应用、视频编辑、办公自动化等领域。",
   "repos": [
     {
       "rank": 1,
       "name": "hallmark",
       "author": "Nutlope",
       "url": "https://github.com/Nutlope/hallmark",
-      "stars": 13096,
+      "stars": 13099,
       "forks": 662,
       "weeklyStars": 8834,
       "language": "CSS",
       "langColor": "#663399",
-      "zhDesc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "zhDesc": "反AI模版化设计技能，专为Claude Code、Cursor和Codex等AI编程工具打造。它通过57项检测门、自检批评与二十种主题，自动生成具有独特指纹的UI布局，彻底杜绝AI同质化。",
       "features": [
-        "",
-        "",
-        ""
+        "二十种主题搭配57项检测门彻底防止AI感",
+        "支持构建、审计、重构、设计学习四类命令",
+        "能从设计截图提取DNA生成可复用的设计规范"
       ],
-      "audience": ""
+      "audience": "AI开发者、前端设计师、产品经理、提示工程师"
     },
     {
       "rank": 2,
       "name": "OpenCut",
       "author": "OpenCut-app",
       "url": "https://github.com/OpenCut-app/OpenCut",
-      "stars": 75634,
+      "stars": 75637,
       "forks": 7609,
       "weeklyStars": 13319,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "The open-source CapCut alternative",
+      "zhDesc": "OpenCut是一款免费开源的跨平台视频编辑器，作为CapCut的开源替代品。它基于Rust核心支持Web、桌面和移动端，并提供插件系统、AI代理和无头模式等高级功能。",
       "features": [
-        "",
-        "",
-        ""
+        "基于Rust核心实现跨平台支持Web、桌面和移动端",
+        "提供编辑器API和插件架构方便第三方扩展",
+        "支持无头模式、脚本编辑和AI代理集成"
       ],
-      "audience": ""
+      "audience": "视频创作者、开源开发者、跨平台应用开发者、AI集成爱好者、内容编辑者"
     },
     {
       "rank": 3,
       "name": "awesome-llm-apps",
       "author": "Shubhamsaboo",
       "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-      "stars": 124279,
+      "stars": 124285,
       "forks": 18347,
       "weeklyStars": 6146,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
+      "zhDesc": "Awesome LLM Apps是一个收录了100+可运行AI代理、技能和RAG应用的开源仓库。它提供经端到端测试的模板，可克隆即用、自由定制，帮助开发者快速构建商用级智能代理。",
       "features": [
-        "",
-        "",
-        ""
+        "100余种AI代理、RAG与语音应用即用模板",
+        "克隆即可启动运行，支持定制与商业部署",
+        "集成多种主流模型和框架，提供端到端教程"
       ],
-      "audience": ""
+      "audience": "AI开发者、全栈工程师、产品经理、技术创业者"
     },
     {
       "rank": 4,
@@ -70,175 +70,175 @@
       "weeklyStars": 5635,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "\"Vibe-Trading: Your Personal Trading Agent\"",
+      "zhDesc": "Vibe-Trading 是一款开源的 AI 个人交易代理，通过自然语言指令即可驱动市场研究、策略回测与多智能体团队。它整合跨市场数据、460+量化因子和影子账户分析，让量化研究像聊天一样高效。",
       "features": [
-        "",
-        "",
-        ""
+        "自然语言研究与回测，一键生成策略报告",
+        "多智能体交易团队，支持投资与风控委员会",
+        "跨市场数据源与460+因子库，覆盖全方位分析"
       ],
-      "audience": ""
+      "audience": "量化交易者、个人投资者、金融研究员、AI开发者、策略工程师"
     },
     {
       "rank": 5,
       "name": "DeepTutor",
       "author": "HKUDS",
       "url": "https://github.com/HKUDS/DeepTutor",
-      "stars": 27808,
+      "stars": 27810,
       "forks": 3693,
       "weeklyStars": 2154,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "DeepTutor: Lifelong Personalized Tutoring.https://deeptutor.info/.",
+      "zhDesc": "DeepTutor 是一个基于 AI 智能体的终身个性化辅导平台，集成问答、解题、测验、研究、可视化与知识管理。它将学习上下文统一在连贯系统中，实现自适应学习与个性化教学。",
       "features": [
-        "",
-        "",
-        ""
+        "统一智能体循环同时驱动聊天、研究与解题模式",
+        "多引擎知识库支持文档智能检索与版本化管理",
+        "可溯源的三层记忆系统记录并关联学习历程"
       ],
-      "audience": ""
+      "audience": "学生、教师、自学者、教育研究者、AI开发者"
     },
     {
       "rank": 6,
       "name": "skills",
       "author": "mattpocock",
       "url": "https://github.com/mattpocock/skills",
-      "stars": 177075,
+      "stars": 177084,
       "forks": 15186,
       "weeklyStars": 11131,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "zhDesc": "真实工程师的AI Agent技能集，源自Matt Pocock日常配置，专为Claude Code、Codex等工具打造。它通过grill-me、tdd等十余个可组合技能，解决需求误解与代码低质问题，让AI编程走向真正工程实践。",
       "features": [
-        "",
-        "",
-        ""
+        "深度追问需求确保AI精准理解开发意图",
+        "内置TDD与审查闭环保障代码正确可靠",
+        "持续改进架构策略有效防止技术债务"
       ],
-      "audience": ""
+      "audience": "AI开发者、全栈工程师、技术负责人、架构师、提示工程师"
     },
     {
       "rank": 7,
       "name": "cangjie-skill",
       "author": "kangarooking",
       "url": "https://github.com/kangarooking/cangjie-skill",
-      "stars": 3751,
+      "stars": 3754,
       "forks": 532,
       "weeklyStars": 1224,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "把书、长视频、播客等高价值内容蒸馏成可执行的 Agent Skills",
+      "zhDesc": "Cangjie Skill 从书籍、长视频、播客等方法论来源中抽取核心技能，转化为可直接在 AI Agent 中调用的结构化包。它借助 RIA-TV++ 流水线和三重验证，让知识不再停留在收藏，而成为可执行的能力。",
       "features": [
-        "",
-        "",
-        ""
+        "从任何长文本自动抽取方法论，生成可复用的 Skill 单元",
+        "通过三重验证和压力测试，只保留独特且可落地的知识",
+        "产出完整技能仓库，含文档测试和关联图，直接集成 AI 工具"
       ],
-      "audience": ""
+      "audience": "知识工作者、AI开发者、内容创作者、深度读者、效率工具用户"
     },
     {
       "rank": 8,
       "name": "OfficeCLI",
       "author": "iOfficeAI",
       "url": "https://github.com/iOfficeAI/OfficeCLI",
-      "stars": 19492,
-      "forks": 1313,
+      "stars": 19493,
+      "forks": 1314,
       "weeklyStars": 4284,
       "language": "C#",
       "langColor": "#178600",
-      "zhDesc": "OfficeCLI is the first and best Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files. Free, open-source, single binary, no Office installation required.",
+      "zhDesc": "OfficeCLI是首个专为AI代理打造的Office命令行套件，支持Word、Excel、PowerPoint的读写与自动化。它通过单二进制免安装运行，让AI代理能像人类一样操控文档，彻底告别繁琐库依赖和GUI操作。",
       "features": [
-        "",
-        "",
-        ""
+        "AI原生接口，一行命令完成文档创建、编辑与查询",
+        "内置渲染引擎，让AI实时预览文档效果并自我修正",
+        "单二进制跨平台，自动集成主流AI编程工具和MCP"
       ],
-      "audience": ""
+      "audience": "AI代理开发者、自动化工程师、办公效率专家、数据分析师、产品经理"
     },
     {
       "rank": 9,
       "name": "ui-skills",
       "author": "ibelick",
       "url": "https://github.com/ibelick/ui-skills",
-      "stars": 5315,
+      "stars": 5316,
       "forks": 228,
       "weeklyStars": 1098,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Skills for Design Engineers",
+      "zhDesc": "UI Skills 是专为设计工程师和AI编程工具打造的CLI技能路由工具，将AI代理导向精心分类的UI技能集，确保输出符合设计规范，摆脱同质化界面。",
       "features": [
-        "",
-        "",
-        ""
+        "模块化技能集覆盖动效、基础UI等，灵活匹配任务",
+        "npx ui-skills start 一键路由至合适技能方向",
+        "支持 categories/list/get 命令精细控制技能应用"
       ],
-      "audience": ""
+      "audience": "设计工程师、AI开发者、前端设计师、提示工程师"
     },
     {
       "rank": 10,
       "name": "codex",
       "author": "openai",
       "url": "https://github.com/openai/codex",
-      "stars": 99564,
+      "stars": 99568,
       "forks": 14905,
       "weeklyStars": 2268,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Lightweight coding agent that runs in your terminal",
+      "zhDesc": "Codex CLI 是 OpenAI 开源的轻量级编码智能体，支持多平台并在终端本地运行。它让开发者无需离开命令行即可通过 ChatGPT 进行代码编写、调试与重构，确保隐私的同时提升效率。",
       "features": [
-        "",
-        "",
-        ""
+        "轻量级本地运行，确保代码安全与隐私",
+        "跨平台多种安装方式，快速上手即用",
+        "与 ChatGPT 无缝集成，智能增强编码体验"
       ],
-      "audience": ""
+      "audience": "开发者、程序员、技术团队、AI 编程用户、开源贡献者"
     },
     {
       "rank": 11,
       "name": "openinterpreter",
       "author": "openinterpreter",
       "url": "https://github.com/openinterpreter/openinterpreter",
-      "stars": 66762,
+      "stars": 66763,
       "forks": 5737,
       "weeklyStars": 2344,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "A coding agent for open models like Kimi K3",
+      "zhDesc": "Open Interpreter 是专为Kimi K3等低成本开放模型优化的编码代理。它通过Rust重写的Harness模拟Codex执行环境，支持多种模型切换和编辑器集成，让开发者以更低成本获得高效编码体验，显著降低AI编程门槛。",
       "features": [
-        "",
-        "",
-        ""
+        "支持/ harness命令切换不同的模型运行环境",
+        "兼容ACP和Codex SDK实现编辑器无缝集成",
+        "内置沙箱和浏览器驱动可自动化测试Web和原生应用"
       ],
-      "audience": ""
+      "audience": "AI开发者、提示工程师、测试工程师、产品经理"
     },
     {
       "rank": 12,
       "name": "code-review-graph",
       "author": "tirth8205",
       "url": "https://github.com/tirth8205/code-review-graph",
-      "stars": 20551,
+      "stars": 20560,
       "forks": 2139,
       "weeklyStars": 644,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Local-first code intelligence graph for MCP and CLI. Builds a persistent map of your codebase so AI coding tools read only what matters, with benchmarked context reductions on reviews and large-repo workflows.",
+      "zhDesc": "code-review-graph 是本地优先的代码智能图工具，专为 MCP 和 CLI 设计。它通过构建代码的持久化结构图谱，让 AI 编程工具只读取相关代码，大幅减少 Token 消耗，加速代码审查和大型仓库工作流。",
       "features": [
-        "",
-        "",
-        ""
+        "增量更新只重解析变更文件，更新速度低于2秒",
+        "爆炸半径分析自动追踪变更影响的文件与函数",
+        "风险评分的PR审查在CI中自动生成中文评论"
       ],
-      "audience": ""
+      "audience": "AI开发者、软件工程师、代码审查者、DevOps工程师"
     },
     {
       "rank": 13,
       "name": "pi",
       "author": "earendil-works",
       "url": "https://github.com/earendil-works/pi",
-      "stars": 72598,
-      "forks": 8966,
+      "stars": 72599,
+      "forks": 8967,
       "weeklyStars": 2782,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
+      "zhDesc": "Pi 是一个模块化的 AI 代理工具包，提供统一的 LLM API、代理运行时和交互式编码代理 CLI。它通过可扩展的设计降低构建 AI 代理的复杂度，使开发者能快速集成多模型并管理工具调用。",
       "features": [
-        "",
-        "",
-        ""
+        "统一 OpenAI、Anthropic 等多提供商 LLM 接口",
+        "代理运行时支持工具调用与状态持久化管理",
+        "交互式编码 CLI 内置终端 UI 差分渲染能力"
       ],
-      "audience": ""
+      "audience": "AI 开发者、Agent 工程师、CLI 工具爱好者、全栈程序员"
     },
     {
       "rank": 14,
@@ -250,13 +250,13 @@
       "weeklyStars": 291,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "暂无描述",
+      "zhDesc": "Anthropic官方Code with Claude工作坊的材料集合，涵盖模型优化、多代理系统、评估驱动开发等九大课题。通过动手实验与完整代码，系统培养开发者利用Claude构建智能代理的最佳实践。",
       "features": [
-        "",
-        "",
-        ""
+        "包含模型选择、多代理编排、评估驱动等关键课题",
+        "提供可运行代码与分步指导，快速上手Agent实践",
+        "从单代理到生产部署，全面覆盖AI工程能力链路"
       ],
-      "audience": ""
+      "audience": "AI开发者、提示工程师、全栈工程师、技术架构师、AI产品经理"
     }
   ]
 }

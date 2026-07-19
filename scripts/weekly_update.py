@@ -65,7 +65,6 @@ def _call_llm(prompt: str, system_prompt: str | None = None, max_retries: int = 
             resp = httpx.post(
                 f"{LLM_BASE_URL}/chat/completions",
                 json=payload,
-                timeout=120,
             )
             resp.raise_for_status()
             data = resp.json()

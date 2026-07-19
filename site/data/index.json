@@ -1,15 +1,10 @@
 {
   "gh": {
-    "count": 8,
+    "count": 7,
     "months": [
       {
         "label": "2026年07月",
         "items": [
-          {
-            "date": "2026-07-19",
-            "count": 14,
-            "summary": "本周 GitHub Trending 收录 14 个热门仓库，涵盖 AI 开发工具、AI 应用、视频编辑、办公自动化等领域。"
-          },
           {
             "date": "2026-07-18",
             "count": 19,

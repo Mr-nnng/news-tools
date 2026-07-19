@@ -17,7 +17,6 @@
 - **周报加工** — LLM 增强生成中文描述、特点、受众标签
 - **JSON 数据输出** — 所有数据以 JSON 格式组织到 `site/data/`，由 SPA 运行时渲染
 - **SPA 静态站点** — `app.js` + `app.css` 实现客户端路由和数据驱动的动态页面
-- **截图工具** — 基于 Playwright 的 HTML 元素截图，适用于报告封面/卡片导出
 - **Cloudflare Pages 部署** — 零构建步骤，直接部署 `site/` 目录即可
 
 ---
@@ -30,9 +29,6 @@ news/
 │   ├── trending.py                # GitHub Trending 获取
 │   ├── wallstreet.py              # 华尔街见闻 7x24 快讯
 │   ├── xwlb.py                    # 新闻联播摘要
-│   ├── screenshot.py              # HTML 元素导出图片
-│   ├── build_report.py            # 周报 enrich JSON 生成（不再生成 HTML）
-│   ├── build_xwlb_html.py         # 新闻联播 JSON 数据迁移
 │   ├── __init__.py
 │   └── __main__.py
 ├── site/                          # 构建输出的静态站点（可直接部署到 CF Pages）
@@ -43,18 +39,13 @@ news/
 │   ├── assets/fonts/              # 自托管字体
 │   └── data/                      # JSON 数据层
 │       ├── index.json             # 聚合索引（双 Tab 列表 + 统计）
-│       ├── xwlb/                  # 新闻联播数据
+│       ├── github/                # GitHub 周报数据
 │       │   └── YYYY-MM-DD.json
-│       └── github/                # GitHub 周报数据
+│       └── xwlb/                  # 新闻联播数据
 │           └── YYYY-MM-DD.json
 ├── assets/
 │   ├── fonts/                     # 网页字体（woff2）
-│   └── templates/                 # HTML 模板（仅用于 LLM 加工参考）
-│       ├── landing-news-tools.html # 旧版主页模板（归档）
-│       ├── github-trending.html    # 旧版周报模板（归档）
-│       └── xwlb-page.html         # 旧版新闻联播模板（归档）
-├── .github/workflows/
-│   └── daily-xwlb.yml             # 每日新闻联播自动更新（GitHub Actions）
+│   └── templates/                 #（已清空，v1.0 遗留模板已移除）
 ├── scripts/
 │   ├── build_site.py              # 构建部署目录：输出 JSON + SPA 静态资源
 │   └── daily_update.py            # GitHub Actions 每日更新入口（SPA 模式）
@@ -96,7 +87,6 @@ uv pip install -e .
 | `requests>=2.31.0` | HTTP 请求 |
 | `beautifulsoup4>=4.12.0` | HTML 解析 |
 | `pydantic>=2.0.0` | 数据建模与 JSON 序列化 |
-| `playwright>=1.60.0` | 截图工具（可选） |
 
 ---
 
@@ -133,16 +123,6 @@ python -m news_tools.xwlb --date 2026-05-29
 python -m news_tools.xwlb --date 2026-05-29 -o xwlb.json
 python -m news_tools.xwlb --compact                # 仅输出 items 数组
 python -m news_tools.xwlb --markdown               # Markdown 格式输出
-```
-
-### 截图工具
-
-```bash
-# 按选择器批量导出为 PNG
-python -m news_tools.screenshot report.html --selector .page -o screenshots/
-
-# 整页截图
-python -m news_tools.screenshot report.html --full-page -o page.png
 ```
 
 ### CLI 命令（安装后可用）
@@ -185,7 +165,9 @@ result = get_xwlb(2026, 5, 29)
 python scripts/build_site.py
 ```
 
-此命令扫描 `site/data/` 下的现有 JSON 数据，重建 `index.json` 聚合索引。不生成 HTML 页面 —— 所有页面由 SPA 运行时在客户端动态渲染。
+此命令扫描 `site/data/github/*.json` 和 `site/data/xwlb/*.json` 下的现有数据，重建 `index.json` 聚合索引。不生成 HTML 页面 —— 所有页面由 SPA 运行时在客户端动态渲染。
+
+幂等安全：重复运行不会破坏已有数据。
 
 ### 每日更新（新闻联播）
 
@@ -193,16 +175,16 @@ python scripts/build_site.py
 python scripts/daily_update.py
 ```
 
-从央视网 API 获取当日新闻联播数据，写入 `site/data/xwlb/YYYY-MM-DD.json`，然后重建 `index.json`。
+从央视网 API 获取当日新闻联播数据，直接写入 `site/data/xwlb/YYYY-MM-DD.json`，然后重建 `index.json`。
 
-### 数据源目录结构
+### 数据目录结构
 
-构建脚本识别的数据来源（由外部工具或 CI 放入）：
+所有数据文件位于 `site/data/` 下，构建脚本自动从中读取：
 
 ```
 site/data/
 ├── index.json              # ← 自动生成：聚合索引
-├── github/                 # ← GitHub 周报 enrich JSON
+├── github/                 # ← GitHub 周报 JSON
 │   └── YYYY-MM-DD.json    #    含 summary, repos 等字段
 └── xwlb/                   # ← 新闻联播 JSON
     └── YYYY-MM-DD.json    #    含 date, items 等字段

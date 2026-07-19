@@ -41,12 +41,12 @@ jobs:
         id: check
         run: |
           DATE="${{ steps.update.outputs.date }}"
-          if [ -f "site/xwlb/$DATE/index.html" ]; then
+          if [ -f "site/data/xwlb/$DATE.json" ]; then
             echo "has_new=true" >> "$GITHUB_OUTPUT"
-            echo "✅ 新数据已生成: site/xwlb/$DATE/index.html"
+            echo "✅ 新数据已生成: site/data/xwlb/$DATE.json"
           else
             echo "has_new=false" >> "$GITHUB_OUTPUT"
-            echo "⚠️  $DATE 暂无新数据，但可能已有历史页面变更需要提交"
+            echo "⚠️  $DATE 暂无新数据，但可能已有变更需要提交"
           fi
 
       - name: 提交并推送变更
@@ -54,7 +54,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add site/ report/
+          git add site/
 
           if git diff --quiet && git diff --staged --quiet; then
             echo "ℹ️  没有新的变更需要提交"

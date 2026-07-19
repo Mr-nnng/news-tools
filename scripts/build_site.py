@@ -2,15 +2,15 @@
 """
 build_site.py — Assemble deployment directory for News Tools (SPA mode)
 
-Changes from v2 (SPA refactor):
-- No longer generates full HTML pages
-- Outputs JSON data files only (site/data/{index,github/*,xwlb/*.json})
-- SPA runtime (app.js + app.css) handles client-side rendering
+Reads existing JSON data from site/data/ (github/*.json, xwlb/*.json)
+and rebuilds site/data/index.json for the SPA landing page.
+
+Idempotent: safe to run multiple times — never destroys existing data.
 
 Usage:
     python scripts/build_site.py
 
-Output: site/ directory ready for Cloudflare Pages deployment.
+Output: site/data/index.json
 """
 
 import json
@@ -24,11 +24,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from news_tools.build_xwlb_html import build_xwlb_page
-from news_tools.build_report import build_report
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-REPORT_DIR = PROJECT_ROOT / "report"
 ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 
@@ -36,19 +32,6 @@ FONTS_DIR = SITE_DIR / "assets" / "fonts"
 DATA_DIR = SITE_DIR / "data"
 GH_DATA_DIR = DATA_DIR / "github"
 XWLB_DATA_DIR = DATA_DIR / "xwlb"
-
-
-def clean_site():
-    """Remove everything except app.css, app.js, index.html, assets/"""
-    if not SITE_DIR.exists():
-        return
-    for item in SITE_DIR.iterdir():
-        if item.name in ("app.css", "app.js", "index.html", "assets"):
-            continue
-        if item.is_dir():
-            shutil.rmtree(item)
-        else:
-            item.unlink()
 
 
 def copy_fonts():
@@ -66,16 +49,8 @@ def copy_fonts():
 # ── Shared helpers ──
 
 
-def format_date(rd: str) -> str:
-    """Format a report directory name into a human-readable Chinese date string."""
-    parts = rd.split("-")
-    if len(parts) == 3 and parts[0].isdigit():
-        return f"{parts[0]}年{int(parts[1])}月{int(parts[2])}日"
-    return rd
-
-
 def get_month_key(rd: str) -> str:
-    """Extract year-month key from a report directory name like '2026-06-07'."""
+    """Extract year-month key from a date string like '2026-06-07'."""
     parts = rd.split("-")
     if len(parts) >= 2 and parts[0].isdigit():
         return f"{parts[0]}年{int(parts[1]):02d}月"
@@ -90,178 +65,50 @@ def month_sort_key(mk: str) -> tuple[int, int]:
     return (0, 0)
 
 
-def load_enriched_json(rd: str) -> dict | None:
-    """Load enriched JSON for a GitHub report directory."""
-    enriched_json = (
-        REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
-    )
-    if not enriched_json.exists():
+def load_gh_data(rd: str) -> dict | None:
+    """Load GitHub weekly JSON from site/data/github/{rd}.json."""
+    path = GH_DATA_DIR / f"{rd}.json"
+    if not path.exists():
         return None
     try:
-        return json.loads(enriched_json.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return None
 
 
 def load_xwlb_data(rd: str) -> dict | None:
-    """Load xwlb.json for a given date string."""
-    json_path = REPORT_DIR / f"xwlb-{rd}" / "data" / "xwlb.json"
-    if not json_path.exists():
+    """Load XWLB JSON from site/data/xwlb/{rd}.json."""
+    path = XWLB_DATA_DIR / f"{rd}.json"
+    if not path.exists():
         return None
     try:
-        return json.loads(json_path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return None
 
 
-# ── GitHub JSON generation ──
-
-
-def build_gh_json(rd: str) -> dict | None:
-    """Generate a GitHub weekly JSON data file.
-
-    Returns the data dict, or None if source data is missing.
-    """
-    enriched = load_enriched_json(rd)
-    if not enriched:
-        return None
-
-    repos_raw = enriched.get("repos", [])
-    repos = []
-    for i, r in enumerate(repos_raw):
-        repos.append({
-            "rank": i + 1,
-            "name": r.get("name", ""),
-            "author": r.get("author", ""),
-            "url": r.get("url", ""),
-            "stars": r.get("stars_total", 0),
-            "forks": r.get("forks", 0),
-            "weeklyStars": r.get("stars_today", 0),
-            "language": r.get("language", ""),
-            "langColor": r.get("language_color", "#888"),
-            "zhDesc": r.get("zh_desc") or r.get("description") or "",
-            "features": r.get("features", []),
-            "audience": r.get("audience", ""),
-        })
-
-    # Derive week info from date
-    date_part = rd
-    try:
-        parts = date_part.split("-")
-        if len(parts) >= 3 and parts[0].isdigit():
-            dt = datetime(int(parts[0]), int(parts[1]), int(parts[2]))
-            week_num = dt.isocalendar()[1]
-            week_label = f"{dt.year}年第{week_num}周"
-            week_info = f"{dt.year} 年第 {week_num} 周 / {dt.strftime('%Y-%m-%d')}"
-        else:
-            week_label = rd
-            week_info = rd
-    except (ValueError, IndexError):
-        week_label = rd
-        week_info = rd
-
-    return {
-        "weekLabel": week_label,
-        "weekInfo": week_info,
-        "date": rd,
-        "count": len(repos),
-        "totalCount": enriched.get("total_count", len(repos)),
-        "coverSummary": enriched.get("cover_summary", ""),
-        "repos": repos,
-    }
-
-
-def build_gh_data_files() -> list[str]:
-    """Scan report/ dirs, generate JSON data files for GitHub weekly."""
-    if not REPORT_DIR.exists():
+def scan_data_dates(data_dir: Path) -> list[str]:
+    """Scan a data directory for date-stamped JSON files."""
+    if not data_dir.exists():
         return []
-
-    gh_dates = []
-    for item in sorted(REPORT_DIR.iterdir()):
-        if not item.name.startswith("github-trending-weekly-"):
-            continue
-        date_part = item.name.replace("github-trending-weekly-", "")
-        enriched_json = item / "data" / "enriched-trending.json"
-        if not enriched_json.exists():
-            print(f"  ⏭️  {item.name}: no enriched-trending.json found")
-            continue
-
-        data = build_gh_json(date_part)
-        if data is None:
-            continue
-
-        # Write JSON to site/data/github/YYYY-MM-DD.json
-        out_path = GH_DATA_DIR / f"{date_part}.json"
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(
-            json.dumps(data, indent=2, ensure_ascii=False),
-            encoding="utf-8",
-        )
-        print(f"  ✅ {item.name} → {out_path.relative_to(PROJECT_ROOT)}")
-        gh_dates.append(date_part)
-
-    return sorted(gh_dates)
-
-
-# ── XWLB JSON generation ──
-
-
-def build_xwlb_data_files() -> list[str]:
-    """Scan report/xwlb-* dirs and generate JSON data files in site/data/xwlb/."""
-    if not REPORT_DIR.exists():
-        return []
-
-    xwlb_dates = []
-    for item in sorted(REPORT_DIR.iterdir()):
-        if not item.name.startswith("xwlb-"):
-            continue
-        date_part = item.name.replace("xwlb-", "")
-        json_path = item / "data" / "xwlb.json"
-        if not json_path.exists():
-            print(f"  ⏭️  {item.name}: no xwlb.json found")
-            continue
-
-        try:
-            data = json.loads(json_path.read_text(encoding="utf-8"))
-        except Exception:
-            print(f"  ❌ {item.name}: failed to parse xwlb.json")
-            continue
-
-        # Build simplified JSON for SPA
-        items = data.get("items", [])
-        xwlb_out = {
-            "title": data.get("title", ""),
-            "date": data.get("date", ""),
-            "url": data.get("url", ""),
-            "count": len(items),
-            "summary": data.get("summary", ""),
-            "items": [
-                {
-                    "title": item.get("title", ""),
-                    "url": item.get("url", ""),
-                    "content": item.get("content", ""),
-                }
-                for item in items
-            ],
-        }
-
-        out_path = XWLB_DATA_DIR / f"{date_part}.json"
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(
-            json.dumps(xwlb_out, indent=2, ensure_ascii=False),
-            encoding="utf-8",
-        )
-        print(f"  ✅ {item.name} → {out_path.relative_to(PROJECT_ROOT)}")
-        xwlb_dates.append(date_part)
-
-    return sorted(xwlb_dates)
+    return sorted(
+        f.stem for f in data_dir.iterdir()
+        if f.is_file() and f.suffix == ".json"
+        and re.match(r"^\d{4}-\d{2}-\d{2}$", f.stem)
+    )
 
 
 # ── Index JSON generation ──
 
 
-def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
-    """Generate site/data/index.json for the landing page."""
+def build_index_data() -> dict:
+    """Generate site/data/index.json from existing site/data/ files.
+
+    Scans site/data/github/*.json and site/data/xwlb/*.json,
+    groups them by month, and writes index.json for the SPA landing page.
+    """
+    gh_dates = scan_data_dates(GH_DATA_DIR)
+    xwlb_dates = scan_data_dates(XWLB_DATA_DIR)
 
     def build_month_groups(dates: list[str], loader_fn, count_label: str):
         """Build month-grouped item list."""
@@ -302,11 +149,9 @@ def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
                 "summary": display_summary,
             })
 
-        # Sort items within each month
         for mk in month_groups:
             month_groups[mk].sort(key=lambda x: x["date"], reverse=True)
 
-        # Sort months
         sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
         return [
             {"label": mk, "items": month_groups[mk]}
@@ -314,7 +159,7 @@ def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
         ]
 
     gh_months = build_month_groups(
-        gh_dates, lambda rd: build_gh_json(rd), "项目"
+        gh_dates, lambda rd: load_gh_data(rd), "项目"
     )
     xwlb_months = build_month_groups(
         xwlb_dates, lambda rd: load_xwlb_data(rd), "新闻"
@@ -339,15 +184,7 @@ def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
         encoding="utf-8",
     )
     print(f"  ✅ index.json → {out_path.relative_to(PROJECT_ROOT)}")
-
-    # Print stats
-    total_projects = 0
-    for rd in gh_dates:
-        data = load_enriched_json(rd)
-        if data:
-            total_projects += data.get("total_count", 0) or len(data.get("repos", []))
-    print(f"     📊 {len(gh_dates)} GitHub reports, {total_projects} total projects")
-    print(f"     📊 {len(xwlb_dates)} XWLB days")
+    print(f"     📊 {len(gh_dates)} GitHub reports, {len(xwlb_dates)} XWLB days")
 
     return index_data
 
@@ -358,8 +195,6 @@ def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
 
 
 def main():
-    if REPORT_DIR.exists():
-        clean_site()
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
     print("🔨 Building site (SPA mode)...\n")
@@ -367,16 +202,8 @@ def main():
     print("📁 Copying fonts...")
     copy_fonts()
 
-    print("\n📁 Building GitHub weekly JSON data...")
-    gh_dates = build_gh_data_files()
-    print(f"  📁 {len(gh_dates)} GitHub weekly data files")
-
-    print("\n📁 Building XWLB JSON data...")
-    xwlb_dates = build_xwlb_data_files()
-    print(f"  📁 {len(xwlb_dates)} XWLB data files")
-
-    print("\n📄 Generating index.json...")
-    build_index_data(gh_dates, xwlb_dates)
+    print("\n📄 Building index.json from existing data...")
+    build_index_data()
 
     print(f"\n✅ Build complete → {SITE_DIR.relative_to(PROJECT_ROOT)}/")
     print(f"   📂 SPA shell: index.html + app.css + app.js")

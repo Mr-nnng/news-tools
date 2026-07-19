@@ -28,7 +28,6 @@ import build_site  # 复用 data / month 工具函数
 
 ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
-REPORT_DIR = PROJECT_ROOT / "report"
 DATA_DIR = SITE_DIR / "data"
 XWLB_DATA_DIR = DATA_DIR / "xwlb"
 FONTS_SRC = ASSETS_DIR / "fonts"
@@ -95,33 +94,9 @@ def ensure_fonts() -> None:
 # ═══════════════════════════════════════════════════════════════════
 
 
-def load_xwlb_raw(date_str: str) -> dict | None:
-    """从 report/xwlb-{date_str}/data/xwlb.json 读取原始数据。"""
-    path = REPORT_DIR / f"xwlb-{date_str}" / "data" / "xwlb.json"
-    if not path.exists():
-        return None
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return None
-
-
 def rebuild_index() -> None:
     """从 data/ 目录现有文件重建 site/data/index.json。"""
-    # —— GitHub 部分 ——
-    gh_dates = []
-    gh_dir = DATA_DIR / "github"
-    if gh_dir.exists():
-        gh_dates = sorted(
-            f.stem for f in gh_dir.iterdir()
-            if f.is_file() and f.suffix == ".json" and re.match(r"^\d{4}-\d{2}-\d{2}$", f.stem)
-        )
-
-    # —— XWLB 部分 ——
-    xwlb_dates = get_xwlb_dates()
-
-    # —— 复用 build_site 的 index 构建 ——
-    build_site.build_index_data(gh_dates, xwlb_dates)
+    build_site.build_index_data()
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -174,24 +149,13 @@ def main() -> None:
         rebuild_index()
         return
 
-    # Step 3: 保存原始数据到 report/（与 build_site 一致）
-    report_data_dir = REPORT_DIR / f"xwlb-{date_str}" / "data"
-    report_data_dir.mkdir(parents=True, exist_ok=True)
-    data_path = report_data_dir / "xwlb.json"
-    data_path.write_text(
-        json.dumps(result.model_dump(), indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
-    print(f"  ✅ 原始数据保存 → {data_path.relative_to(PROJECT_ROOT)}")
+    # Step 3: 生成 SPA JSON 数据文件
+    print(f"\n📄 生成 SPA JSON 数据...")
+    out_path = save_xwlb_json(date_str, result.model_dump())
+    print(f"  ✅ SPA JSON → {out_path.relative_to(PROJECT_ROOT)}")
     print(f"     共 {len(result.items)} 条新闻")
 
-    # Step 4: 生成 SPA JSON 数据文件
-    print(f"\n📄 生成 SPA JSON 数据...")
-    raw_data = json.loads(data_path.read_text(encoding="utf-8"))
-    out_path = save_xwlb_json(date_str, raw_data)
-    print(f"  ✅ SPA JSON → {out_path.relative_to(PROJECT_ROOT)}")
-
-    # Step 5: 重建 index.json
+    # Step 4: 重建 index.json
     print(f"\n🏠 重建 index.json...")
     rebuild_index()
 

@@ -37,7 +37,7 @@ GH_DATA_DIR = DATA_DIR / "github"
 # ── LLM 配置 ───────────────────────────────────────────────────────
 LLM_BASE_URL = "https://opencode.ai/zen/v1"
 LLM_MODEL = "deepseek-v4-flash-free"
-LLM_API_KEY = None  # free model 无需真实 key
+LLM_API_KEY = None  # free model 无需 key，传 None 则不发送 Authorization Header
 
 
 # ═══════════════════════════════════════════════════════════════════

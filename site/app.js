@@ -822,6 +822,13 @@
   }
 
   function navigate() {
+    // 如果 hash 存在但不是 #/ 开头的路由（如 #repo-01 等内部锚点），
+    // 交给浏览器原生锚点滚动处理，不触发路由切换
+    var rawHash = window.location.hash;
+    if (rawHash && rawHash.indexOf('#/') !== 0) {
+      return;
+    }
+
     var parsed = parseHash();
 
     if (parsed.route === 'landing') {

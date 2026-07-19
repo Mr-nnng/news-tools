@@ -12,7 +12,6 @@ daily_update.py — GitHub Actions 每日新闻联播自动更新入口 (SPA mod
 
 import json
 import re
-import shutil
 import sys
 import argparse
 from pathlib import Path
@@ -26,12 +25,9 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 from news_tools.xwlb import get_xwlb
 import build_site  # 复用 data / month 工具函数
 
-ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 DATA_DIR = SITE_DIR / "data"
 XWLB_DATA_DIR = DATA_DIR / "xwlb"
-FONTS_SRC = ASSETS_DIR / "fonts"
-FONTS_DST = SITE_DIR / "assets" / "fonts"
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -77,16 +73,6 @@ def save_xwlb_json(date_str: str, data: dict) -> Path:
     return out_path
 
 
-def ensure_fonts() -> None:
-    """复制字体到 site/assets/fonts/（如不存在）。"""
-    if not FONTS_SRC.exists():
-        return
-    FONTS_DST.mkdir(parents=True, exist_ok=True)
-    for f in FONTS_SRC.iterdir():
-        if f.is_file():
-            dst = FONTS_DST / f.name
-            if not dst.exists():
-                shutil.copy2(f, dst)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -135,7 +121,6 @@ def main() -> None:
     # Step 1: 确保站点资源
     print("📁 确保站点资源...")
     SITE_DIR.mkdir(parents=True, exist_ok=True)
-    ensure_fonts()
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     print("  ✅ 站点目录就绪")
 

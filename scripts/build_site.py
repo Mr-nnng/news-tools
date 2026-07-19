@@ -15,7 +15,6 @@ Output: site/data/index.json
 
 import json
 import re
-import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -25,25 +24,11 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 
-FONTS_DIR = SITE_DIR / "assets" / "fonts"
 DATA_DIR = SITE_DIR / "data"
 GH_DATA_DIR = DATA_DIR / "github"
 XWLB_DATA_DIR = DATA_DIR / "xwlb"
-
-
-def copy_fonts():
-    """Copy fonts to site/ for monospace (JetBrains Mono)."""
-    FONTS_DIR.mkdir(parents=True, exist_ok=True)
-    src = ASSETS_DIR / "fonts"
-    if src.exists():
-        for f in src.iterdir():
-            if f.is_file():
-                shutil.copy2(f, FONTS_DIR / f.name)
-                print(f"  📄 {f.name}")
-    print(f"  ✅ Fonts → {FONTS_DIR.relative_to(PROJECT_ROOT)}")
 
 
 # ── Shared helpers ──
@@ -199,10 +184,7 @@ def main():
 
     print("🔨 Building site (SPA mode)...\n")
 
-    print("📁 Copying fonts...")
-    copy_fonts()
-
-    print("\n📄 Building index.json from existing data...")
+    print("📄 Building index.json from existing data...")
     build_index_data()
 
     print(f"\n✅ Build complete → {SITE_DIR.relative_to(PROJECT_ROOT)}/")

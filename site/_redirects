@@ -1,0 +1,5 @@
+# Cloudflare Pages Redirects
+# Old HTML URLs → SPA hash routes (301 permanent redirect)
+
+/xwlb/*/index.html   /#/xwlb/:splat   301
+/github_weekly/*/report.html   /#/github/:splat   301

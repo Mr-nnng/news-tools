@@ -1,0 +1,352 @@
+{
+  "weekLabel": "2026年第29周",
+  "weekInfo": "2026 年第 29 周 / 2026-07-18",
+  "date": "2026-07-18",
+  "count": 19,
+  "totalCount": 19,
+  "coverSummary": "本周 GitHub Trending 收录 19 个热门仓库，AI 编程工具与开发基础设施成为本周明星。涵盖 AI 代理框架·设计系统·C++ 基础库·视频编辑器·量化交易系统·JavaScript 运行时·Office 自动化·AI 自适应教育·AI 网关·终端复用器·CI/CD 工具·原生桌面应用等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "hallmark",
+      "author": "Nutlope",
+      "url": "https://github.com/Nutlope/hallmark",
+      "stars": 12178,
+      "forks": 610,
+      "weeklyStars": 8075,
+      "language": "CSS",
+      "langColor": "#663399",
+      "zhDesc": "反AI模版化设计技能，专为Claude Code、Cursor等AI编程工具打造。它通过57项检测门和二十种主题，自动生成独特UI布局，彻底告别千篇一律的AI生成界面。开发者可一键审计、重构或学习现有设计，快速打造差异化的产品外观。",
+      "features": [
+        "二十种主题搭配57项抗模版检测门防止AI感",
+        "支持审计、重构、学习四类命令覆盖设计全流程",
+        "能从设计截图提取DNA生成跨项目可复用规范"
+      ],
+      "audience": "AI开发者、前端设计师、产品经理、提示工程师"
+    },
+    {
+      "rank": 2,
+      "name": "abseil-cpp",
+      "author": "abseil",
+      "url": "https://github.com/abseil/abseil-cpp",
+      "stars": 17962,
+      "forks": 3139,
+      "weeklyStars": 608,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "Google开源的C++基础库集合，作为C++标准库的有力补充。提供算法、容器、字符串处理等高效且经过生产验证的组件，解决C++开发中常见但标准库未覆盖的需求。广泛用于Google内部，具备测试完善、兼容性强的特点。",
+      "features": [
+        "提供算法、容器等生产级C++补充组件",
+        "源代码来自Google内部经过严苛测试与验证",
+        "支持C++17标准并集成Bazel与CMake构建"
+      ],
+      "audience": "C++开发者、系统程序员、基础架构工程师、软件工程研究者"
+    },
+    {
+      "rank": 3,
+      "name": "stitch-skills",
+      "author": "google-labs-code",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "stars": 7628,
+      "forks": 893,
+      "weeklyStars": 1076,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Google Stitch MCP服务器的设计技能库，兼容Claude Code、Cursor等主流AI编程工具。为AI代理提供直接创建、管理和优化设计的能力，解决AI生成界面千篇一律的问题。通过插件市场一键安装，快速接入Stitch设计系统。",
+      "features": [
+        "提供设计、构建、工具三大类技能插件",
+        "一键安装至Claude Code与Cursor等环境",
+        "遵循Agent Skills开放标准保证生态兼容"
+      ],
+      "audience": "AI开发者、UI/UX设计师、全栈工程师、设计系统维护者"
+    },
+    {
+      "rank": 4,
+      "name": "Vibe-Trading",
+      "author": "HKUDS",
+      "url": "https://github.com/HKUDS/Vibe-Trading",
+      "stars": 24685,
+      "forks": 4087,
+      "weeklyStars": 5616,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于大语言模型的个人交易代理，通过自然语言指挥完成股票、加密货币等交易操作。解决普通用户缺乏程序化交易能力的痛点，支持模拟账户和实盘对接。提供Web界面和MCP协议接口，五分钟即可部署使用。",
+      "features": [
+        "支持股票与加密货币的智能交易代理",
+        "提供模拟账户与实盘双模式运行",
+        "通过自然语言指令即可完成复杂交易"
+      ],
+      "audience": "量化交易爱好者、个人投资者、金融科技开发者、AI研究者"
+    },
+    {
+      "rank": 5,
+      "name": "DesktopCommanderMCP",
+      "author": "wonderwhy-er",
+      "url": "https://github.com/wonderwhy-er/DesktopCommanderMCP",
+      "stars": 8461,
+      "forks": 934,
+      "weeklyStars": 1657,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "为Claude AI提供终端控制、文件搜索和差异化编辑能力的MCP服务器。让AI编程工具能直接运行命令、管理进程和编辑文件，突破传统只读限制。支持长时间运行任务和文件预览，大幅提升自动化效率。",
+      "features": [
+        "赋予AI agent完整终端控制与文件编辑能力",
+        "支持长时间运行任务后台管理与进程监控",
+        "集成文件搜索与差异编辑提升代码修改效率"
+      ],
+      "audience": "AI开发者、DevOps工程师、命令行爱好者、自动化工程师、后端开发者"
+    },
+    {
+      "rank": 6,
+      "name": "OpenCut",
+      "author": "OpenCut-app",
+      "url": "https://github.com/OpenCut-app/OpenCut",
+      "stars": 74992,
+      "forks": 7555,
+      "weeklyStars": 12718,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源跨平台视频编辑器，是CapCut的替代方案。基于Rust核心构建，支持桌面、网页和移动端，提供插件架构进行功能扩展。正在重写新版本，将加入MCP服务器和headless模式以支持AI自动化。",
+      "features": [
+        "基于Rust核心实现跨平台三端统一体验",
+        "插件优先架构支持第三方功能扩展",
+        "规划MCP服务器实现AI自动化编辑"
+      ],
+      "audience": "视频创作者、开源爱好者、Rust开发者、AI集成开发者"
+    },
+    {
+      "rank": 7,
+      "name": "orca",
+      "author": "stablyai",
+      "url": "https://github.com/stablyai/orca",
+      "stars": 21248,
+      "forks": 1536,
+      "weeklyStars": 5409,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "并行AI代理编排器，可在多个独立工作树中同时运行Codex、Claude Code等代理。解决单一代码生成效率瓶颈，通过并行开发和结果对比加速软件构建。支持移动端远程监控和通知，让开发者随时随地管理代理工作。",
+      "features": [
+        "支持多种编程代理在独立工作树中并行运行",
+        "提供移动端远程监控与即时通知功能",
+        "通过对比合并机制选择最优代理输出"
+      ],
+      "audience": "AI开发者、软件架构师、高级开发者、效率工具探索者、团队主管"
+    },
+    {
+      "rank": 8,
+      "name": "awesome-llm-apps",
+      "author": "Shubhamsaboo",
+      "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+      "stars": 123656,
+      "forks": 18227,
+      "weeklyStars": 6252,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "超过100个可运行的开源AI代理和RAG应用模板集合，覆盖从简单到复杂的各类场景。解决开发者从零构建AI应用耗时的问题，提供即克隆即用的完整代码。支持多种模型提供商，便于学习和二次开发。",
+      "features": [
+        "汇集超百个端到端AI代理与RAG应用模板",
+        "支持Claude、GPT、Gemini等主流大模型",
+        "每套模板可独立克隆部署快速验证想法"
+      ],
+      "audience": "AI应用开发者、初学者、产品经理、研究者、技术团队"
+    },
+    {
+      "rank": 9,
+      "name": "bun",
+      "author": "oven-sh",
+      "url": "https://github.com/oven-sh/bun",
+      "stars": 94807,
+      "forks": 4883,
+      "weeklyStars": 1212,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "极速JavaScript/TypeScript运行时、打包器、测试运行器和包管理器的合一工具。解决Node.js生态工具碎片化导致的开发效率低下问题，采用JavaScriptCore引擎提升启动速度和内存效率。零配置支持TypeScript和JSX，开箱即用。",
+      "features": [
+        "一款可替代Node.js的极速JavaScript运行时",
+        "集成包管理器、测试器和打包器于一体",
+        "基于JavaScriptCore引擎显著提升启动速度"
+      ],
+      "audience": "前端开发者、全栈工程师、Node.js用户、新项目启动者、性能优化工程师"
+    },
+    {
+      "rank": 10,
+      "name": "OfficeCLI",
+      "author": "iOfficeAI",
+      "url": "https://github.com/iOfficeAI/OfficeCLI",
+      "stars": 18905,
+      "forks": 1267,
+      "weeklyStars": 4611,
+      "language": "C#",
+      "langColor": "#178600",
+      "zhDesc": "全球首个专为AI代理设计的Office套件，零依赖二进制文件即可操作Word、Excel和PowerPoint。解决AI无法直接生成Office文档的痛点，内置渲染引擎支持预览和修正。无需安装Microsoft Office，可无缝集成到AI工作流。",
+      "features": [
+        "专为AI代理设计的Word、Excel、PPT操作工具",
+        "内置HTML渲染引擎实现高保真文档预览",
+        "单二进制零依赖即可独立运行与集成"
+      ],
+      "audience": "AI开发者、办公自动化工程师、文档处理人员、企业IT管理员"
+    },
+    {
+      "rank": 11,
+      "name": "claude-code-templates",
+      "author": "davila7",
+      "url": "https://github.com/davila7/claude-code-templates",
+      "stars": 29688,
+      "forks": 3158,
+      "weeklyStars": 1084,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于CLI的Claude Code配置与监控工具，提供项目管理模板和实时监控仪表盘。解决Claude Code在多项目管理中的统一配置和进度跟踪难题。支持自定义模板和自动化流水线，提升AI编码代理的使用体验。",
+      "features": [
+        "CLI方式管理Claude Code项目模板与配置",
+        "提供实时监控仪表盘跟踪代理工作状态",
+        "支持自定义流水线与自动化任务编排"
+      ],
+      "audience": "Claude Code用户、AI开发者、项目经理、DevOps工程师"
+    },
+    {
+      "rank": 12,
+      "name": "codex-plugin-cc",
+      "author": "openai",
+      "url": "https://github.com/openai/codex-plugin-cc",
+      "stars": 29131,
+      "forks": 1845,
+      "weeklyStars": 1801,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "OpenAI官方开发的Claude Code插件，允许在Claude Code中直接调用Codex进行代码审查和任务委托。解决多AI工具切换的烦恼，无缝集成两种编码代理的能力。支持后台提交、状态查询和结果获取，简化协同工作流。",
+      "features": [
+        "在Claude Code中直接调用Codex进行审查",
+        "支持后台提交、状态查询与结果获取",
+        "提供对抗性审查模式深度挑战实现决策"
+      ],
+      "audience": "Claude Code用户、Codex用户、AI开发者、代码审查者"
+    },
+    {
+      "rank": 13,
+      "name": "DeepTutor",
+      "author": "HKUDS",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "stars": 27433,
+      "forks": 3653,
+      "weeklyStars": 1801,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于大模型的生命周期个性化辅导系统，覆盖数学、编程等多个学科。解决传统辅导缺乏适应性和持续性的问题，利用深度学习跟踪学习者知识状态并提供定制化练习。支持多种语言和学科，可根据学习进度动态调整难度。",
+      "features": [
+        "利用深度学习跟踪知识状态实现个性化辅导",
+        "覆盖数学、编程等多学科内容自适应学习",
+        "支持多种语言并根据学习进度动态调整难度"
+      ],
+      "audience": "教育工作者、学生、在线教育平台、AI教育研究者、自学爱好者"
+    },
+    {
+      "rank": 14,
+      "name": "impeccable",
+      "author": "pbakaus",
+      "url": "https://github.com/pbakaus/impeccable",
+      "stars": 47679,
+      "forks": 2759,
+      "weeklyStars": 2331,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "专为AI编程代理设计的设计指导系统，包含23条命令和46条确定性检测规则。解决AI生成前端界面千篇一律的问题，通过init、craft、audit等命令引导AI产出更有设计感的UI。可与浏览器扩展配合，实时迭代设计。",
+      "features": [
+        "包含23条设计命令覆盖从规划到发布全流程",
+        "内置46条规则探测AI生成界面的典型缺陷",
+        "支持实时浏览器迭代与设计系统对齐"
+      ],
+      "audience": "前端开发者、UI/UX设计师、AI开发者、设计系统工程师、产品经理"
+    },
+    {
+      "rank": 15,
+      "name": "cangjie-skill",
+      "author": "kangarooking",
+      "url": "https://github.com/kangarooking/cangjie-skill",
+      "stars": 3533,
+      "forks": 509,
+      "weeklyStars": 1158,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "将书籍、长视频、播客等高价值内容蒸馏为可被AI代理调用的技能工具包。解决知识难以转化为可执行方法的痛点，通过RIA-TV++流水线提取方法论并压力测试。输出结构化技能仓库，让AI能在真实场景中调用学到的知识。",
+      "features": [
+        "将书籍视频等长内容蒸馏为可执行AI技能",
+        "RIA-TV++流水线确保方法论经过三重验证",
+        "输出多文件技能仓库含测试用例便于调用"
+      ],
+      "audience": "知识工作者、内容创作者、AI提示工程师、终身学习者、技术写作者"
+    },
+    {
+      "rank": 16,
+      "name": "OmniRoute",
+      "author": "diegosouzapw",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "stars": 18428,
+      "forks": 2639,
+      "weeklyStars": 3605,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "统一AI网关，通过一个端点连接250多家AI提供商，其中90+免费。解决开发者管理多API密钥和付费账户的痛点，支持自动故障转移和响应缓存。内置RTK+Caveman压缩节约15-95% Token，大幅降低使用成本。",
+      "features": [
+        "单端点接入250+提供商含90+免费层",
+        "智能路由与自动故障转移保证服务稳定",
+        "高级压缩技术可节约15%至95%Token"
+      ],
+      "audience": "AI开发者、API集成工程师、成本敏感型用户、创业团队、LLM应用构建者"
+    },
+    {
+      "rank": 17,
+      "name": "herdr",
+      "author": "ogulcancelik",
+      "url": "https://github.com/ogulcancelik/herdr",
+      "stars": 17711,
+      "forks": 1118,
+      "weeklyStars": 2512,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "终端中的AI代理复用器，同时查看和管理多个代理的工作状态。解决多个AI编码代理并行工作时的监控和管理难题，支持会话持久化、终端分屏和远程附加。纯Rust编写，高性能且不依赖Electron。",
+      "features": [
+        "支持拆分面板同时监视多个AI代理工作",
+        "会话持久化并支持SSH远程重连查看",
+        "纯Rust编写无Electron依赖性能优异"
+      ],
+      "audience": "AI开发者、多代理用户、DevOps工程师、终端爱好者、系统管理员"
+    },
+    {
+      "rank": 18,
+      "name": "checkout",
+      "author": "actions",
+      "url": "https://github.com/actions/checkout",
+      "stars": 8488,
+      "forks": 2601,
+      "weeklyStars": 159,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "GitHub官方提供的工作流动作，用于在CI中检出仓库代码。支持浅克隆、指定分支和持久化认证等配置，解决CI环境中的代码获取需求。最新版增强了安全性，默认拒绝fork PR的检出以防止Pwn请求。",
+      "features": [
+        "可在CI工作流中快速检出指定仓库代码",
+        "支持浅克隆、token持久化等灵活配置",
+        "最新版增强安全性拒绝对fork PR自动检出"
+      ],
+      "audience": "GitHub Actions用户、DevOps工程师、CI/CD维护者、开发者"
+    },
+    {
+      "rank": 19,
+      "name": "native",
+      "author": "vercel-labs",
+      "url": "https://github.com/vercel-labs/native",
+      "stars": 6531,
+      "forks": 266,
+      "weeklyStars": 854,
+      "language": "Zig",
+      "langColor": "#EC915C",
+      "zhDesc": "构建原生桌面应用的完整工具包，使用TypeScript或Zig编写逻辑，Native标记定义视图。解决桌面应用在表达力和原生性能之间的矛盾，无需浏览器或WebView即可绘制窗口。编译为原生代码，二进制极小，性能堪比手写C++。",
+      "features": [
+        "使用TypeScript/Zig编写逻辑编译为原生代码",
+        "无需浏览器运行时直接绘制原生OS窗口",
+        "声明式标记语言分离UI与逻辑提高开发效率"
+      ],
+      "audience": "桌面应用开发者、TypeScript/Zig开发者、前端工程师、系统开发工程师、独立开发者"
+    }
+  ]
+}

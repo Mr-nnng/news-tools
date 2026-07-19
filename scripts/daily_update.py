@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-daily_update.py — GitHub Actions 每日新闻联播自动更新入口
+daily_update.py — GitHub Actions 每日新闻联播自动更新入口 (SPA mode)
 
-复用 build_site.py 中的 landing card / sidebar 生成函数。
+复用 build_site.py 中的 landing card / month group 生成函数。
+不再生成 HTML 页面，仅写入 JSON 数据，由 SPA 运行时渲染。
 
 用法:
     python scripts/daily_update.py
@@ -23,127 +24,58 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from news_tools.xwlb import get_xwlb
-from news_tools.build_xwlb_html import build_xwlb_page
-import build_site  # 复用 landing / sidebar 函数
+import build_site  # 复用 data / month 工具函数
 
 ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 REPORT_DIR = PROJECT_ROOT / "report"
-XWLB_DIR = SITE_DIR / "xwlb"
-XWLB_TEMPLATE = ASSETS_DIR / "templates" / "xwlb-page.html"
-LANDING_TEMPLATE = ASSETS_DIR / "templates" / "landing-news-tools.html"
+DATA_DIR = SITE_DIR / "data"
+XWLB_DATA_DIR = DATA_DIR / "xwlb"
 FONTS_SRC = ASSETS_DIR / "fonts"
 FONTS_DST = SITE_DIR / "assets" / "fonts"
 
 
 # ═══════════════════════════════════════════════════════════════════
-# XWLB 专有函数（build_site 不覆盖的部分）
+# XWLB 数据生成
 # ═══════════════════════════════════════════════════════════════════
 
 
 def get_xwlb_dates() -> list[str]:
-    """扫描 site/xwlb/ 获取所有已有日期目录。"""
-    if not XWLB_DIR.exists():
+    """扫描 data/xwlb/ 获取所有已有日期（不含 .json 后缀）。"""
+    if not XWLB_DATA_DIR.exists():
         return []
     return sorted(
-        d.name
-        for d in XWLB_DIR.iterdir()
-        if d.is_dir() and re.match(r"^\d{4}-\d{2}-\d{2}$", d.name)
+        f.stem
+        for f in XWLB_DATA_DIR.iterdir()
+        if f.is_file() and f.suffix == ".json" and re.match(r"^\d{4}-\d{2}-\d{2}$", f.stem)
     )
 
 
-def load_xwlb_data(date_str: str) -> dict | None:
-    """从 report/xwlb-{date_str}/data/xwlb.json 读取数据。"""
-    path = REPORT_DIR / f"xwlb-{date_str}" / "data" / "xwlb.json"
-    if not path.exists():
-        return None
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return None
-
-
-def build_xwlb_card_html(date_str: str, data: dict | None) -> str:
-    """生成着陆页中的单张 XWLB 时间线卡片 HTML。"""
-    item_count = "?"
-    preview = ""
-    if data:
-        items = data.get("items", [])
-        item_count = str(len(items)) if items else "0"
-        titles = [x.get("title", "") for x in items[:3]]
-        clean_titles = []
-        for t in titles:
-            first = t.splitlines()[0].strip() if t else ""
-            first = re.sub(r"[（\(]\d+[）\)].*", "", first).strip()
-            first = first.rstrip("：:;；，, ") or t[:40]
-            if first:
-                clean_titles.append(first)
-        if clean_titles:
-            preview = " · ".join(clean_titles)
-            if len(preview) > 180:
-                preview = preview[:180] + "…"
-
-    display_date = build_site.format_date(date_str)
-    return f"""    <a href="xwlb/{date_str}/index.html" class="report-card">
-      <p class="card-date">{display_date}</p>
-      <p class="card-meta">{item_count} 条新闻</p>
-      <p class="card-desc">{preview}</p>
-    </a>"""
-
-
-def build_xwlb_landing_html(xwlb_dates: list[str]) -> tuple[str, int]:
-    """生成着陆页 XWLB Tab 的完整 HTML。"""
-    total_days = len(xwlb_dates)
-    month_groups: dict[str, list[str]] = {}
-    for rd in sorted(xwlb_dates, reverse=True):
-        mk = build_site.get_month_key(rd)
-        if mk not in month_groups:
-            month_groups[mk] = []
-        month_groups[mk].append(rd)
-
-    sorted_months = sorted(
-        month_groups.keys(), key=build_site.month_sort_key, reverse=True
+def save_xwlb_json(date_str: str, data: dict) -> Path:
+    """保存 XWLB 数据为 SPA JSON 格式到 data/xwlb/{date}.json。"""
+    items = data.get("items", [])
+    xwlb_out = {
+        "title": data.get("title", ""),
+        "date": data.get("date", ""),
+        "url": data.get("url", ""),
+        "count": len(items),
+        "summary": data.get("summary", ""),
+        "items": [
+            {
+                "title": item.get("title", ""),
+                "url": item.get("url", ""),
+                "content": item.get("content", ""),
+            }
+            for item in items
+        ],
+    }
+    XWLB_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = XWLB_DATA_DIR / f"{date_str}.json"
+    out_path.write_text(
+        json.dumps(xwlb_out, indent=2, ensure_ascii=False),
+        encoding="utf-8",
     )
-    months_html = ""
-    for mk in sorted_months:
-        rds = month_groups[mk]
-        cards_html = ""
-        for rd in rds:
-            data = load_xwlb_data(rd)
-            cards_html += build_xwlb_card_html(rd, data) + "\n"
-        months_html += f"""  <div class="month-group">
-    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
-      <span class="month-arrow">▾</span>
-      <span class="month-label">{mk}</span>
-    </div>
-    <div class="report-grid">
-{cards_html}    </div>
-  </div>
-"""
-    return months_html, total_days
-
-
-def rebuild_xwlb_sidebars(xwlb_dates: list[str]) -> None:
-    """为所有 xwlb 详情页重新生成侧边栏导航。"""
-    for rd in xwlb_dates:
-        page_path = XWLB_DIR / rd / "index.html"
-        if not page_path.exists():
-            continue
-        html = page_path.read_text(encoding="utf-8")
-        sidebar_html = build_site.build_xwlb_sidebar_html(xwlb_dates, rd)
-
-        if "{{SIDEBAR}}" in html:
-            html = html.replace("{{SIDEBAR}}", sidebar_html)
-        else:
-            html = re.sub(
-                r'<nav class="sidebar">.*?</nav>\s*',
-                sidebar_html,
-                html,
-                flags=re.DOTALL,
-            )
-
-        page_path.write_text(html, encoding="utf-8")
-        print(f"  🧩 sidebar → site/xwlb/{rd}/index.html")
+    return out_path
 
 
 def ensure_fonts() -> None:
@@ -159,42 +91,37 @@ def ensure_fonts() -> None:
 
 
 # ═══════════════════════════════════════════════════════════════════
-# 着陆页重建
+# 着陆页 Index JSON 重建
 # ═══════════════════════════════════════════════════════════════════
 
 
-def rebuild_landing_page() -> None:
-    """从 report/ 数据完全重建 site/index.html（复用 build_site 函数）。"""
-    index_path = SITE_DIR / "index.html"
+def load_xwlb_raw(date_str: str) -> dict | None:
+    """从 report/xwlb-{date_str}/data/xwlb.json 读取原始数据。"""
+    path = REPORT_DIR / f"xwlb-{date_str}" / "data" / "xwlb.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
+
+def rebuild_index() -> None:
+    """从 data/ 目录现有文件重建 site/data/index.json。"""
     # —— GitHub 部分 ——
-    gh_dirs = []
-    if REPORT_DIR.exists():
-        for item in sorted(REPORT_DIR.iterdir()):
-            if item.name.startswith("github-trending-weekly-"):
-                date_part = item.name.replace("github-trending-weekly-", "")
-                enriched_json = item / "data" / "enriched-trending.json"
-                if enriched_json.exists():
-                    gh_dirs.append(date_part)
-
-    gh_cards_html, _ = build_site.build_gh_landing_cards(gh_dirs)
-    gh_count = str(len(gh_dirs))
+    gh_dates = []
+    gh_dir = DATA_DIR / "github"
+    if gh_dir.exists():
+        gh_dates = sorted(
+            f.stem for f in gh_dir.iterdir()
+            if f.is_file() and f.suffix == ".json" and re.match(r"^\d{4}-\d{2}-\d{2}$", f.stem)
+        )
 
     # —— XWLB 部分 ——
     xwlb_dates = get_xwlb_dates()
-    xwlb_cards_html, total_xwlb_days = build_xwlb_landing_html(xwlb_dates)
 
-    # —— 从模板生成 ——
-    template = LANDING_TEMPLATE.read_text(encoding="utf-8")
-    html = template.replace("{{GH_MONTH_GROUPS}}", gh_cards_html)
-    html = html.replace("{{XWLB_MONTH_GROUPS}}", xwlb_cards_html)
-    html = html.replace("{{REPORT_COUNT}}", gh_count)
-    html = html.replace("{{XWLB_COUNT}}", str(total_xwlb_days))
-
-    index_path.write_text(html, encoding="utf-8")
-    print(
-        f"  ✅ Landing page → site/index.html (GH: {gh_count}, XWLB: {total_xwlb_days})"
-    )
+    # —— 复用 build_site 的 index 构建 ——
+    build_site.build_index_data(gh_dates, xwlb_dates)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -203,7 +130,7 @@ def rebuild_landing_page() -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="每日新闻联播自动更新脚本")
+    parser = argparse.ArgumentParser(description="每日新闻联播自动更新脚本 (SPA mode)")
     parser.add_argument(
         "--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天"
     )
@@ -234,6 +161,7 @@ def main() -> None:
     print("📁 确保站点资源...")
     SITE_DIR.mkdir(parents=True, exist_ok=True)
     ensure_fonts()
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     print("  ✅ 站点目录就绪")
 
     # Step 2: 获取新闻联播数据
@@ -242,11 +170,11 @@ def main() -> None:
 
     if result is None:
         print(f"  ⚠️  {date_str} 暂无新闻联播数据（可能尚未发布）")
-        print("\n🏠 重新构建着陆页...")
-        rebuild_landing_page()
+        print("\n🏠 重新构建 index.json...")
+        rebuild_index()
         return
 
-    # 保存数据到 report/xwlb-{date}/data/xwlb.json（与 build_site 一致）
+    # Step 3: 保存原始数据到 report/（与 build_site 一致）
     report_data_dir = REPORT_DIR / f"xwlb-{date_str}" / "data"
     report_data_dir.mkdir(parents=True, exist_ok=True)
     data_path = report_data_dir / "xwlb.json"
@@ -254,32 +182,24 @@ def main() -> None:
         json.dumps(result.model_dump(), indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    print(f"  ✅ 数据保存 → {data_path.relative_to(PROJECT_ROOT)}")
+    print(f"  ✅ 原始数据保存 → {data_path.relative_to(PROJECT_ROOT)}")
     print(f"     共 {len(result.items)} 条新闻")
 
-    # Step 3: 生成 HTML 页面
-    print(f"\n📄 生成 HTML 页面...")
-    out = build_xwlb_page(
-        json_path=str(data_path),
-        output_dir=str(XWLB_DIR / date_str),
-        template_path=str(XWLB_TEMPLATE),
-    )
-    print(f"  ✅ HTML 页面 → {Path(out).relative_to(PROJECT_ROOT)}")
+    # Step 4: 生成 SPA JSON 数据文件
+    print(f"\n📄 生成 SPA JSON 数据...")
+    raw_data = json.loads(data_path.read_text(encoding="utf-8"))
+    out_path = save_xwlb_json(date_str, raw_data)
+    print(f"  ✅ SPA JSON → {out_path.relative_to(PROJECT_ROOT)}")
 
-    # Step 4: 重建所有 xwlb 页面的侧边栏
-    print(f"\n🧩 重建侧边栏...")
-    all_dates = get_xwlb_dates()
-    rebuild_xwlb_sidebars(all_dates)
-
-    # Step 5: 重建着陆页
-    print(f"\n🏠 重建着陆页...")
-    rebuild_landing_page()
+    # Step 5: 重建 index.json
+    print(f"\n🏠 重建 index.json...")
+    rebuild_index()
 
     print(f"\n{'=' * 50}")
     print(f"✅ 每日更新完成: {date_str}")
-    print(f"   📄 site/xwlb/{date_str}/index.html")
-    print(f"   🏠 site/index.html")
-    print(f"   📊 累计 {len(all_dates)} 天新闻联播")
+    print(f"   📄 site/data/xwlb/{date_str}.json")
+    print(f"   🏠 site/data/index.json")
+    print(f"   📊 累计 {len(get_xwlb_dates())} 天新闻联播")
     print(f"{'=' * 50}")
 
 

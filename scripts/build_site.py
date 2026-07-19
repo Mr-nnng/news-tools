@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-build_site.py — Assemble deployment directory for News Tools
+build_site.py — Assemble deployment directory for News Tools (SPA mode)
 
-Changes from v1:
-- GitHub reports: site/reports/ → site/github_weekly/
-- Added XWLB pages: site/xwlb/{date}/index.html
-- Landing page: dual-tab layout (GitHub + XWLB)
+Changes from v2 (SPA refactor):
+- No longer generates full HTML pages
+- Outputs JSON data files only (site/data/{index,github/*,xwlb/*.json})
+- SPA runtime (app.js + app.css) handles client-side rendering
 
 Usage:
     python scripts/build_site.py
@@ -33,17 +33,22 @@ ASSETS_DIR = PROJECT_ROOT / "assets"
 SITE_DIR = PROJECT_ROOT / "site"
 
 FONTS_DIR = SITE_DIR / "assets" / "fonts"
-GH_DIR = SITE_DIR / "github_weekly"  # was SITE_DIR / "reports"
-XWLB_DIR = SITE_DIR / "xwlb"  # new
-
-TEMPLATE_PATH = ASSETS_DIR / "templates" / "landing-news-tools.html"
-XWLB_TEMPLATE_PATH = ASSETS_DIR / "templates" / "xwlb-page.html"
-GH_TEMPLATE_PATH = ASSETS_DIR / "templates" / "github-trending.html"
+DATA_DIR = SITE_DIR / "data"
+GH_DATA_DIR = DATA_DIR / "github"
+XWLB_DATA_DIR = DATA_DIR / "xwlb"
 
 
 def clean_site():
-    if SITE_DIR.exists():
-        shutil.rmtree(SITE_DIR)
+    """Remove everything except app.css, app.js, index.html, assets/"""
+    if not SITE_DIR.exists():
+        return
+    for item in SITE_DIR.iterdir():
+        if item.name in ("app.css", "app.js", "index.html", "assets"):
+            continue
+        if item.is_dir():
+            shutil.rmtree(item)
+        else:
+            item.unlink()
 
 
 def copy_fonts():
@@ -58,229 +63,7 @@ def copy_fonts():
     print(f"  ✅ Fonts → {FONTS_DIR.relative_to(PROJECT_ROOT)}")
 
 
-# ── GitHub Weekly helpers ──
-
-
-def build_gh_pages():
-    """Rebuild GitHub weekly report HTML from enriched JSON, then deploy to site/github_weekly/.
-
-    Unlike the old copy-only approach, this regenerates from JSON (matching XWLB rebuild behaviour).
-    After generation, font paths are adjusted and sidebar is injected.
-    """
-    if not REPORT_DIR.exists():
-        return []
-
-    gh_dates = []
-    for item in sorted(REPORT_DIR.iterdir()):
-        if not item.name.startswith("github-trending-weekly-"):
-            continue
-        date_part = item.name.replace("github-trending-weekly-", "")
-        enriched_json = item / "data" / "enriched-trending.json"
-        if not enriched_json.exists():
-            print(f"  ⏭️  {item.name}: no enriched-trending.json found")
-            continue
-
-        out_dir = GH_DIR / date_part
-        try:
-            # Rebuild HTML from JSON (skip network avatar download)
-            build_report(
-                enriched=json.loads(enriched_json.read_text(encoding="utf-8")),
-                template_path=str(GH_TEMPLATE_PATH),
-                output_dir=str(out_dir),
-                avatar_dir_name="avatar",
-                download_avatars=False,
-            )
-            # Read back, fix font paths, and inject sidebar
-            report_path = out_dir / "report.html"
-            if report_path.exists():
-                html = report_path.read_text(encoding="utf-8")
-                html = html.replace("{{SIDEBAR}}", "__SIDEBAR_PLACEHOLDER__")
-                report_path.write_text(html, encoding="utf-8")
-            print(f"  ✅ {item.name} → {out_dir.relative_to(PROJECT_ROOT)}/")
-            gh_dates.append(date_part)
-        except Exception as e:
-            print(f"  ❌ {item.name}: {e}")
-
-    # Second pass: inject sidebar into every GH page (now that we know all dates)
-    all_gh_dates = sorted(gh_dates)
-    for rd in all_gh_dates:
-        report_path = GH_DIR / rd / "report.html"
-        if not report_path.exists():
-            continue
-        html = report_path.read_text(encoding="utf-8")
-        sidebar_html = build_gh_sidebar_html(all_gh_dates, rd)
-        html = html.replace("__SIDEBAR_PLACEHOLDER__", sidebar_html)
-        report_path.write_text(html, encoding="utf-8")
-        print(f"  🧩 sidebar injected → {report_path.relative_to(PROJECT_ROOT)}")
-
-    return sorted(gh_dates)
-
-
-def build_gh_sidebar_html(report_dirs: list[str], current_rd: str) -> str:
-    """Generate sidebar timeline HTML for a GitHub report page.
-
-    Sidebar links: ../{rd}/report.html because sidebar is in site/github_weekly/{rd}/report.html
-    and linked reports are at site/github_weekly/{other_rd}/report.html
-    """
-    month_groups: dict[str, list[str]] = {}
-    for rd in sorted(report_dirs, reverse=True):
-        mk = get_month_key(rd)
-        if mk not in month_groups:
-            month_groups[mk] = []
-        month_groups[mk].append(rd)
-
-    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
-
-    sections_html = ""
-    for mk in sorted_months:
-        rds = month_groups[mk]
-        items_html = ""
-        for rd in rds:
-            display_date = format_date(rd)
-            active_class = " is-active" if rd == current_rd else ""
-            items_html += f"""
-          <a href="../{rd}/report.html" class="sidebar-item{active_class}">{display_date}</a>"""
-
-        sections_html += f"""
-      <div class="sidebar-month-group">
-        <div class="sidebar-month-toggle">
-          <span class="arrow">▾</span>
-          {mk}
-        </div>
-        <div class="sidebar-month-items">
-          {items_html}
-        </div>
-      </div>"""
-
-    # Return to home: ../../index.html from site/github_weekly/{date}/index.html
-    sidebar = f"""<nav class="sidebar">
-    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
-    <div class="sidebar-section">
-      {sections_html}
-    </div>
-    <div class="sidebar-footer">
-      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
-    </div>
-  </nav>"""
-    return sidebar
-
-
-# ── XWLB helpers ──
-
-
-def build_xwlb_sidebar_html(xwlb_dates: list[str], current_rd: str) -> str:
-    """Generate sidebar timeline HTML for an XWLB page.
-    Links: ../{rd}/index.html at site/xwlb/{rd}/index.html
-    """
-    month_groups: dict[str, list[str]] = {}
-    for rd in sorted(xwlb_dates, reverse=True):
-        mk = get_month_key(rd)
-        if mk not in month_groups:
-            month_groups[mk] = []
-        month_groups[mk].append(rd)
-
-    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
-    sections_html = ""
-    for mk in sorted_months:
-        rds = month_groups[mk]
-        items_html = ""
-        for rd in rds:
-            display_date = format_date(rd)
-            active_class = " is-active" if rd == current_rd else ""
-            items_html += f"""
-          <a href="../{rd}/index.html" class="sidebar-item{active_class}">{display_date}</a>"""
-        sections_html += f"""
-      <div class="sidebar-month-group">
-        <div class="sidebar-month-toggle">
-          <span class="arrow">▾</span>
-          {mk}
-        </div>
-        <div class="sidebar-month-items">
-          {items_html}
-        </div>
-      </div>"""
-
-    sidebar = f"""<nav class="sidebar">
-    <a class="sidebar-home" href="../../index.html"><span class="icon">🏠</span> 返回主页</a>
-    <div class="sidebar-section">
-      {sections_html}
-    </div>
-    <div class="sidebar-footer">
-      <a href="https://github.com/Mr-nnng/news-tools" target="_blank" rel="noopener"><span class="icon">📂</span> GitHub</a>
-    </div>
-  </nav>"""
-    return sidebar
-
-
-def build_xwlb_pages():
-    """Scan report/xwlb-* dirs and build HTML pages in site/xwlb/{date}/."""
-    if not REPORT_DIR.exists():
-        return []
-
-    xwlb_dates = []
-    for item in sorted(REPORT_DIR.iterdir()):
-        if not item.name.startswith("xwlb-"):
-            continue
-        date_part = item.name.replace("xwlb-", "")
-        json_path = item / "data" / "xwlb.json"
-        if not json_path.exists():
-            print(f"  ⏭️  {item.name}: no xwlb.json found")
-            continue
-
-        out_dir = XWLB_DIR / date_part
-        try:
-            out = build_xwlb_page(
-                json_path=str(json_path),
-                output_dir=str(out_dir),
-                template_path=str(XWLB_TEMPLATE_PATH),
-            )
-            # Font path in template: ../../assets/fonts/ → correct for site/xwlb/{date}/index.html
-            print(f"  ✅ {item.name} → {out_dir.relative_to(PROJECT_ROOT)}/")
-            xwlb_dates.append(date_part)
-        except Exception as e:
-            print(f"  ❌ {item.name}: {e}")
-
-    # Second pass: inject sidebar into every XWLB page (now that we know all dates)
-    all_xwlb_dates = sorted(xwlb_dates)
-    for rd in all_xwlb_dates:
-        xwlb_path = XWLB_DIR / rd / "index.html"
-        if not xwlb_path.exists():
-            continue
-        html = xwlb_path.read_text(encoding="utf-8")
-        if "{{SIDEBAR}}" in html:
-            sidebar_html = build_xwlb_sidebar_html(all_xwlb_dates, rd)
-            html = html.replace("{{SIDEBAR}}", sidebar_html)
-            xwlb_path.write_text(html, encoding="utf-8")
-            print(f"  🧩 sidebar injected → {xwlb_path.relative_to(PROJECT_ROOT)}")
-
-    return sorted(xwlb_dates)
-
-
-def load_xwlb_data(rd: str) -> dict | None:
-    """Load xwlb.json for a given date string."""
-    json_path = REPORT_DIR / f"xwlb-{rd}" / "data" / "xwlb.json"
-    if not json_path.exists():
-        return None
-    try:
-        return json.loads(json_path.read_text(encoding="utf-8"))
-    except Exception:
-        return None
-
-
 # ── Shared helpers ──
-
-
-def load_enriched_json(rd: str) -> dict | None:
-    """Load enriched JSON for a GitHub report directory."""
-    enriched_json = (
-        REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
-    )
-    if not enriched_json.exists():
-        return None
-    try:
-        return json.loads(enriched_json.read_text(encoding="utf-8"))
-    except Exception:
-        return None
 
 
 def format_date(rd: str) -> str:
@@ -307,116 +90,266 @@ def month_sort_key(mk: str) -> tuple[int, int]:
     return (0, 0)
 
 
-# ── Landing page builders ──
+def load_enriched_json(rd: str) -> dict | None:
+    """Load enriched JSON for a GitHub report directory."""
+    enriched_json = (
+        REPORT_DIR / f"github-trending-weekly-{rd}" / "data" / "enriched-trending.json"
+    )
+    if not enriched_json.exists():
+        return None
+    try:
+        return json.loads(enriched_json.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
 
-def build_gh_landing_cards(report_dirs: list[str]) -> tuple[str, int]:
-    """Generate month-grouped GitHub report card HTML and compute total project count."""
-    total_projects = 0
-    month_groups: dict[str, list[str]] = {}
-    for rd in sorted(report_dirs, reverse=True):
-        mk = get_month_key(rd)
-        if mk not in month_groups:
-            month_groups[mk] = []
-        month_groups[mk].append(rd)
+def load_xwlb_data(rd: str) -> dict | None:
+    """Load xwlb.json for a given date string."""
+    json_path = REPORT_DIR / f"xwlb-{rd}" / "data" / "xwlb.json"
+    if not json_path.exists():
+        return None
+    try:
+        return json.loads(json_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
-    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
 
-    months_html = ""
-    for mk in sorted_months:
-        rds = month_groups[mk]
-        cards_html = ""
-        for rd in rds:
-            data = load_enriched_json(rd)
-            total = "?"
+# ── GitHub JSON generation ──
+
+
+def build_gh_json(rd: str) -> dict | None:
+    """Generate a GitHub weekly JSON data file.
+
+    Returns the data dict, or None if source data is missing.
+    """
+    enriched = load_enriched_json(rd)
+    if not enriched:
+        return None
+
+    repos_raw = enriched.get("repos", [])
+    repos = []
+    for i, r in enumerate(repos_raw):
+        repos.append({
+            "rank": i + 1,
+            "name": r.get("name", ""),
+            "author": r.get("author", ""),
+            "url": r.get("url", ""),
+            "stars": r.get("stars_total", 0),
+            "forks": r.get("forks", 0),
+            "weeklyStars": r.get("stars_today", 0),
+            "language": r.get("language", ""),
+            "langColor": r.get("language_color", "#888"),
+            "zhDesc": r.get("zh_desc") or r.get("description") or "",
+            "features": r.get("features", []),
+            "audience": r.get("audience", ""),
+        })
+
+    # Derive week info from date
+    date_part = rd
+    try:
+        parts = date_part.split("-")
+        if len(parts) >= 3 and parts[0].isdigit():
+            dt = datetime(int(parts[0]), int(parts[1]), int(parts[2]))
+            week_num = dt.isocalendar()[1]
+            week_label = f"{dt.year}年第{week_num}周"
+            week_info = f"{dt.year} 年第 {week_num} 周 / {dt.strftime('%Y-%m-%d')}"
+        else:
+            week_label = rd
+            week_info = rd
+    except (ValueError, IndexError):
+        week_label = rd
+        week_info = rd
+
+    return {
+        "weekLabel": week_label,
+        "weekInfo": week_info,
+        "date": rd,
+        "count": len(repos),
+        "totalCount": enriched.get("total_count", len(repos)),
+        "coverSummary": enriched.get("cover_summary", ""),
+        "repos": repos,
+    }
+
+
+def build_gh_data_files() -> list[str]:
+    """Scan report/ dirs, generate JSON data files for GitHub weekly."""
+    if not REPORT_DIR.exists():
+        return []
+
+    gh_dates = []
+    for item in sorted(REPORT_DIR.iterdir()):
+        if not item.name.startswith("github-trending-weekly-"):
+            continue
+        date_part = item.name.replace("github-trending-weekly-", "")
+        enriched_json = item / "data" / "enriched-trending.json"
+        if not enriched_json.exists():
+            print(f"  ⏭️  {item.name}: no enriched-trending.json found")
+            continue
+
+        data = build_gh_json(date_part)
+        if data is None:
+            continue
+
+        # Write JSON to site/data/github/YYYY-MM-DD.json
+        out_path = GH_DATA_DIR / f"{date_part}.json"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(
+            json.dumps(data, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        print(f"  ✅ {item.name} → {out_path.relative_to(PROJECT_ROOT)}")
+        gh_dates.append(date_part)
+
+    return sorted(gh_dates)
+
+
+# ── XWLB JSON generation ──
+
+
+def build_xwlb_data_files() -> list[str]:
+    """Scan report/xwlb-* dirs and generate JSON data files in site/data/xwlb/."""
+    if not REPORT_DIR.exists():
+        return []
+
+    xwlb_dates = []
+    for item in sorted(REPORT_DIR.iterdir()):
+        if not item.name.startswith("xwlb-"):
+            continue
+        date_part = item.name.replace("xwlb-", "")
+        json_path = item / "data" / "xwlb.json"
+        if not json_path.exists():
+            print(f"  ⏭️  {item.name}: no xwlb.json found")
+            continue
+
+        try:
+            data = json.loads(json_path.read_text(encoding="utf-8"))
+        except Exception:
+            print(f"  ❌ {item.name}: failed to parse xwlb.json")
+            continue
+
+        # Build simplified JSON for SPA
+        items = data.get("items", [])
+        xwlb_out = {
+            "title": data.get("title", ""),
+            "date": data.get("date", ""),
+            "url": data.get("url", ""),
+            "count": len(items),
+            "summary": data.get("summary", ""),
+            "items": [
+                {
+                    "title": item.get("title", ""),
+                    "url": item.get("url", ""),
+                    "content": item.get("content", ""),
+                }
+                for item in items
+            ],
+        }
+
+        out_path = XWLB_DATA_DIR / f"{date_part}.json"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(
+            json.dumps(xwlb_out, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        print(f"  ✅ {item.name} → {out_path.relative_to(PROJECT_ROOT)}")
+        xwlb_dates.append(date_part)
+
+    return sorted(xwlb_dates)
+
+
+# ── Index JSON generation ──
+
+
+def build_index_data(gh_dates: list[str], xwlb_dates: list[str]) -> dict:
+    """Generate site/data/index.json for the landing page."""
+
+    def build_month_groups(dates: list[str], loader_fn, count_label: str):
+        """Build month-grouped item list."""
+        month_groups: dict[str, list[dict]] = {}
+        for rd in sorted(dates, reverse=True):
+            mk = get_month_key(rd)
+            if mk not in month_groups:
+                month_groups[mk] = []
+
+            data = loader_fn(rd)
+            item_count = 0
             summary = ""
             if data:
-                count = data.get("total_count", 0)
-                total = str(count) if count else "?"
-                if isinstance(count, int):
-                    total_projects += count
-                summary = data.get("cover_summary", "")
-                if len(summary) > 280:
-                    summary = summary[:280] + "…"
+                if count_label == "项目":
+                    item_count = data.get("totalCount", 0) or data.get("count", 0)
+                    summary = data.get("coverSummary", "")
+                else:
+                    items = data.get("items", [])
+                    item_count = len(items)
+                    # Build preview from first few item titles
+                    titles = [x.get("title", "") for x in items[:3]]
+                    clean_titles = []
+                    for t in titles:
+                        first = t.splitlines()[0].strip() if t else ""
+                        first = re.sub(r"[（\(]\d+[）\)].*", "", first).strip()
+                        first = first.rstrip("：:;；，, ") or t[:40]
+                        if first:
+                            clean_titles.append(first)
+                    if clean_titles:
+                        summary = " · ".join(clean_titles)
+                        if len(summary) > 180:
+                            summary = summary[:180] + "…"
 
-            display_date = format_date(rd)
-            cards_html += f"""    <a href="github_weekly/{rd}/report.html" class="report-card">
-      <p class="card-date">{display_date}</p>
-      <p class="card-meta">{total} 个项目</p>
-      <p class="card-desc">{summary}</p>
-    </a>
-"""
-        months_html += f"""  <div class="month-group">
-    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
-      <span class="month-arrow">▾</span>
-      <span class="month-label">{mk}</span>
-    </div>
-    <div class="report-grid">
-{cards_html}    </div>
-  </div>
-"""
-    return months_html, total_projects
+            display_summary = (summary[:280] + "…") if len(summary) > 280 else summary
+            month_groups[mk].append({
+                "date": rd,
+                "count": item_count if isinstance(item_count, int) else 0,
+                "summary": display_summary,
+            })
 
+        # Sort items within each month
+        for mk in month_groups:
+            month_groups[mk].sort(key=lambda x: x["date"], reverse=True)
 
-def build_xwlb_landing_cards(xwlb_dates: list[str]) -> tuple[str, int]:
-    """Generate month-grouped XWLB card HTML and compute total day count.
+        # Sort months
+        sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
+        return [
+            {"label": mk, "items": month_groups[mk]}
+            for mk in sorted_months
+        ]
 
-    Card preview shows first few cleaned news titles separated by ·.
-    """
-    total_days = len(xwlb_dates)
+    gh_months = build_month_groups(
+        gh_dates, lambda rd: build_gh_json(rd), "项目"
+    )
+    xwlb_months = build_month_groups(
+        xwlb_dates, lambda rd: load_xwlb_data(rd), "新闻"
+    )
 
-    month_groups: dict[str, list[str]] = {}
-    for rd in sorted(xwlb_dates, reverse=True):
-        mk = get_month_key(rd)
-        if mk not in month_groups:
-            month_groups[mk] = []
-        month_groups[mk].append(rd)
+    index_data = {
+        "gh": {
+            "count": len(gh_dates),
+            "months": gh_months,
+        },
+        "xwlb": {
+            "count": len(xwlb_dates),
+            "months": xwlb_months,
+        },
+    }
 
-    sorted_months = sorted(month_groups.keys(), key=month_sort_key, reverse=True)
+    # Write index.json
+    out_path = DATA_DIR / "index.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        json.dumps(index_data, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(f"  ✅ index.json → {out_path.relative_to(PROJECT_ROOT)}")
 
-    months_html = ""
-    for mk in sorted_months:
-        rds = month_groups[mk]
-        cards_html = ""
-        for rd in rds:
-            data = load_xwlb_data(rd)
-            item_count = "?"
-            preview = ""
-            if data:
-                items = data.get("items", [])
-                item_count = str(len(items)) if items else "0"
-                # Build preview from first few item titles
-                titles = [x.get("title", "") for x in items[:3]]
-                clean_titles = []
-                for t in titles:
-                    # Extract first line, clean sub-title numbering
-                    first = t.splitlines()[0].strip() if t else ""
-                    first = re.sub(r"[（\(]\d+[）\)].*", "", first).strip()
-                    first = first.rstrip("：:;；，, ") or t[:40]
-                    if first:
-                        clean_titles.append(first)
-                if clean_titles:
-                    preview = " · ".join(clean_titles)
-                    if len(preview) > 180:
-                        preview = preview[:180] + "…"
+    # Print stats
+    total_projects = 0
+    for rd in gh_dates:
+        data = load_enriched_json(rd)
+        if data:
+            total_projects += data.get("total_count", 0) or len(data.get("repos", []))
+    print(f"     📊 {len(gh_dates)} GitHub reports, {total_projects} total projects")
+    print(f"     📊 {len(xwlb_dates)} XWLB days")
 
-            display_date = format_date(rd)
-            cards_html += f"""    <a href="xwlb/{rd}/index.html" class="report-card">
-      <p class="card-date">{display_date}</p>
-      <p class="card-meta">{item_count} 条新闻</p>
-      <p class="card-desc">{preview}</p>
-    </a>
-"""
-        months_html += f"""  <div class="month-group">
-    <div class="month-toggle" onclick="this.parentElement.classList.toggle('is-collapsed')">
-      <span class="month-arrow">▾</span>
-      <span class="month-label">{mk}</span>
-    </div>
-    <div class="report-grid">
-{cards_html}    </div>
-  </div>
-"""
-    return months_html, total_days
+    return index_data
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -429,38 +362,25 @@ def main():
         clean_site()
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("🔨 Building site directory...\n")
+    print("🔨 Building site (SPA mode)...\n")
 
     print("📁 Copying fonts...")
     copy_fonts()
 
-    print("\n📁 Building GitHub weekly reports...")
-    gh_dirs = build_gh_pages()
-    print(f"  📁 {len(gh_dirs)} GitHub weekly reports available")
+    print("\n📁 Building GitHub weekly JSON data...")
+    gh_dates = build_gh_data_files()
+    print(f"  📁 {len(gh_dates)} GitHub weekly data files")
 
-    print("\n📁 Building XWLB pages...")
-    xwlb_dates = build_xwlb_pages()
-    print(f"  📁 {len(xwlb_dates)} XWLB dates available")
+    print("\n📁 Building XWLB JSON data...")
+    xwlb_dates = build_xwlb_data_files()
+    print(f"  📁 {len(xwlb_dates)} XWLB data files")
 
-    print("\n📄 Generating landing page (Kami design, dual-tab)...")
-    gh_cards_html, total_projects = build_gh_landing_cards(gh_dirs)
-    xwlb_cards_html, total_xwlb_days = build_xwlb_landing_cards(xwlb_dates)
-
-    # Load Kami template
-    template = TEMPLATE_PATH.read_text(encoding="utf-8")
-
-    # Replace placeholders
-    index_html = template.replace("{{GH_MONTH_GROUPS}}", gh_cards_html)
-    index_html = index_html.replace("{{XWLB_MONTH_GROUPS}}", xwlb_cards_html)
-    index_html = index_html.replace("{{REPORT_COUNT}}", str(len(gh_dirs)))
-    index_html = index_html.replace("{{XWLB_COUNT}}", str(total_xwlb_days))
-
-    (SITE_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ index.html generated (Kami design system, dual-tab)")
+    print("\n📄 Generating index.json...")
+    build_index_data(gh_dates, xwlb_dates)
 
     print(f"\n✅ Build complete → {SITE_DIR.relative_to(PROJECT_ROOT)}/")
-    print(f"   📂 {len(gh_dirs)} GitHub reports, {total_projects} total projects")
-    print(f"   📂 {total_xwlb_days} XWLB days")
+    print(f"   📂 SPA shell: index.html + app.css + app.js")
+    print(f"   📂 Data: data/index.json + data/github/*.json + data/xwlb/*.json")
 
 
 if __name__ == "__main__":

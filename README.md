@@ -3,9 +3,9 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-一站式新闻信息获取与报告生成工具集。支持 **GitHub Trending**、**华尔街见闻 7x24 快讯**、**新闻联播** 三个数据源，并提供 HTML 周报/新闻联播页面生成与静态网站部署能力。
+一站式新闻信息获取与报告生成工具集。支持 **GitHub Trending**、**华尔街见闻 7x24 快讯**、**新闻联播** 三个数据源，提供 SPA 静态站点一键部署能力。
 
-> 🌐 在线站点：自动生成并部署 GitHub Trending 中文周报（每周更新）+ 新闻联播文字摘要（每日更新）。
+> 🌐 在线站点：<https://news-tools.pages.dev> — GitHub Trending 中文周报（每周更新）+ 新闻联播文字摘要（每日更新），SPA 单页应用，客户端动态渲染。
 
 ---
 
@@ -14,10 +14,11 @@
 - **GitHub Trending** — 获取每日/每周趋势仓库，支持语言过滤和代理
 - **华尔街见闻** — 按日期和重要度获取 7x24 快讯
 - **新闻联播** — 获取文字摘要，支持 JSON / Markdown 输出
-- **HTML 周报生成** — 从模板自动生成中文 GitHub Trending 周报（封面 + 排名表 + 详情页 + 侧边栏导航 + 右侧索引）
-- **新闻联播 HTML 页面生成** — 从 JSON 生成精美排版的新闻联播文字摘要页（含摘要、索引导航、侧边栏日期切换）
+- **周报加工** — LLM 增强生成中文描述、特点、受众标签
+- **JSON 数据输出** — 所有数据以 JSON 格式组织到 `site/data/`，由 SPA 运行时渲染
+- **SPA 静态站点** — `app.js` + `app.css` 实现客户端路由和数据驱动的动态页面
 - **截图工具** — 基于 Playwright 的 HTML 元素截图，适用于报告封面/卡片导出
-- **静态网站部署** — 一键构建可部署到 Cloudflare Pages 的静态站点（双 Tab 布局：GitHub 周报 + 新闻联播）
+- **Cloudflare Pages 部署** — 零构建步骤，直接部署 `site/` 目录即可
 
 ---
 
@@ -30,27 +31,33 @@ news/
 │   ├── wallstreet.py              # 华尔街见闻 7x24 快讯
 │   ├── xwlb.py                    # 新闻联播摘要
 │   ├── screenshot.py              # HTML 元素导出图片
-│   ├── build_report.py            # HTML 周报生成（含详情页索引）
-│   ├── build_xwlb_html.py         # 新闻联播 HTML 页面生成
+│   ├── build_report.py            # 周报 enrich JSON 生成（不再生成 HTML）
+│   ├── build_xwlb_html.py         # 新闻联播 JSON 数据迁移
 │   ├── __init__.py
 │   └── __main__.py
-├── site/                          # 构建输出的静态站点（可直接部署）
-│   ├── index.html                 # 项目主页（双 Tab：GitHub 周报 + 新闻联播）
+├── site/                          # 构建输出的静态站点（可直接部署到 CF Pages）
+│   ├── index.html                 # SPA 入口页（\<div id="app"\> 由 app.js 接管）
+│   ├── app.js                     # SPA 运行时：路由、数据加载、渲染
+│   ├── app.css                    # 全局样式（响应式、明/暗主题）
+│   ├── _redirects                 # Cloudflare Pages SPA fallback 规则
 │   ├── assets/fonts/              # 自托管字体
-│   ├── github_weekly/             # GitHub 周报各期（原 reports/）
-│   │   └── YYYY-MM-DD/report.html
-│   └── xwlb/                      # 新闻联播各期
-│       └── YYYY-MM-DD/index.html
+│   └── data/                      # JSON 数据层
+│       ├── index.json             # 聚合索引（双 Tab 列表 + 统计）
+│       ├── xwlb/                  # 新闻联播数据
+│       │   └── YYYY-MM-DD.json
+│       └── github/                # GitHub 周报数据
+│           └── YYYY-MM-DD.json
 ├── assets/
 │   ├── fonts/                     # 网页字体（woff2）
-│   └── templates/                 # HTML 模板
-│       ├── landing-news-tools.html # 主页模板（双 Tab）
-│       └── xwlb-page.html         # 新闻联播详情页模板
+│   └── templates/                 # HTML 模板（仅用于 LLM 加工参考）
+│       ├── landing-news-tools.html # 旧版主页模板（归档）
+│       ├── github-trending.html    # 旧版周报模板（归档）
+│       └── xwlb-page.html         # 旧版新闻联播模板（归档）
 ├── .github/workflows/
 │   └── daily-xwlb.yml             # 每日新闻联播自动更新（GitHub Actions）
 ├── scripts/
-│   ├── build_site.py              # 构建部署目录
-│   └── daily_update.py            # GitHub Actions 每日更新入口
+│   ├── build_site.py              # 构建部署目录：输出 JSON + SPA 静态资源
+│   └── daily_update.py            # GitHub Actions 每日更新入口（SPA 模式）
 ├── skills/news-tools/             # Agent 配置（报告生成工作流）
 │   ├── SKILL.md
 │   ├── agents/                    # 各平台 agent 配置
@@ -128,13 +135,6 @@ python -m news_tools.xwlb --compact                # 仅输出 items 数组
 python -m news_tools.xwlb --markdown               # Markdown 格式输出
 ```
 
-### 生成新闻联播 HTML 页面
-
-```bash
-python -m news_tools.build_xwlb_html report/xwlb-2026-06-27/data/xwlb.json \
-  -o site/xwlb/2026-06-27
-```
-
 ### 截图工具
 
 ```bash
@@ -162,7 +162,6 @@ news-xwlb --date 2026-05-29
 from news_tools.trending import fetch_trending
 from news_tools.wallstreet import fetch_live_by_date
 from news_tools.xwlb import get_xwlb
-from news_tools.build_xwlb_html import build_xwlb_page
 from datetime import datetime
 
 # GitHub Trending
@@ -174,89 +173,62 @@ result = fetch_live_by_date(target_date=datetime(2026, 5, 29))
 
 # 新闻联播
 result = get_xwlb(2026, 5, 29)
-
-# 生成新闻联播 HTML 页面
-html_path = build_xwlb_page(
-    "report/xwlb-2026-06-27/data/xwlb.json",
-    output_dir="site/xwlb/2026-06-27",
-)
 ```
 
 ---
 
-## 生成周报
+## 数据构建
 
-从 enriched JSON 生成 HTML 周报：
-
-```bash
-python -m news_tools.build_report data/enriched-trending.json
-```
-
-生成流程：
-
-1. `fetch_trending()` → 获取原始趋势数据
-2. LLM 加工 → enriched JSON（中文描述、特点、受众）
-3. `build_report()` → 填充模板 → `report.html`（含封面排名表、详情页、右侧索引导航）+ 下载头像
-
-生成的报告包含：
-- **封面页**：周次信息、封面摘要（数字高亮+领域关键词加粗）、前 10 排名表
-- **详情页**：每页 2 个仓库，含头像、仓库名、Star/Fork/本周增量、中文描述、特点列表、推荐受众
-- **右侧索引**：可点击跳转的仓库目录
-- **侧边栏**：各期历史报告导航（由 `build_site.py` 注入）
-
----
-
-## 部署到 Cloudflare Pages
-
-在本地执行构建命令后，将输出目录 `site/` 部署到 Cloudflare Pages。
+### 构建全站（JSON + SPA 静态资源）
 
 ```bash
 python scripts/build_site.py
 ```
 
-输出目录结构：
+此命令扫描 `site/data/` 下的现有 JSON 数据，重建 `index.json` 聚合索引。不生成 HTML 页面 —— 所有页面由 SPA 运行时在客户端动态渲染。
 
-```
-site/
-├── index.html                    ← 项目主页（双 Tab：GitHub 周报 + 新闻联播）
-├── assets/fonts/                 ← 自托管字体
-├── github_weekly/
-│   └── YYYY-MM-DD/report.html    ← 各期 GitHub 周报
-└── xwlb/
-    └── YYYY-MM-DD/index.html     ← 各期新闻联播
+### 每日更新（新闻联播）
+
+```bash
+python scripts/daily_update.py
 ```
 
-### 新闻联播数据预处理
+从央视网 API 获取当日新闻联播数据，写入 `site/data/xwlb/YYYY-MM-DD.json`，然后重建 `index.json`。
 
-部署前需要将新闻联播 JSON 数据按以下结构放入 `report/` 目录：
+### 数据源目录结构
+
+构建脚本识别的数据来源（由外部工具或 CI 放入）：
 
 ```
-report/
-├── github-trending-weekly-YYYY-MM-DD/   # GitHub 周报数据
-│   └── data/
-│       ├── trending-weekly.json
-│       └── enriched-trending.json
-└── xwlb-YYYY-MM-DD/                     # 新闻联播数据
-    └── data/
-        └── xwlb.json
+site/data/
+├── index.json              # ← 自动生成：聚合索引
+├── github/                 # ← GitHub 周报 enrich JSON
+│   └── YYYY-MM-DD.json    #    含 summary, repos 等字段
+└── xwlb/                   # ← 新闻联播 JSON
+    └── YYYY-MM-DD.json    #    含 date, items 等字段
 ```
+
+---
+
+## 部署到 Cloudflare Pages
+
+SPA 架构下，`site/` 目录即为可直接部署的静态站点。无需构建步骤。
 
 ### 方式一：Git 集成（推荐）
 
-1. 在本地执行构建命令生成静态站点：
+1. 在本地执行构建命令生成 JSON 数据：
    ```bash
    python scripts/build_site.py
    ```
 2. 将代码（包含 `site/` 目录）推送到 GitHub
-3. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Build → Compute → Workers & Pages
-4. 点击 **Create application** → **Connect to Git** → **Looking to deploy Pages? Get started**
-5. 选择你的仓库
-6. 配置：
+3. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages
+4. 点击 **Create application** → **Connect to Git** → 选择仓库
+5. 配置：
    - **Build command**（构建命令）：留空
    - **Build output directory**（输出目录）：`site`
-7. 点击 **Save and Deploy**
+6. 点击 **Save and Deploy**
 
-之后每次推送代码，Cloudflare Pages 会直接部署 `site/` 目录中的静态文件。
+部署后，`site/_redirects` 文件确保所有前端路由（如 `/xwlb/2026-07-18`）回退到 `index.html`，由 SPA 处理。
 
 ### 方式二：Wrangler CLI
 
@@ -294,7 +266,12 @@ uv run pytest tests/ -v
 
 ## 项目状态
 
-每周自动生成 GitHub Trending 中文周报并部署上线，每日自动生成新闻联播文字摘要页面。查看 [`site/github_weekly/`](site/github_weekly/) 获取最新 GitHub 周报，[`site/xwlb/`](site/xwlb/) 获取新闻联播。
+每周自动生成 GitHub Trending 中文周报并部署上线，每日自动生成新闻联播文字摘要。查看在线站点 [news-tools.pages.dev](https://news-tools.pages.dev) 获取最新内容。
+
+| Tab | 数据来源 | 更新频率 | 说明 |
+|-----|----------|----------|------|
+| **GitHub 周报** | GitHub Trending | 每周（周日） | LLM 增强中文描述、特点、受众标签 |
+| **新闻联播** | 央视网 API | 每日 21:00 | 文字摘要 + 原始 JSON 数据归档 |
 
 ---
 
@@ -308,17 +285,15 @@ uv run pytest tests/ -v
 |--------|------|
 | **触发时间** | 每晚 21:00（北京时间 `UTC 13:00`） |
 | **手动触发** | 支持 `workflow_dispatch` 在 GitHub 页面手动运行 |
-| **流程** | 获取数据 → 生成 HTML → 重建着陆页 → 更新侧边栏 → 自动提交 |
+| **流程** | 获取数据 → 写入 JSON → 重建 index.json → 自动提交 |
 | **部署** | 提交后自动触发 Cloudflare Pages 重新部署 |
 
 工作流执行步骤：
 1. 检出代码 → 安装 Python + uv 依赖
 2. 运行 [`scripts/daily_update.py`](scripts/daily_update.py)：
    - 调用央视网 API 获取当日《新闻联播》文字数据
-   - 生成 HTML 详情页到 `site/xwlb/{date}/`
-   - 保留 JSON 数据到 `site/xwlb/{date}/xwlb.json`
-   - 重建所有已有 XWLB 页面的侧边栏导航
-   - 重建 `site/index.html` 着陆页（保留 GitHub 周报部分）
+   - 以 JSON 格式写入 `site/data/xwlb/{date}.json`
+   - 重建 `site/data/index.json` 聚合索引
 3. 自动 `git commit + push`，触发 Cloudflare Pages 部署
 
-> 💡 若当日新闻联播尚未发布（如遇周末或节假日），脚本跳过数据获取，仅重建着陆页，不产生空提交。
+> 💡 若当日新闻联播尚未发布（如遇周末或节假日），脚本跳过数据获取，仅重建索引，不产生空提交。

@@ -65,6 +65,7 @@ def _call_llm(prompt: str, system_prompt: str | None = None, max_retries: int = 
             resp = httpx.post(
                 f"{LLM_BASE_URL}/chat/completions",
                 json=payload,
+                timeout=120,
             )
             resp.raise_for_status()
             data = resp.json()
@@ -93,13 +94,14 @@ def _call_llm_for_repo(repo: TrendingRepo, max_retries: int = 3) -> dict | None:
 
 ## 核心原则
 1. 必须完整阅读 README 内容后再写 zh_desc，不可仅靠 description 字段
-2. description 已用 zh_desc 替代，最终 JSON 中不得包含 description、readme 字段
-3. 只输出 JSON，不包含任何其他内容（不要用 markdown 代码块包裹）
+2. description 已用 zh_desc 替代，最终 JSON 中不得包含 description、readme、built_by、author_avatar_url 字段
+3. 必须保留的原始字段：author / name / stars_total / stars_today / forks / language / language_color / url
+4. 只输出 JSON，不包含任何其他内容（不要用 markdown 代码块包裹）
 
 ## 字段规范
-- **zh_desc**：精炼的 2 句话中文简介（100字以内，50-90字最佳）。第一句讲清楚项目是什么，第二句讲为什么重要/解决什么问题。避免啰嗦。
-- **features**：固定 3 条，每条 15-25 字，直接说明功能价值。
-- **audience**：中文推荐受众，用顿号分隔 3-5 种用户身份。"""
+- **zh_desc**：精炼的 2 句话中文简介（100 字以内，50-90 字最佳）。第一句讲清楚项目是什么，第二句讲为什么重要/解决什么问题。避免啰嗦。
+- **features**：固定 3 条，每条 15-25 字，直接说明功能价值。超出 3 条会超出页面边界。
+- **audience**：中文推荐受众，用顿号分隔 3-5 种用户身份，至少 3 条，4 或 5 条最佳。"""
 
     user_prompt = f"""仓库名称: {name}
 英文描述: {desc}
@@ -108,15 +110,15 @@ README 内容:
 
 请严格按照以上规范输出 JSON。
 
-参考示例（来自历史仓库 Nutlope/hallmark）：
+参考示例（来自历史仓库 microsoft/markitdown）：
 {{
-  "zh_desc": "反AI模版化设计技能，专为Claude Code、Cursor等AI编程工具打造。它通过57项检测门和二十种主题，自动生成独特UI布局，彻底告别千篇一律的AI生成界面。",
+  "zh_desc": "微软开源的轻量级文件转换工具，可将 Office 文档、图片、PDF 等多种格式统一转为 Markdown。极大简化 LLM 应用开发中的文档预处理流程，让 AI 直接消费高质量文本内容。",
   "features": [
-    "二十种主题搭配57项抗模版检测门防止AI感",
-    "支持审计、重构、学习四类命令覆盖设计全流程",
-    "能从设计截图提取DNA生成跨项目可复用规范"
+    "多格式文档转换支持 Office/PDF/图片等",
+    "保留结构为 Markdown 无信息丢失",
+    "轻量无依赖可嵌入任意项目"
   ],
-  "audience": "AI开发者、前端设计师、产品经理、提示工程师"
+  "audience": "数据科学家、LLM 应用开发者、文档工程师"
 }}"""
 
     for attempt in range(1, max_retries + 1):
@@ -171,10 +173,12 @@ def _call_llm_for_cover_summary(repos_info: list[dict], max_retries: int = 3) ->
     prompt = f"""以下是一周 GitHub Trending 热门仓库列表：
 {repo_lines}
 
-请用一句话概括本周趋势，格式如下：
-"本周 GitHub Trending 收录 N 个热门仓库，涵盖 ··· 等领域。"
-其中 ··· 之间用中文领域关键词分隔。
-不要包含其他内容。"""
+请用一句话概括本周趋势，严格按以下格式输出（不要包含其他内容）：
+
+"本周 GitHub Trending 收录 N 个热门仓库，涵盖 AI · 安全 · 前端设计 等领域。"
+
+其中 N 替换为实际仓库数量，"AI · 安全 · 前端设计" 替换为实际的中文领域关键词，用 " · "（空格·空格）分隔。
+数字将自动被高亮蓝色，领域将自动加粗。"""
 
     return _call_llm(prompt, max_retries=max_retries)
 

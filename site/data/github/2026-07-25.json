@@ -4,223 +4,223 @@
   "date": "2026-07-25",
   "count": 20,
   "totalCount": 20,
-  "coverSummary": "本周 GitHub Trending 收录 20 个热门仓库，涵盖 CSS·Go·Python·Rust·Shell·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 20 个热门仓库，涵盖 AI · 安全 · 前端设计 等领域。",
   "repos": [
     {
       "rank": 1,
       "name": "ai-agent-book",
       "author": "bojieli",
       "url": "https://github.com/bojieli/ai-agent-book",
-      "stars": 19366,
-      "forks": 1934,
+      "stars": 19394,
+      "forks": 1939,
       "weeklyStars": 17401,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库：全书正文、编译版 PDF 与按章配套代码",
+      "zhDesc": "开源书籍《深入理解AI Agent：设计原理与工程实践》提供完整正文、PDF和配套代码。围绕Agent=LLM+上下文+工具公式，系统讲解从原理到生产级工程实战。",
       "features": [
-        "",
-        "",
-        ""
+        "全书10章全面覆盖AI Agent核心知识体系",
+        "92个配套代码项目助力动手实践学习",
+        "提供多语言在线阅读和PDF/EPUB下载"
       ],
-      "audience": ""
+      "audience": "AI工程师、大模型应用开发者、技术研究者、计算机专业学生、AI产品经理"
     },
     {
       "rank": 2,
       "name": "worldmonitor",
       "author": "koala73",
       "url": "https://github.com/koala73/worldmonitor",
-      "stars": 73602,
-      "forks": 11035,
+      "stars": 73651,
+      "forks": 11040,
       "weeklyStars": 10936,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+      "zhDesc": "实时全球情报仪表盘，通过 AI 聚合新闻、地缘政治和基础设施数据，提供统一的态势感知界面。帮助用户快速掌握跨国事件、风险信号和市场动态，支撑决策分析。",
       "features": [
-        "",
-        "",
-        ""
+        "500+精选新闻源AI合成摘要",
+        "双地图引擎与56种图层分析",
+        "本地AI运行无需API密钥"
       ],
-      "audience": ""
+      "audience": "地缘政治分析师、新闻记者、安全研究员、金融交易员"
     },
     {
       "rank": 3,
       "name": "code-review-graph",
       "author": "tirth8205",
       "url": "https://github.com/tirth8205/code-review-graph",
-      "stars": 26293,
-      "forks": 2457,
+      "stars": 26299,
+      "forks": 2458,
       "weeklyStars": 6565,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Local-first code intelligence graph for MCP and CLI. Builds a persistent map of your codebase so AI coding tools read only what matters, with benchmarked context reductions on reviews and large-repo workflows.",
+      "zhDesc": "本地优先的代码智能图工具，基于 Tree-sitter 构建代码库持久化映射，为 MCP 和 CLI 提供精准上下文。解决 AI 编码工具审查时重复扫描大型仓库的令牌浪费，经基准测试可减少 38-528 倍令牌消耗，提升审查效率。",
       "features": [
-        "",
-        "",
-        ""
+        "增量更新仅重解析变更文件，耗时<2秒",
+        "影响范围分析自动定位变更波及的代码",
+        "提供30个MCP工具支持代码查询与审查"
       ],
-      "audience": ""
+      "audience": "AI辅助编程用户、大型仓库开发者、代码审查工程师、DevOps工程师"
     },
     {
       "rank": 4,
       "name": "kimi-code",
       "author": "MoonshotAI",
       "url": "https://github.com/MoonshotAI/kimi-code",
-      "stars": 4977,
-      "forks": 724,
+      "stars": 4982,
+      "forks": 725,
       "weeklyStars": 1589,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Kimi Code CLI — The Starting Point for Next-Gen Agents",
+      "zhDesc": "月之暗面推出的终端 AI 编程助手，可在命令行中读写代码、运行命令、搜索文件与抓取网页。支持 Kimi 模型，提供单二进制安装和毫秒级启动，专为长时间聚焦的代理工作流优化。",
       "features": [
-        "",
-        "",
-        ""
+        "单二进制分发，一行命令即可完成安装并运行",
+        "毫秒级启动，TUI 界面随开随用",
+        "支持视频输入，代理可直接观看屏幕录制并理解"
       ],
-      "audience": ""
+      "audience": "AI 开发者、程序员、终端爱好者、自动化工程师"
     },
     {
       "rank": 5,
       "name": "jcode",
       "author": "1jehuang",
       "url": "https://github.com/1jehuang/jcode",
-      "stars": 11276,
+      "stars": 11281,
       "forks": 1234,
       "weeklyStars": 2773,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "The most intelligent agent harness for code",
+      "zhDesc": "jcode 是最智能的代码代理 harness，专为多会话工作流和无限扩展而设计。其极致的内存优化和智能记忆系统让 AI 编码效率提升数倍，显著降低运行成本。",
       "features": [
-        "",
-        "",
-        ""
+        "多会话并行执行与智能语义记忆检索",
+        "极低资源占用，启动速度比同类快数十倍",
+        "内置 swarm 多代理协作与浏览器自动化"
       ],
-      "audience": ""
+      "audience": "软件工程师、AI 开发者、DevOps 工程师、技术团队领导、开源贡献者"
     },
     {
       "rank": 6,
       "name": "OmniRoute",
       "author": "diegosouzapw",
       "url": "https://github.com/diegosouzapw/OmniRoute",
-      "stars": 29234,
-      "forks": 3815,
+      "stars": 29277,
+      "forks": 3818,
       "weeklyStars": 9965,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Never stop coding. Free MIT AI gateway: one endpoint, 290+ providers (90+ free), 500+ models — Kimi, Claude, GPT, OpenAI, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 500+ contributors",
+      "zhDesc": "OmniRoute 是一款免费开源的 AI 聚合网关，通过单一端点连接 250+ 供应商（含 90+ 免费）和 500+ 模型。它让开发者摆脱多账户与限额困扰，自动回退、智能压缩且零成本起步，极大降低 AI 使用门槛与开销。",
       "features": [
-        "",
-        "",
-        ""
+        "一键连接250家厂商与90+免费模型",
+        "智能自动回退与配额管理零停机",
+        "RTK+Caveman压缩节省15-95%令牌"
       ],
-      "audience": ""
+      "audience": "AI 应用开发者、技术极客、创业团队、成本敏感用户、AI 研究员"
     },
     {
       "rank": 7,
       "name": "pi-web",
       "author": "agegr",
       "url": "https://github.com/agegr/pi-web",
-      "stars": 2654,
+      "stars": 2655,
       "forks": 352,
       "weeklyStars": 1316,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Web UI for the pi coding agent",
+      "zhDesc": "Pi Web 是 pi 编码代理的本地 Web UI，将终端会话转化为可视化的浏览器工作空间。它让开发者轻松管理历史对话、配置模型与技能、预览项目文件，大幅提升编码代理的使用体验。",
       "features": [
-        "",
-        "",
-        ""
+        "按项目管理历史会话并支持分支和回退",
+        "边聊边预览项目文件及文档无需切换",
+        "Web 界面配置模型密钥和技能告别终端"
       ],
-      "audience": ""
+      "audience": "AI编码代理用户、全栈开发者、高级程序员、技术团队、效率工具爱好者"
     },
     {
       "rank": 8,
       "name": "DeepTutor",
       "author": "HKUDS",
       "url": "https://github.com/HKUDS/DeepTutor",
-      "stars": 29610,
+      "stars": 29614,
       "forks": 3905,
       "weeklyStars": 2380,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "DeepTutor: Lifelong Personalized Tutoring.https://deeptutor.info/.",
+      "zhDesc": "DeepTutor 是香港大学开源的终身个性化智能辅导系统。它通过统一代理循环连接聊天、研究、测验等学习模式，并支持多引擎知识库、可检查记忆和子代理协作，为学习者提供全面的自适应学习体验。",
       "features": [
-        "",
-        "",
-        ""
+        "统一代理循环实现聊天/研究/测验等模式无缝切换",
+        "多引擎知识库与技能系统支撑个性化终身学习",
+        "三层可审计记忆与子代理协作使学习过程透明可控"
       ],
-      "audience": ""
+      "audience": "学生、教师、研究人员、开发者、终身学习者"
     },
     {
       "rank": 9,
       "name": "kimi-cli",
       "author": "MoonshotAI",
       "url": "https://github.com/MoonshotAI/kimi-cli",
-      "stars": 10804,
+      "stars": 10806,
       "forks": 1251,
       "weeklyStars": 1570,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Kimi Code CLI is your next CLI agent.",
+      "zhDesc": "月之暗面推出的终端AI代理，可在命令行中完成代码编辑、Shell命令执行和网络搜索等开发任务。它支持VS Code集成和MCP协议，让AI无缝融入开发者工作流，有效提升编码效率。",
       "features": [
-        "",
-        "",
-        ""
+        "一体化代码编辑、Shell命令执行与搜索",
+        "支持VS Code扩展及ACP协议与IDE深度集成",
+        "通过MCP协议接入外部工具扩展功能"
       ],
-      "audience": ""
+      "audience": "软件开发人员、运维工程师、AI应用开发者、技术创作者"
     },
     {
       "rank": 10,
       "name": "pi",
       "author": "earendil-works",
       "url": "https://github.com/earendil-works/pi",
-      "stars": 77214,
-      "forks": 9491,
+      "stars": 77229,
+      "forks": 9493,
       "weeklyStars": 4880,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
+      "zhDesc": "Pi Agent Harness 是一个自扩展的编码代理工具包，集成了统一多供应商 LLM API 和强大的 agent 运行时。它提供了终端 TUI 与交互式编码代理 CLI，简化了 AI 编码助手和自动化工作流的开发。",
       "features": [
-        "",
-        "",
-        ""
+        "统一多供应商 LLM API，支持 OpenAI/Anthropic 等",
+        "可扩展 agent 运行时，含工具调用与状态管理",
+        "交互式编码代理 CLI，提升编码效率与体验"
       ],
-      "audience": ""
+      "audience": "AI 应用开发者、代码助手构建者、软件工程师、自动化工作流工程师"
     },
     {
       "rank": 11,
       "name": "ai-engineering-from-scratch",
       "author": "rohitg00",
       "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
-      "stars": 43261,
-      "forks": 7239,
+      "stars": 43271,
+      "forks": 7241,
       "weeklyStars": 4399,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Learn it. Build it. Ship it for others.",
+      "zhDesc": "一个从零开始的AI工程全栈开源课程，涵盖503课时20阶段，从数学基础到多智能体系统。每个课程都产出可复用的提示词、技能、智能体或MCP服务器，让你真正理解并实际构建AI。",
       "features": [
-        "",
-        "",
-        ""
+        "系统化20阶段503课时从零直达实战",
+        "每个课程产出可直接部署的AI工具包",
+        "覆盖Python/TypeScript/Rust/Julia多语言"
       ],
-      "audience": ""
+      "audience": "AI爱好者、软件工程师、数据科学家、技术经理"
     },
     {
       "rank": 12,
       "name": "ui-skills",
       "author": "ibelick",
       "url": "https://github.com/ibelick/ui-skills",
-      "stars": 6343,
+      "stars": 6344,
       "forks": 279,
       "weeklyStars": 1691,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Skills for Design Engineers",
+      "zhDesc": "UI Skills 是一个面向设计工程师的 CLI 工具，能够为 AI 代理精准分配合适的 UI 技能资源。它通过简单的命令管理技能集，显著提升设计工程团队的工作效率。",
       "features": [
-        "",
-        "",
-        ""
+        "快速启动 npx 命令路由到合适 UI 技能集",
+        "分类展示所有可用技能便于浏览选择",
+        "按任务类型精确定位所需 UI 技能"
       ],
-      "audience": ""
+      "audience": "设计工程师、前端开发者、AI 应用开发者、产品设计师"
     },
     {
       "rank": 13,
@@ -232,85 +232,85 @@
       "weeklyStars": 364,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Bonsai Demo",
+      "zhDesc": "PrismML 开源的高效语言模型演示项目，支持 1-bit 和 Ternary 两种极低比特量化模型在本地运行。让 27B 规模模型具备视觉、工具调用和推理思考能力，在手机或消费级 GPU 上即可部署，大幅降低大模型使用门槛。",
       "features": [
-        "",
-        "",
-        ""
+        "极低比特量化（1-bit/ternary），模型体积极致压缩",
+        "支持视觉理解、工具调用和推理思考，功能全面",
+        "一键脚本安装，跨平台本地运行，门槛极低"
       ],
-      "audience": ""
+      "audience": "AI研究员、本地大模型开发者、边缘计算工程师、隐私敏感用户、开源爱好者"
     },
     {
       "rank": 14,
       "name": "lingbot-map",
       "author": "Robbyant",
       "url": "https://github.com/Robbyant/lingbot-map",
-      "stars": 15330,
-      "forks": 1591,
+      "stars": 15334,
+      "forks": 1592,
       "weeklyStars": 3640,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "A feed-forward 3D foundation model for reconstructing scenes from streaming data",
+      "zhDesc": "LingBot-Map 是一种前馈式 3D 基础模型，能从连续视频流中实时重建 3D 场景。其几何上下文变换器统一了坐标估计、密集几何与长程漂移校正，为流式重建提供了高效且精确的方案。",
       "features": [
-        "",
-        "",
-        ""
+        "流式推理稳定，长序列可达 20 FPS",
+        "几何上下文变换器统一多线索处理",
+        "在多个基准上达到最先进的场景重建"
       ],
-      "audience": ""
+      "audience": "计算机视觉研究员、3D 重建开发者、机器人 SLAM 工程师、自动驾驶系统开发者"
     },
     {
       "rank": 15,
       "name": "ossie",
       "author": "apache",
       "url": "https://github.com/apache/ossie",
-      "stars": 1619,
+      "stars": 1620,
       "forks": 184,
       "weeklyStars": 471,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Apache Ossie, industry wide specification effort to standardize how we exchange semantic metadata across analytics, AI and BI platforms, providing a vendor neutral, single source of truth for semantic data",
+      "zhDesc": "Apache Ossie 是 Apache 孵化的行业级语义元数据交换标准，为 AI、BI 与分析平台提供统一的语义模型。它通过厂商中立的单一真实来源，解决跨工具 KPI 定义分歧，确保数据意义的一致性和 AI 输出的可靠性。",
       "features": [
-        "",
-        "",
-        ""
+        "JSON/YAML 开放规范，统一 AI、BI 与分析平台语义",
+        "内置 dbt、GoodData 等格式双向转换能力",
+        "验证工具自动校验语义模型，确保一致性"
       ],
-      "audience": ""
+      "audience": "数据分析师、AI工程师、BI平台开发者、数据治理专家、技术架构师"
     },
     {
       "rank": 16,
       "name": "hallmark",
       "author": "Nutlope",
       "url": "https://github.com/Nutlope/hallmark",
-      "stars": 17243,
-      "forks": 864,
+      "stars": 17274,
+      "forks": 865,
       "weeklyStars": 4978,
       "language": "CSS",
       "langColor": "#663399",
-      "zhDesc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "zhDesc": "Hallmark 是专为 Claude Code、Cursor 和 Codex 打造的反 AI 同质化设计技能，通过 20 个主题和 57 项 slop 测试生成独特 UI。它解决 AI 编码工具产出千篇一律界面的问题，让每个项目拥有专属视觉指纹。",
       "features": [
-        "",
-        "",
-        ""
+        "智能选择宏观结构与主题生成独特UI",
+        "57项反模式检测消除AI设计同质化",
+        "支持审计、重构、提取设计DNA操作"
       ],
-      "audience": ""
+      "audience": "AI 辅助开发者、前端工程师、UX 设计师、提示工程师、产品设计师"
     },
     {
       "rank": 17,
       "name": "skills",
       "author": "mattpocock",
       "url": "https://github.com/mattpocock/skills",
-      "stars": 187232,
-      "forks": 16083,
+      "stars": 187312,
+      "forks": 16090,
       "weeklyStars": 10969,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "zhDesc": "专为真实工程设计的 AI 代理技能集合，将软件工程原则封装为直接的斜杠命令。通过强制对齐、反馈循环和设计改进，让 AI 编码真正服务于专业开发者。",
       "features": [
-        "",
-        "",
-        ""
+        "需求对齐会话确保代理准确理解开发意图",
+        "强制红绿重构循环提供即时反馈提升代码质量",
+        "代码架构扫描设计建议防止系统熵增和技术债务"
       ],
-      "audience": ""
+      "audience": "AI辅助开发者、软件工程师、技术负责人、代码质量工程师"
     },
     {
       "rank": 18,
@@ -322,49 +322,49 @@
       "weeklyStars": 1538,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "A Flexible Framework for Experiencing Heterogeneous LLM Inference/Fine-tune Optimizations",
+      "zhDesc": "KTransformers 是开源的 CPU-GPU 异构大模型推理与微调框架。它通过自适应专家调度和多种量化，让百亿参数 MoE 模型在消费级 GPU 上高效运行，降低部署成本。",
       "features": [
-        "",
-        "",
-        ""
+        "CPU-GPU 协同推理高效优化 MoE 模型性能",
+        "支持多种量化精度以大幅降低显存占用",
+        "集成 LLaMA-Factory 实现大规模 MoE 微调"
       ],
-      "audience": ""
+      "audience": "大模型开发者、AI 研究员、深度学习工程师、算法工程师"
     },
     {
       "rank": 19,
       "name": "RuView",
       "author": "ruvnet",
       "url": "https://github.com/ruvnet/RuView",
-      "stars": 86090,
-      "forks": 11460,
+      "stars": 86112,
+      "forks": 11459,
       "weeklyStars": 4821,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+      "zhDesc": "RuView是一个利用普通WiFi信号实现穿墙感知和生命体征监测的无摄像头平台。通过ESP32读取信道状态信息，在边缘设备上实时检测人员存在、呼吸和心率，保护隐私且成本极低。",
       "features": [
-        "",
-        "",
-        ""
+        "通过标准WiFi实现穿墙存在检测与人数计数",
+        "无接触实时监测呼吸频率和心率变化",
+        "边缘本地计算保护隐私无需云服务"
       ],
-      "audience": ""
+      "audience": "智能家居开发者、无线感知研究人员、边缘AI工程师、安防监控从业者、物联网解决方案架构师"
     },
     {
       "rank": 20,
       "name": "croc",
       "author": "schollz",
       "url": "https://github.com/schollz/croc",
-      "stars": 38359,
+      "stars": 38362,
       "forks": 1524,
       "weeklyStars": 2647,
       "language": "Go",
       "langColor": "#00ADD8",
-      "zhDesc": "Easily and securely send things from one computer to another 🐊 📦",
+      "zhDesc": "croc 是一个命令行工具，支持任意两台计算机之间简单安全地传输文件和文件夹。它采用 PAKE 端到端加密，无需服务器和端口转发，跨平台且支持断点续传，极大简化文件交换流程。",
       "features": [
-        "",
-        "",
-        ""
+        "端到端加密保障传输安全，抵御中间人攻击",
+        "跨平台支持 Windows、Linux、macOS 无缝传输",
+        "支持多文件批量发送与断点续传，高效可靠"
       ],
-      "audience": ""
+      "audience": "开发人员、系统管理员、网络安全工程师、日常办公用户"
     }
   ]
 }

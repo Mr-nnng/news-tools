@@ -1,0 +1,370 @@
+{
+  "weekLabel": "2026年第30周",
+  "weekInfo": "2026 年第 30 周 / 2026-07-25",
+  "date": "2026-07-25",
+  "count": 20,
+  "totalCount": 20,
+  "coverSummary": "本周 GitHub Trending 收录 20 个热门仓库，涵盖 CSS·Go·Python·Rust·Shell·TypeScript 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "ai-agent-book",
+      "author": "bojieli",
+      "url": "https://github.com/bojieli/ai-agent-book",
+      "stars": 19366,
+      "forks": 1934,
+      "weeklyStars": 17401,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库：全书正文、编译版 PDF 与按章配套代码",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 2,
+      "name": "worldmonitor",
+      "author": "koala73",
+      "url": "https://github.com/koala73/worldmonitor",
+      "stars": 73602,
+      "forks": 11035,
+      "weeklyStars": 10936,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 3,
+      "name": "code-review-graph",
+      "author": "tirth8205",
+      "url": "https://github.com/tirth8205/code-review-graph",
+      "stars": 26293,
+      "forks": 2457,
+      "weeklyStars": 6565,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Local-first code intelligence graph for MCP and CLI. Builds a persistent map of your codebase so AI coding tools read only what matters, with benchmarked context reductions on reviews and large-repo workflows.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 4,
+      "name": "kimi-code",
+      "author": "MoonshotAI",
+      "url": "https://github.com/MoonshotAI/kimi-code",
+      "stars": 4977,
+      "forks": 724,
+      "weeklyStars": 1589,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Kimi Code CLI — The Starting Point for Next-Gen Agents",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 5,
+      "name": "jcode",
+      "author": "1jehuang",
+      "url": "https://github.com/1jehuang/jcode",
+      "stars": 11276,
+      "forks": 1234,
+      "weeklyStars": 2773,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "The most intelligent agent harness for code",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 6,
+      "name": "OmniRoute",
+      "author": "diegosouzapw",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "stars": 29234,
+      "forks": 3815,
+      "weeklyStars": 9965,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Never stop coding. Free MIT AI gateway: one endpoint, 290+ providers (90+ free), 500+ models — Kimi, Claude, GPT, OpenAI, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 500+ contributors",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 7,
+      "name": "pi-web",
+      "author": "agegr",
+      "url": "https://github.com/agegr/pi-web",
+      "stars": 2654,
+      "forks": 352,
+      "weeklyStars": 1316,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Web UI for the pi coding agent",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 8,
+      "name": "DeepTutor",
+      "author": "HKUDS",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "stars": 29610,
+      "forks": 3905,
+      "weeklyStars": 2380,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "DeepTutor: Lifelong Personalized Tutoring.https://deeptutor.info/.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 9,
+      "name": "kimi-cli",
+      "author": "MoonshotAI",
+      "url": "https://github.com/MoonshotAI/kimi-cli",
+      "stars": 10804,
+      "forks": 1251,
+      "weeklyStars": 1570,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Kimi Code CLI is your next CLI agent.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 10,
+      "name": "pi",
+      "author": "earendil-works",
+      "url": "https://github.com/earendil-works/pi",
+      "stars": 77214,
+      "forks": 9491,
+      "weeklyStars": 4880,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 11,
+      "name": "ai-engineering-from-scratch",
+      "author": "rohitg00",
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "stars": 43261,
+      "forks": 7239,
+      "weeklyStars": 4399,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Learn it. Build it. Ship it for others.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 12,
+      "name": "ui-skills",
+      "author": "ibelick",
+      "url": "https://github.com/ibelick/ui-skills",
+      "stars": 6343,
+      "forks": 279,
+      "weeklyStars": 1691,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Skills for Design Engineers",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 13,
+      "name": "Bonsai-demo",
+      "author": "PrismML-Eng",
+      "url": "https://github.com/PrismML-Eng/Bonsai-demo",
+      "stars": 2036,
+      "forks": 200,
+      "weeklyStars": 364,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Bonsai Demo",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 14,
+      "name": "lingbot-map",
+      "author": "Robbyant",
+      "url": "https://github.com/Robbyant/lingbot-map",
+      "stars": 15330,
+      "forks": 1591,
+      "weeklyStars": 3640,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "A feed-forward 3D foundation model for reconstructing scenes from streaming data",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 15,
+      "name": "ossie",
+      "author": "apache",
+      "url": "https://github.com/apache/ossie",
+      "stars": 1619,
+      "forks": 184,
+      "weeklyStars": 471,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Apache Ossie, industry wide specification effort to standardize how we exchange semantic metadata across analytics, AI and BI platforms, providing a vendor neutral, single source of truth for semantic data",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 16,
+      "name": "hallmark",
+      "author": "Nutlope",
+      "url": "https://github.com/Nutlope/hallmark",
+      "stars": 17243,
+      "forks": 864,
+      "weeklyStars": 4978,
+      "language": "CSS",
+      "langColor": "#663399",
+      "zhDesc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 17,
+      "name": "skills",
+      "author": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 187232,
+      "forks": 16083,
+      "weeklyStars": 10969,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 18,
+      "name": "ktransformers",
+      "author": "kvcache-ai",
+      "url": "https://github.com/kvcache-ai/ktransformers",
+      "stars": 19011,
+      "forks": 1483,
+      "weeklyStars": 1538,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "A Flexible Framework for Experiencing Heterogeneous LLM Inference/Fine-tune Optimizations",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 19,
+      "name": "RuView",
+      "author": "ruvnet",
+      "url": "https://github.com/ruvnet/RuView",
+      "stars": 86090,
+      "forks": 11460,
+      "weeklyStars": 4821,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 20,
+      "name": "croc",
+      "author": "schollz",
+      "url": "https://github.com/schollz/croc",
+      "stars": 38359,
+      "forks": 1524,
+      "weeklyStars": 2647,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "Easily and securely send things from one computer to another 🐊 📦",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    }
+  ]
+}

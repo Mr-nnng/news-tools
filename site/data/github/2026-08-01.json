@@ -1,0 +1,352 @@
+{
+  "weekLabel": "2026年第31周",
+  "weekInfo": "2026 年第 31 周 / 2026-08-01",
+  "date": "2026-08-01",
+  "count": 19,
+  "totalCount": 19,
+  "coverSummary": "本周 GitHub Trending 收录 19 个热门仓库，涵盖 AI · 开发者工具 · 前端设计 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "buzz",
+      "author": "block",
+      "url": "https://github.com/block/buzz",
+      "stars": 19768,
+      "forks": 2013,
+      "weeklyStars": 10558,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Buzz 是 Block 开源的蜂群意识协作平台，基于 Nostr 协议让人类与 AI 代理在同一工作空间内共创。它通过单一事件日志统一消息、代码、工作流与审批准入，使代理以成员身份参与并拥有完整审计轨迹，替代多工具拼凑的协作模式。",
+      "features": [
+        "统一事件日志承载消息代码与工作流",
+        "人类与 AI 代理同房间协作同等操作",
+        "分支即频道沉淀补丁 CI 与审批"
+      ],
+      "audience": "软件开发者、技术团队负责人、DevOps 工程师、AI 应用开发者、开源社区成员"
+    },
+    {
+      "rank": 2,
+      "name": "ego-lite",
+      "author": "citrolabs",
+      "url": "https://github.com/citrolabs/ego-lite",
+      "stars": 7134,
+      "forks": 342,
+      "weeklyStars": 4741,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "专为 AI 代理打造的极速浏览器，让 Claude Code、Codex 等在独立空间并行执行自动化任务。零成本零配置共享真实登录状态，多代理同时工作不打扰用户，复杂任务提速 2.5 倍并节省 token。",
+      "features": [
+        "独立空间多代理并行运行互不干扰",
+        "一键迁移浏览器数据继承全部登录状态",
+        "代码级工具调用复杂任务提速省 token"
+      ],
+      "audience": "AI 代理开发者、Claude Code 用户、Codex 用户、RPA 工程师、自动化测试工程师"
+    },
+    {
+      "rank": 3,
+      "name": "open-code-review",
+      "author": "alibaba",
+      "url": "https://github.com/alibaba/open-code-review",
+      "stars": 17143,
+      "forks": 1166,
+      "weeklyStars": 4746,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "阿里巴巴开源的生产级 AI 代码审查 CLI，结合确定性流水线与 LLM Agent，输出精确到行的审查意见。内置 NPE、线程安全、XSS、SQL 注入等缺陷规则，显著提升审查精度并降低误报。",
+      "features": [
+        "确定性管道结合 LLM Agent，审查稳定精准",
+        "内置 NPE、线程安全等缺陷规则，识别率高",
+        "兼容 OpenAI 与 Anthropic，灵活接入模型"
+      ],
+      "audience": "后端开发工程师、技术负责人、DevOps 工程师、开源项目维护者、研发效能团队"
+    },
+    {
+      "rank": 4,
+      "name": "i-have-adhd",
+      "author": "ayghri",
+      "url": "https://github.com/ayghri/i-have-adhd",
+      "stars": 14876,
+      "forks": 809,
+      "weeklyStars": 5133,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "为编码代理打造的 ADHD 友好输出技能。强制 AI 先说方案、再列编号步骤、结尾给出清晰的下一步，解决 AI 回答冗长婉转、用户注意力易丢的问题。",
+      "features": [
+        "先给行动再列步骤，结尾附上明确下一步",
+        "压制开场寒暄与结尾客套，直达问题核心",
+        "列表限制在 5 项内，减轻认知负担"
+      ],
+      "audience": "ADHD 开发者、追求效率的程序员、AI 编码工具重度用户、远程办公者、新手程序员"
+    },
+    {
+      "rank": 5,
+      "name": "ai-agent-book",
+      "author": "bojieli",
+      "url": "https://github.com/bojieli/ai-agent-book",
+      "stars": 28704,
+      "forks": 3032,
+      "weeklyStars": 9454,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "《深入理解 AI Agent》开源技术书，系统讲解 AI Agent 设计原理与工程实践，含 10 章正文、PDF 和 95 个配套实验。围绕 Agent = LLM + 上下文 + 工具的核心公式，从原理到生产实战帮助开发者快速上手并深入掌握 Agent 开发。",
+      "features": [
+        "10 章正文从基础到生产级实战",
+        "95 个可运行配套实验覆盖核心场景",
+        "支持 13 种语言及 PDF/EPUB 下载"
+      ],
+      "audience": "AI 工程师、算法工程师、大模型应用开发者、技术管理者"
+    },
+    {
+      "rank": 6,
+      "name": "editor",
+      "author": "pascalorg",
+      "url": "https://github.com/pascalorg/editor",
+      "stars": 20481,
+      "forks": 2643,
+      "weeklyStars": 2863,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "基于 React Three Fiber 和 WebGPU 的 3D 建筑编辑器，让用户创建并分享复杂建筑项目。采用 Turborepo 模块化架构，提供可扩展的插件系统与完整编辑工具链。",
+      "features": [
+        "基于 React Three Fiber 和 WebGPU 实现高效渲染",
+        "插件机制支持自定义节点与面板灵活扩展",
+        "内置墙体楼板等丰富建筑工具和节点定义"
+      ],
+      "audience": "建筑师、3D 设计师、建筑行业开发者、前端开发者"
+    },
+    {
+      "rank": 7,
+      "name": "book-to-skill",
+      "author": "virgiliojr94",
+      "url": "https://github.com/virgiliojr94/book-to-skill",
+      "stars": 14425,
+      "forks": 1565,
+      "weeklyStars": 4603,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "将技术书籍、文档目录等结构文档蒸馏为 AI 智能体技能（Agent Skill）的开源工具。按需加载章节，相比直灌全文节省 24-51 倍 token，消除幻觉与检索成本。",
+      "features": [
+        "支持 PDF/EPUB/DOCX/MD 多格式转换",
+        "按需加载章节节省 24-51 倍 token",
+        "兼容 Copilot CLI、Claude Code"
+      ],
+      "audience": "开发者、AI 编程工具用户、技术书籍读者、知识管理爱好者"
+    },
+    {
+      "rank": 8,
+      "name": "jcode",
+      "author": "1jehuang",
+      "url": "https://github.com/1jehuang/jcode",
+      "stars": 14730,
+      "forks": 1623,
+      "weeklyStars": 3351,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "jcode 是一款主打极致内存效率的 AI 编程代理 CLI，支持多会话并行、语义记忆和智能体协作。相较于 Claude Code、OpenCode 等主流工具，大幅降低 RAM 占用与启动延迟，让开发者低成本运行多个 AI 工作流。",
+      "features": [
+        "极致内存优化，单会话仅需约 27.8MB",
+        "内置语义记忆与技能自动注入增强上下文",
+        "支持多智能体蜂群协作与浏览器自动化"
+      ],
+      "audience": "AI 应用开发者、软件工程师、DevOps 工程师、命令行爱好者"
+    },
+    {
+      "rank": 9,
+      "name": "skills",
+      "author": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 198145,
+      "forks": 17060,
+      "weeklyStars": 11622,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Matt Pocock 开源的一套 AI 编程智能体技能包，含需求澄清、TDD、代码审查、架构改进等工程实践。让 AI Agent 遵循软件工程规范而非乱写代码，解决对齐差、质量失控等核心痛点。",
+      "features": [
+        "通过拷问式调研澄清需求对齐意图",
+        "内置 TDD 红绿重构循环严控代码质量",
+        "技能小而可组合适配任意模型和代理"
+      ],
+      "audience": "AI 提示词工程师、全栈开发者、技术团队负责人、独立开发者"
+    },
+    {
+      "rank": 10,
+      "name": "t3code",
+      "author": "pingdotgg",
+      "url": "https://github.com/pingdotgg/t3code",
+      "stars": 16127,
+      "forks": 3589,
+      "weeklyStars": 1488,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "T3 Code 是 AI 编程代理的远程控制面板，通过手机、网页或桌面应用即可操控本机 Claude Code、Codex、Cursor 等代理。开源且远程就绪，带来流畅的代理开发体验。",
+      "features": [
+        "手机、网页、桌面三端远程控制代理",
+        "兼容 Claude Code、Codex 等代理",
+        "完全开源，支持自托管与任意 fork 定制"
+      ],
+      "audience": "AI 编程开发者、远程办公工程师、开源工具爱好者、多代理工作流管理者"
+    },
+    {
+      "rank": 11,
+      "name": "worldmonitor",
+      "author": "koala73",
+      "url": "https://github.com/koala73/worldmonitor",
+      "stars": 77540,
+      "forks": 11580,
+      "weeklyStars": 4657,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "实时全球情报仪表盘，AI 聚合 500+ 新闻源，融合地缘政治、金融、军事与基础设施监控；支持 3D/平面双地图、31 国不稳定指数与本地 AI 部署，实现统一态势感知。",
+      "features": [
+        "AI 聚合 500+ 新闻源生成多领域情报简报",
+        "3D 地球与平面地图双引擎 56 种可视化图层",
+        "Ollama 本地 AI 支持无需任何 API 密钥"
+      ],
+      "audience": "地缘政治分析师、金融投资者、军事研究人员、国际新闻从业者、开源情报爱好者"
+    },
+    {
+      "rank": 12,
+      "name": "GeoLibre",
+      "author": "opengeos",
+      "url": "https://github.com/opengeos/GeoLibre",
+      "stars": 4748,
+      "forks": 477,
+      "weeklyStars": 2765,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "GeoLibre 是一款免费开源的轻量级云原生 GIS 平台，用于地理空间数据的可视化、探索与分析。支持浏览器、桌面、移动端和 Jupyter 多端运行，内置 3D 瓦片、行星底图及 700+ 空间分析工具。",
+      "features": [
+        "跨浏览器、桌面、移动端与 Jupyter 全端运行",
+        "支持 3D Tiles、行星底图与多源矢量数据",
+        "内置 700+ 空间分析工具与 SQL 工作台"
+      ],
+      "audience": "GIS 开发者、地理空间分析师、数据科学家、测绘遥感工程师、Jupyter 用户"
+    },
+    {
+      "rank": 13,
+      "name": "Kronos",
+      "author": "shiyu-coder",
+      "url": "https://github.com/shiyu-coder/Kronos",
+      "stars": 35289,
+      "forks": 5883,
+      "weeklyStars": 1939,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Kronos 是首个为金融 K 线（OHLCV）序列设计的开源基础模型，基于全球 45+ 交易所数据预训练。通过专用分词器将行情量化为层次化离散 token，再经自回归 Transformer 学习，为量化预测等多元任务提供统一解决方案。",
+      "features": [
+        "45+ 交易所海量 K 线数据预训练",
+        "分层离散分词器适配高噪声金融数据",
+        "支持概率预测、微调与批量并行推理"
+      ],
+      "audience": "量化研究员、金融 AI 开发者、交易策略分析师、数据科学家"
+    },
+    {
+      "rank": 14,
+      "name": "airi",
+      "author": "moeru-ai",
+      "url": "https://github.com/moeru-ai/airi",
+      "stars": 46269,
+      "forks": 4561,
+      "weeklyStars": 3125,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "自托管开源 AI 虚拟伴侣，复刻 Neuro-sama，支持语音对话、游戏游玩与 VRM/Live2D 形象。解决闭源虚拟主播无法互动的问题，让 AI 伴侣真正属于你、随时陪伴。",
+      "features": [
+        "实时语音对话与 Minecraft 等游戏联动",
+        "VRM/Live2D 虚拟形象与自动动画",
+        "自托管部署与 Web/桌面/移动多端支持"
+      ],
+      "audience": "AI 爱好者、虚拟主播爱好者、二次元玩家、数字人开发者、自托管用户"
+    },
+    {
+      "rank": 15,
+      "name": "OmniRoute",
+      "author": "diegosouzapw",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "stars": 36366,
+      "forks": 4672,
+      "weeklyStars": 7701,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "免费 AI 网关，一端聚合 290+ 提供商、500+ 模型，兼容主流编码工具。智能路由自动回退防限流，RTK+Caveman 压缩省 15-95% token，零成本、不间断开发。",
+      "features": [
+        "一个端点聚合 290+ 提供商、500+ 模型",
+        "配额感知自动回退，限流时无缝切换",
+        "RTK+Caveman 压缩节省 15-95% token"
+      ],
+      "audience": "AI 应用开发者、Claude Code/Cursor 使用者、开源爱好者、云成本敏感团队"
+    },
+    {
+      "rank": 16,
+      "name": "Instatic",
+      "author": "CoreBunch",
+      "url": "https://github.com/CoreBunch/Instatic",
+      "stars": 7022,
+      "forks": 607,
+      "weeklyStars": 2866,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "自托管的开源 CMS，将可视化编辑、内容引擎与静态发布集于单个 Bun 服务，输出零框架残留的干净页面。为 Webflow 与 WordPress 的开源替代，内置用户角色、插件、数据模型与 AI 编辑，站点归你所有。",
+      "features": [
+        "可视化画布与设计令牌系统，全站实时同步",
+        "发布即产出纯静态 HTML，无框架运行时残留",
+        "沙箱插件、自定义数据表与 AI 智能编辑"
+      ],
+      "audience": "网页设计师、前端开发者、内容团队、独立开发者、自托管爱好者"
+    },
+    {
+      "rank": 17,
+      "name": "text-to-cad",
+      "author": "earthtojake",
+      "url": "https://github.com/earthtojake/text-to-cad",
+      "stars": 12291,
+      "forks": 1308,
+      "weeklyStars": 1901,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 AI 智能体的 CAD/CAE/CAM 技能库，支持用自然语言或图像直接生成、编辑与预览 CAD 模型。覆盖机器人描述、仿真、切片到制造交付全流程，推动硬件设计自动化落地。",
+      "features": [
+        "自然语言或图像直接生成 STEP CAD 模型",
+        "覆盖 URDF/SDF 机器人建模与仿真场景",
+        "集成 G-code 切片与 3D 打印流程"
+      ],
+      "audience": "CAD 工程师、机器人开发者、硬件创客、AI Agent 开发者、3D 打印爱好者"
+    },
+    {
+      "rank": 18,
+      "name": "pi",
+      "author": "earendil-works",
+      "url": "https://github.com/earendil-works/pi",
+      "stars": 81638,
+      "forks": 10083,
+      "weeklyStars": 4571,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Pi 是一个 AI 代理工具包，集成了统一多供应商 LLM API、代理运行时、终端 UI 与编码代理 CLI。它让开发者能快速构建并扩展自己的 AI 编码代理，显著简化多模型接入和代理工作流管理。",
+      "features": [
+        "统一多供应商 LLM API，支持 OpenAI/Anthropic/Google",
+        "交互式编码代理 CLI，内置工具调用与状态管理",
+        "终端 UI 库带差分渲染，实现高效界面更新"
+      ],
+      "audience": "AI 应用开发者、编码代理用户、终端工具开发者、开源贡献者"
+    },
+    {
+      "rank": 19,
+      "name": "VibeVoice",
+      "author": "microsoft",
+      "url": "https://github.com/microsoft/VibeVoice",
+      "stars": 51731,
+      "forks": 5732,
+      "weeklyStars": 1222,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "微软开源的前沿语音 AI 模型家族，覆盖长篇幅语音识别与多说话人语音合成。通过超低帧率连续分词与扩散框架，单次处理 60 分钟以上音频并生成 90 分钟自然语音，解决长上下文语音处理难题。",
+      "features": [
+        "单次识别 60 分钟长音频并输出说话人与时间戳",
+        "合成最长 90 分钟多说话人表达性语音",
+        "流式输入与 300ms 低延迟实时语音合成"
+      ],
+      "audience": "语音 AI 研究员、语音应用开发者、音频内容创作者、大模型应用开发者"
+    }
+  ]
+}

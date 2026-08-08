@@ -1,0 +1,298 @@
+{
+  "weekLabel": "2026年第32周",
+  "weekInfo": "2026 年第 32 周 / 2026-08-08",
+  "date": "2026-08-08",
+  "count": 16,
+  "totalCount": 16,
+  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 AI · 安全 · 前端设计 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "reverse-skill",
+      "author": "zhaoxuya520",
+      "url": "https://github.com/zhaoxuya520/reverse-skill",
+      "stars": 20654,
+      "forks": 2849,
+      "weeklyStars": 10400,
+      "language": "PowerShell",
+      "langColor": "#012456",
+      "zhDesc": "面向 AI 编程助手的网络安全技能路由包，自动匹配逆向、渗透与安全研究场景。解决 AI 在 APK、二进制、JS 加密等任务中工具选择混乱的问题，按需自举工具链并沉淀经验库。",
+      "features": [
+        "AI 自动路由匹配逆向与渗透场景",
+        "按需自举工具链并校验本地环境",
+        "经验库自动进化沉淀实战知识库"
+      ],
+      "audience": "安全研究员、渗透测试工程师、CTF 选手、AI 应用开发者"
+    },
+    {
+      "rank": 2,
+      "name": "AI-For-Beginners",
+      "author": "microsoft",
+      "url": "https://github.com/microsoft/AI-For-Beginners",
+      "stars": 63283,
+      "forks": 12261,
+      "weeklyStars": 8224,
+      "language": "Jupyter Notebook",
+      "langColor": "#DA5B0B",
+      "zhDesc": "微软出品的 AI 入门课程，12 周 24 课系统讲解神经网络、深度学习、NLP 等核心主题。配套可执行 Notebook、测验与实验，让零基础学习者快速掌握 AI 基础并动手实践。",
+      "features": [
+        "12周24课系统覆盖AI核心知识",
+        "PyTorch与TensorFlow双框架实战",
+        "配套测验实验与多语言翻译支持"
+      ],
+      "audience": "AI初学者、开发者、学生、技术爱好者"
+    },
+    {
+      "rank": 3,
+      "name": "TencentDB-Agent-Memory",
+      "author": "TencentCloud",
+      "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+      "stars": 17641,
+      "forks": 1584,
+      "weeklyStars": 7501,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "腾讯云开源的 AI Agent 团队级记忆中枢，把对话、文档和代码沉淀为分层记忆资产，支持跨框架复用。采用符号化短期记忆与分层长期记忆，减少最高 61% token 消耗，显著提升 Agent 任务成功率。",
+      "features": [
+        "分层记忆从事实到画像逐级抽象可下钻",
+        "Mermaid 符号图压缩日志节省上下文成本",
+        "白盒存储全链路追溯保证记忆可审计"
+      ],
+      "audience": "AI Agent 开发者、LLM 应用工程师、大模型平台架构师、智能运维工程师"
+    },
+    {
+      "rank": 4,
+      "name": "kaneo",
+      "author": "usekaneo",
+      "url": "https://github.com/usekaneo/kaneo",
+      "stars": 7641,
+      "forks": 611,
+      "weeklyStars": 2925,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Kaneo 是一款开源项目管理工具，以极简设计为核心，提供干净界面、自托管部署和快速性能。它摒弃冗余功能，让团队专注于实际工作，而非工具本身。",
+      "features": [
+        "极简界面聚焦工作，减少冗余功能干扰",
+        "支持自托管部署，数据完全自主可控",
+        "内置 MCP 服务器，AI 工具可管理任务"
+      ],
+      "audience": "开发者、自托管爱好者、独立开发者、AI 工具用户"
+    },
+    {
+      "rank": 5,
+      "name": "airllm",
+      "author": "lyogavin",
+      "url": "https://github.com/lyogavin/airllm",
+      "stars": 29959,
+      "forks": 3193,
+      "weeklyStars": 5521,
+      "language": "Jupyter Notebook",
+      "langColor": "#DA5B0B",
+      "zhDesc": "AirLLM 是一种无需量化、蒸馏或剪枝的大模型推理方案，让 70B 模型在单张 4GB GPU 上流畅运行。其核心是逐层流式加载，显存需求仅取决于模型层大小，可运行 671B 级超大规模模型。",
+      "features": [
+        "单张 4GB 显卡即可运行 70B 级模型",
+        "支持 405B 与 671B 超大规模模型",
+        "无需量化蒸馏，逐层流式加载推理"
+      ],
+      "audience": "大模型开发者、推理工程师、资源受限用户、边缘计算开发者"
+    },
+    {
+      "rank": 6,
+      "name": "DeepSeek-Reasonix",
+      "author": "esengine",
+      "url": "https://github.com/esengine/DeepSeek-Reasonix",
+      "stars": 32937,
+      "forks": 2124,
+      "weeklyStars": 4739,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "DeepSeek 原生的终端 AI 编程代理，围绕前缀缓存稳定性设计，让长会话 token 成本保持极低。实测缓存命中率超 99%，可长期驻留运行，大幅降低 DeepSeek API 使用成本。",
+      "features": [
+        "前缀缓存优化使长会话 token 成本极低",
+        "支持 MCP、Skills、记忆、钩子等扩展",
+        "内置 Web 仪表盘与语义搜索能力"
+      ],
+      "audience": "CLI 开发者、AI 应用开发者、DeepSeek 用户、开源贡献者"
+    },
+    {
+      "rank": 7,
+      "name": "book-to-skill",
+      "author": "virgiliojr94",
+      "url": "https://github.com/virgiliojr94/book-to-skill",
+      "stars": 18433,
+      "forks": 1981,
+      "weeklyStars": 3957,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "将技术书籍或文档转化为 AI 智能体技能的开源工具，支持 PDF/EPUB/DOCX 等格式。让 Claude Code 等智能体按需加载章节，节省 24-51 倍 token 并避免幻觉。",
+      "features": [
+        "支持 PDF/EPUB/DOCX 等格式一键转换",
+        "章节按需加载，节省 24-51 倍 token",
+        "本地处理隐私安全，兼容主流 AI 智能体"
+      ],
+      "audience": "开发者、AI 应用开发者、文档工程师、知识管理者"
+    },
+    {
+      "rank": 8,
+      "name": "buzz",
+      "author": "block",
+      "url": "https://github.com/block/buzz",
+      "stars": 25049,
+      "forks": 2921,
+      "weeklyStars": 5746,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Buzz 是一个可自托管的工作区，让人类与 AI 代理在同一房间中协作，所有事件均以 Nostr 签名事件记录。它让代理拥有与队友同等的身份和审计轨迹，将聊天、代码、工作流统一到一个事件日志，解决团队协作工具碎片化问题。",
+      "features": [
+        "人类与 AI 代理同室协作，代理有真实身份与权限",
+        "基于 Nostr 签名事件，统一审计日志与搜索",
+        "频道、画布、工作流、媒体评论等协作功能"
+      ],
+      "audience": "开发者、AI 应用开发者、团队协作、自托管爱好者、DevOps 工程师"
+    },
+    {
+      "rank": 9,
+      "name": "awesome-systematic-trading",
+      "author": "paperswithbacktest",
+      "url": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+      "stars": 12977,
+      "forks": 1578,
+      "weeklyStars": 1433,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "精选系统化交易资源合集，涵盖 97 个库、40+ 学术策略、55 本书籍及视频博客教程。为量化交易者提供从策略研究到实盘运行的一站式导航，大幅降低信息搜集成本。",
+      "features": [
+        "精选 97 个量化库与回测框架",
+        "收录 40+ 学术策略含 Sharpe 指标",
+        "汇总书籍视频课程一站式学习"
+      ],
+      "audience": "量化交易员、算法工程师、金融研究员、投资爱好者、数据科学家"
+    },
+    {
+      "rank": 10,
+      "name": "openwork",
+      "author": "different-ai",
+      "url": "https://github.com/different-ai/openwork",
+      "stars": 21488,
+      "forks": 2103,
+      "weeklyStars": 2367,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "OpenWork 是免费的 AI 工作流共享桌面应用，作为 Claude Cowork 的开源替代品，支持三大主流桌面系统。通过单个 MCP 即可让 Codex、Claude Code、Cursor 等代理复用同一套技能与连接，实现跨团队、跨设备的工作流共享。",
+      "features": [
+        "单一 MCP 桥接多代理复用技能与连接",
+        "团队共享工作流支持一次创建随处复用",
+        "商业化管理后台实现企业级访问控制"
+      ],
+      "audience": "AI 应用开发者、Claude Code 用户、技术团队负责人、企业 IT 管理员"
+    },
+    {
+      "rank": 11,
+      "name": "ds4",
+      "author": "antirez",
+      "url": "https://github.com/antirez/ds4",
+      "stars": 20904,
+      "forks": 1866,
+      "weeklyStars": 1341,
+      "language": "C",
+      "langColor": "#555555",
+      "zhDesc": "antirez 开源的本地大模型推理引擎，专为 DeepSeek V4 Flash/PRO 与 GLM 5.2 深度优化，支持 Metal、CUDA 和 ROCm 后端。它让高端个人硬件即可运行顶级模型，并提供 SSD 流式加载、多机分布式与张量并行等扩展能力。",
+      "features": [
+        "专为 DeepSeek V4 与 GLM 5.2 深度优化",
+        "支持 Metal、CUDA、ROCm 多后端",
+        "SSD 流式加载与多机分布式推理"
+      ],
+      "audience": "大模型开发者、AI 应用开发者、MacBook 高性能用户、企业私有化部署工程师"
+    },
+    {
+      "rank": 12,
+      "name": "data-engineer-handbook",
+      "author": "DataExpert-io",
+      "url": "https://github.com/DataExpert-io/data-engineer-handbook",
+      "stars": 43389,
+      "forks": 8962,
+      "weeklyStars": 742,
+      "language": "Jupyter Notebook",
+      "langColor": "#DA5B0B",
+      "zhDesc": "数据工程领域最全面的学习资源手册，汇集书籍、社区、博客、播客、工具与认证等一站式资源。无论新手入门还是进阶提升，都能找到清晰的学习路径与行业生态全景图。",
+      "features": [
+        "精选 25+ 本数据工程必读书籍",
+        "收录 10+ 高质量社区与播客资源",
+        "覆盖主流工具、课程与认证指南"
+      ],
+      "audience": "数据工程师、数据架构师、数据分析师、数据科学家、转行者"
+    },
+    {
+      "rank": 13,
+      "name": "swarm-forge",
+      "author": "unclebob",
+      "url": "https://github.com/unclebob/swarm-forge",
+      "stars": 1876,
+      "forks": 203,
+      "weeklyStars": 273,
+      "language": "Clojure",
+      "langColor": "#DB5855",
+      "zhDesc": "基于 tmux 的多智能体编排平台，通过 git worktree 和角色分工让多个智能体协作完成软件工程。提供配置驱动的 swarm 拓扑、分层宪法和 handoff 协议，将智能体群转化为可靠的软件工程师。",
+      "features": [
+        "配置驱动的多代理拓扑，角色分工灵活",
+        "基于 tmux 的会话隔离，多代理并行协作",
+        "通过交接协议确保任务的可靠传递"
+      ],
+      "audience": "AI 工程师、DevOps 工程师、软件架构师、技术团队负责人"
+    },
+    {
+      "rank": 14,
+      "name": "embabel-agent",
+      "author": "embabel",
+      "url": "https://github.com/embabel/embabel-agent",
+      "stars": 4016,
+      "forks": 398,
+      "weeklyStars": 176,
+      "language": "Kotlin",
+      "langColor": "#A97BFF",
+      "zhDesc": "Embabel 是 JVM 平台的 Agent 框架，由 Spring 创始人打造，支持在 Java/Kotlin 中融合 LLM 与代码。采用 GOAP 动态规划，可自主组合已知步骤完成新任务，支持多 LLM 混合与 MCP 集成。",
+      "features": [
+        "GOAP 动态规划，可自主规划与路径寻优",
+        "Java 与 Kotlin 双语言，深度集成 Spring",
+        "支持多 LLM 混合与 MCP 工具生态集成"
+      ],
+      "audience": "Java 后端开发者、Spring 生态开发者、AI 应用开发者、企业架构师"
+    },
+    {
+      "rank": 15,
+      "name": "i-have-adhd",
+      "author": "ayghri",
+      "url": "https://github.com/ayghri/i-have-adhd",
+      "stars": 18219,
+      "forks": 1061,
+      "weeklyStars": 3497,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "为编码助手设计的 ADHD 友好技能，强制 AI 直接给出答案、编号步骤、避免冗长铺垫。解决开发者被 AI 长篇回复淹没关键信息的问题，让每次交互都直奔主题、高效落地。",
+      "features": [
+        "行动优先直接给答案，关键信息不被淹没",
+        "多步骤任务自动编号，步骤清晰可执行",
+        "每条回复附具体下一步，杜绝客套废话"
+      ],
+      "audience": "ADHD 开发者、编码助手重度用户、追求效率的程序员、技术团队负责人"
+    },
+    {
+      "rank": 16,
+      "name": "tailwindcss",
+      "author": "tailwindlabs",
+      "url": "https://github.com/tailwindlabs/tailwindcss",
+      "stars": 97106,
+      "forks": 5568,
+      "weeklyStars": 997,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Tailwind CSS 是一款实用优先的 CSS 框架，通过预定义的原子类快速构建自定义用户界面。它让开发者无需编写传统 CSS 即可高效完成样式设计，大幅提升前端开发效率与一致性。",
+      "features": [
+        "原子类直接组合无需写 CSS",
+        "内置响应式与状态变体支持",
+        "高度可定制适配任意设计系统"
+      ],
+      "audience": "前端开发者、UI 工程师、全栈开发者、独立开发者"
+    }
+  ]
+}

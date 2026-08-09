@@ -1,0 +1,83 @@
+name: 华尔街见闻早间汇总更新
+
+on:
+  # schedule 暂时注释（外部网站手动触发，避免 GitHub 调度延迟）
+  # UTC 04:30 = 北京时间 12:30（早间要闻汇总发布）
+  # schedule:
+  #   - cron: '30 4 * * *'
+  # 仅手动触发（外部网站通过 GitHub API repository_dispatch 调用，或 Actions 页面手动）
+  workflow_dispatch:
+    inputs:
+      date:
+        type: string
+        required: false
+        default: ''
+        description: '日期 YYYY-MM-DD，留空=今天'
+  repository_dispatch:
+    types: [wallstreet-morning]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: 安装依赖
+        run: uv sync
+
+      - name: 确定目标日期
+        id: date
+        run: |
+          DATE="${{ github.event.client_payload.date || inputs.date || '' }}"
+          if [ -z "$DATE" ]; then
+            DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d')
+          fi
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "ℹ️  目标日期: $DATE"
+
+      - name: 运行早间汇总栏目更新
+        id: update
+        continue-on-error: true
+        run: |
+          DATE="${{ steps.date.outputs.date }}"
+          echo "🚀 开始更新 $DATE 华尔街见闻早间要闻汇总..."
+          uv run python scripts/wallstreet_update.py --section morning --date "$DATE" 2>&1
+
+      - name: 检查是否生成了新数据
+        id: check
+        run: |
+          DATE="${{ steps.date.outputs.date }}"
+          if [ -f "site/data/wallstreet/$DATE.json" ]; then
+            echo "has_file=true" >> "$GITHUB_OUTPUT"
+            echo "✅ 当日文件已生成: site/data/wallstreet/$DATE.json"
+          else
+            echo "has_file=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️  $DATE 暂无华尔街见闻数据，但可能已有变更需要提交"
+          fi
+
+      - name: 提交并推送变更
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add site/
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "ℹ️  没有新的变更需要提交"
+          else
+            DATE="${{ steps.date.outputs.date }}"
+            git commit -m "chore(wallstreet): auto-update 早间汇总 $DATE"
+            git push
+            echo "✅ 已提交并推送华尔街见闻早间汇总更新"
+          fi

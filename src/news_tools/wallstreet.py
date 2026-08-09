@@ -1,7 +1,7 @@
 """
 news_tools/wallstreet.py — 华尔街见闻 7x24 快讯获取工具
 
-通过直接请求 API 获取指定日期 0:00~24:00 的全部重要新闻，输出 JSON。
+通过直接请求 API 获取指定时间范围（默认单日 0:00~24:00）的重要新闻，输出 JSON。
 
 用法:
     python -m news_tools.wallstreet                          # 今日快讯
@@ -9,15 +9,19 @@ news_tools/wallstreet.py — 华尔街见闻 7x24 快讯获取工具
     python -m news_tools.wallstreet --date 2026-05-28 -o news.json
     python -m news_tools.wallstreet --score 3                # 仅最重要的新闻
     python -m news_tools.wallstreet --compact                # 仅输出 items 数组
+    python -m news_tools.wallstreet --start 2026-05-29T00:00 --end 2026-05-29T08:00  # 时间窗
 
 作为模块调用:
-    from news_tools.wallstreet import fetch_live_by_date
+    from news_tools.wallstreet import fetch_live_by_date, fetch_live_between
     result = fetch_live_by_date(target_date=datetime(2026, 5, 29))
+    result = fetch_live_between(start_dt=datetime(2026, 5, 29, 0, 0),
+                                end_dt=datetime(2026, 5, 29, 8, 0))
     print(result.model_dump_json(indent=2, ensure_ascii=False))
 """
 
 import sys
 import json
+import re
 import time
 import argparse
 from datetime import datetime, timezone, timedelta
@@ -86,6 +90,83 @@ class LiveResult(BaseModel):
     fetched_at: str
     total_count: int
     items: list[LiveItem]
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 栏目工具（华尔街见闻聚合栏目）
+# ═══════════════════════════════════════════════════════════════════
+
+# 栏目 → 标题匹配规则
+#   breakfast: 前缀匹配 "华尔街见闻早餐"（每日含日期，如 "华尔街见闻早餐 | 2026年8月5日"）
+#   morning:   精确匹配 "早间要闻汇总"（固定标题）
+#   premarket: 包含 "美股盘前"（如 "周三美股盘前你需要了解的全球要闻"）
+SECTION_PATTERNS: dict[str, str] = {
+    "breakfast": "华尔街见闻早餐",
+    "morning": "早间要闻汇总",
+    "premarket": "美股盘前",
+}
+
+SECTION_LABELS: dict[str, str] = {
+    "breakfast": "华尔街见闻早餐",
+    "morning": "早间要闻汇总",
+    "premarket": "美股盘前",
+}
+
+SECTION_ORDER: list[str] = ["breakfast", "morning", "premarket"]
+
+
+def find_section_items(items: list[LiveItem], section: str) -> list[LiveItem]:
+    """按标题匹配栏目条目，返回按 display_time 降序排列的命中列表。"""
+    pattern = SECTION_PATTERNS.get(section)
+    if not pattern:
+        return []
+    hits: list[LiveItem] = []
+    for item in items:
+        title = (item.title or "").strip()
+        if section == "morning":
+            matched = title == pattern
+        elif section == "breakfast":
+            matched = title.startswith(pattern)
+        else:  # premarket
+            matched = pattern in title
+        if matched:
+            hits.append(item)
+    hits.sort(key=lambda x: x.display_time, reverse=True)
+    return hits
+
+
+def parse_content_points(content: str, content_text: str = "") -> list[str]:
+    """将快讯 content（HTML）解析为纯文本要点列表。
+
+    优先解析 <ul>/<li> 结构；无列表标签时回退到 content_text 按换行切分；
+    仍为空时返回空列表。
+    """
+    if not content:
+        content = ""
+
+    # 1) 解析 <li>...</li>
+    li_items = re.findall(r"<li[^>]*>(.*?)</li>", content, flags=re.DOTALL)
+    if li_items:
+        points: list[str] = []
+        for li in li_items:
+            # 去掉残留 HTML 标签与 br
+            text = re.sub(r"<br\s*/?>", "\n", li)
+            text = re.sub(r"<[^>]+>", "", text)
+            for line in text.split("\n"):
+                line = line.strip()
+                if line:
+                    points.append(line)
+        return points
+
+    # 2) 回退：content_text 按换行切分
+    text = (content_text or "").strip()
+    if text:
+        return [line.strip() for line in text.split("\n") if line.strip()]
+
+    # 3) 最后回退：content 去标签
+    text = re.sub(r"<br\s*/?>", "\n", content)
+    text = re.sub(r"<[^>]+>", "", text)
+    return [line.strip() for line in text.split("\n") if line.strip()]
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -200,50 +281,56 @@ def _find_cursor_for_time(
 # ═══════════════════════════════════════════════════════════════════
 
 
-def fetch_live_by_date(
-    target_date: datetime,
+def fetch_live_between(
+    start_dt: datetime,
+    end_dt: datetime,
     score: int = 2,
     limit: int = DEFAULT_LIMIT,
     max_retries: int = 3,
     verbose: bool = False,
 ) -> LiveResult:
-    """获取指定日期 0:00~24:00 (CST, UTC+8) 的全部重要新闻。
+    """获取指定时间范围 [start_dt, end_dt) 内 (CST, UTC+8) 的重要新闻。
+
+    相比整日抓取，按小时间窗抓取可显著减少分页请求量，降低被 API 风控的概率。
 
     Args:
-        target_date: 目标日期（将在 CST 时区解析）
+        start_dt: 起始时间（含），将在 CST 时区解析
+        end_dt: 结束时间（不含），将在 CST 时区解析
         score: 新闻重要度 (2=重要, 3=更重要)
         limit: 每页大小
         max_retries: 单次请求最大重试次数
         verbose: 是否输出进度信息到 stderr
 
     Returns:
-        LiveResult 包含所有符合条件条目
+        LiveResult 包含所有符合条件条目（date 字段取 start_dt 所在日期）
     """
-    if target_date.tzinfo is None:
-        target_date = target_date.replace(tzinfo=CST)
+    if start_dt.tzinfo is None:
+        start_dt = start_dt.replace(tzinfo=CST)
     else:
-        target_date = target_date.astimezone(CST)
+        start_dt = start_dt.astimezone(CST)
 
-    target_start = datetime(
-        target_date.year, target_date.month, target_date.day, tzinfo=CST
-    )
-    target_end_exclusive = datetime(
-        target_date.year, target_date.month, target_date.day + 1, tzinfo=CST
-    )
+    if end_dt.tzinfo is None:
+        end_dt = end_dt.replace(tzinfo=CST)
+    else:
+        end_dt = end_dt.astimezone(CST)
 
-    start_ts = int(target_start.timestamp())
-    end_ts_exclusive = int(target_end_exclusive.timestamp())
-    date_str = target_date.strftime("%Y-%m-%d")
+    if end_dt <= start_dt:
+        raise ValueError("end_dt 必须晚于 start_dt")
+
+    start_ts = int(start_dt.timestamp())
+    end_ts_exclusive = int(end_dt.timestamp())
+    date_str = start_dt.strftime("%Y-%m-%d")
 
     def log(msg: str) -> None:
         if verbose:
             print(msg, file=sys.stderr)
 
-    log(f"目标日期: {date_str}")
+    log(f"目标时间窗: {start_dt.strftime('%Y-%m-%d %H:%M:%S')} ~ "
+        f"{end_dt.strftime('%Y-%m-%d %H:%M:%S')}")
     log(f"  时间戳范围: {start_ts} ~ {end_ts_exclusive}  (score={score})")
 
     # 1. 获取总条数
-    first_items, total_count, _ = _get_first_page_data(limit=1, score=score)
+    _, total_count, _ = _get_first_page_data(limit=1, score=score)
     log(f"总数据量 (score={score}): {total_count} 条")
 
     if total_count == 0:
@@ -261,7 +348,7 @@ def fetch_live_by_date(
     max_cursor = _find_max_cursor(score=score)
     log(f"最大 cursor: {max_cursor}")
 
-    # 3. 二分查找起始 cursor
+    # 3. 二分查找起始 cursor（以窗口结束时间为目标）
     log("正在定位起始位置...")
     start_cursor = _find_cursor_for_time(
         target_ts=end_ts_exclusive, max_cursor=max_cursor, score=score, find_newest=True
@@ -269,7 +356,7 @@ def fetch_live_by_date(
 
     check_ts = _get_first_item_time(start_cursor, limit, score)
     if check_ts is None or check_ts < start_ts:
-        # 二分找到的 cursor 数据已早于目标日，但最新页（cursor 1）可能已跨越目标日范围
+        # 二分找到的 cursor 数据已早于窗口起点，但最新页（cursor 1）可能已跨越窗口范围
         first_page = _fetch_page(cursor=1, limit=limit, score=score)
         cursor1_items = first_page.get("data", {}).get("items", [])
         if any(
@@ -278,7 +365,7 @@ def fetch_live_by_date(
         ):
             start_cursor = 1
         else:
-            log(f"目标日期 {date_str} 在该频道中无数据")
+            log(f"时间窗 {date_str} 在该频道中无数据")
             return LiveResult(
                 date=date_str,
                 score=score,
@@ -346,7 +433,7 @@ def fetch_live_by_date(
         )
 
         if last_ts < start_ts:
-            log("  已超出目标日期范围，停止")
+            log("  已超出目标时间窗范围，停止")
             break
 
         cursor = next_cursor
@@ -368,6 +455,48 @@ def fetch_live_by_date(
     )
 
 
+def fetch_live_by_date(
+    target_date: datetime,
+    score: int = 2,
+    limit: int = DEFAULT_LIMIT,
+    max_retries: int = 3,
+    verbose: bool = False,
+) -> LiveResult:
+    """获取指定日期 0:00~24:00 (CST, UTC+8) 的全部重要新闻。
+
+    内部委托给 fetch_live_between（整日窗口），保持向后兼容。
+
+    Args:
+        target_date: 目标日期（将在 CST 时区解析）
+        score: 新闻重要度 (2=重要, 3=更重要)
+        limit: 每页大小
+        max_retries: 单次请求最大重试次数
+        verbose: 是否输出进度信息到 stderr
+
+    Returns:
+        LiveResult 包含所有符合条件条目
+    """
+    if target_date.tzinfo is None:
+        target_date = target_date.replace(tzinfo=CST)
+    else:
+        target_date = target_date.astimezone(CST)
+
+    start = datetime(
+        target_date.year, target_date.month, target_date.day, tzinfo=CST
+    )
+    end_exclusive = datetime(
+        target_date.year, target_date.month, target_date.day + 1, tzinfo=CST
+    )
+    return fetch_live_between(
+        start_dt=start,
+        end_dt=end_exclusive,
+        score=score,
+        limit=limit,
+        max_retries=max_retries,
+        verbose=verbose,
+    )
+
+
 # ═══════════════════════════════════════════════════════════════════
 # CLI 入口
 # ═══════════════════════════════════════════════════════════════════
@@ -379,10 +508,20 @@ def main() -> None:
         sys.stdout.reconfigure(encoding="utf-8")
 
     parser = argparse.ArgumentParser(
-        description="获取华尔街见闻 7x24 快讯（按日期筛选重要新闻），输出 JSON。",
+        description=(
+            "获取华尔街见闻 7x24 快讯，支持整日或时间窗抓取，输出 JSON。"
+        ),
     )
     parser.add_argument(
         "--date", "-d", default=None, help="日期 (YYYY-MM-DD)，默认今天"
+    )
+    parser.add_argument(
+        "--start", default=None,
+        help="起始时间 (YYYY-MM-DDTHH:MM 或 YYYY-MM-DD HH:MM)，与 --end 搭配",
+    )
+    parser.add_argument(
+        "--end", default=None,
+        help="结束时间（不含），与 --start 搭配",
     )
     parser.add_argument(
         "--score",
@@ -410,23 +549,46 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    if args.date:
-        try:
-            target = datetime.strptime(args.date, "%Y-%m-%d")
-        except ValueError:
-            err = {"error": f"日期格式无效 '{args.date}'，应为 YYYY-MM-DD"}
-            print(json.dumps(err, ensure_ascii=False), file=sys.stderr)
-            sys.exit(1)
-    else:
-        target = datetime.now(CST)
+    def _parse_dt(s: str, label: str) -> datetime:
+        for fmt in ("%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S"):
+            try:
+                return datetime.strptime(s, fmt).replace(tzinfo=CST)
+            except ValueError:
+                continue
+        err = {"error": f"{label} 格式无效 '{s}'，应为 YYYY-MM-DDTHH:MM"}
+        print(json.dumps(err, ensure_ascii=False), file=sys.stderr)
+        sys.exit(1)
+
+    if (args.start is None) != (args.end is None):
+        err = {"error": "--start 与 --end 必须同时提供"}
+        print(json.dumps(err, ensure_ascii=False), file=sys.stderr)
+        sys.exit(1)
 
     try:
-        result = fetch_live_by_date(
-            target_date=target,
-            score=args.score,
-            limit=args.limit,
-            verbose=args.verbose,
-        )
+        if args.start:
+            result = fetch_live_between(
+                start_dt=_parse_dt(args.start, "--start"),
+                end_dt=_parse_dt(args.end, "--end"),
+                score=args.score,
+                limit=args.limit,
+                verbose=args.verbose,
+            )
+        else:
+            if args.date:
+                try:
+                    target = datetime.strptime(args.date, "%Y-%m-%d")
+                except ValueError:
+                    err = {"error": f"日期格式无效 '{args.date}'，应为 YYYY-MM-DD"}
+                    print(json.dumps(err, ensure_ascii=False), file=sys.stderr)
+                    sys.exit(1)
+            else:
+                target = datetime.now(CST)
+            result = fetch_live_by_date(
+                target_date=target,
+                score=args.score,
+                limit=args.limit,
+                verbose=args.verbose,
+            )
     except requests.RequestException as e:
         print(
             json.dumps({"error": f"请求 API 失败: {e}"}, ensure_ascii=False),

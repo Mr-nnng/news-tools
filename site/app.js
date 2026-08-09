@@ -63,7 +63,7 @@
 
   function updateMeta(title, description) {
     document.title = title || 'News Tools';
-    var desc = description || 'GitHub Trending 中文周报 & 新闻联播文字摘要';
+    var desc = description || 'GitHub Trending 中文周报 · 华尔街见闻要闻 & 新闻联播文字摘要';
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', desc);
     var ogTitle = document.querySelector('meta[property="og:title"]');
@@ -104,7 +104,7 @@
   // ── 着陆页 ──────────────────────────────────────────────
 
   function renderLanding(data) {
-    updateMeta('News Tools · GitHub Trending 周报 & 新闻联播');
+    updateMeta('News Tools · GitHub Trending 周报 & 华尔街见闻 & 新闻联播');
 
     APP.className = '';
     APP.innerHTML =
@@ -113,6 +113,7 @@
       renderTabBar() +
       renderGHPanel(data.gh) +
       renderXWLBPanel(data.xwlb) +
+      renderWallstreetPanel(data.wallstreet) +
       renderFooter(false) +
       '\n</main>';
 
@@ -124,6 +125,7 @@
   function renderHero(data) {
     var ghCount = data.gh ? data.gh.count : 0;
     var xwlbCount = data.xwlb ? data.xwlb.count : 0;
+    var wsCount = data.wallstreet ? data.wallstreet.count : 0;
     return [
       '<header class="hero">',
       '  <div class="eyebrow">',
@@ -133,10 +135,11 @@
       '    </span>',
       '  </div>',
       '  <h1>News Tools</h1>',
-      '  <p class="tagline">GitHub Trending 周报 · 新闻联播文字摘要</p>',
+      '  <p class="tagline">GitHub Trending 周报 · 新闻联播 · 华尔街见闻</p>',
       '  <div class="hero-tokens">',
       '    <span><b>' + ghCount + '</b> 期 GitHub 周报</span>',
       '    <span><b>' + xwlbCount + '</b> 天新闻联播</span>',
+      '    <span><b>' + wsCount + '</b> 天华尔街见闻</span>',
       '    <span><b>自动生成</b></span>',
       '    <span><b>中文摘要</b></span>',
       '  </div>',
@@ -152,7 +155,53 @@
       '<div class="tab-bar" role="tablist">',
       '  <button class="tab-btn is-active" data-tab="github" role="tab"><span class="tab-icon">📂</span>GitHub 周报</button>',
       '  <button class="tab-btn" data-tab="xwlb" role="tab"><span class="tab-icon">📺</span>新闻联播</button>',
+      '  <button class="tab-btn" data-tab="wallstreet" role="tab"><span class="tab-icon">💹</span>华尔街见闻</button>',
       '</div>',
+    ].join('\n');
+  }
+
+  function renderWallstreetPanel(ws) {
+    var monthsHtml = '';
+    if (ws && ws.months) {
+      var sorted = ws.months.slice().sort(function (a, b) {
+        return monthSortKey(b.label) - monthSortKey(a.label);
+      });
+      sorted.forEach(function (m) {
+        var cards = m.items
+          .map(function (item) {
+            return [
+              '    <a href="#/wallstreet/' + item.date + '" class="report-card">',
+              '      <p class="card-date">' + formatDate(item.date) + '</p>',
+              '      <p class="card-meta">' + item.count + ' 个栏目</p>',
+              '      <p class="card-desc">' + escapeHtml(item.summary) + '</p>',
+              '    </a>',
+            ].join('\n');
+          })
+          .join('\n');
+        monthsHtml += [
+          '  <div class="month-group">',
+          '    <div class="month-toggle">',
+          '      <span class="month-arrow">▾</span>',
+          '      <span class="month-label">' + m.label + '</span>',
+          '    </div>',
+          '    <div class="report-grid">',
+          cards,
+          '    </div>',
+          '  </div>',
+        ].join('\n');
+      });
+    }
+    return [
+      '<section id="tab-wallstreet" class="tab-panel" role="tabpanel">',
+      '  <div class="section-head">',
+      '    <p class="section-num">03 · 华尔街见闻</p>',
+      '    <h2 class="section-title">华尔街见闻要闻</h2>',
+      '    <p class="section-lede">每日三档：华尔街见闻早餐 · 早间要闻汇总 · 美股盘前，捕捉全球市场重要动态。</p>',
+      '  </div>',
+      '  <div class="timeline">',
+      monthsHtml,
+      '  </div>',
+      '</section>',
     ].join('\n');
   }
 
@@ -434,6 +483,122 @@
     initScrollTracking('.index-nav .index-item:not(.index-summary)');
   }
 
+  // ── 详情页：华尔街见闻 ──────────────────────────────────
+
+  var WALLSTREET_SECTIONS = [
+    { key: 'breakfast', label: '华尔街见闻早餐', icon: '☕', anchor: 'ws-breakfast' },
+    { key: 'morning', label: '早间要闻汇总', icon: '🌅', anchor: 'ws-morning' },
+    { key: 'premarket', label: '美股盘前', icon: '📈', anchor: 'ws-premarket' }
+  ];
+
+  function renderWallstreetPage(date, data) {
+    var title = '华尔街见闻 · ' + formatDate(date);
+    var desc = '华尔街见闻要闻 ' + formatDate(date) + '，收录 ' + data.count + ' 个栏目。';
+    updateMeta(title, desc);
+
+    APP.className = 'has-sidebar';
+
+    var sectionsHtml = '';
+    var indexHtml = '';
+    var sectionCount = 0;
+    WALLSTREET_SECTIONS.forEach(function (sec, i) {
+      var secData = data.sections ? data.sections[sec.key] : null;
+      indexHtml +=
+        '      <a class="index-item" href="#' + sec.anchor + '">' +
+        '<span class="idx-num">' + (i + 1) + '</span> ' + sec.label + '</a>\n';
+
+      if (secData) {
+        sectionCount++;
+        sectionsHtml += buildWallstreetSection(sec, secData, date);
+      } else {
+        sectionsHtml += buildWallstreetEmpty(sec);
+      }
+    });
+
+    APP.innerHTML =
+      renderSidebar('wallstreet', date) +
+      renderIndexNav(indexHtml) +
+      [
+        '<main class="page page-detail">',
+        '  <header class="page-header">',
+        '    <div class="eyebrow"><a href="#/">← 返回主页</a><span style="margin-left:12px;color:var(--stone)">News Tools</span></div>',
+        '    <h1>华尔街见闻 <span style="color:var(--brand)">要闻</span></h1>',
+        '    <div class="meta">',
+        '      <span><span class="tag">华尔街见闻</span></span>',
+        '      <span>' + sectionCount + ' 个栏目</span>',
+        '      <span>来源：<a href="https://wallstreetcn.com/" target="_blank" rel="noopener">华尔街见闻</a></span>',
+        '      <span>' + date + '</span>',
+        '    </div>',
+        '  </header>',
+        '  <div class="wallstreet-summary">' +
+        '    <p>每日三档栏目 · 早餐 07:25 · 早间汇总 12:30 · 美股盘前 21:30</p>' +
+        '  </div>',
+        sectionsHtml,
+        renderFooter(true),
+        '</main>',
+      ].join('\n');
+
+    initSidebarCollapse();
+    initScrollTracking('.index-nav .index-item:not(.index-summary)');
+  }
+
+  function buildWallstreetSection(sec, secData, date) {
+    var coverHtml = '';
+    var article = secData.article;
+    if (article && article.image && article.image.uri) {
+      coverHtml = [
+        '  <div class="wallstreet-cover">',
+        '    <img src="' + escapeHtml(article.image.uri) + '" alt="' + escapeHtml(sec.label) + '" loading="lazy">',
+        '  </div>',
+      ].join('\n');
+    }
+
+    var pointsHtml = '';
+    var points = secData.points || [];
+    if (points.length) {
+      var lis = points
+        .map(function (p) { return '      <li>' + escapeHtml(p) + '</li>'; })
+        .join('\n');
+      pointsHtml = '    <ol class="wallstreet-list">\n' + lis + '\n    </ol>';
+    } else {
+      pointsHtml = '    <p class="wallstreet-empty-note">（暂无内容）</p>';
+    }
+
+    var sourceLink = '';
+    if (secData.uri) {
+      sourceLink = '<a class="wallstreet-source" href="' + escapeHtml(secData.uri) + '" target="_blank" rel="noopener">原文快讯 ↗</a>';
+    }
+    if (article && article.uri) {
+      sourceLink = '<a class="wallstreet-source" href="' + escapeHtml(article.uri) + '" target="_blank" rel="noopener">阅读全文 ↗</a>';
+    }
+
+    return [
+      '  <section class="wallstreet-section" id="' + sec.anchor + '">',
+      '    <div class="section-head">',
+      '      <p class="section-num">' + sec.icon + ' ' + sec.label + '</p>',
+      '      <h2 class="section-title">' + escapeHtml(secData.title || sec.label) + '</h2>',
+      '    </div>',
+      coverHtml,
+      pointsHtml,
+      '    <div class="wallstreet-foot">' + sourceLink +
+      '      <span class="wallstreet-time">抓取于 ' + escapeHtml((secData.fetched_at || '').slice(0, 16).replace('T', ' ')) + '</span>' +
+      '    </div>',
+      '  </section>',
+    ].join('\n');
+  }
+
+  function buildWallstreetEmpty(sec) {
+    return [
+      '  <section class="wallstreet-section wallstreet-empty" id="' + sec.anchor + '">',
+      '    <div class="section-head">',
+      '      <p class="section-num">' + sec.icon + ' ' + sec.label + '</p>',
+      '      <h2 class="section-title">' + sec.label + '</h2>',
+      '    </div>',
+      '    <p class="wallstreet-empty-note">本栏目今日未更新，稍后再来看看吧。</p>',
+      '  </section>',
+    ].join('\n');
+  }
+
   // ══════════════════════════════════════════════════════════════
   // XWLB 构建函数（从 build_xwlb_html.py 翻译）
   // ══════════════════════════════════════════════════════════════
@@ -636,7 +801,10 @@
 
     // 从 index.json 获取日期数据
     loadJSON(CONFIG.dataRoot + '/index.json').then(function (indexData) {
-      var data = type === 'github' ? indexData.gh : indexData.xwlb;
+      var data;
+      if (type === 'github') data = indexData.gh;
+      else if (type === 'wallstreet') data = indexData.wallstreet;
+      else data = indexData.xwlb;
       if (!data || !data.months) return;
 
       var sortedMonths = data.months.slice().sort(function (a, b) {
@@ -652,7 +820,10 @@
           .map(function (item) {
             var displayDate = formatDate(item.date);
             var activeClass = item.date === currentDate ? ' is-active' : '';
-            var link = type === 'github' ? '#/github/' + item.date : '#/xwlb/' + item.date;
+            var link;
+            if (type === 'github') link = '#/github/' + item.date;
+            else if (type === 'wallstreet') link = '#/wallstreet/' + item.date;
+            else link = '#/xwlb/' + item.date;
             return '<a href="' + link + '" class="sidebar-item' + activeClass + '">' + displayDate + '</a>';
           })
           .join('\n');
@@ -691,10 +862,10 @@
   function renderFooter(isDetail) {
     var cls = 'foot' + (isDetail ? ' foot-detail' : '');
     var markCls = isDetail ? 'mark mark-simple' : 'mark';
-    var line = isDetail ? 'GitHub Trending 中文周报 · 新闻联播' : 'GitHub Trending 中文周报 · 新闻联播';
+    var line = isDetail ? 'GitHub Trending 中文周报 · 华尔街见闻 · 新闻联播' : 'GitHub Trending 中文周报 · 华尔街见闻 · 新闻联播';
     var ethos = isDetail
-      ? '每周为你发现开源世界的好项目，每日为你播报天下大事'
-      : '每周为你发现开源世界的好项目，每日为你播报天下大事';
+      ? '每周发现开源好项目，每日捕捉全球市场动态与天下大事'
+      : '每周发现开源好项目，每日捕捉全球市场动态与天下大事';
 
     return [
       '<footer class="' + cls + '">',
@@ -817,6 +988,7 @@
     var parts = hash.split('/');
     if (!hash || hash === '') return { route: 'landing' };
     if (parts[0] === 'github' && parts[1]) return { route: 'github', date: parts[1] };
+    if (parts[0] === 'wallstreet' && parts[1]) return { route: 'wallstreet', date: parts[1] };
     if (parts[0] === 'xwlb' && parts[1]) return { route: 'xwlb', date: parts[1] };
     return { route: 'landing' };
   }
@@ -857,6 +1029,22 @@
         ['catch'](function (err) {
           showError('无法加载 GitHub 周报数据 (日期: ' + parsed.date + ')。');
           console.error('GH page load error:', err);
+        });
+      return;
+    }
+
+    if (parsed.route === 'wallstreet') {
+      showLoading();
+      var dataUrl = CONFIG.dataRoot + '/wallstreet/' + parsed.date + '.json';
+      loadJSON(dataUrl)
+        .then(function (data) {
+          renderWallstreetPage(parsed.date, data);
+          loadSidebarData('wallstreet', parsed.date);
+          window.scrollTo(0, 0);
+        })
+        ['catch'](function (err) {
+          showError('无法加载华尔街见闻数据 (日期: ' + parsed.date + ')。');
+          console.error('Wallstreet page load error:', err);
         });
       return;
     }

@@ -858,6 +858,105 @@ footer.foot-detail {
 }
 
 /* ==================================================================
+   Wallstreet: 详情页栏目
+   ================================================================== */
+
+.wallstreet-summary {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--olive);
+  padding: 14px 18px;
+  background: var(--ivory);
+  border-left: 3px solid var(--brand);
+  border-radius: 3px;
+  margin: 0 0 36px;
+}
+
+.wallstreet-section {
+  margin-top: 44px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+.wallstreet-section:first-of-type { margin-top: 0; }
+
+.wallstreet-section .section-head {
+  margin-bottom: 20px;
+}
+.wallstreet-section .section-title {
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--near-black);
+  margin-top: 4px;
+}
+
+.wallstreet-cover {
+  margin: 0 0 18px;
+  max-width: 640px;
+}
+.wallstreet-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.wallstreet-list {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--olive);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.wallstreet-list li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--dark-warm);
+}
+.wallstreet-list li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 10px;
+  color: var(--brand);
+}
+
+.wallstreet-foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  font-family: var(--latin-ui);
+  font-size: 12px;
+  color: var(--stone);
+}
+.wallstreet-source {
+  color: var(--brand);
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.wallstreet-source:hover { border-bottom-style: solid; }
+.wallstreet-time { color: var(--stone); }
+
+.wallstreet-empty .section-title {
+  color: var(--stone);
+}
+.wallstreet-empty-note {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--stone);
+  margin: 0;
+  padding: 16px 18px;
+  background: var(--ivory);
+  border-radius: 3px;
+}
+
+/* ==================================================================
    GitHub: Cover Summary
    ================================================================== */
 

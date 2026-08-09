@@ -2,8 +2,8 @@
 """
 build_site.py — Assemble deployment directory for News Tools (SPA mode)
 
-Reads existing JSON data from site/data/ (github/*.json, xwlb/*.json)
-and rebuilds site/data/index.json for the SPA landing page.
+Reads existing JSON data from site/data/ (github/*.json, xwlb/*.json,
+wallstreet/*.json) and rebuilds site/data/index.json for the SPA landing page.
 
 Idempotent: safe to run multiple times — never destroys existing data.
 
@@ -23,12 +23,15 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+from news_tools.wallstreet_sections import build_wallstreet_summary
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SITE_DIR = PROJECT_ROOT / "site"
 
 DATA_DIR = SITE_DIR / "data"
 GH_DATA_DIR = DATA_DIR / "github"
 XWLB_DATA_DIR = DATA_DIR / "xwlb"
+WALLSTREET_DATA_DIR = DATA_DIR / "wallstreet"
 
 
 # ── Shared helpers ──
@@ -72,6 +75,17 @@ def load_xwlb_data(rd: str) -> dict | None:
         return None
 
 
+def load_wallstreet_data(rd: str) -> dict | None:
+    """Load Wallstreet daily JSON from site/data/wallstreet/{rd}.json."""
+    path = WALLSTREET_DATA_DIR / f"{rd}.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
 def scan_data_dates(data_dir: Path) -> list[str]:
     """Scan a data directory for date-stamped JSON files."""
     if not data_dir.exists():
@@ -89,11 +103,13 @@ def scan_data_dates(data_dir: Path) -> list[str]:
 def build_index_data() -> dict:
     """Generate site/data/index.json from existing site/data/ files.
 
-    Scans site/data/github/*.json and site/data/xwlb/*.json,
-    groups them by month, and writes index.json for the SPA landing page.
+    Scans site/data/github/*.json, site/data/xwlb/*.json,
+    site/data/wallstreet/*.json, groups them by month, and writes
+    index.json for the SPA landing page.
     """
     gh_dates = scan_data_dates(GH_DATA_DIR)
     xwlb_dates = scan_data_dates(XWLB_DATA_DIR)
+    wallstreet_dates = scan_data_dates(WALLSTREET_DATA_DIR)
 
     def build_month_groups(dates: list[str], loader_fn, count_label: str):
         """Build month-grouped item list."""
@@ -110,6 +126,8 @@ def build_index_data() -> dict:
                 if count_label == "项目":
                     item_count = data.get("totalCount", 0) or data.get("count", 0)
                     summary = data.get("coverSummary", "")
+                elif count_label == "华尔街见闻":
+                    item_count, summary = build_wallstreet_summary(data)
                 else:
                     items = data.get("items", [])
                     item_count = len(items)
@@ -149,6 +167,9 @@ def build_index_data() -> dict:
     xwlb_months = build_month_groups(
         xwlb_dates, lambda rd: load_xwlb_data(rd), "新闻"
     )
+    wallstreet_months = build_month_groups(
+        wallstreet_dates, lambda rd: load_wallstreet_data(rd), "华尔街见闻"
+    )
 
     index_data = {
         "gh": {
@@ -158,6 +179,10 @@ def build_index_data() -> dict:
         "xwlb": {
             "count": len(xwlb_dates),
             "months": xwlb_months,
+        },
+        "wallstreet": {
+            "count": len(wallstreet_dates),
+            "months": wallstreet_months,
         },
     }
 
@@ -169,7 +194,11 @@ def build_index_data() -> dict:
         encoding="utf-8",
     )
     print(f"  ✅ index.json → {out_path.relative_to(PROJECT_ROOT)}")
-    print(f"     📊 {len(gh_dates)} GitHub reports, {len(xwlb_dates)} XWLB days")
+    print(
+        f"     📊 {len(gh_dates)} GitHub reports, "
+        f"{len(xwlb_dates)} XWLB days, "
+        f"{len(wallstreet_dates)} Wallstreet days"
+    )
 
     return index_data
 
@@ -189,7 +218,10 @@ def main():
 
     print(f"\n✅ Build complete → {SITE_DIR.relative_to(PROJECT_ROOT)}/")
     print(f"   📂 SPA shell: index.html + app.css + app.js")
-    print(f"   📂 Data: data/index.json + data/github/*.json + data/xwlb/*.json")
+    print(
+        f"   📂 Data: data/index.json + data/github/*.json "
+        f"+ data/xwlb/*.json + data/wallstreet/*.json"
+    )
 
 
 if __name__ == "__main__":

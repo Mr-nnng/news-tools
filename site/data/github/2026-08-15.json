@@ -1,0 +1,298 @@
+{
+  "weekLabel": "2026年第33周",
+  "weekInfo": "2026 年第 33 周 / 2026-08-15",
+  "date": "2026-08-15",
+  "count": 16,
+  "totalCount": 16,
+  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 C++·JavaScript·Python·Roff·Rust·TypeScript 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "prime-agent",
+      "author": "PrimeIntellect-ai",
+      "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+      "stars": 16002,
+      "forks": 1713,
+      "weeklyStars": 10739,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Prime Agent 是开源的自改进式 RLM 智能体，专为编码工作流与长时自主任务设计。持久化 Python 环境结合可迭代记忆，让子代理与技能全程可编程，提升自动化效率。",
+      "features": [
+        "递归子代理并行执行并返回程序化结果",
+        "记忆与技能可迭代优化且支持快照回滚",
+        "持久 IPython 环境实现全流程程序化控制"
+      ],
+      "audience": "AI 研究员、软件开发者、LLM 应用开发者、智能体工程师"
+    },
+    {
+      "rank": 2,
+      "name": "semantica",
+      "author": "semantica-agi",
+      "url": "https://github.com/semantica-agi/semantica",
+      "stars": 7592,
+      "forks": 791,
+      "weeklyStars": 5135,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Semantica 是面向 AI 智能体的图原生基础设施，将企业数据转化为上下文知识图谱，支持图分析、因果推理与决策溯源。为金融、医疗等强监管场景提供可解释、可审计、可自托管的 AI 决策层。",
+      "features": [
+        "企业数据一键构建可查询的上下文知识图谱",
+        "决策全链路溯源审计，导出监管合规报告",
+        "确定性推理引擎可解释，不依赖 LLM 黑盒"
+      ],
+      "audience": "AI 平台工程师、数据工程师、合规风控团队、金融医疗企业、基础设施工程师"
+    },
+    {
+      "rank": 3,
+      "name": "skills",
+      "author": "google",
+      "url": "https://github.com/google/skills",
+      "stars": 18219,
+      "forks": 1439,
+      "weeklyStars": 2186,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Google 官方发布的 Agent Skills 集合，为 AI 代理提供 Google Cloud、广告、分析等产品的即用型操作技能。覆盖云架构、GKE、数据库、安全等场景，让代理能直接调用 Google 技术栈完成复杂任务。",
+      "features": [
+        "覆盖谷歌云全栈技能，快速上手 GKE、数据库与安全",
+        "npx 一键安装，按需选择技能包降低使用门槛",
+        "内置插件市场，无缝接入 Claude、Codex 等主流代理"
+      ],
+      "audience": "云架构师、AI 应用开发者、DevOps 工程师、数据分析师"
+    },
+    {
+      "rank": 4,
+      "name": "celld",
+      "author": "denoland",
+      "url": "https://github.com/denoland/celld",
+      "stars": 3576,
+      "forks": 117,
+      "weeklyStars": 1549,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "celld 是自托管的分布式 Durable Objects 守护进程，可在自有机器上运行 Cloudflare Workers 与 Durable Objects。每个对象独立 SQLite 数据库，通过对象存储协调节点，无需控制平面与共识，天然分片并消除单点数据库瓶颈。",
+      "features": [
+        "每个对象独立 SQLite 数据库，天然分片",
+        "基于对象存储协调，无控制平面与共识",
+        "不活跃 cell 近零成本，支持 S3 与 GCS"
+      ],
+      "audience": "自托管平台开发者、边缘计算工程师、分布式应用架构师、云服务运维人员"
+    },
+    {
+      "rank": 5,
+      "name": "code-graph-rag",
+      "author": "vitali87",
+      "url": "https://github.com/vitali87/code-graph-rag",
+      "stars": 4306,
+      "forks": 591,
+      "weeklyStars": 1718,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于知识图谱的多语言代码库 RAG 工具，用 Tree-sitter 解析代码结构并存入 Memgraph，支持自然语言查询、编辑与优化。让 AI 真正理解大型 monorepo 的跨语言依赖关系，提升代码检索与重构效率。",
+      "features": [
+        "自然语言查询代码库，答案基于真实结构",
+        "基于 AST 的精准编辑与 diff 预览，安全修改代码",
+        "支持 14+ 语言统一图谱，跨语言分析"
+      ],
+      "audience": "大型项目开发者、AI 工程师、代码重构专家、技术负责人"
+    },
+    {
+      "rank": 6,
+      "name": "holehe",
+      "author": "megadose",
+      "url": "https://github.com/megadose/holehe",
+      "stars": 12900,
+      "forks": 1722,
+      "weeklyStars": 671,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 7,
+      "name": "Switchyard",
+      "author": "NVIDIA-NeMo",
+      "url": "https://github.com/NVIDIA-NeMo/Switchyard",
+      "stars": 1486,
+      "forks": 134,
+      "weeklyStars": 1195,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Switchyard lets LLM applications route traffic across models and providers while preserving native OpenAI and Anthropic API compatibility - enabling flexible model selection, benchmarking, and cost/performance optimization.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 8,
+      "name": "computer",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/computer",
+      "stars": 8152,
+      "forks": 448,
+      "weeklyStars": 2856,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Give your agent a computer 👾",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 9,
+      "name": "agent-skills",
+      "author": "addyosmani",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "stars": 87320,
+      "forks": 9368,
+      "weeklyStars": 3845,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Production-grade engineering skills for AI coding agents.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 10,
+      "name": "TencentDB-Agent-Memory",
+      "author": "TencentCloud",
+      "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+      "stars": 21760,
+      "forks": 1995,
+      "weeklyStars": 4423,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 11,
+      "name": "needle",
+      "author": "cactus-compute",
+      "url": "https://github.com/cactus-compute/needle",
+      "stars": 5695,
+      "forks": 377,
+      "weeklyStars": 1929,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 12,
+      "name": "loopx",
+      "author": "huangruiteng",
+      "url": "https://github.com/huangruiteng/loopx",
+      "stars": 4734,
+      "forks": 410,
+      "weeklyStars": 1455,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence logs, and verifiable handoffs.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 13,
+      "name": "manim",
+      "author": "3b1b",
+      "url": "https://github.com/3b1b/manim",
+      "stars": 91145,
+      "forks": 7549,
+      "weeklyStars": 1919,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Animation engine for explanatory math videos",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 14,
+      "name": "ladybird",
+      "author": "LadybirdBrowser",
+      "url": "https://github.com/LadybirdBrowser/ladybird",
+      "stars": 65639,
+      "forks": 3131,
+      "weeklyStars": 819,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "Truly independent web browser",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 15,
+      "name": "ChinaTextbook",
+      "author": "TapXWorld",
+      "url": "https://github.com/TapXWorld/ChinaTextbook",
+      "stars": 79659,
+      "forks": 18072,
+      "weeklyStars": 1998,
+      "language": "Roff",
+      "langColor": "#ECDEBE",
+      "zhDesc": "所有小初高、大学PDF教材。",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 16,
+      "name": "t3code",
+      "author": "pingdotgg",
+      "url": "https://github.com/pingdotgg/t3code",
+      "stars": 18772,
+      "forks": 4337,
+      "weeklyStars": 1603,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "暂无描述",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    }
+  ]
+}

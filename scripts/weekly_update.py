@@ -12,6 +12,7 @@ weekly_update.py — GitHub Actions 每周周榜自动更新入口 (SPA mode)
     python scripts/weekly_update.py --proxy http://127.0.0.1:7890
 """
 
+import time
 import json
 import os
 import re
@@ -21,11 +22,15 @@ from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
 import httpx
+from dotenv import load_dotenv
 
 # 确保 src/ 和 scripts/ 可导入
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+
+# 加载 .env（不存在则跳过，GitHub Actions 中依赖默认免费端点或仓库 secrets）
+load_dotenv(PROJECT_ROOT / ".env")
 
 from news_tools.trending import fetch_trending, TrendingRepo
 import build_site  # 复用 data / month 工具函数
@@ -34,9 +39,10 @@ SITE_DIR = PROJECT_ROOT / "site"
 DATA_DIR = SITE_DIR / "data"
 GH_DATA_DIR = DATA_DIR / "github"
 
-# ── LLM 配置 ───────────────────────────────────────────────────────
-LLM_BASE_URL = "https://opencode.ai/zen/v1"
-LLM_MODEL = "deepseek-v4-flash-free"
+# ── LLM 配置（优先环境变量 / .env，否则使用默认免费端点） ──────────
+LLM_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://opencode.ai/zen/v1").rstrip("/")
+LLM_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
+LLM_MODEL = os.environ.get("OPENAI_DEFAULT_MODEL", "deepseek-v4-flash-free")
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -62,9 +68,15 @@ def _call_llm(prompt: str, system_prompt: str | None = None, max_retries: int = 
                 "messages": messages,
                 "temperature": 0.1,
             }
+            headers = {}
+            if LLM_API_KEY:
+                headers["Authorization"] = f"Bearer {LLM_API_KEY}"
+            else:
+                time.sleep(30)  # 免费端点可能需要延迟，避免频繁请求
             resp = httpx.post(
                 f"{LLM_BASE_URL}/chat/completions",
                 json=payload,
+                headers=headers or None,
                 timeout=120,
             )
             resp.raise_for_status()
@@ -167,18 +179,29 @@ README 内容:
 def _call_llm_for_cover_summary(repos_info: list[dict], max_retries: int = 3) -> str | None:
     """调用 LLM 生成周榜总览摘要，失败重试直到 max_retries 次。"""
     repo_lines = "\n".join(
-        f"- {r['name']}（{r.get('zhDesc', '')[:60]}）"
+        f"- {r['name']}（Stars {r.get('stars', 0)}，本周 +{r.get('weeklyStars', 0)}，"
+        f"{r.get('language') or '未知'}）{r.get('zhDesc', '')[:60]}"
         for r in repos_info
     )
-    prompt = f"""以下是一周 GitHub Trending 热门仓库列表：
+    prompt = f"""以下是一周 GitHub Trending 热门仓库列表（含 Star 总数与本周增量）：
 {repo_lines}
 
-请用一句话概括本周趋势，严格按以下格式输出（不要包含其他内容）：
+请写一段 2-3 句的中文周报摘要（全文字数 90-150 字），遵循以下规则：
 
-"本周 GitHub Trending 收录 N 个热门仓库，涵盖 AI · 安全 · 前端设计 等领域。"
+1. 第一句严格以这个句式开头："本周 GitHub Trending 收录 N 个热门仓库，涵盖 A · B · C 等领域。"
+   - N 替换为实际仓库总数；
+   - A · B · C 用 " · "（空格·空格）分隔，必须从本周真实出现的仓库中归纳出 3-6 个具体领域
+     （例如：代码智能、AI 智能体、向量数据库、自托管应用、量化交易、文档转换）。
+   - 禁止机械套用 "AI · 安全 · 前端设计" 等与本周仓库无关的泛化模板词。
 
-其中 N 替换为实际仓库数量，"AI · 安全 · 前端设计" 替换为实际的中文领域关键词，用 " · "（空格·空格）分隔。
-数字将自动被高亮蓝色，领域将自动加粗。"""
+2. 剩余 1-2 句写本周真正的亮点，从列表中挑选依据：
+   - 本周增量（+）最大、Stars 总量最高或首次上榜的项目，指名道姓并引用数字，例如
+     "X 本周新增 12k Star 领跑"、"M 以 87k Star 位居榜首"、"Y 新上榜即进入前十"；
+   - 若增量普遍平缓，则改为概括趋势：本周最集中的方向是什么、生态往哪里演进。
+
+3. 数字一律用阿拉伯数字（前端会自动高亮），禁止转成中文数字。
+
+只输出这段摘要文本本身，不要加引号、不要加"摘要："等前缀、不要输出其他内容。"""
 
     return _call_llm(prompt, max_retries=max_retries)
 

@@ -29,6 +29,10 @@ jobs:
 
       - name: 运行每周更新脚本
         id: update
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_DEFAULT_MODEL: ${{ secrets.OPENAI_DEFAULT_MODEL }}
         run: |
           DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d')
           echo "date=$DATE" >> "$GITHUB_OUTPUT"

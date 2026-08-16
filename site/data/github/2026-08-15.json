@@ -4,295 +4,295 @@
   "date": "2026-08-15",
   "count": 16,
   "totalCount": 16,
-  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 C++·JavaScript·Python·Roff·Rust·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 AI 智能体 · 代码智能 · 知识图谱 · 低代码平台 · 天气预报等领域。diagram-design 本周新增 14735 Star 领跑，manim 以 91250 Star 位居榜首。AI 代理与代码智能工具成为本周主要热点。",
   "repos": [
     {
       "rank": 1,
-      "name": "prime-agent",
-      "author": "PrimeIntellect-ai",
-      "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-      "stars": 16002,
-      "forks": 1713,
-      "weeklyStars": 10739,
-      "language": "TypeScript",
-      "langColor": "#3178C6",
-      "zhDesc": "Prime Agent 是开源的自改进式 RLM 智能体，专为编码工作流与长时自主任务设计。持久化 Python 环境结合可迭代记忆，让子代理与技能全程可编程，提升自动化效率。",
+      "name": "diagram-design",
+      "author": "cathrynlavery",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 18804,
+      "forks": 1139,
+      "weeklyStars": 14735,
+      "language": "HTML",
+      "langColor": "#E34C26",
+      "zhDesc": "为 Claude Code 打造的图表技能，生成 20 余种自包含 HTML+SVG 编辑级图表。自动读取网站品牌色与字体，并支持重绘 draw.io/Mermaid，告别千篇一律的 AI 模板图。",
       "features": [
-        "递归子代理并行执行并返回程序化结果",
-        "记忆与技能可迭代优化且支持快照回滚",
-        "持久 IPython 环境实现全流程程序化控制"
+        "20 余种编辑级图表类型，自包含 HTML+SVG",
+        "60 秒读取网站品牌色与字体完成自动适配",
+        "支持重绘 draw.io/Mermaid 图表"
       ],
-      "audience": "AI 研究员、软件开发者、LLM 应用开发者、智能体工程师"
+      "audience": "Claude Code 用户、AI 应用开发者、技术文档写作者、产品经理、解决方案架构师"
     },
     {
       "rank": 2,
       "name": "semantica",
       "author": "semantica-agi",
       "url": "https://github.com/semantica-agi/semantica",
-      "stars": 7592,
-      "forks": 791,
-      "weeklyStars": 5135,
+      "stars": 7975,
+      "forks": 817,
+      "weeklyStars": 5339,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Semantica 是面向 AI 智能体的图原生基础设施，将企业数据转化为上下文知识图谱，支持图分析、因果推理与决策溯源。为金融、医疗等强监管场景提供可解释、可审计、可自托管的 AI 决策层。",
+      "zhDesc": "AI 智能体的图原生基础设施，将企业数据构建为上下文图与知识图谱，提供决策智能、确定性推理与完整溯源。它让 AI 决策可解释、可审计，解决黑盒与合规风险，适合金融、医疗等受监管领域。",
       "features": [
-        "企业数据一键构建可查询的上下文知识图谱",
-        "决策全链路溯源审计，导出监管合规报告",
-        "确定性推理引擎可解释，不依赖 LLM 黑盒"
+        "构建上下文图与知识图谱，支持因果推理",
+        "每个决策可查询可溯源，完整审计追踪",
+        "RDF/LPG 多图存储，零供应商锁定"
       ],
-      "audience": "AI 平台工程师、数据工程师、合规风控团队、金融医疗企业、基础设施工程师"
+      "audience": "AI 平台工程师、数据工程师、合规风控团队、受监管行业企业、基础架构工程师"
     },
     {
       "rank": 3,
-      "name": "skills",
-      "author": "google",
-      "url": "https://github.com/google/skills",
-      "stars": 18219,
-      "forks": 1439,
-      "weeklyStars": 2186,
-      "language": "Python",
-      "langColor": "#3572A5",
-      "zhDesc": "Google 官方发布的 Agent Skills 集合，为 AI 代理提供 Google Cloud、广告、分析等产品的即用型操作技能。覆盖云架构、GKE、数据库、安全等场景，让代理能直接调用 Google 技术栈完成复杂任务。",
+      "name": "prime-agent",
+      "author": "PrimeIntellect-ai",
+      "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+      "stars": 16350,
+      "forks": 1754,
+      "weeklyStars": 8488,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Prime Agent 是开源的递归语言模型（RLM）编码与研究智能体，面向长期自主任务。它通过持久 IPython、递归子代理与自我精化 Harness，让工作上下文跨会话延续。",
       "features": [
-        "覆盖谷歌云全栈技能，快速上手 GKE、数据库与安全",
-        "npx 一键安装，按需选择技能包降低使用门槛",
-        "内置插件市场，无缝接入 Claude、Codex 等主流代理"
+        "持久 IPython 环境一切操作皆可编程",
+        "内置递归子代理支持并行与后台任务",
+        "/refine 自我精化 Harness 并支持回滚"
       ],
-      "audience": "云架构师、AI 应用开发者、DevOps 工程师、数据分析师"
+      "audience": "AI 研究员、软件工程师、机器学习工程师、Agent 开发者"
     },
     {
       "rank": 4,
-      "name": "celld",
-      "author": "denoland",
-      "url": "https://github.com/denoland/celld",
-      "stars": 3576,
-      "forks": 117,
-      "weeklyStars": 1549,
-      "language": "Rust",
-      "langColor": "#DEA584",
-      "zhDesc": "celld 是自托管的分布式 Durable Objects 守护进程，可在自有机器上运行 Cloudflare Workers 与 Durable Objects。每个对象独立 SQLite 数据库，通过对象存储协调节点，无需控制平面与共识，天然分片并消除单点数据库瓶颈。",
-      "features": [
-        "每个对象独立 SQLite 数据库，天然分片",
-        "基于对象存储协调，无控制平面与共识",
-        "不活跃 cell 近零成本，支持 S3 与 GCS"
-      ],
-      "audience": "自托管平台开发者、边缘计算工程师、分布式应用架构师、云服务运维人员"
-    },
-    {
-      "rank": 5,
-      "name": "code-graph-rag",
-      "author": "vitali87",
-      "url": "https://github.com/vitali87/code-graph-rag",
-      "stars": 4306,
-      "forks": 591,
-      "weeklyStars": 1718,
-      "language": "Python",
-      "langColor": "#3572A5",
-      "zhDesc": "基于知识图谱的多语言代码库 RAG 工具，用 Tree-sitter 解析代码结构并存入 Memgraph，支持自然语言查询、编辑与优化。让 AI 真正理解大型 monorepo 的跨语言依赖关系，提升代码检索与重构效率。",
-      "features": [
-        "自然语言查询代码库，答案基于真实结构",
-        "基于 AST 的精准编辑与 diff 预览，安全修改代码",
-        "支持 14+ 语言统一图谱，跨语言分析"
-      ],
-      "audience": "大型项目开发者、AI 工程师、代码重构专家、技术负责人"
-    },
-    {
-      "rank": 6,
       "name": "holehe",
       "author": "megadose",
       "url": "https://github.com/megadose/holehe",
-      "stars": 12900,
-      "forks": 1722,
-      "weeklyStars": 671,
+      "stars": 13161,
+      "forks": 1744,
+      "weeklyStars": 1059,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.",
+      "zhDesc": "holehe 是一款 OSINT 工具，通过忘记密码功能检查邮箱在 Twitter、Instagram 等 120 多个网站的注册情况。能获取部分隐藏的恢复邮箱和手机号，且不会向目标邮箱发送提醒，适合账号关联分析与隐私调查。",
       "features": [
-        "",
-        "",
-        ""
+        "覆盖 120+ 网站平台检查邮箱注册情况",
+        "利用忘记密码接口且不惊动目标邮箱",
+        "返回恢复邮箱/手机号等附加信息"
       ],
-      "audience": ""
+      "audience": "安全研究员、渗透测试人员、调查记者、隐私爱好者、社工分析人员"
     },
     {
-      "rank": 7,
+      "rank": 5,
       "name": "Switchyard",
       "author": "NVIDIA-NeMo",
       "url": "https://github.com/NVIDIA-NeMo/Switchyard",
-      "stars": 1486,
-      "forks": 134,
-      "weeklyStars": 1195,
+      "stars": 1598,
+      "forks": 144,
+      "weeklyStars": 1326,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Switchyard lets LLM applications route traffic across models and providers while preserving native OpenAI and Anthropic API compatibility - enabling flexible model selection, benchmarking, and cost/performance optimization.",
+      "zhDesc": "NVIDIA 开源的 LLM 流量路由代理与 Rust 库，支持 OpenAI 与 Anthropic API 间协议翻译。让 Claude Code、Codex 等智能体直接对接开源模型，实现灵活路由、基准测试与成本优化。",
       "features": [
-        "",
-        "",
-        ""
+        "多协议翻译兼容 OpenAI 与 Anthropic API",
+        "多种路由策略支持分阶段与动态分流",
+        "Prometheus 指标监控延迟与成本开销"
       ],
-      "audience": ""
+      "audience": "LLM 应用开发者、智能体开发者、模型评测工程师、后端架构师"
+    },
+    {
+      "rank": 6,
+      "name": "code-graph-rag",
+      "author": "vitali87",
+      "url": "https://github.com/vitali87/code-graph-rag",
+      "stars": 4379,
+      "forks": 595,
+      "weeklyStars": 1756,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于 Tree-sitter 与知识图谱的多语言代码库 RAG 引擎，将代码结构解析为 Memgraph 图并用自然语言查询、编辑和优化代码。让 AI 准确理解跨语言大型仓库的调用关系，提升代码检索与重构效率。",
+      "features": [
+        "多语言统一图谱建模，覆盖 14 种编程语言",
+        "自然语言生成 Cypher 查询，精准定位代码",
+        "AST 精准编辑与死代码检测，支持 MCP"
+      ],
+      "audience": "AI 应用开发者、后端工程师、代码架构师、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 7,
+      "name": "needle",
+      "author": "cactus-compute",
+      "url": "https://github.com/cactus-compute/needle",
+      "stars": 6133,
+      "forks": 409,
+      "weeklyStars": 2488,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "14MB 基础模型专为手机、可穿戴等微型设备设计，支持工具调用与结构化提取。基于简单注意力网络与紧凑量化，仅需 28MB 内存即可运行，性能可媲美数倍大的模型，适合端侧离线部署。",
+      "features": [
+        "自包含单文件引擎，离线运行无需联网",
+        "工具调用返回结构化 JSON，语法约束保证格式",
+        "恒定 28MB 内存，长对话不增加占用"
+      ],
+      "audience": "嵌入式开发者、移动应用开发者、智能家居工程师、机器人开发者、边缘计算工程师"
     },
     {
       "rank": 8,
-      "name": "computer",
-      "author": "cloudflare",
-      "url": "https://github.com/cloudflare/computer",
-      "stars": 8152,
-      "forks": 448,
-      "weeklyStars": 2856,
-      "language": "TypeScript",
-      "langColor": "#3178C6",
-      "zhDesc": "Give your agent a computer 👾",
+      "name": "macro",
+      "author": "macro-inc",
+      "url": "https://github.com/macro-inc/macro",
+      "stars": 3291,
+      "forks": 327,
+      "weeklyStars": 2434,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Macro 是面向团队的一体化工作区，统一邮件、聊天、文档、任务、智能体与 CRM。通过双向 @ 链接和共享 AI 记忆消除工具切换，让整个公司在同一个操作系统中协作。",
       "features": [
-        "",
-        "",
-        ""
+        "双向 @ 链接打通邮件、文档、任务、聊天与 CRM，互相可追溯",
+        "团队级 AI 记忆统一业务上下文，智能体可跨工具行动",
+        "基于 Rust 与 SolidJS，全量开源且支持自托管"
       ],
-      "audience": ""
+      "audience": "技术创业者、远程协作团队、研发效能工程师、AI 智能体开发者、自托管爱好者"
     },
     {
       "rank": 9,
-      "name": "agent-skills",
-      "author": "addyosmani",
-      "url": "https://github.com/addyosmani/agent-skills",
-      "stars": 87320,
-      "forks": 9368,
-      "weeklyStars": 3845,
+      "name": "ToolJet",
+      "author": "ToolJet",
+      "url": "https://github.com/ToolJet/ToolJet",
+      "stars": 39608,
+      "forks": 5301,
+      "weeklyStars": 1047,
       "language": "JavaScript",
       "langColor": "#F1E05A",
-      "zhDesc": "Production-grade engineering skills for AI coding agents.",
+      "zhDesc": "ToolJet 是开源的企业级应用生成平台，用于快速构建内部工具、仪表盘、业务流程与 AI 代理。它让非技术团队也能可视化搭建业务应用，并显著降低企业软件的开发与交付成本。",
       "features": [
-        "",
-        "",
-        ""
+        "可视化拖拽构建器含 60+ 响应式组件",
+        "内置无代码数据库，连接 80+ 数据源",
+        "支持多人在线协作与灵活自托管部署"
       ],
-      "audience": ""
+      "audience": "产品经理、后端开发、前端工程师、运维工程师、数字化团队"
     },
     {
       "rank": 10,
       "name": "TencentDB-Agent-Memory",
       "author": "TencentCloud",
       "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
-      "stars": 21760,
-      "forks": 1995,
-      "weeklyStars": 4423,
+      "stars": 22023,
+      "forks": 2018,
+      "weeklyStars": 3956,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
+      "zhDesc": "腾讯云开源的 AI Agent 团队级记忆中枢，将对话、文档与代码沉淀为分层记忆资产。基于符号化短期记忆与分层长期记忆架构，实测最高可降低 61% Token 消耗并提升 51% 任务成功率。",
       "features": [
-        "",
-        "",
-        ""
+        "Mermaid 符号图压缩上下文，降低 Token 消耗",
+        "分层记忆金字塔沉淀用户画像，可溯源可下钻",
+        "生产级插件开箱即用，支持 OpenClaw 与 Hermes 集成"
       ],
-      "audience": ""
+      "audience": "AI Agent 开发者、LLM 应用工程师、OpenClaw 用户、Hermes 用户、企业智能体团队"
     },
     {
       "rank": 11,
-      "name": "needle",
-      "author": "cactus-compute",
-      "url": "https://github.com/cactus-compute/needle",
-      "stars": 5695,
-      "forks": 377,
-      "weeklyStars": 1929,
-      "language": "Python",
-      "langColor": "#3572A5",
-      "zhDesc": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
+      "name": "agent-skills",
+      "author": "addyosmani",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "stars": 87542,
+      "forks": 9383,
+      "weeklyStars": 3300,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "为 AI 编程代理打造的生产级工程技能包，内置 24 个覆盖开发全生命周期的技能工作流。将资深工程师的规范与质量门禁编码为 AI 可执行流程，让代理不再跳过测试、评审等关键环节。",
       "features": [
-        "",
-        "",
-        ""
+        "覆盖开发全生命周期的 24 个工程技能",
+        "8 条斜杠命令一键触发对应技能流程",
+        "内置反合理化与验证门禁防止走捷径"
       ],
-      "audience": ""
+      "audience": "AI 编程工具用户、全栈开发工程师、技术团队负责人、DevOps 工程师、AI Agent 开发者"
     },
     {
       "rank": 12,
-      "name": "loopx",
-      "author": "huangruiteng",
-      "url": "https://github.com/huangruiteng/loopx",
-      "stars": 4734,
-      "forks": 410,
-      "weeklyStars": 1455,
-      "language": "Python",
-      "langColor": "#3572A5",
-      "zhDesc": "Lightweight loop engineering state kernel for long-running AI agent teams. Agent-loop agnostic across Codex, Claude Code, and other coding agents, with durable goals, quota-aware auto-wake, executable todos, evidence logs, and verifiable handoffs.",
-      "features": [
-        "",
-        "",
-        ""
-      ],
-      "audience": ""
-    },
-    {
-      "rank": 13,
       "name": "manim",
       "author": "3b1b",
       "url": "https://github.com/3b1b/manim",
-      "stars": 91145,
+      "stars": 91250,
       "forks": 7549,
-      "weeklyStars": 1919,
+      "weeklyStars": 2008,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Animation engine for explanatory math videos",
+      "zhDesc": "3Blue1Brown 出品的数学视频动画引擎，用 Python 代码精确控制动画生成。它为数学讲解提供了程序化建模能力，让创作者高效制作高质量可视化教学内容。",
       "features": [
-        "",
-        "",
-        ""
+        "Python 代码驱动动画，精确控制每一帧",
+        "内置丰富数学图形与变换动画体系",
+        "支持 LaTeX 公式渲染与场景导出"
       ],
-      "audience": ""
+      "audience": "数学教育者、科普视频创作者、动画编程爱好者、数据可视化工程师"
+    },
+    {
+      "rank": 13,
+      "name": "computer",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/computer",
+      "stars": 8275,
+      "forks": 450,
+      "weeklyStars": 1966,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Cloudflare 开源的代理运行时虚拟文件系统，将 SQLite 状态映射为可在容器或 Worker 中执行的持久化工作区。为 AI 代理提供统一的文件读写与命令执行环境，支持容器、Shell 和 JavaScript 三种后端，大幅简化代理的计算机操作能力。",
+      "features": [
+        "SQLite 权威存储，多后端统一执行入口",
+        "容器 FUSE 挂载，支持真实 Linux 用户态",
+        "隔离 Worker 运行 Shell/JS，免同步实时访问"
+      ],
+      "audience": "AI 代理开发者、云原生工程师、边缘计算研究者、后端架构师"
     },
     {
       "rank": 14,
-      "name": "ladybird",
-      "author": "LadybirdBrowser",
-      "url": "https://github.com/LadybirdBrowser/ladybird",
-      "stars": 65639,
-      "forks": 3131,
-      "weeklyStars": 819,
-      "language": "C++",
-      "langColor": "#F34B7D",
-      "zhDesc": "Truly independent web browser",
+      "name": "skills",
+      "author": "google",
+      "url": "https://github.com/google/skills",
+      "stars": 18352,
+      "forks": 1443,
+      "weeklyStars": 1821,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "谷歌官方发布的 Agent Skills 集合，覆盖 Google Cloud、GKE、BigQuery 等产品技术，为 AI 代理提供即用型操作技能。让代理直接掌握 Google 最佳实践，大幅降低云端应用开发与运维的复杂度。",
       "features": [
-        "",
-        "",
-        ""
+        "覆盖云基础设施数据分析广告等多场景",
+        "复用 Google 官方架构与配置最佳实践",
+        "npx 一键安装按需选择所需技能"
       ],
-      "audience": ""
+      "audience": "云开发者、DevOps 工程师、AI 应用开发者、数据工程师、平台架构师"
     },
     {
       "rank": 15,
-      "name": "ChinaTextbook",
-      "author": "TapXWorld",
-      "url": "https://github.com/TapXWorld/ChinaTextbook",
-      "stars": 79659,
-      "forks": 18072,
-      "weeklyStars": 1998,
-      "language": "Roff",
-      "langColor": "#ECDEBE",
-      "zhDesc": "所有小初高、大学PDF教材。",
+      "name": "weathernext",
+      "author": "google-deepmind",
+      "url": "https://github.com/google-deepmind/weathernext",
+      "stars": 7527,
+      "forks": 961,
+      "weeklyStars": 670,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Google DeepMind 开发的全球中程天气预报 AI 模型，涵盖 WeatherNext 2、GraphCast 与 GenCast 等多代架构，提供预训练权重和推理代码。通过机器学习实现比传统数值预测更快、更准的大气与热带气旋预报，显著提升极端天气应对能力。",
       "features": [
-        "",
-        "",
-        ""
+        "0.25° 分辨率全球预报，精度领先传统数值模型",
+        "集成热带气旋轨迹直接预测与追踪功能",
+        "提供 Colab 演示，支持预训练权重快速推理"
       ],
-      "audience": ""
+      "audience": "气象研究人员、机器学习工程师、应急管理决策者、气候数据分析师"
     },
     {
       "rank": 16,
-      "name": "t3code",
-      "author": "pingdotgg",
-      "url": "https://github.com/pingdotgg/t3code",
-      "stars": 18772,
-      "forks": 4337,
-      "weeklyStars": 1603,
+      "name": "paperclip",
+      "author": "paperclipai",
+      "url": "https://github.com/paperclipai/paperclip",
+      "stars": 78338,
+      "forks": 14363,
+      "weeklyStars": 2430,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "暂无描述",
+      "zhDesc": "开源的 AI 智能体团队编排平台，将各类代理组织成可运转的虚拟公司。通过组织架构、预算治理与目标对齐，让团队从任务分配到成本监控全流程自主运行。",
       "features": [
-        "",
-        "",
-        ""
+        "自带任意代理统一编排，一张组织架构图管理全员",
+        "任务目标层层对齐，审批治理与预算硬限全程可控",
+        "多公司数据隔离，移动端随时监督业务运行"
       ],
-      "audience": ""
+      "audience": "AI 创业者、智能体开发者、企业平台运维者、自动化运营团队"
     }
   ]
 }

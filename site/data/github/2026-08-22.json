@@ -1,0 +1,298 @@
+{
+  "weekLabel": "2026年第34周",
+  "weekInfo": "2026 年第 34 周 / 2026-08-22",
+  "date": "2026-08-22",
+  "count": 16,
+  "totalCount": 16,
+  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 HTML·Mojo·Python·Rust·Shell·TypeScript 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "cordis",
+      "author": "cordiverse",
+      "url": "https://github.com/cordiverse/cordis",
+      "stars": 6999,
+      "forks": 408,
+      "weeklyStars": 3614,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Meta-Framework of Spatiotemporal Composability",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 2,
+      "name": "diagram-design",
+      "author": "cathrynlavery",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 25098,
+      "forks": 1533,
+      "weeklyStars": 8457,
+      "language": "HTML",
+      "langColor": "#E34C26",
+      "zhDesc": "38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 3,
+      "name": "plugins",
+      "author": "cursor",
+      "url": "https://github.com/cursor/plugins",
+      "stars": 4457,
+      "forks": 368,
+      "weeklyStars": 1582,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Cursor plugin specification and official plugins",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 4,
+      "name": "OpenViking",
+      "author": "volcengine",
+      "url": "https://github.com/volcengine/OpenViking",
+      "stars": 31748,
+      "forks": 2428,
+      "weeklyStars": 3033,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 5,
+      "name": "omarchy",
+      "author": "basecamp",
+      "url": "https://github.com/basecamp/omarchy",
+      "stars": 27661,
+      "forks": 2831,
+      "weeklyStars": 2565,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Beautiful, Modern & Opinionated Linux",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 6,
+      "name": "modular",
+      "author": "modular",
+      "url": "https://github.com/modular/modular",
+      "stars": 28721,
+      "forks": 3056,
+      "weeklyStars": 1643,
+      "language": "Mojo",
+      "langColor": "#FF4C1F",
+      "zhDesc": "The Modular Platform (includes MAX & Mojo)",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 7,
+      "name": "MoneyPrinterTurbo",
+      "author": "harry0703",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+      "stars": 114089,
+      "forks": 17314,
+      "weeklyStars": 10470,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 8,
+      "name": "public-apis",
+      "author": "public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "stars": 468135,
+      "forks": 51639,
+      "weeklyStars": 10990,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "A collective list of free APIs",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 9,
+      "name": "semantica",
+      "author": "semantica-agi",
+      "url": "https://github.com/semantica-agi/semantica",
+      "stars": 10123,
+      "forks": 1084,
+      "weeklyStars": 2755,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Graph-Native Infrastructure for Context and Accountable AI Systems",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 10,
+      "name": "OpenLogi",
+      "author": "AprilNEA",
+      "url": "https://github.com/AprilNEA/OpenLogi",
+      "stars": 13117,
+      "forks": 354,
+      "weeklyStars": 4054,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 11,
+      "name": "needle",
+      "author": "cactus-compute",
+      "url": "https://github.com/cactus-compute/needle",
+      "stars": 8387,
+      "forks": 543,
+      "weeklyStars": 2985,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 12,
+      "name": "Switchyard",
+      "author": "NVIDIA-NeMo",
+      "url": "https://github.com/NVIDIA-NeMo/Switchyard",
+      "stars": 2089,
+      "forks": 185,
+      "weeklyStars": 642,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Switchyard lets LLM applications route traffic across models and providers while preserving native OpenAI and Anthropic API compatibility - enabling flexible model selection, benchmarking, and cost/performance optimization.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 13,
+      "name": "ai-memory",
+      "author": "akitaonrails",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "stars": 3971,
+      "forks": 298,
+      "weeklyStars": 2404,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 14,
+      "name": "llmfit",
+      "author": "AlexsJones",
+      "url": "https://github.com/AlexsJones/llmfit",
+      "stars": 33472,
+      "forks": 2083,
+      "weeklyStars": 1991,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Hundreds of models & providers. One command to find what runs on your hardware.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 15,
+      "name": "unsloth",
+      "author": "unslothai",
+      "url": "https://github.com/unslothai/unsloth",
+      "stars": 74298,
+      "forks": 6717,
+      "weeklyStars": 2987,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Local UI to run and train LLMs and diffusion models, including Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, DeepSeek-V4, FLUX and more.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 16,
+      "name": "omlx",
+      "author": "jundot",
+      "url": "https://github.com/jundot/omlx",
+      "stars": 20234,
+      "forks": 1717,
+      "weeklyStars": 1536,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "LLM inference server with continuous batching & SSD caching for Apple Silicon — managed from the macOS menu bar",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    }
+  ]
+}

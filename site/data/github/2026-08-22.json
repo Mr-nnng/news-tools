@@ -4,295 +4,295 @@
   "date": "2026-08-22",
   "count": 16,
   "totalCount": 16,
-  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 HTML·Mojo·Python·Rust·Shell·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 16 个热门仓库，涵盖 AI 智能体 · 开发者工具 · LLM 推理 · 知识图谱 · 短视频生成 等领域。public-apis 以 468k Star 位居榜首，本周新增 10990；MoneyPrinterTurbo 新增 10470 紧随其后，diagram-design 也以 8457 增量表现亮眼。",
   "repos": [
     {
       "rank": 1,
       "name": "cordis",
       "author": "cordiverse",
       "url": "https://github.com/cordiverse/cordis",
-      "stars": 6999,
+      "stars": 7028,
       "forks": 408,
       "weeklyStars": 3614,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Meta-Framework of Spatiotemporal Composability",
+      "zhDesc": "Cordis 是一个面向时空组合性的元框架，提供核心抽象与工具来构建可组合的空间时间应用。它解决了复杂时空场景下系统集成与扩展的难题，让开发者以统一范式高效组织多维数据与逻辑。",
       "features": [
-        "",
-        "",
-        ""
+        "元框架抽象统一时空组合模型",
+        "核心包提供可扩展的基础能力",
+        "简化多维数据与逻辑的编排"
       ],
-      "audience": ""
+      "audience": "框架开发者、时空应用工程师、系统架构师、数据平台开发者"
     },
     {
       "rank": 2,
       "name": "diagram-design",
       "author": "cathrynlavery",
       "url": "https://github.com/cathrynlavery/diagram-design",
-      "stars": 25098,
-      "forks": 1533,
+      "stars": 25203,
+      "forks": 1541,
       "weeklyStars": 8457,
       "language": "HTML",
       "langColor": "#E34C26",
-      "zhDesc": "38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "zhDesc": "为 Claude Code、Codex、Pi 等 AI 编程助手提供 39 种编辑级图表类型，生成自包含 HTML+SVG，无阴影无冗余。让 AI 直接产出设计师认可的高质量图表，自动匹配品牌风格，告别通用模板感。",
       "features": [
-        "",
-        "",
-        ""
+        "39 种编辑级图表类型覆盖架构流程时序等",
+        "自动提取网站品牌色与字体 60 秒完成匹配",
+        "支持导入 draw.io 与 Mermaid 并按需重绘"
       ],
-      "audience": ""
+      "audience": "AI 编程工具用户、技术写作者、产品经理、架构师、设计师"
     },
     {
       "rank": 3,
       "name": "plugins",
       "author": "cursor",
       "url": "https://github.com/cursor/plugins",
-      "stars": 4457,
-      "forks": 368,
+      "stars": 4503,
+      "forks": 372,
       "weeklyStars": 1582,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Cursor plugin specification and official plugins",
+      "zhDesc": "Cursor 官方插件市场仓库，收录面向开发者工具、框架和 SaaS 产品的各类插件。每个插件独立目录并附带清单文件，可扩展 Cursor 的自动化、代码审查与第三方集成能力。",
       "features": [
-        "",
-        "",
-        ""
+        "官方插件市场集中管理多款插件",
+        "覆盖开发工具与第三方 SaaS 集成",
+        "独立清单文件便于安装和扩展"
       ],
-      "audience": ""
+      "audience": "Cursor 用户、开发者工具爱好者、SaaS 集成开发者、AI 编程实践者"
     },
     {
       "rank": 4,
       "name": "OpenViking",
       "author": "volcengine",
       "url": "https://github.com/volcengine/OpenViking",
-      "stars": 31748,
-      "forks": 2428,
+      "stars": 31817,
+      "forks": 2431,
       "weeklyStars": 3033,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+      "zhDesc": "OpenViking 是面向 AI Agent 的开源上下文数据库，将记忆、知识与技能统一为 viking:// 虚拟文件系统。通过分层加载与可观测检索，显著降低 Token 消耗并提升 Agent 长程任务表现。",
       "features": [
-        "",
-        "",
-        ""
+        "统一记忆、知识与技能为 viking:// 文件系统",
+        "L0/L1/L2 分层加载按需读取降低开销",
+        "目录式递归检索保留上下文且轨迹可观测"
       ],
-      "audience": ""
+      "audience": "AI Agent 开发者、RAG 应用工程师、大模型应用架构师、AI 研究员"
     },
     {
       "rank": 5,
       "name": "omarchy",
       "author": "basecamp",
       "url": "https://github.com/basecamp/omarchy",
-      "stars": 27661,
-      "forks": 2831,
+      "stars": 27816,
+      "forks": 2843,
       "weeklyStars": 2565,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Beautiful, Modern & Opinionated Linux",
+      "zhDesc": "Omarchy 是 DHH 打造的现代化 Linux 发行版，追求精美外观、现代交互与一致的开发体验。内置完整应用生态与文档化配置体系，让开发者开箱即用地获得高度统一的生产力桌面。",
       "features": [
-        "",
-        "",
-        ""
+        "内置终端、Neovim 与完整开发工具链",
+        "统一主题、热键与剪贴板历史增强体验",
+        "文档化一键式系统配置开箱即用"
       ],
-      "audience": ""
+      "audience": "Linux 爱好者、开发者、后端工程师、Mac/Windows 迁移用户"
     },
     {
       "rank": 6,
       "name": "modular",
       "author": "modular",
       "url": "https://github.com/modular/modular",
-      "stars": 28721,
-      "forks": 3056,
+      "stars": 28759,
+      "forks": 3059,
       "weeklyStars": 1643,
       "language": "Mojo",
       "langColor": "#FF4C1F",
-      "zhDesc": "The Modular Platform (includes MAX & Mojo)",
+      "zhDesc": "Modular 开源的统一 AI 开发与部署平台，包含 MAX 框架和 Mojo 语言。为高性能 AI 推理和系统编程提供一体化解决方案，显著降低模型服务与底层开发的复杂度。",
       "features": [
-        "",
-        "",
-        ""
+        "MAX 框架支持高性能模型推理与部署",
+        "Mojo 语言融合 Python 易用性与 C 性能",
+        "提供 OpenAI 兼容端点与模型流水线"
       ],
-      "audience": ""
+      "audience": "AI 工程师、机器学习平台开发者、系统程序员、数据科学家"
     },
     {
       "rank": 7,
       "name": "MoneyPrinterTurbo",
       "author": "harry0703",
       "url": "https://github.com/harry0703/MoneyPrinterTurbo",
-      "stars": 114089,
-      "forks": 17314,
+      "stars": 114301,
+      "forks": 17350,
       "weeklyStars": 10470,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "zhDesc": "一站式AI短视频生成工具，输入主题或关键词即可自动生成脚本、素材、字幕、配音和背景音乐，合成高清视频。大幅降低短视频制作门槛，让创作者无需专业剪辑技能即可批量产出内容。",
       "features": [
-        "",
-        "",
-        ""
+        "输入主题或关键词一键生成高清短视频",
+        "支持批量生成竖屏横屏多尺寸视频",
+        "集成主流大模型支持多平台一键发布"
       ],
-      "audience": ""
+      "audience": "短视频创作者、自媒体运营者、内容营销人员、视频剪辑新手"
     },
     {
       "rank": 8,
       "name": "public-apis",
       "author": "public-apis",
       "url": "https://github.com/public-apis/public-apis",
-      "stars": 468135,
-      "forks": 51639,
+      "stars": 468249,
+      "forks": 51654,
       "weeklyStars": 10990,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "A collective list of free APIs",
+      "zhDesc": "社区维护的免费公共 API 精选合集，收录从动物、金融到天气等数十个领域的数百个接口。为开发者提供一站式 API 发现平台，大幅降低寻找和评估可用接口的时间成本，助力快速原型开发与产品迭代。",
       "features": [
-        "",
-        "",
-        ""
+        "覆盖五十余个领域数百个免费接口",
+        "社区持续维护并标注鉴权与跨域信息",
+        "分类索引清晰支持快速检索与筛选"
       ],
-      "audience": ""
+      "audience": "全栈开发者、移动应用开发者、数据工程师、产品原型设计师"
     },
     {
       "rank": 9,
       "name": "semantica",
       "author": "semantica-agi",
       "url": "https://github.com/semantica-agi/semantica",
-      "stars": 10123,
-      "forks": 1084,
+      "stars": 10166,
+      "forks": 1086,
       "weeklyStars": 2755,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Graph-Native Infrastructure for Context and Accountable AI Systems",
+      "zhDesc": "Semantica 是面向 AI 智能体的图原生基础设施，将企业数据构建为上下文图与知识图谱，支持图分析与因果推理。为金融、医疗等受监管场景提供可解释、可审计、可追溯的确定性决策层，弥补传统 RAG 缺乏上下文与审计能力的短板。",
       "features": [
-        "",
-        "",
-        ""
+        "构建上下文图与知识图谱，支持图分析与因果推理",
+        "决策全程溯源，W3C PROV-O 标准审计导出",
+        "多存储后端可替换，自托管零供应商锁定"
       ],
-      "audience": ""
+      "audience": "AI/ML 平台团队、数据平台工程师、合规风控审计团队、受监管企业开发者、知识图谱工程师"
     },
     {
       "rank": 10,
       "name": "OpenLogi",
       "author": "AprilNEA",
       "url": "https://github.com/AprilNEA/OpenLogi",
-      "stars": 13117,
-      "forks": 354,
+      "stars": 13307,
+      "forks": 358,
       "weeklyStars": 4054,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+      "zhDesc": "用 Rust 编写的罗技 Options+ 本地替代品，通过 HID++ 和 UVC 协议解锁鼠标、键盘与摄像头的全部功能。无需账户、无遥测，支持 Linux 平台，提供纯文本配置与 CLI，让用户完全掌控自己的外设。",
       "features": [
-        "",
-        "",
-        ""
+        "按钮重映射、手势与操作环，深度定制鼠标",
+        "DPI 与 SmartShift 滚轮控制，纯文本 TOML 配置",
+        "跨 macOS/Linux/Windows，无账户无遥测"
       ],
-      "audience": ""
+      "audience": "罗技外设用户、Linux 桌面用户、效率工具爱好者、开源软件拥护者"
     },
     {
       "rank": 11,
       "name": "needle",
       "author": "cactus-compute",
       "url": "https://github.com/cactus-compute/needle",
-      "stars": 8387,
-      "forks": 543,
+      "stars": 8448,
+      "forks": 550,
       "weeklyStars": 2985,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
+      "zhDesc": "Needle 2 是仅 14MB 的端侧工具调用基础模型，支持函数调用、设备操控与结构化提取。体积比同类模型小 5-70 倍，仅需 28MB 内存即可运行完整会话，适配手机、穿戴设备与机器人。",
       "features": [
-        "",
-        "",
-        ""
+        "单文件 14MB 引擎，权重内嵌免部署",
+        "文本进 JSON 出，语法约束保证格式",
+        "置信度门控与工具检索，支持 LoRA 微调"
       ],
-      "audience": ""
+      "audience": "嵌入式开发者、IoT 工程师、端侧 AI 应用开发者、智能硬件产品团队"
     },
     {
       "rank": 12,
       "name": "Switchyard",
       "author": "NVIDIA-NeMo",
       "url": "https://github.com/NVIDIA-NeMo/Switchyard",
-      "stars": 2089,
+      "stars": 2127,
       "forks": 185,
       "weeklyStars": 642,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Switchyard lets LLM applications route traffic across models and providers while preserving native OpenAI and Anthropic API compatibility - enabling flexible model selection, benchmarking, and cost/performance optimization.",
+      "zhDesc": "Switchyard 是 NVIDIA 开源的 Rust LLM 流量代理与路由库，可在不同模型和提供商间分发请求，并保持 OpenAI 与 Anthropic API 原生兼容。它让编码代理无缝对接开源模型，实现灵活模型选择、A/B 基准测试与成本性能优化。",
       "features": [
-        "",
-        "",
-        ""
+        "OpenAI 与 Anthropic 协议双向转换",
+        "多策略路由：随机/LLM 分类器/阶段路由",
+        "Prometheus 指标监控请求延迟与成本"
       ],
-      "audience": ""
+      "audience": "LLM 应用开发者、AI 基础设施工程师、模型评测人员、Rust 后端工程师"
     },
     {
       "rank": 13,
       "name": "ai-memory",
       "author": "akitaonrails",
       "url": "https://github.com/akitaonrails/ai-memory",
-      "stars": 3971,
+      "stars": 4000,
       "forks": 298,
       "weeklyStars": 2404,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "zhDesc": "为 AI 编码代理提供长期记忆的 Rust 工具，支持跨代理会话交接。解决 LLM 编码代理会话结束即丢失上下文的问题，让不同代理间无缝续接任务。",
       "features": [
-        "",
-        "",
-        ""
+        "跨代理会话无缝交接，无需重复解释上下文",
+        "生命周期钩子自动捕获会话与工具调用",
+        "Markdown 维基存储，支持全文与语义混合检索"
       ],
-      "audience": ""
+      "audience": "AI 编码代理用户、跨工具开发者、团队协作者、技术负责人"
     },
     {
       "rank": 14,
       "name": "llmfit",
       "author": "AlexsJones",
       "url": "https://github.com/AlexsJones/llmfit",
-      "stars": 33472,
-      "forks": 2083,
+      "stars": 33493,
+      "forks": 2087,
       "weeklyStars": 1991,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Hundreds of models & providers. One command to find what runs on your hardware.",
+      "zhDesc": "llmfit 是一款终端工具，自动检测硬件并从数百款模型中筛选适配内存、CPU 和 GPU 的 LLM。通过质量、速度、适配度与上下文四维评分，一条命令即可找到本机能流畅运行的模型。",
       "features": [
-        "",
-        "",
-        ""
+        "自动检测硬件并匹配数百款 LLM 模型",
+        "TUI/CLI 双模式，支持多 GPU 与 MoE",
+        "内置基准测试验证真实推理性能"
       ],
-      "audience": ""
+      "audience": "AI 开发者、机器学习工程师、硬件爱好者、本地模型部署者、技术评测人员"
     },
     {
       "rank": 15,
       "name": "unsloth",
       "author": "unslothai",
       "url": "https://github.com/unslothai/unsloth",
-      "stars": 74298,
-      "forks": 6717,
+      "stars": 74336,
+      "forks": 6722,
       "weeklyStars": 2987,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Local UI to run and train LLMs and diffusion models, including Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, DeepSeek-V4, FLUX and more.",
+      "zhDesc": "Unsloth 是一款本地桌面应用，用于运行和训练 LLM 与扩散模型，支持 Qwen3.8、Kimi K3、Gemma 4、DeepSeek-V4 等主流模型。提供比传统方案快 2 倍、节省 70% 显存的微调能力，让普通用户也能在本地轻松完成模型训练与部署。",
       "features": [
-        "",
-        "",
-        ""
+        "本地运行训练 LLM 与扩散模型，支持主流架构",
+        "微调速度提升 2 倍且显存占用减少 70%",
+        "支持 RL、LoRA、QLoRA 及 GGUF 导出部署"
       ],
-      "audience": ""
+      "audience": "AI 开发者、机器学习工程师、数据科学家、本地部署爱好者"
     },
     {
       "rank": 16,
       "name": "omlx",
       "author": "jundot",
       "url": "https://github.com/jundot/omlx",
-      "stars": 20234,
-      "forks": 1717,
+      "stars": 20257,
+      "forks": 1719,
       "weeklyStars": 1536,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "LLM inference server with continuous batching & SSD caching for Apple Silicon — managed from the macOS menu bar",
+      "zhDesc": "专为 Apple Silicon 打造的 LLM 推理服务器，支持连续批处理与热内存/冷 SSD 两级 KV 缓存，菜单栏一键管理。让本地大模型在真实编码场景中保持高速响应，兼顾便利与控制。",
       "features": [
-        "",
-        "",
-        ""
+        "连续批处理与热冷两级 KV 缓存加速推理",
+        "菜单栏原生应用一键启停与实时监控",
+        "兼容 OpenAI/Anthropic API 即插即用"
       ],
-      "audience": ""
+      "audience": "Mac 开发者、LLM 应用开发者、本地 AI 爱好者、Claude Code 用户"
     }
   ]
 }

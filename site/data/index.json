@@ -535,11 +535,16 @@
     ]
   },
   "wallstreet": {
-    "count": 18,
+    "count": 19,
     "months": [
       {
         "label": "2026年08月",
         "items": [
+          {
+            "date": "2026-08-27",
+            "count": 1,
+            "summary": "见闻早餐 12 条"
+          },
           {
             "date": "2026-08-26",
             "count": 3,

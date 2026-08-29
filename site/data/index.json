@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 12,
+    "count": 13,
     "months": [
       {
         "label": "2026年08月",
         "items": [
+          {
+            "date": "2026-08-29",
+            "count": 19,
+            "summary": "本周 GitHub Trending 收录 19 个热门仓库，涵盖 JavaScript·Mojo·Python·Rust·Shell·TypeScript 等领域。"
+          },
           {
             "date": "2026-08-22",
             "count": 16,

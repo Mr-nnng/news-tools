@@ -1,0 +1,352 @@
+{
+  "weekLabel": "2026年第35周",
+  "weekInfo": "2026 年第 35 周 / 2026-08-29",
+  "date": "2026-08-29",
+  "count": 19,
+  "totalCount": 19,
+  "coverSummary": "本周 GitHub Trending 收录 19 个热门仓库，涵盖 JavaScript·Mojo·Python·Rust·Shell·TypeScript 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "claude-plugins-community",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-plugins-community",
+      "stars": 2656,
+      "forks": 219,
+      "weeklyStars": 2207,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 2,
+      "name": "awesome-gpt-image-2",
+      "author": "freestylefly",
+      "url": "https://github.com/freestylefly/awesome-gpt-image-2",
+      "stars": 24676,
+      "forks": 2430,
+      "weeklyStars": 12877,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 3,
+      "name": "omarchy",
+      "author": "basecamp",
+      "url": "https://github.com/basecamp/omarchy",
+      "stars": 34122,
+      "forks": 3516,
+      "weeklyStars": 5942,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Beautiful, Modern & Opinionated Linux",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 4,
+      "name": "codex",
+      "author": "openai",
+      "url": "https://github.com/openai/codex",
+      "stars": 119696,
+      "forks": 18286,
+      "weeklyStars": 9109,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Lightweight coding agent that runs in your terminal",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 5,
+      "name": "archify",
+      "author": "tt-a1i",
+      "url": "https://github.com/tt-a1i/archify",
+      "stars": 29188,
+      "forks": 1833,
+      "weeklyStars": 11099,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 6,
+      "name": "OpenLogi",
+      "author": "AprilNEA",
+      "url": "https://github.com/AprilNEA/OpenLogi",
+      "stars": 17513,
+      "forks": 504,
+      "weeklyStars": 4825,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 7,
+      "name": "maka",
+      "author": "apache",
+      "url": "https://github.com/apache/maka",
+      "stars": 3963,
+      "forks": 367,
+      "weeklyStars": 1918,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 8,
+      "name": "freellmapi",
+      "author": "tashfeenahmed",
+      "url": "https://github.com/tashfeenahmed/freellmapi",
+      "stars": 21885,
+      "forks": 3086,
+      "weeklyStars": 2162,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 9,
+      "name": "modular",
+      "author": "modular",
+      "url": "https://github.com/modular/modular",
+      "stars": 29320,
+      "forks": 3122,
+      "weeklyStars": 875,
+      "language": "Mojo",
+      "langColor": "#FF4C1F",
+      "zhDesc": "The Modular Platform (includes MAX & Mojo)",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 10,
+      "name": "plugins",
+      "author": "cursor",
+      "url": "https://github.com/cursor/plugins",
+      "stars": 6063,
+      "forks": 481,
+      "weeklyStars": 1594,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Cursor plugin specification and official plugins",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 11,
+      "name": "ai-job-search",
+      "author": "MadsLorentzen",
+      "url": "https://github.com/MadsLorentzen/ai-job-search",
+      "stars": 37894,
+      "forks": 12836,
+      "weeklyStars": 4828,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 12,
+      "name": "openhuman",
+      "author": "tinyhumansai",
+      "url": "https://github.com/tinyhumansai/openhuman",
+      "stars": 38788,
+      "forks": 3806,
+      "weeklyStars": 2353,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Your Personal AI super intelligence. A brain that builds a local-first memory of your life, a fantastic orchestrator of agent fleets and workflows, and a deep researcher.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 13,
+      "name": "claude-plugins-official",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "stars": 35183,
+      "forks": 3944,
+      "weeklyStars": 1281,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 14,
+      "name": "awesome-agent-skills",
+      "author": "VoltAgent",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "stars": 33152,
+      "forks": 3500,
+      "weeklyStars": 2372,
+      "language": "",
+      "langColor": "",
+      "zhDesc": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 15,
+      "name": "posthog",
+      "author": "PostHog",
+      "url": "https://github.com/PostHog/posthog",
+      "stars": 39448,
+      "forks": 3309,
+      "weeklyStars": 1270,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "🦔 PostHog is the leading platform for building self-driving products. Our developer tools – AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more – capture all the context agents need to diagnose problems, uncover opportunities, and ship fixes. Steer it all from Slack, web, desktop, or the MCP.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 16,
+      "name": "ai-engineering-from-scratch",
+      "author": "rohitg00",
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "stars": 50778,
+      "forks": 8798,
+      "weeklyStars": 3263,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Learn it. Build it. Ship it for others.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 17,
+      "name": "free-claude-code",
+      "author": "Alishahryar1",
+      "url": "https://github.com/Alishahryar1/free-claude-code",
+      "stars": 51284,
+      "forks": 8258,
+      "weeklyStars": 4769,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Use Claude Code, Codex, Pi, and OpenCode and more for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 18,
+      "name": "munder-difflin",
+      "author": "chaitanyagiri",
+      "url": "https://github.com/chaitanyagiri/munder-difflin",
+      "stars": 5318,
+      "forks": 634,
+      "weeklyStars": 1853,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "local multi-agent harness",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 19,
+      "name": "bookorbit",
+      "author": "bookorbit",
+      "url": "https://github.com/bookorbit/bookorbit",
+      "stars": 3570,
+      "forks": 213,
+      "weeklyStars": 806,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "BookOrbit: Your Reading Space",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "date": "2026-08-29",
   "count": 19,
   "totalCount": 19,
-  "coverSummary": "本周 GitHub Trending 收录 19 个热门仓库，涵盖 JavaScript·Mojo·Python·Rust·Shell·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 19 个热门仓库，涵盖 AI 编码智能体 · 提示词工程 · 本地 AI 工作区等领域。awesome-gpt-image-2 本周新增 12877 Star 领跑，codex 以 119696 Star 居总量榜首。",
   "repos": [
     {
       "rank": 1,
@@ -16,13 +16,13 @@
       "weeklyStars": 2207,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Community plugin marketplace for Claude Cowork and Claude Code. Read-only mirror — submit plugins at clau.de/plugin-directory-submission.",
+      "zhDesc": "Anthropic 维护的 Claude 社区插件市场只读镜像，集中提供经安全审核的 Cowork 与 Code 插件。它让开发者无需自行筛选来源，即可在 Claude 中快速安装可信扩展。",
       "features": [
-        "",
-        "",
-        ""
+        "集中提供社区插件市场只读镜像仓库",
+        "插件均经自动安全扫描与人工审核",
+        "支持 Cowork 与 Code 快速安装"
       ],
-      "audience": ""
+      "audience": "Claude 开发者、Claude Code 用户、Cowork 使用者、插件开发者"
     },
     {
       "rank": 2,
@@ -34,13 +34,13 @@
       "weeklyStars": 12877,
       "language": "JavaScript",
       "langColor": "#F1E05A",
-      "zhDesc": "Prompt as Code | GPT-Image2 工业级提示词引擎与模板库，530+ 个案例逆向工程，20+ 套工业级模板，并提炼出Skills，持续更新中",
+      "zhDesc": "GPT-Image2 的工业级提示词引擎与模板库，收录 530+ 逆向案例和 20+ 可复用模板。它将散乱提示词压缩为结构化 Prompt-as-Code，提升批量生成、模板化与自动化工作流的稳定性。",
       "features": [
-        "",
-        "",
-        ""
+        "530+案例逆向沉淀可复用提示词",
+        "20+工业模板覆盖海报图表界面",
+        "结构化协议适配Agent批量生成"
       ],
-      "audience": ""
+      "audience": "AI 图像生成开发者、提示词工程师、自动化工作流工程师、视觉设计师"
     },
     {
       "rank": 3,
@@ -52,13 +52,13 @@
       "weeklyStars": 5942,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Beautiful, Modern & Opinionated Linux",
+      "zhDesc": "DHH 打造的美观现代 Linux 发行版，提供观点鲜明且开箱即用的系统体验。它减少个性化配置负担，让开发者获得精致一致的桌面环境。",
       "features": [
-        "",
-        "",
-        ""
+        "统一美观的现代桌面体验开箱即用",
+        "观点鲜明默认配置降低系统配置成本",
+        "MIT 开源许可便于社区二次开发"
       ],
-      "audience": ""
+      "audience": "Linux 爱好者、桌面用户、开发者、开源社区贡献者"
     },
     {
       "rank": 4,
@@ -70,13 +70,13 @@
       "weeklyStars": 9109,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Lightweight coding agent that runs in your terminal",
+      "zhDesc": "OpenAI 推出的轻量级终端编码智能体，可在本地运行并辅助完成代码编写、调试与重构任务。它让开发者无需离开命令行即可用 AI 加速日常开发流程。",
       "features": [
-        "",
-        "",
-        ""
+        "本地终端运行，无需离开命令行操作",
+        "支持 ChatGPT 登录与 API 密钥接入",
+        "支持 macOS、Linux 与 Windows 安装"
       ],
-      "audience": ""
+      "audience": "终端开发者、AI 编程工具用户、OpenAI 开发者、全栈工程师"
     },
     {
       "rank": 5,
@@ -88,13 +88,13 @@
       "weeklyStars": 11099,
       "language": "JavaScript",
       "langColor": "#F1E05A",
-      "zhDesc": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
+      "zhDesc": "Archify 是面向 AI 编程助手的架构可视化技能，可将代码库或系统描述编译为自包含交互式 HTML 图。它用类型化 JSON 和确定性校验生成可验证的架构、流程、时序等图表，便于评审与分享。",
       "features": [
-        "",
-        "",
-        ""
+        "五类图表覆盖架构流程时序数据流生命周期",
+        "类型化 JSON 确定性编译为可验证 HTML",
+        "支持快照对比路由追踪与多格式导出分享"
       ],
-      "audience": ""
+      "audience": "架构师、后端工程师、AI 编程工具用户、技术文档作者、开源项目维护者"
     },
     {
       "rank": 6,
@@ -106,13 +106,13 @@
       "weeklyStars": 4825,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+      "zhDesc": "基于 Rust 的本地优先罗技外设配置工具，替代官方 Options+。通过 HID++ 重映射按键、DPI 与 SmartShift，无账号无遥测，隐私更可控。",
       "features": [
-        "",
-        "",
-        ""
+        "本地优先运行无需账号和遥测数据",
+        "支持鼠标按键重映射与 DPI 调节",
+        "通过 HID++ 控制 SmartShift 功能"
       ],
-      "audience": ""
+      "audience": "罗技鼠标用户、隐私敏感开发者、Rust 工具爱好者、外设配置玩家"
     },
     {
       "rank": 7,
@@ -124,13 +124,13 @@
       "weeklyStars": 1918,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.",
+      "zhDesc": "Apache Maka 是本地优先的 AI 智能体工作区，将模型消息、工具调用、权限决策和终止事件记录为追加日志。它提供可审计、可回放的本地运行环境，便于调试、复盘与合规追溯。",
       "features": [
-        "",
-        "",
-        ""
+        "本地优先的 AI 智能体工作区运行环境",
+        "完整记录模型消息工具调用与结果",
+        "追加日志便于审计回放与合规追溯"
       ],
-      "audience": ""
+      "audience": "AI Agent 开发者、大模型应用工程师、平台架构师、合规审计人员"
     },
     {
       "rank": 8,
@@ -142,13 +142,13 @@
       "weeklyStars": 2162,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. All behind one /v1 endpoint, plus any custom OpenAI-compatible endpoint. Smart routing, automatic failover, encrypted keys. Personal experimentation only.",
+      "zhDesc": "聚合 34 家免费 LLM 服务商与 635 个模型端点，提供统一 OpenAI 兼容 /v1 接口。支持智能路由、自动故障转移和加密密钥，适合个人低成本实验大模型。",
       "features": [
-        "",
-        "",
-        ""
+        "统一/v1接口聚合34家免费LLM服务商",
+        "智能路由与自动故障转移提升可用性",
+        "加密密钥管理并支持自定义OpenAI端点"
       ],
-      "audience": ""
+      "audience": "个人开发者、AI应用实验者、LLM集成工程师、学生"
     },
     {
       "rank": 9,
@@ -160,13 +160,13 @@
       "weeklyStars": 875,
       "language": "Mojo",
       "langColor": "#FF4C1F",
-      "zhDesc": "The Modular Platform (includes MAX & Mojo)",
+      "zhDesc": "Modular 是集成 MAX 与 Mojo 的高性能模块化区块链平台，面向以太坊生态的智能合约与链上应用开发。它通过统一执行环境和高性能语言，帮助团队构建低延迟、高吞吐的 Web3 应用。",
       "features": [
-        "",
-        "",
-        ""
+        "集成 MAX 执行环境支撑高性能链上计算",
+        "内置 Mojo 语言简化高性能应用开发",
+        "模块化架构便于扩展以太坊生态应用"
       ],
-      "audience": ""
+      "audience": "区块链开发者、智能合约工程师、Web3 架构师、高性能计算工程师"
     },
     {
       "rank": 10,
@@ -178,13 +178,13 @@
       "weeklyStars": 1594,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Cursor plugin specification and official plugins",
+      "zhDesc": "Cursor 官方维护的插件规范与插件集合，用于定义 Cursor 扩展机制并提供可用插件。帮助开发者按统一标准构建和分发 Cursor 插件，扩展 AI 编程编辑器能力。",
       "features": [
-        "",
-        "",
-        ""
+        "提供 Cursor 插件规范与接口定义",
+        "收录官方插件便于快速集成与使用",
+        "规范 Cursor 插件开发降低集成成本"
       ],
-      "audience": ""
+      "audience": "Cursor 插件开发者、AI 编程工具用户、扩展生态贡献者、前端开发者"
     },
     {
       "rank": 11,
@@ -196,13 +196,13 @@
       "weeklyStars": 4828,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "zhDesc": "可 Fork 的本地 AI 求职框架，基于 Claude Code 自动评估岗位、定制简历、写求职信并准备面试。把重复求职流程自动化，帮助个人提升投递效率与匹配质量。",
       "features": [
-        "",
-        "",
-        ""
+        "评估岗位匹配度并筛选高价值机会",
+        "自动定制简历与求职信提升匹配度",
+        "本地运行保护隐私可深度定制流程"
       ],
-      "audience": ""
+      "audience": "求职者、应届毕业生、转行人士、技术候选人、AI 工具爱好者"
     },
     {
       "rank": 12,
@@ -214,13 +214,13 @@
       "weeklyStars": 2353,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Your Personal AI super intelligence. A brain that builds a local-first memory of your life, a fantastic orchestrator of agent fleets and workflows, and a deep researcher.",
+      "zhDesc": "OpenHuman 是一个本地优先的个人 AI 超级智能系统，用于构建个人生活记忆并编排多智能体工作流。它将私人记忆、任务调度和深度研究整合到本地，帮助个人更高效地管理信息与复杂任务。",
       "features": [
-        "",
-        "",
-        ""
+        "本地优先构建个人记忆并保护隐私",
+        "编排多智能体舰队与自动化工作流",
+        "提供深度研究并汇总多源信息结论"
       ],
-      "audience": ""
+      "audience": "个人 AI 爱好者、智能体开发者、效率工具用户、隐私敏感型用户"
     },
     {
       "rank": 13,
@@ -232,13 +232,13 @@
       "weeklyStars": 1281,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+      "zhDesc": "Anthropic 官方维护的 Claude Code 插件目录，集中收录高质量、可复用扩展。为开发者提供可信插件来源，降低查找与集成成本，提升工作流效率。",
       "features": [
-        "",
-        "",
-        ""
+        "官方维护高质量插件目录与来源集合",
+        "集中收录可复用扩展能力与工具集",
+        "降低插件筛选与集成使用成本门槛"
       ],
-      "audience": ""
+      "audience": "Claude Code 开发者、AI 工具链工程师、插件生态贡献者、自动化工作流开发者"
     },
     {
       "rank": 14,
@@ -250,13 +250,13 @@
       "weeklyStars": 2372,
       "language": "",
       "langColor": "",
-      "zhDesc": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.",
+      "zhDesc": "VoltAgent 精选的 1000+ 智能体技能库，汇集官方与社区贡献的 AI 编码能力。兼容 Claude Code、Codex、Gemini CLI、Cursor 等工具，帮助开发者快速扩展代理任务处理能力。",
       "features": [
-        "",
-        "",
-        ""
+        "收录 1000+ 智能体技能覆盖编码与工具调用",
+        "兼容多种主流 AI 编码与命令行工具",
+        "帮助开发者快速扩展 AI 代理任务处理能力"
       ],
-      "audience": ""
+      "audience": "AI 编码开发者、智能体应用工程师、CLI 工具用户、自动化工程师"
     },
     {
       "rank": 15,
@@ -268,13 +268,13 @@
       "weeklyStars": 1270,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "🦔 PostHog is the leading platform for building self-driving products. Our developer tools – AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more – capture all the context agents need to diagnose problems, uncover opportunities, and ship fixes. Steer it all from Slack, web, desktop, or the MCP.",
+      "zhDesc": "PostHog 是开源产品数据平台，整合分析、回放、实验、日志与 AI 可观测能力。它帮助团队自动诊断问题、发现机会并快速修复产品。",
       "features": [
-        "",
-        "",
-        ""
+        "统一采集行为、错误与 AI 运行上下文",
+        "用会话回放和实验定位问题验证改动",
+        "支持云版与 Docker 自托管灵活部署"
       ],
-      "audience": ""
+      "audience": "产品团队、数据分析师、全栈工程师、AI 应用开发者"
     },
     {
       "rank": 16,
@@ -286,13 +286,13 @@
       "weeklyStars": 3263,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Learn it. Build it. Ship it for others.",
+      "zhDesc": "这是一套开源 AI 工程实战课程，含 523 节课、20 个阶段和多语言示例。它帮助开发者补齐从数学基础到 LLM、Agent 与 MCP 的工程能力，并产出可复用成果。",
       "features": [
-        "",
-        "",
-        ""
+        "523节课覆盖AI工程完整学习路径",
+        "20个阶段支持多语言动手构建项目",
+        "每课产出可复用提示词、Agent或MCP"
       ],
-      "audience": ""
+      "audience": "AI 初学者、Python 开发者、LLM 应用工程师、Agent 开发者、MCP 实践者"
     },
     {
       "rank": 17,
@@ -304,13 +304,13 @@
       "weeklyStars": 4769,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Use Claude Code, Codex, Pi, and OpenCode and more for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
+      "zhDesc": "Free Claude Code 是开源免费模型网关，可让 Claude Code、Codex 等编码代理接入多种免费或本地模型。它统一管理提供商、自动降级并支持多端语音，降低 AI 编码成本。",
       "features": [
-        "",
-        "",
-        ""
+        "聚合五十家合规提供商与免费模型",
+        "统一驱动十种编码代理并自动降级",
+        "支持终端、IDE、手机与本地语音输入"
       ],
-      "audience": ""
+      "audience": "AI 编码开发者、终端用户、IDE 用户、语音交互用户、开源工具爱好者"
     },
     {
       "rank": 18,
@@ -322,13 +322,13 @@
       "weeklyStars": 1853,
       "language": "JavaScript",
       "langColor": "#F1E05A",
-      "zhDesc": "local multi-agent harness",
+      "zhDesc": "Munder Difflin 是本地多智能体桌面框架，将 Claude Code 等终端 CLI 包装成可协作的数字克隆。通过共享记忆与消息路由，让多个 AI 代理自主分工并处理关键审批。",
       "features": [
-        "",
-        "",
-        ""
+        "兼容多种终端CLI并封装为代理",
+        "共享记忆与邮箱路由即时协作能力",
+        "可视化办公室实时监控代理工作状态"
       ],
-      "audience": ""
+      "audience": "AI 代理开发者、独立开发者、终端工具爱好者、自动化工作流用户、效率工具玩家"
     },
     {
       "rank": 19,
@@ -340,13 +340,13 @@
       "weeklyStars": 806,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "BookOrbit: Your Reading Space",
+      "zhDesc": "BookOrbit 是自托管电子书、PDF、有声书与漫画阅读平台，支持网页阅读和 Kobo/KOReader 同步。它将书目管理、进度标注、统计成就与多用户权限整合到私有基础设施，解决跨设备阅读割裂问题。",
       "features": [
-        "",
-        "",
-        ""
+        "多格式阅读覆盖电子书 PDF 有声书漫画",
+        "跨设备同步进度高亮批注与阅读状态",
+        "多用户权限与 OPDS 投递外部阅读同步"
       ],
-      "audience": ""
+      "audience": "个人读者、家庭 NAS 用户、自托管爱好者、电子书收藏者、阅读数据爱好者"
     }
   ]
 }

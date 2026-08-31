@@ -240,31 +240,68 @@ _README_ATTEMPTS = [
 ]
 
 
+def _fetch_readme_via_api(
+    owner: str,
+    name: str,
+    proxies: Optional[dict] = None,
+    timeout: int = 20,
+    max_length: int = 0,
+) -> Optional[str]:
+    """通过 GitHub REST API 的 /readme 端点抓取 README。
+
+    该端点会自动解析仓库的默认分支与 README 文件名（支持任意分支名、
+    任意大小写文件名），比逐个猜测 raw 分支/文件名更可靠。
+    """
+    api_url = f"https://api.github.com/repos/{owner}/{name}/readme"
+    headers = {**HEADERS, "Accept": "application/vnd.github.raw"}
+    try:
+        resp = requests.get(api_url, headers=headers, proxies=proxies, timeout=timeout)
+        if resp.status_code == 200:
+            text = resp.text.strip()
+            if text:
+                if max_length and max_length > 0 and len(text) > max_length:
+                    return text[:max_length]
+                return text
+    except requests.RequestException:
+        pass
+    return None
+
+
 def _fetch_readme(
     owner: str,
     name: str,
     proxies: Optional[dict] = None,
     timeout: int = 8,
     max_length: int = 0,
+    retries: int = 2,
 ) -> Optional[str]:
     """尝试抓取仓库 README 内容。
 
-    依次尝试 main/master 分支下的 README.md / README.rst / README，取第一个成功的结果。
+    策略（按顺序）：
+    1. 依次尝试 main/master 分支下的 README.md / README.rst / README（含重试）；
+    2. 全部失败时回退到 GitHub REST API 的 /readme 端点（自动解析默认分支与文件名，
+       可覆盖非 main/master 默认分支或非常规文件名的仓库）。
+
     max_length=0 表示不截断（完整保留）。
     """
-    for url_builder in _README_ATTEMPTS:
-        try:
-            url = url_builder(owner, name)
-            resp = requests.get(url, headers=HEADERS, proxies=proxies, timeout=timeout)
-            if resp.status_code == 200:
-                text = resp.text.strip()
-                if text:
-                    if max_length and max_length > 0 and len(text) > max_length:
-                        return text[:max_length]
-                    return text
-        except requests.RequestException:
-            continue
-    return None
+    for _ in range(max(1, retries)):
+        for url_builder in _README_ATTEMPTS:
+            try:
+                url = url_builder(owner, name)
+                resp = requests.get(url, headers=HEADERS, proxies=proxies, timeout=timeout)
+                if resp.status_code == 200:
+                    text = resp.text.strip()
+                    if text:
+                        if max_length and max_length > 0 and len(text) > max_length:
+                            return text[:max_length]
+                        return text
+            except requests.RequestException:
+                continue
+
+    # 回退：GitHub API /readme 端点
+    return _fetch_readme_via_api(
+        owner, name, proxies=proxies, timeout=max(20, timeout), max_length=max_length
+    )
 
 
 def _enrich_repos(

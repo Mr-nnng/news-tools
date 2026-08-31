@@ -10,6 +10,10 @@ weekly_update.py — GitHub Actions 每周周榜自动更新入口 (SPA mode)
     python scripts/weekly_update.py
     python scripts/weekly_update.py --date 2026-07-18
     python scripts/weekly_update.py --proxy http://127.0.0.1:7890
+
+补全模式（针对已生成但 zhDesc/features/audience 缺失的历史 JSON）:
+    python scripts/weekly_update.py --backfill 2026-08-29
+    python scripts/weekly_update.py --backfill 2026-08-29 --proxy http://127.0.0.1:7890
 """
 
 import time
@@ -20,6 +24,7 @@ import sys
 import argparse
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+from typing import Optional
 
 import httpx
 from dotenv import load_dotenv
@@ -29,8 +34,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
-# 加载 .env（不存在则跳过，GitHub Actions 中依赖默认免费端点或仓库 secrets）
-load_dotenv(PROJECT_ROOT / ".env")
+# 加载 .env（override=True：确保本地 .env 中的 LLM 配置不被 shell 中遗留的
+# OPENAI_* 环境变量遮蔽；文件不存在时 load_dotenv 静默跳过）
+load_dotenv(PROJECT_ROOT / ".env", override=True)
 
 from news_tools.trending import fetch_trending, TrendingRepo
 import build_site  # 复用 data / month 工具函数
@@ -268,10 +274,106 @@ def save_github_json(date_str: str, data: dict) -> Path:
     GH_DATA_DIR.mkdir(parents=True, exist_ok=True)
     out_path = GH_DATA_DIR / f"{date_str}.json"
     out_path.write_text(
-        json.dumps(data, indent=2, ensure_ascii=False),
+        json.dumps(data, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
     return out_path
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 补全模式（backfill）
+# ═══════════════════════════════════════════════════════════════════
+
+
+def _repo_needs_backfill(repo: dict) -> bool:
+    """判断仓库条目是否缺失中文增强内容（features 任一为空或 audience 为空）。"""
+    features = repo.get("features") or []
+    if not repo.get("audience", "").strip():
+        return True
+    if len(features) != 3 or not all(f.strip() for f in features):
+        return True
+    return False
+
+
+def _backfill_repo_from_dict(repo: dict, proxy: Optional[str] = None, max_retries: int = 3) -> bool:
+    """针对 JSON 中单个仓库重新抓取 README 并调用 LLM 补全中文内容。
+
+    成功则原地更新 repo dict 并返回 True；失败返回 False（保留原值）。
+    """
+    from news_tools.trending import TrendingRepo, _fetch_readme
+
+    readme = _fetch_readme(
+        repo["author"], repo["name"],
+        proxies={"http": proxy, "https": proxy} if proxy else None,
+        timeout=10,
+        max_length=0,
+    )
+
+    pseudo = TrendingRepo(
+        author=repo["author"],
+        name=repo["name"],
+        url=repo["url"],
+        description=repo.get("zhDesc") or "",
+    )
+    pseudo.readme = readme
+
+    llm_data = _call_llm_for_repo(pseudo, max_retries=max_retries)
+    if not llm_data:
+        return False
+
+    repo["zhDesc"] = llm_data["zhDesc"]
+    repo["features"] = llm_data["features"]
+    repo["audience"] = llm_data["audience"]
+    return True
+
+
+def backfill_github_json(date_str: str, proxy: Optional[str] = None, max_retries: int = 3) -> None:
+    """补全已存在的周榜 JSON 中缺失的中文增强内容。
+
+    流程：
+    1. 读取 site/data/github/{date}.json；
+    2. 对每个缺失 zhDesc/features/audience 的仓库，重新抓取 README 并调用 LLM；
+    3. 写回 JSON；
+    4. 重建 index.json。
+    """
+    path = GH_DATA_DIR / f"{date_str}.json"
+    if not path.exists():
+        print(f"❌ 文件不存在: {path}")
+        sys.exit(1)
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    repos = data.get("repos", [])
+    missing = [r for r in repos if _repo_needs_backfill(r)]
+
+    if not missing:
+        print(f"✅ {date_str} 所有仓库均已包含中文增强内容，无需补全")
+        return
+
+    print(f"🔧 待补全 {len(missing)}/{len(repos)} 个仓库:\n")
+    for idx, repo in enumerate(missing, 1):
+        name = f"{repo['author']}/{repo['name']}"
+        print(f"  [{idx}/{len(missing)}] {name} ...", end=" ", flush=True)
+        ok = _backfill_repo_from_dict(repo, proxy=proxy, max_retries=max_retries)
+        print("✅" if ok else "⚠️  失败（保留原值）")
+
+    path.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    still = [
+        f"{r['author']}/{r['name']}"
+        for r in repos if _repo_needs_backfill(r)
+    ]
+    if still:
+        print(f"\n⚠️  仍有 {len(still)} 个仓库补全失败: {', '.join(still)}")
+    else:
+        try:
+            display = path.relative_to(PROJECT_ROOT)
+        except ValueError:
+            display = path
+        print(f"\n✅ 全部补全完成 → {display}")
+
+    print("🏠 重建 index.json...")
+    build_site.build_index_data()
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -290,6 +392,10 @@ def main() -> None:
         "--retries", "-r", type=int, default=3,
         help="LLM 调用失败最大重试次数（默认 3）",
     )
+    parser.add_argument(
+        "--backfill", metavar="DATE", default=None,
+        help="补全模式：补全指定日期 (YYYY-MM-DD) 已有 JSON 中缺失的中文内容",
+    )
     args = parser.parse_args()
 
     # 确定代理：优先命令行参数，其次环境变量
@@ -299,6 +405,11 @@ def main() -> None:
 
     if proxy:
         print(f"🔌 使用代理: {proxy}\n")
+
+    # —— 补全模式 ——
+    if args.backfill:
+        backfill_github_json(args.backfill, proxy=proxy, max_retries=args.retries)
+        return
 
     # —— 确定目标日期 ——
     bj_tz = timezone(timedelta(hours=8))

@@ -1,9 +1,9 @@
 name: 每周 GitHub 周榜自动更新
 
 on:
-  schedule:
-    # UTC 05:00 每周六 = 北京时间 周六 13:00
-    - cron: '0 5 * * 6'
+  # schedule:
+  #   # UTC 05:00 每周六 = 北京时间 周六 13:00
+  #   - cron: '0 5 * * 6'
   workflow_dispatch:
     # 支持手动触发，可指定日期（通过 inputs）
 

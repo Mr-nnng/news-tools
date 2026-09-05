@@ -1,7 +1,17 @@
 {
   "gh": {
-    "count": 13,
+    "count": 14,
     "months": [
+      {
+        "label": "2026年09月",
+        "items": [
+          {
+            "date": "2026-09-05",
+            "count": 20,
+            "summary": "本周 GitHub Trending 收录 20 个热门仓库，涵盖 AI 智能体 · 架构可视化 · MCP 生态等领域。archify 本周新增 21896 Star 领跑，awesome-mcp-servers 以 94163 Star 位居榜首，智能体工具链明显升温。"
+          }
+        ]
+      },
       {
         "label": "2026年08月",
         "items": [

@@ -1,0 +1,370 @@
+{
+  "weekLabel": "2026年第36周",
+  "weekInfo": "2026 年第 36 周 / 2026-09-05",
+  "date": "2026-09-05",
+  "count": 20,
+  "totalCount": 20,
+  "coverSummary": "本周 GitHub Trending 收录 20 个热门仓库，涵盖 AI 智能体 · 架构可视化 · MCP 生态等领域。archify 本周新增 21896 Star 领跑，awesome-mcp-servers 以 94163 Star 位居榜首，智能体工具链明显升温。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "archify",
+      "author": "tt-a1i",
+      "url": "https://github.com/tt-a1i/archify",
+      "stars": 48176,
+      "forks": 3111,
+      "weeklyStars": 21896,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Archify 是面向 AI Agent 的架构可视化技能，将代码库或系统描述编译为自包含交互式 HTML 图表。它用类型化 JSON IR 和确定性校验生成可验证图表，方便评审与分享。",
+      "features": [
+        "支持架构、工作流、时序等五类图表生成",
+        "类型化 JSON IR 保证图表可验证",
+        "自包含 HTML 输出并支持 PNG/SVG 导出"
+      ],
+      "audience": "架构师、后端开发者、DevOps 工程师、AI Agent 开发者、技术文档作者"
+    },
+    {
+      "rank": 2,
+      "name": "OpenMAIC",
+      "author": "THU-MAIC",
+      "url": "https://github.com/THU-MAIC/OpenMAIC",
+      "stars": 31543,
+      "forks": 5188,
+      "weeklyStars": 10274,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源多智能体互动课堂平台，一键将主题或文档生成沉浸式 AI 课程。用 AI 教师、白板、测验和交互模拟降低教学搭建门槛，让学习更主动。",
+      "features": [
+        "一键生成课件测验交互模拟与项目式学习",
+        "多智能体实时讨论白板讲解与互动问答",
+        "支持课件导入导出及本地模型接入部署"
+      ],
+      "audience": "教育科技开发者、AI 应用工程师、在线课程创作者、教学研究人员、智能体开发者"
+    },
+    {
+      "rank": 3,
+      "name": "gods-eye-view",
+      "author": "bilawalsidhu",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "stars": 17549,
+      "forks": 3540,
+      "weeklyStars": 7314,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "浏览器端开源实时 3D 地球模拟器，融合真实航班、船舶、卫星、地震、交通与公共摄像头数据。它将公开空间信号变成可交互的情境感知工具，帮助用户直观理解全球动态。",
+      "features": [
+        "实时追踪航班船舶卫星与地震交通等公开数据",
+        "照片级三维地球支持多种传感器风格切换",
+        "语音代理可查询标注并操控三维场景"
+      ],
+      "audience": "地理空间开发者、OSINT分析师、数据可视化工程师、地理信息爱好者、AI应用开发者"
+    },
+    {
+      "rank": 4,
+      "name": "openclaude",
+      "author": "Gitlawb",
+      "url": "https://github.com/Gitlawb/openclaude",
+      "stars": 32585,
+      "forks": 9049,
+      "weeklyStars": 1679,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "OpenClaude 是开源终端编码智能体 CLI，统一接入云端与本地模型提供商。它让开发者无需多套工具，即可在终端完成提示、工具调用、MCP 和流式编码任务。",
+      "features": [
+        "多模型后端统一接入云端与本地推理",
+        "内置文件、Bash、MCP 等编码工具链",
+        "支持会话恢复、后台任务与编辑器集成"
+      ],
+      "audience": "全栈开发者、AI 应用工程师、终端用户、本地模型爱好者、DevOps 工程师"
+    },
+    {
+      "rank": 5,
+      "name": "timesfm",
+      "author": "google-research",
+      "url": "https://github.com/google-research/timesfm",
+      "stars": 31071,
+      "forks": 2962,
+      "weeklyStars": 2653,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "TimesFM 是 Google Research 开源的预训练时间序列基础模型，支持零样本单变量与多变量预测。它用统一模型降低各领域时序预测门槛，并支持协变量、分位数和微调。",
+      "features": [
+        "零样本预测单变量与多变量时序数据",
+        "原生支持历史与未来协变量输入通道",
+        "提供分位数预测与LoRA微调示例"
+      ],
+      "audience": "数据科学家、时序预测工程师、AI 应用开发者、数据平台工程师"
+    },
+    {
+      "rank": 6,
+      "name": "minimind",
+      "author": "jingyaogong",
+      "url": "https://github.com/jingyaogong/minimind",
+      "stars": 58557,
+      "forks": 7608,
+      "weeklyStars": 3390,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "MiniMind 是个人 GPU 可训的 64M 小语言模型项目。它用原生 PyTorch 实现预训练、SFT、LoRA 与 RL，降低 LLM 入门门槛。",
+      "features": [
+        "低成本从零复现64M语言模型训练",
+        "原生PyTorch实现预训练SFT与LoRA",
+        "内置DPO、PPO、GRPO等强化学习"
+      ],
+      "audience": "LLM初学者、算法工程师、AI学生、独立开发者、模型研究员"
+    },
+    {
+      "rank": 7,
+      "name": "scientific-agent-skills",
+      "author": "K-Dense-AI",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "stars": 42656,
+      "forks": 3904,
+      "weeklyStars": 6898,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "面向 AI 智能体的科学技能库，含 163 个技能与百余个科学数据库。解决科研流程碎片化，让 Cursor 等智能体可靠执行多步研究。",
+      "features": [
+        "统一接入100+科研数据库接口",
+        "封装163个科研技能加速工作流",
+        "兼容Cursor等主流智能体平台"
+      ],
+      "audience": "科研人员、生物信息工程师、药物发现研究员、AI 应用开发者、实验室数据分析师"
+    },
+    {
+      "rank": 8,
+      "name": "vphone-cli",
+      "author": "Lakr233",
+      "url": "https://github.com/Lakr233/vphone-cli",
+      "stars": 10522,
+      "forks": 1354,
+      "weeklyStars": 1982,
+      "language": "Swift",
+      "langColor": "#F05138",
+      "zhDesc": "vphone-cli 是 Apple Silicon Mac 上的命令行工具，用于启动和管理虚拟 iPhone。它自动完成固件下载、补丁、DFU 恢复与越狱安装，便于 iOS 研究与自动化测试。",
+      "features": [
+        "一条命令创建并启动虚拟 iPhone",
+        "支持五种固件补丁与越狱变体选项",
+        "内置 SSH 与 VNC 连接并支持自动化测试"
+      ],
+      "audience": "iOS 安全研究人员、越狱开发者、移动自动化测试工程师、Apple 系统工程师"
+    },
+    {
+      "rank": 9,
+      "name": "fmt",
+      "author": "fmtlib",
+      "url": "https://github.com/fmtlib/fmt",
+      "stars": 25480,
+      "forks": 3035,
+      "weeklyStars": 1671,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "{fmt} 是 C++ 现代格式化库，提供比 stdio 和 iostreams 更快更安全的格式化方案。它实现 C++20 std::format，类型安全、高性能且跨平台，适合对输出质量要求高的项目。",
+      "features": [
+        "实现 C++20 标准格式化接口",
+        "类型安全并编译期检查格式串错误",
+        "高性能数字格式化且跨平台输出一致"
+      ],
+      "audience": "C++ 开发者、系统软件工程师、数据库开发者、高性能计算工程师"
+    },
+    {
+      "rank": 10,
+      "name": "open-seo",
+      "author": "every-app",
+      "url": "https://github.com/every-app/open-seo",
+      "stars": 17036,
+      "forks": 2122,
+      "weeklyStars": 2950,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "OpenSEO 是面向 SEO 的开源一体化工具，替代 Semrush 和 Ahrefs 等昂贵套件。它支持自托管、按需付费和 AI 智能体集成，帮助团队更低成本掌控 SEO 数据。",
+      "features": [
+        "关键词研究、排名追踪与竞品洞察",
+        "外链分析与站点审计覆盖核心需求",
+        "MCP服务让AI智能体直接调用数据"
+      ],
+      "audience": "SEO 专员、独立开发者、增长团队、AI 智能体开发者"
+    },
+    {
+      "rank": 11,
+      "name": "heretic",
+      "author": "p-e-w",
+      "url": "https://github.com/p-e-w/heretic",
+      "stars": 30464,
+      "forks": 3371,
+      "weeklyStars": 2065,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Heretic 是全自动移除大语言模型安全审查的开源工具，通过方向消融与参数优化生成去审查模型。它无需人工调参，即可在降低拒绝率的同时尽量保留原模型能力。",
+      "features": [
+        "自动优化消融参数降低人工调参成本",
+        "广泛支持密集多模态与混合专家模型",
+        "内置评估与可视化能力辅助模型研究"
+      ],
+      "audience": "本地模型玩家、AI 安全研究者、LLM 开发者、开源社区贡献者"
+    },
+    {
+      "rank": 12,
+      "name": "zod",
+      "author": "colinhacks",
+      "url": "https://github.com/colinhacks/zod",
+      "stars": 43837,
+      "forks": 2175,
+      "weeklyStars": 297,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Zod 是面向 TypeScript 的轻量级数据校验库，可通过声明式规则定义运行时校验逻辑。它能在运行时验证数据并自动推断静态类型，减少类型与校验不一致的问题。",
+      "features": [
+        "运行时校验并自动推断 TypeScript 类型",
+        "支持对象数组字符串等丰富校验规则",
+        "错误信息结构化便于快速定位问题"
+      ],
+      "audience": "TypeScript 开发者、全栈工程师、API 设计者、前端工程师"
+    },
+    {
+      "rank": 13,
+      "name": "patent-disclosure-skill",
+      "author": "handsomestWei",
+      "url": "https://github.com/handsomestWei/patent-disclosure-skill",
+      "stars": 7380,
+      "forks": 816,
+      "weeklyStars": 1975,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "面向中国专利申请的智能技能包，支持发明、实用新型、外观专利点挖掘与交底书编写。同时提供通俗解读、著录检索、政策简报和审查答复辅助，帮助研发人员把技术贡献转化为可交付专利材料。",
+      "features": [
+        "覆盖发明实用外观三类交底书编写",
+        "通俗解读专利并沉淀个人专利知识库",
+        "辅助审查答复并跟踪政策审查口径"
+      ],
+      "audience": "研发工程师、专利代理师、知识产权律师、技术负责人"
+    },
+    {
+      "rank": 14,
+      "name": "VoiceStudio",
+      "author": "debpalash",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "stars": 18069,
+      "forks": 2363,
+      "weeklyStars": 5150,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "VoiceStudio 是开源本地语音创作工具，集成声音克隆、设计、视频配音、听写、转写与有声书制作。它让创作者在自有硬件上离线完成音频创作，无需账号、API 密钥或订阅。",
+      "features": [
+        "内置多种TTS与ASR引擎，支持跨平台灵活切换",
+        "本地离线完成声音克隆、视频配音与转写",
+        "提供完整桌面应用、本地API与MCP集成能力"
+      ],
+      "audience": "语音创作者、独立开发者、内容创作者、AI应用开发者"
+    },
+    {
+      "rank": 15,
+      "name": "awesome-mcp-servers",
+      "author": "punkpeye",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "stars": 94163,
+      "forks": 15651,
+      "weeklyStars": 1198,
+      "language": "",
+      "langColor": "",
+      "zhDesc": "MCP 服务器精选列表，按浏览器、数据库、云、安全等分类收录大量实现与框架。帮助开发者快速发现并接入 Model Context Protocol 工具，降低 AI 应用扩展本地与远程资源能力的门槛。",
+      "features": [
+        "按场景分类收录 MCP 服务器实现",
+        "覆盖浏览器、数据库、云与安全等场景",
+        "提供框架教程社区与官方目录链接"
+      ],
+      "audience": "AI 应用开发者、MCP 生态贡献者、大模型工程师、DevOps 工程师、技术选型负责人"
+    },
+    {
+      "rank": 16,
+      "name": "screenshot-to-code",
+      "author": "abi",
+      "url": "https://github.com/abi/screenshot-to-code",
+      "stars": 77697,
+      "forks": 9457,
+      "weeklyStars": 2372,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "screenshot-to-code 是 AI 截图转代码工具，可将设计稿、截图或录制成 HTML、Tailwind、React、Vue 代码。它帮助团队快速把视觉设计变成可运行前端页面。",
+      "features": [
+        "支持截图、Figma 设计和录制成前端代码",
+        "覆盖主流前端技术栈并生成可运行代码",
+        "集成多模型与图像编辑提升页面还原度"
+      ],
+      "audience": "前端开发者、UI 设计师、独立开发者、产品经理"
+    },
+    {
+      "rank": 17,
+      "name": "chrome-devtools-mcp",
+      "author": "ChromeDevTools",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "stars": 50943,
+      "forks": 3572,
+      "weeklyStars": 1067,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Chrome DevTools 官方 MCP 服务器，让 Claude、Cursor 等代理控制并检查 Chrome 浏览器。它为 AI 提供浏览器自动化、网络调试和性能追踪，提升前端开发可靠性。",
+      "features": [
+        "录制性能追踪并提取可操作优化建议",
+        "分析网络请求、截图与控制台日志调试",
+        "自动等待结果并稳定执行浏览器操作"
+      ],
+      "audience": "前端开发者、AI 编码助手用户、性能优化工程师、自动化测试工程师、MCP 工具开发者"
+    },
+    {
+      "rank": 18,
+      "name": "ipatool",
+      "author": "majd",
+      "url": "https://github.com/majd/ipatool",
+      "stars": 10876,
+      "forks": 910,
+      "weeklyStars": 903,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "IPATool 是命令行工具，可搜索并下载 App Store 的 iOS、iPadOS、tvOS、visionOS 和 macOS 应用包。它借助 Apple ID 授权获取安装包，便于自动化测试与离线分发。",
+      "features": [
+        "支持多平台应用搜索与版本查询功能",
+        "苹果账号授权后下载应用安装包文件",
+        "提供非交互模式便于脚本自动化集成"
+      ],
+      "audience": "iOS 开发者、移动端测试工程师、自动化运维人员、应用分发工程师"
+    },
+    {
+      "rank": 19,
+      "name": "Soup",
+      "author": "MakazhanAlpamys",
+      "url": "https://github.com/MakazhanAlpamys/Soup",
+      "stars": 5305,
+      "forks": 790,
+      "weeklyStars": 1808,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Soup 是面向 LLM 微调的一体化命令行工具，用单个 YAML 配置即可完成训练、评估、合并与部署。它通过层流式加载和自动量化，让 8B 模型可在 4 GB 笔记本 GPU 上微调，降低本地训练门槛。",
+      "features": [
+        "单文件配置驱动训练评估与部署流程",
+        "层流式加载显著降低训练显存门槛",
+        "自动检测显卡并选择量化训练方案"
+      ],
+      "audience": "LLM 开发者、算法工程师、本地训练用户、AI 应用工程师、数据科学家"
+    },
+    {
+      "rank": 20,
+      "name": "openwhispr",
+      "author": "OpenWhispr",
+      "url": "https://github.com/OpenWhispr/openwhispr",
+      "stars": 6784,
+      "forks": 905,
+      "weeklyStars": 794,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "OpenWhispr 是开源跨平台语音听写与会议转写工具，支持本地 Whisper/Parakeet 与云端模型。它以隐私优先方式将语音转为文字、笔记和 AI 操作，提升办公效率。",
+      "features": [
+        "全局热键语音听写并自动粘贴文本",
+        "本地 Whisper 转写保护语音隐私",
+        "会议自动转写并生成可搜索笔记库"
+      ],
+      "audience": "效率工具用户、会议记录者、开发者、隐私敏感用户、内容创作者"
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+{
+  "weekLabel": "2026年第37周",
+  "weekInfo": "2026 年第 37 周 / 2026-09-12",
+  "date": "2026-09-12",
+  "count": 23,
+  "totalCount": 23,
+  "coverSummary": "本周 GitHub Trending 收录 23 个热门仓库，涵盖智能体编码 · 代理技能 · 图表生成 · 文档转换 · 搜索优化等领域。注意力友好输出项目 i-have-adhd 本周新增 13164 Star 领跑，Matt Pocock 的 skills 以 260021 Star 居首。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "i-have-adhd",
+      "author": "ayghri",
+      "url": "https://github.com/ayghri/i-have-adhd",
+      "stars": 42541,
+      "forks": 2413,
+      "weeklyStars": 13164,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "为编码智能体安装的 ADHD 友好输出技能，强制先给行动、编号步骤并去掉寒暄。让 AI 回答更直接可执行，减少注意力负担和无效铺垫。",
+      "features": [
+        "先给下一步行动避免回答冗长铺垫",
+        "多步任务编号清晰并限制列表长度",
+        "每轮重述状态并给具体可执行下一步"
+      ],
+      "audience": "ADHD 开发者、AI 编码助手用户、独立开发者、效率工具爱好者"
+    },
+    {
+      "rank": 2,
+      "name": "ECC",
+      "author": "affaan-m",
+      "url": "https://github.com/affaan-m/ECC",
+      "stars": 256687,
+      "forks": 38415,
+      "weeklyStars": 8714,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "ECC 是面向 Claude Code、Codex、Cursor 等 AI 编码代理的工程操作系统，提供技能、记忆、安全扫描与持续学习。它将计划、测试、审查、验证固化为可复用流程，减少上下文浪费并提升交付可靠性。",
+      "features": [
+        "内置技能与代理固化计划测试审查流程",
+        "统一记忆库跨工具共享会话上下文",
+        "AgentShield 审计代理配置安全风险"
+      ],
+      "audience": "AI 编码代理用户、Claude Code 开发者、Codex 用户、Cursor 用户、平台工程团队"
+    },
+    {
+      "rank": 3,
+      "name": "ponytail",
+      "author": "DietrichGebert",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "stars": 136057,
+      "forks": 7295,
+      "weeklyStars": 11054,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Ponytail 是面向 AI 编码代理的极简开发规则集，让它像资深开发者一样优先复用、标准库和原生特性。它通过避免过度工程降低代码量、token 成本与延迟，同时保留安全、验证和可访问性。",
+      "features": [
+        "兼容 Claude Code 等 20 种代理",
+        "按 YAGNI 阶梯优先复用与原生实现",
+        "审查 diff 并清理过度工程代码"
+      ],
+      "audience": "AI 编程工具用户、全栈开发者、前端工程师、后端工程师、技术负责人"
+    },
+    {
+      "rank": 4,
+      "name": "skills",
+      "author": "humanlayer",
+      "url": "https://github.com/humanlayer/skills",
+      "stars": 3825,
+      "forks": 113,
+      "weeklyStars": 1637,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "HumanLayer 为 Claude Code 提供的可安装技能包，增强 AI 编程代理的工程工作流。它优化 CLAUDE.md、收窄 React 类型并构建代理循环，提升指令遵循与自动化效率。",
+      "features": [
+        "重写 CLAUDE.md 强化指令遵循",
+        "收窄 React 类型匹配真实路径",
+        "构建迭代代理循环与自动化工作流"
+      ],
+      "audience": "AI 编程代理用户、Claude Code 开发者、React 前端工程师、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 5,
+      "name": "plugins",
+      "author": "openai",
+      "url": "https://github.com/openai/plugins",
+      "stars": 6478,
+      "forks": 854,
+      "weeklyStars": 1063,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "OpenAI 官方维护的 Codex 插件示例仓库，内置 Figma、Notion、移动端与 Web 开发等插件模板。帮助开发者快速接入技能、MCP 与命令，扩展 Codex 自动化工作流。",
+      "features": [
+        "内置 Figma、Notion 等插件示例",
+        "覆盖 iOS、macOS 与 Web 开发",
+        "支持技能、MCP、命令与钩子扩展"
+      ],
+      "audience": "Codex 开发者、插件作者、AI 工作流工程师、移动端开发者"
+    },
+    {
+      "rank": 6,
+      "name": "archify",
+      "author": "tt-a1i",
+      "url": "https://github.com/tt-a1i/archify",
+      "stars": 58875,
+      "forks": 3854,
+      "weeklyStars": 11006,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "AI 编码助手的系统图生成技能，将代码库或描述编译为可交互 HTML/SVG 图表。覆盖架构、工作流、时序、数据流与生命周期，帮助团队验证并清晰沟通系统设计。",
+      "features": [
+        "生成架构、工作流、时序等五类系统图",
+        "输出自包含 HTML 并支持 PNG/SVG 导出",
+        "支持架构差异比较与可验证变更评审"
+      ],
+      "audience": "架构师、后端工程师、AI 编码助手用户、技术负责人、DevOps 工程师"
+    },
+    {
+      "rank": 7,
+      "name": "context-mode",
+      "author": "mksglu",
+      "url": "https://github.com/mksglu/context-mode",
+      "stars": 22251,
+      "forks": 1606,
+      "weeklyStars": 1810,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Context Mode 是 AI 编码代理的 MCP 上下文优化服务，用沙箱隔离工具输出并持久化会话状态。它能减少约 98% 的上下文占用，避免压缩后丢失任务、文件和用户决策。",
+      "features": [
+        "沙箱隔离工具输出，降低约98%上下文占用",
+        "持久化会话事件，压缩后自动恢复工作状态",
+        "跨17个平台强制路由，统一接入MCP与钩子"
+      ],
+      "audience": "AI 编码代理开发者、MCP 服务构建者、大模型应用工程师、研发效能负责人"
+    },
+    {
+      "rank": 8,
+      "name": "skills",
+      "author": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 260021,
+      "forks": 21929,
+      "weeklyStars": 10571,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Matt Pocock 开源的 AI 编码代理技能集，提供可组合的工程工作流指令。它通过需求澄清、测试驱动、调试与架构审查，减少代理跑偏、冗长和架构腐化。",
+      "features": [
+        "兼容主流编码代理并可自定义编辑",
+        "提供需求澄清与领域文档工作流技能",
+        "内置测试驱动与调试循环提升质量"
+      ],
+      "audience": "AI 编码代理用户、全栈工程师、独立开发者、技术负责人"
+    },
+    {
+      "rank": 9,
+      "name": "humanizer",
+      "author": "blader",
+      "url": "https://github.com/blader/humanizer",
+      "stars": 47057,
+      "forks": 3838,
+      "weeklyStars": 4649,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Humanizer 是用于 Agent 的文本技能，可重写 AI 生成文案而不改变原意。它识别 25 类常见 AI 写作模式并保留事实，让输出更像真实人类表达。",
+      "features": [
+        "自动识别常见AI写作痕迹并标记",
+        "保留原文事实数据不编造缺失细节",
+        "支持粘贴文本或指定文件路径改写"
+      ],
+      "audience": "内容创作者、技术写作者、AI 应用开发者、运营编辑、产品经理"
+    },
+    {
+      "rank": 10,
+      "name": "skills",
+      "author": "openai",
+      "url": "https://github.com/openai/skills",
+      "stars": 26957,
+      "forks": 1806,
+      "weeklyStars": 1532,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "OpenAI 推出的 Codex 技能目录，现已弃用并迁移到 Plugins。它以文件夹封装指令、脚本和资源，让 AI 代理可复用特定任务能力。",
+      "features": [
+        "集中管理可复用技能包与脚本资源",
+        "通过安装器按名称快速部署新技能",
+        "以开放标准封装指令脚本供代理调用"
+      ],
+      "audience": "智能体开发者、Codex 用户、自动化工程师、插件开发者"
+    },
+    {
+      "rank": 11,
+      "name": "hyperframes",
+      "author": "heygen-com",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "stars": 49073,
+      "forks": 4484,
+      "weeklyStars": 5100,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "HyperFrames 是 HeyGen 开源的 HTML 视频渲染框架，将 HTML 与可寻址动画确定性输出为 MP4。它让 AI 代理和开发者免构建自动生成可复现视频。",
+      "features": [
+        "HTML 原生定义视频无需构建步骤",
+        "可寻址动画支持 GSAP CSS Lottie",
+        "确定性渲染适合 CI 自动化流水线"
+      ],
+      "audience": "AI 代理开发者、前端工程师、视频创作者、DevOps 工程师"
+    },
+    {
+      "rank": 12,
+      "name": "diagram-design",
+      "author": "cathrynlavery",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 38602,
+      "forks": 2452,
+      "weeklyStars": 7776,
+      "language": "HTML",
+      "langColor": "#E34C26",
+      "zhDesc": "面向Claude Code等智能体的编辑级图表设计系统，内置39种HTML+SVG图表。可自动匹配网站品牌，并导入draw.io、Mermaid等，快速产出可离线打开的专业图表。",
+      "features": [
+        "内置39种编辑级图表覆盖架构流程数据",
+        "自动提取网站品牌色字体保持视觉一致",
+        "可导入draw.io与Mermaid并导出PNG"
+      ],
+      "audience": "AI 智能体开发者、技术写作者、产品设计师、前端工程师"
+    },
+    {
+      "rank": 13,
+      "name": "fmt",
+      "author": "fmtlib",
+      "url": "https://github.com/fmtlib/fmt",
+      "stars": 25749,
+      "forks": 3061,
+      "weeklyStars": 338,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "fmt 是现代 C++ 格式化库，提供比 C stdio 和 iostreams 更快更安全的替代。它实现 C++20/23 标准格式化接口，用类型安全与编译期检查提升可靠性。",
+      "features": [
+        "实现 C++20/23 格式化与打印接口",
+        "提供类型安全与编译期格式错误检查",
+        "高性能数值格式化并支持丰富类型"
+      ],
+      "audience": "C++ 开发者、系统工程师、游戏开发者、基础设施工程师"
+    },
+    {
+      "rank": 14,
+      "name": "gods-eye-view",
+      "author": "bilawalsidhu",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "stars": 27649,
+      "forks": 5651,
+      "weeklyStars": 8916,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "浏览器端开源空间情报模拟器，在照片级 3D 地球上实时显示公开航班、船只、卫星、地震、交通和摄像头数据。它融合分散地理信号为可交互、可语音控制的情境视图，降低 OSINT/GEOINT 开发门槛。",
+      "features": [
+        "融合航班船只卫星地震等实时公开数据",
+        "照片级3D地球支持多传感器视角切换",
+        "语音AI控制地图查询与动态标注"
+      ],
+      "audience": "地理空间开发者、OSINT 分析师、GEOINT 研究者、可视化工程师、开源爱好者"
+    },
+    {
+      "rank": 15,
+      "name": "marketingskills",
+      "author": "coreyhaines31",
+      "url": "https://github.com/coreyhaines31/marketingskills",
+      "stars": 49684,
+      "forks": 7551,
+      "weeklyStars": 2765,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 AI 编码代理的营销技能库，覆盖 CRO、文案、SEO、分析与增长工程。让 Claude Code 等代理按专业流程执行营销任务，提升转化与增长效率。",
+      "features": [
+        "覆盖转化、文案、SEO 与增长等营销技能",
+        "适配主流 AI 编码代理与技能规范",
+        "以产品营销上下文驱动多技能协同"
+      ],
+      "audience": "技术型市场人员、创始人、增长工程师、AI 应用开发者"
+    },
+    {
+      "rank": 16,
+      "name": "chrome-devtools-mcp",
+      "author": "ChromeDevTools",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "stars": 51709,
+      "forks": 3633,
+      "weeklyStars": 804,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Chrome DevTools 官方 MCP 服务器，让编码代理控制并检查真实 Chrome 浏览器。它将性能分析、网络调试与自动化接入 AI 工作流，提升 Web 排查可靠性。",
+      "features": [
+        "记录性能追踪并提取可执行优化建议",
+        "分析网络请求、截图和控制台日志",
+        "自动等待浏览器操作结果提升稳定性"
+      ],
+      "audience": "前端工程师、AI 应用开发者、自动化测试工程师、性能优化工程师"
+    },
+    {
+      "rank": 17,
+      "name": "markitdown",
+      "author": "microsoft",
+      "url": "https://github.com/microsoft/markitdown",
+      "stars": 182786,
+      "forks": 13442,
+      "weeklyStars": 4650,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "微软开源的 Python 文件转 Markdown 工具，支持 Office、PDF、图片、音频等格式。它为 LLM 和文本分析管线提供结构清晰、token 高效的预处理文本。",
+      "features": [
+        "支持办公文档、PDF、图片等格式转换",
+        "保留标题、列表、表格等结构信息",
+        "提供命令行与 Python API 集成能力"
+      ],
+      "audience": "LLM 应用开发者、数据工程师、文档处理工程师、AI 产品工程师"
+    },
+    {
+      "rank": 18,
+      "name": "hermes-agent",
+      "author": "NousResearch",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "stars": 244703,
+      "forks": 50739,
+      "weeklyStars": 3481,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Nous Research 的自改进 AI 代理，内置技能生成、持久记忆和跨会话用户建模。支持多模型、多终端与消息平台，让代理在低成本云环境持续成长并自动化任务。",
+      "features": [
+        "内置学习闭环自动沉淀技能与记忆",
+        "支持多模型切换与多平台消息接入",
+        "多终端后端与定时任务实现无人值守"
+      ],
+      "audience": "AI 代理开发者、独立开发者、自动化运维工程师、大模型应用研究员"
+    },
+    {
+      "rank": 19,
+      "name": "ruflo",
+      "author": "ruvnet",
+      "url": "https://github.com/ruvnet/ruflo",
+      "stars": 72177,
+      "forks": 8539,
+      "weeklyStars": 1726,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Ruflo是面向Claude Code与Codex的智能体元框架，内置多代理集群、自学习记忆、向量RAG与联邦协作。它让AI代理能跨会话记忆、自主协调并安全通信，降低复杂工作流编排成本。",
+      "features": [
+        "多代理集群支持复杂任务共识协调",
+        "自学习记忆支持跨会话知识沉淀复用",
+        "零信任联邦保障跨机器安全通信协作"
+      ],
+      "audience": "AI应用开发者、智能体平台工程师、DevOps工程师、企业架构师、安全合规人员"
+    },
+    {
+      "rank": 20,
+      "name": "OpenMAIC",
+      "author": "THU-MAIC",
+      "url": "https://github.com/THU-MAIC/OpenMAIC",
+      "stars": 35989,
+      "forks": 5713,
+      "weeklyStars": 4509,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "OpenMAIC 是开源多智能体互动课堂，一键将主题或文档生成课件、测验、模拟与项目学习课程。AI 师生实时讲解讨论，让学习者从被动观看转向动手探索。",
+      "features": [
+        "一键生成课件测验与互动模拟课程",
+        "多智能体师生实时讨论与白板讲解",
+        "支持 PPTX 与离线 HTML 课堂导出"
+      ],
+      "audience": "AI 教育产品开发者、课程设计师、智能体应用工程师、教育技术研究者"
+    },
+    {
+      "rank": 21,
+      "name": "WeKnora",
+      "author": "Tencent",
+      "url": "https://github.com/Tencent/WeKnora",
+      "stars": 22465,
+      "forks": 3226,
+      "weeklyStars": 964,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "腾讯开源的 LLM 知识平台，将原始文档转为可查询 RAG、自主推理 Agent 和自维护 Wiki。它解决企业文档分散、检索难和知识维护成本高的问题，支持多源接入与私有化部署。",
+      "features": [
+        "RAG 问答与 ReAct 智能体处理复杂检索",
+        "文档自动蒸馏为自维护 Wiki 知识图谱",
+        "多源文档接入并自动同步更新知识库"
+      ],
+      "audience": "企业知识工程师、AI 应用开发者、DevOps 运维、产品经理"
+    },
+    {
+      "rank": 22,
+      "name": "skills",
+      "author": "jakubkrehel",
+      "url": "https://github.com/jakubkrehel/skills",
+      "stars": 6354,
+      "forks": 224,
+      "weeklyStars": 691,
+      "language": "Markdown",
+      "langColor": "#083FA1",
+      "zhDesc": "面向 AI 代理的界面设计技能集，覆盖 UI、排版、颜色、无障碍、布局与产品文案。通过可安装技能帮助 Claude Code 等工具系统审查并优化前端界面质量。",
+      "features": [
+        "覆盖 UI 排版颜色无障碍布局与产品文案",
+        "提供界面评审排版优化色彩系统生成等能力",
+        "支持组件多状态压测与变体迭代快速打磨"
+      ],
+      "audience": "前端工程师、产品设计师、设计工程师、Claude Code 用户、AI 应用开发者"
+    },
+    {
+      "rank": 23,
+      "name": "open-seo",
+      "author": "every-app",
+      "url": "https://github.com/every-app/open-seo",
+      "stars": 18476,
+      "forks": 2334,
+      "weeklyStars": 1507,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "OpenSEO是Semrush和Ahrefs的开源替代，提供关键词、排名、外链、审计等一体化SEO工具。它支持MCP与AI代理集成，并按量付费，帮助团队低成本掌控SEO数据。",
+      "features": [
+        "覆盖关键词排名外链审计等核心SEO流程",
+        "内置MCP服务让AI代理直接读取SEO数据",
+        "支持自托管并按量付费降低SEO成本"
+      ],
+      "audience": "SEO从业者、网站运营者、独立开发者、AI代理开发者"
+    }
+  ]
+}

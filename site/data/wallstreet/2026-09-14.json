@@ -1,0 +1,33 @@
+{
+  "source": "wallstreet_daily",
+  "date": "2026-09-14",
+  "count": 1,
+  "sections": {
+    "breakfast": {
+      "title": "华尔街见闻早餐 | 2026年9月14日",
+      "uri": "https://wallstreetcn.com/livenews/3164475",
+      "fetched_at": "2026-09-14T07:53:46.880265+08:00",
+      "points": [
+        "上周五美股反弹，纳指涨1%；周一亚市盘初纳指100期货跌1%，此前AI巨头呼吁放慢发展速度。",
+        "沙特关闭重要输油管道，霍尔木兹海峡会议被推迟，周一亚市盘初国际油价涨逾3%。",
+        "美国8月CPI核心环比0.3%超预期，美联储本周加息概率升至近九成。",
+        "三大人工智能巨头忧心AI安全，齐声呼吁放慢先进模型开发速度。",
+        "美国联邦政府本财年前11个月预算赤字达到1.97万亿美元，净利息支出高达1万亿美元。",
+        "智谱以零息+溢价转股形式融资50亿美元，主要用于算力基础设施与模型研发。",
+        "谷歌DeepMind已经破解RSI？谷歌API突现名为「rsi-model-liverl-le」的神秘模型。",
+        "本轮AI牛市两大“网红”合并！SemiAnalysis收购Citrini。"
+      ],
+      "article": {
+        "id": 3781660,
+        "title": "华尔街见闻早餐FM-Radio | 2026年9月14日",
+        "uri": "https://wallstreetcn.com/articles/3781660",
+        "image": {
+          "uri": "https://wpimg-wscn.awtmt.com/9a2a2054-2264-4d69-91a6-5e51830fef91.jpeg",
+          "height": 449,
+          "width": 1024,
+          "size": 90100
+        }
+      }
+    }
+  }
+}

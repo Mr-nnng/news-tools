@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 15,
+    "count": 16,
     "months": [
       {
         "label": "2026年09月",
         "items": [
+          {
+            "date": "2026-09-19",
+            "count": 21,
+            "summary": "本周 GitHub Trending 收录 21 个热门仓库，涵盖 AI 代码审查 · 编码智能体 · 企业知识库 等领域。open-code-review 本周新增 14144 Star 领跑，superpowers 以 288598 Star 居首。编码代理技能、MCP 与并行工作流成主线。"
+          },
           {
             "date": "2026-09-12",
             "count": 23,

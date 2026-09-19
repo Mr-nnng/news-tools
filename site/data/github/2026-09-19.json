@@ -1,0 +1,388 @@
+{
+  "weekLabel": "2026年第38周",
+  "weekInfo": "2026 年第 38 周 / 2026-09-19",
+  "date": "2026-09-19",
+  "count": 21,
+  "totalCount": 21,
+  "coverSummary": "本周 GitHub Trending 收录 21 个热门仓库，涵盖 AI 代码审查 · 编码智能体 · 企业知识库 等领域。open-code-review 本周新增 14144 Star 领跑，superpowers 以 288598 Star 居首。编码代理技能、MCP 与并行工作流成主线。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "open-code-review",
+      "author": "alibaba",
+      "url": "https://github.com/alibaba/open-code-review",
+      "stars": 36931,
+      "forks": 2633,
+      "weeklyStars": 14144,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "阿里巴巴开源的 AI 代码审查 CLI 工具，采用确定性流水线与 LLM Agent 混合架构。它提供行级精准评论和多语言规则，解决通用 Agent 漏检、位置漂移及高 Token 成本问题。",
+      "features": [
+        "混合架构提升精准度并降低 Token 成本",
+        "行级定位减少误报便于开发者修复",
+        "内置多语言规则覆盖常见安全缺陷"
+      ],
+      "audience": "后端开发者、前端开发者、DevOps 工程师、安全工程师、代码审查负责人"
+    },
+    {
+      "rank": 2,
+      "name": "i-have-adhd",
+      "author": "ayghri",
+      "url": "https://github.com/ayghri/i-have-adhd",
+      "stars": 48260,
+      "forks": 2807,
+      "weeklyStars": 7869,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "一个给编码 AI 助手的 ADHD 友好输出技能，让回答先给行动和编号步骤。它减少寒暄、跑题和铺垫，帮助注意力分散的人更快拿到可执行答案。",
+      "features": [
+        "行动优先直接给出下一步操作命令",
+        "多步骤任务编号清晰流程更易执行",
+        "抑制寒暄与跑题并聚焦可执行结果"
+      ],
+      "audience": "ADHD 开发者、AI 编码助手用户、独立开发者、技术学习者"
+    },
+    {
+      "rank": 3,
+      "name": "gods-eye-view",
+      "author": "bilawalsidhu",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "stars": 38007,
+      "forks": 7663,
+      "weeklyStars": 11683,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "浏览器里的实时开源空间智能 3D 地球，用公开数据模拟间谍卫星式全球态势感知。融合航班、船舶、卫星、地震、交通和摄像头，帮助直观理解世界实时动态。",
+      "features": [
+        "融合航班船舶卫星地震交通摄像头等实时数据",
+        "支持语音控制视角、标注路线与场景问答",
+        "本地运行无需密钥即可体验核心地球能力"
+      ],
+      "audience": "GIS 开发者、空间智能爱好者、OSINT 研究者、前端可视化工程师、地理信息学习者"
+    },
+    {
+      "rank": 4,
+      "name": "ECC",
+      "author": "affaan-m",
+      "url": "https://github.com/affaan-m/ECC",
+      "stars": 262260,
+      "forks": 39231,
+      "weeklyStars": 5877,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 Claude Code、Codex、Cursor 等编码智能体的工程化运行系统，提供技能、记忆、安全扫描与持续学习。它固化计划、测试、审查与验证流程，提升 AI 编程可靠性。",
+      "features": [
+        "统一技能、代理与规则优化编码流程",
+        "跨会话记忆沉淀可复用开发经验库",
+        "安全扫描守护智能体配置与权限风险"
+      ],
+      "audience": "AI 编程用户、Claude Code 开发者、智能体工作流工程师、全栈开发者、DevOps 工程师"
+    },
+    {
+      "rank": 5,
+      "name": "WeKnora",
+      "author": "Tencent",
+      "url": "https://github.com/Tencent/WeKnora",
+      "stars": 27108,
+      "forks": 3646,
+      "weeklyStars": 4703,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "腾讯开源的企业级 LLM 知识平台，可将原始文档转化为可查询 RAG、自主推理 Agent 与自维护 Wiki。解决企业文档分散、检索与知识更新难的问题，让文档成为可持续演进的智能知识资产。",
+      "features": [
+        "RAG问答与ReAct Agent处理复杂任务",
+        "自维护Wiki与知识图谱可视化编辑",
+        "多源同步、技能沙箱与跨会话记忆"
+      ],
+      "audience": "企业知识工程师、AI应用开发者、后端架构师、文档管理负责人、DevOps工程师"
+    },
+    {
+      "rank": 6,
+      "name": "claude-code",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-code",
+      "stars": 146413,
+      "forks": 23821,
+      "weeklyStars": 1620,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Anthropic 推出的终端智能编码工具，能通过自然语言理解代码库并执行开发任务。它自动处理常规编码、复杂代码解释和 Git 流程，提升终端开发效率。",
+      "features": [
+        "通过自然语言在终端执行编码任务",
+        "理解项目代码库并解释复杂代码逻辑",
+        "自动处理日常 Git 流程减少重复操作"
+      ],
+      "audience": "软件工程师、全栈开发者、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 7,
+      "name": "context-mode",
+      "author": "mksglu",
+      "url": "https://github.com/mksglu/context-mode",
+      "stars": 23575,
+      "forks": 1699,
+      "weeklyStars": 1398,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Context Mode 是面向 AI 编码代理的 MCP 上下文优化服务器，用沙箱隔离工具输出并持久化会话记忆。它可将上下文占用降低约 98%，并在压缩后恢复任务状态，避免代理遗忘关键工作。",
+      "features": [
+        "沙箱执行工具输出，上下文降低约 98%",
+        "SQLite 持久化会话事件，压缩后自动恢复",
+        "统一路由 17 个 AI 编码平台与 MCP 工具"
+      ],
+      "audience": "AI 编码代理开发者、MCP 工具集成者、大模型应用工程师、研发效能平台工程师"
+    },
+    {
+      "rank": 8,
+      "name": "agent-skills",
+      "author": "addyosmani",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "stars": 96541,
+      "forks": 10202,
+      "weeklyStars": 3051,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Addy Osmani 出品的 AI 编码代理技能包，将资深工程师工作流封装为 25 个可安装技能。它通过规格、测试、评审、发布等门禁，让 AI 稳定遵循生产级工程规范。",
+      "features": [
+        "25 个技能覆盖开发全生命周期",
+        "9 条斜杠命令自动触发对应流程",
+        "内置测试评审安全性能等质量门禁"
+      ],
+      "audience": "AI 编码工具用户、前端工程师、全栈开发者、技术负责人"
+    },
+    {
+      "rank": 9,
+      "name": "worktrunk",
+      "author": "max-sixty",
+      "url": "https://github.com/max-sixty/worktrunk",
+      "stars": 8048,
+      "forks": 275,
+      "weeklyStars": 1104,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Worktrunk 是 Git worktree 管理 CLI，专为并行 AI Agent 工作流设计。它把创建、切换、合并和清理简化为分支级操作，让多 Agent 并行开发互不干扰。",
+      "features": [
+        "分支式 worktree 创建切换清理",
+        "一键合并并自动生成 LLM 提交信息",
+        "多 Agent 并行隔离开发互不干扰"
+      ],
+      "audience": "AI Agent 开发者、Git 工作流工程师、全栈开发者、DevOps 工程师、开源 CLI 爱好者"
+    },
+    {
+      "rank": 10,
+      "name": "knowledge-work-plugins",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/knowledge-work-plugins",
+      "stars": 24941,
+      "forks": 2975,
+      "weeklyStars": 776,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 开源的 Claude 岗位插件库，为知识工作者提供专用技能与命令。它可接入企业工具并定制流程，让 Claude 交付更专业一致的工作成果。",
+      "features": [
+        "开箱即用岗位插件覆盖销售、产品、数据",
+        "MCP连接器接入Slack等常用企业工具",
+        "文件化配置无需构建即可定制团队流程"
+      ],
+      "audience": "知识工作者、产品经理、销售运营、数据分析师、企业AI管理员"
+    },
+    {
+      "rank": 11,
+      "name": "plugins",
+      "author": "openai",
+      "url": "https://github.com/openai/plugins",
+      "stars": 6988,
+      "forks": 904,
+      "weeklyStars": 542,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "OpenAI 官方整理的 Codex 插件示例库，提供 manifest、skills、MCP 与 agents 标准结构。帮助开发者快速构建可复用插件，覆盖 Figma、Notion、iOS 与 Web 工作流。",
+      "features": [
+        "提供 Codex 插件标准结构与清单模板",
+        "内置 Figma、Notion 等常用集成示例",
+        "覆盖 iOS、macOS、Web 与 Expo 开发"
+      ],
+      "audience": "AI 应用开发者、Codex 插件开发者、前端工程师、全栈工程师、DevOps 工程师"
+    },
+    {
+      "rank": 12,
+      "name": "humanizer",
+      "author": "blader",
+      "url": "https://github.com/blader/humanizer",
+      "stars": 50007,
+      "forks": 4035,
+      "weeklyStars": 3118,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Humanizer 是一个 Agent 技能，可将 AI 味文本改写成更像人写的自然文字。它保留原意与事实，减少机器腔，适配支持技能的智能体。",
+      "features": [
+        "按强弱标记25种AI腔模式并优先处理",
+        "支持粘贴文本或文件路径改写正文",
+        "可参考写作样本匹配个人语气风格"
+      ],
+      "audience": "内容创作者、技术写作者、AI 智能体开发者、文档编辑、市场文案"
+    },
+    {
+      "rank": 13,
+      "name": "firstmate",
+      "author": "kunchenguid",
+      "url": "https://github.com/kunchenguid/firstmate",
+      "stars": 6590,
+      "forks": 2007,
+      "weeklyStars": 990,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "firstmate 是多智能体协作发行版，让你只与一个主智能体对话，由它派遣并监督多个编码智能体并行工作。它用隔离工作树和事件驱动监督，解决多任务并行时的上下文混乱与盯守问题。",
+      "features": [
+        "单一入口调度多个编码智能体并行",
+        "每个任务使用独立工作树避免冲突",
+        "事件驱动监督减少人工盯守的负担"
+      ],
+      "audience": "AI 编程工具用户、全栈工程师、DevOps 工程师、独立开发者、技术负责人"
+    },
+    {
+      "rank": 14,
+      "name": "markitdown",
+      "author": "microsoft",
+      "url": "https://github.com/microsoft/markitdown",
+      "stars": 185474,
+      "forks": 13655,
+      "weeklyStars": 2841,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "微软开源的轻量级 Python 工具，可将 Office、PDF、图片、音频等多种文件转为 Markdown。为 LLM 和文本分析提供结构化、低噪声的文本输入，简化文档预处理流程。",
+      "features": [
+        "支持办公文档、PDF、图片与音频转换",
+        "保留标题、表格、链接等关键文档结构",
+        "支持 CLI、Python 调用与第三方插件"
+      ],
+      "audience": "LLM 应用开发者、数据工程师、文档自动化工程师、AI 应用工程师"
+    },
+    {
+      "rank": 15,
+      "name": "core",
+      "author": "home-assistant",
+      "url": "https://github.com/home-assistant/core",
+      "stars": 90752,
+      "forks": 38700,
+      "weeklyStars": 357,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Home Assistant 是开源本地家庭自动化平台，可统一控制智能设备与自动化流程。它以本地控制和隐私优先，帮助用户摆脱云端依赖并自由扩展设备集成。",
+      "features": [
+        "本地优先运行保护隐私与网络自主",
+        "模块化集成轻松接入各类智能设备",
+        "树莓派或服务器部署适合家庭自动化"
+      ],
+      "audience": "智能家居爱好者、DIY 开发者、家庭自动化用户、隐私敏感用户"
+    },
+    {
+      "rank": 16,
+      "name": "orca",
+      "author": "stablyai",
+      "url": "https://github.com/stablyai/orca",
+      "stars": 72130,
+      "forks": 4718,
+      "weeklyStars": 5272,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Orca 是编排并行 AI 编码代理的跨平台开发环境，支持多个终端代理在独立 Git worktree 中同时运行。它统一任务、终端、审查与远程执行，帮助开发者用自有订阅高效完成多代理开发。",
+      "features": [
+        "多代理在独立Git工作树并行运行任务",
+        "手机监控代理并远程发送后续指令",
+        "统一集成终端、PR与项目管理任务流"
+      ],
+      "audience": "AI 编码代理使用者、全栈开发者、平台工程师、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 17,
+      "name": "hyperframes",
+      "author": "heygen-com",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "stars": 51467,
+      "forks": 4688,
+      "weeklyStars": 2401,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "HeyGen 开源的 HTML 原生视频渲染框架，用 HTML、CSS 和可寻址动画生成确定性 MP4。它为 AI 代理提供 CLI 与技能化工作流，免 React、免构建即可自动产出视频。",
+      "features": [
+        "HTML 原生编写视频 免 React 构建",
+        "可寻址动画 兼容 GSAP 与 Lottie",
+        "CLI 渲染 MP4 支持 Lambda 分布式"
+      ],
+      "audience": "前端工程师、AI 代理开发者、视频内容创作者、自动化运维工程师"
+    },
+    {
+      "rank": 18,
+      "name": "Agent-Reach",
+      "author": "Panniantong",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "stars": 83206,
+      "forks": 7288,
+      "weeklyStars": 3766,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Agent Reach 是 AI Agent 的开源互联网读取能力层，一条命令安装并配置多平台接入。它自动选型、体检和路由 Twitter、Reddit、YouTube、B站、小红书等渠道，免 API 费用。",
+      "features": [
+        "一键安装并自动配置多平台读取渠道",
+        "内置诊断命令检查各渠道可用状态",
+        "多后端路由自动切换失效接入方式"
+      ],
+      "audience": "AI Agent 开发者、自动化工程师、爬虫工程师、数据分析师、内容运营"
+    },
+    {
+      "rank": 19,
+      "name": "superpowers",
+      "author": "obra",
+      "url": "https://github.com/obra/superpowers",
+      "stars": 288598,
+      "forks": 25815,
+      "weeklyStars": 3573,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Superpowers 是面向编码智能体的可组合技能框架与软件开发方法论。它通过自动触发设计、计划、TDD 和子代理审查流程，让 AI 编码更规范、可验证且少跑偏。",
+      "features": [
+        "为编码智能体提供可组合技能体系",
+        "用红绿重构和子代理审查提升质量",
+        "适配主流编码工具并自动触发流程"
+      ],
+      "audience": "AI 编码工具用户、软件工程师、独立开发者、团队负责人"
+    },
+    {
+      "rank": 20,
+      "name": "no-ai-slop",
+      "author": "petergyang",
+      "url": "https://github.com/petergyang/no-ai-slop",
+      "stars": 10601,
+      "forks": 731,
+      "weeklyStars": 2189,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "可装入 ChatGPT、Claude Code 等编码代理的写作技能，能清除 20 多种 AI 味套路并保留个人声音。它解决 AI 文本千篇一律、编辑时抹平作者风格的问题，让文章更像本人。",
+      "features": [
+        "一键清除二元对比、假洞察等20多种AI味套路",
+        "保留个人词汇、节奏和幽默，避免风格被磨平",
+        "支持检测套路、改写文章，并列出具体修改项"
+      ],
+      "audience": "内容创作者、自媒体作者、技术写作者、AI 写作用户"
+    },
+    {
+      "rank": 21,
+      "name": "LibreChat",
+      "author": "danny-avila",
+      "url": "https://github.com/danny-avila/LibreChat",
+      "stars": 44348,
+      "forks": 9112,
+      "weeklyStars": 1528,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "LibreChat 是开源自托管 AI 聊天平台，统一接入多模型并支持 Agents、MCP 与代码解释器。帮助团队构建可控、隐私友好的私有 AI 对话与自动化工作流。",
+      "features": [
+        "统一接入主流大模型并支持自定义端点",
+        "内置智能体、MCP 工具与沙箱代码执行",
+        "提供多用户认证、权限管理与管理面板"
+      ],
+      "audience": "AI 应用开发者、企业 IT 管理员、数据工程师、私有化部署用户"
+    }
+  ]
+}

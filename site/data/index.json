@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 16,
+    "count": 17,
     "months": [
       {
         "label": "2026年09月",
         "items": [
+          {
+            "date": "2026-09-26",
+            "count": 18,
+            "summary": "本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI 智能体 · 编码代理 · 安全审计等领域。security-audit-skill 本周新增 9547 Star 领跑，ECC 以 267701 Star 位居总量榜首。"
+          },
           {
             "date": "2026-09-19",
             "count": 21,

@@ -1,0 +1,334 @@
+{
+  "weekLabel": "2026年第39周",
+  "weekInfo": "2026 年第 39 周 / 2026-09-26",
+  "date": "2026-09-26",
+  "count": 18,
+  "totalCount": 18,
+  "coverSummary": "本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI 智能体 · 编码代理 · 安全审计等领域。security-audit-skill 本周新增 9547 Star 领跑，ECC 以 267701 Star 位居总量榜首。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "financial-services",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/financial-services",
+      "stars": 37610,
+      "forks": 5439,
+      "weeklyStars": 2623,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 推出的金融服务 Claude 参考代理与技能库，覆盖投行、研究、私募和财富管理。它将财务建模、备忘录、对账等工作流标准化为可部署插件，便于专业人员审核使用。",
+      "features": [
+        "内置投行、研究、私募等端到端工作流代理",
+        "提供可比公司、现金流折现等财务建模技能",
+        "支持插件安装与托管代理 API 部署"
+      ],
+      "audience": "投行分析师、卖方研究员、私募投资人、财富管理顾问、金融运营人员"
+    },
+    {
+      "rank": 2,
+      "name": "security-audit-skill",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "stars": 21812,
+      "forks": 1258,
+      "weeklyStars": 9547,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Cloudflare 开源编码代理安全审计技能，将 AI 代理编排为多阶段漏洞审计流程。通过独立验证与机器可读报告，降低误报并提升审查可重复性。",
+      "features": [
+        "六阶段审计覆盖侦察到报告全流程",
+        "多代理独立验证漏洞候选降误报率",
+        "结构化报告支撑自动化安全流水线"
+      ],
+      "audience": "安全工程师、应用开发者、代码审计人员、安全运营工程师、AI 代理使用者"
+    },
+    {
+      "rank": 3,
+      "name": "claude-code",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-code",
+      "stars": 148153,
+      "forks": 24674,
+      "weeklyStars": 2102,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Anthropic 推出的终端智能体编码工具，可理解代码库并用自然语言执行任务、解释代码和处理 Git 工作流。它把重复开发操作自动化，让工程师更快完成编码与代码理解。",
+      "features": [
+        "终端自然语言驱动执行日常编码任务",
+        "理解项目上下文快速解释复杂代码",
+        "自动处理版本控制流程减少重复操作"
+      ],
+      "audience": "软件工程师、全栈开发者、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 4,
+      "name": "paperclip",
+      "author": "paperclipai",
+      "url": "https://github.com/paperclipai/paperclip",
+      "stars": 85810,
+      "forks": 15304,
+      "weeklyStars": 2616,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源 AI 智能体团队编排平台，用统一仪表盘管理多个工作智能体。以任务、预算、治理和心跳机制协调智能体完成业务目标，避免失控成本与上下文丢失。",
+      "features": [
+        "统一管理多智能体任务、预算与审批治理",
+        "心跳调度与持久会话支持 7x24 自主运行",
+        "兼容 Claude、Codex 等任意智能体运行时"
+      ],
+      "audience": "AI 团队负责人、智能体开发者、自动化工程师、独立创业者、平台运维"
+    },
+    {
+      "rank": 5,
+      "name": "hindsight",
+      "author": "vectorize-io",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "stars": 30510,
+      "forks": 3290,
+      "weeklyStars": 4869,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Hindsight 是面向 AI 智能体的长期记忆系统，通过 Retain、Recall、Reflect 让智能体持续学习而非仅检索历史。它用仿生记忆结构替代简单 RAG，在长时记忆任务上取得领先准确率，适合构建可进化的 AI 员工。",
+      "features": [
+        "三操作实现记忆存储、检索与深度反思",
+        "仿生结构整合事实、经验与心智模型",
+        "内置 MCP、多语言与敏感信息防御能力"
+      ],
+      "audience": "AI 智能体开发者、LLM 应用工程师、企业自动化负责人、MLOps 工程师"
+    },
+    {
+      "rank": 6,
+      "name": "WeKnora",
+      "author": "Tencent",
+      "url": "https://github.com/Tencent/WeKnora",
+      "stars": 30211,
+      "forks": 4058,
+      "weeklyStars": 3189,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "腾讯开源的 LLM 知识平台，将原始文档转为可查询 RAG、自主推理 Agent 和自维护 Wiki。它帮助企业统一沉淀知识，实现可溯源问答、多步任务与持续更新。",
+      "features": [
+        "支持混合检索与引用溯源的知识问答",
+        "智能体多步推理并调用技能与沙箱",
+        "自动构建可编辑回滚的知识图谱页面"
+      ],
+      "audience": "企业知识管理者、RAG 应用开发者、AI 智能体开发者、文档工程师、运维工程师"
+    },
+    {
+      "rank": 7,
+      "name": "ECC",
+      "author": "affaan-m",
+      "url": "https://github.com/affaan-m/ECC",
+      "stars": 267701,
+      "forks": 39986,
+      "weeklyStars": 6037,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "ECC 是面向 Claude Code 等编码代理的工程化增强系统，集成技能、记忆与安全扫描。它将计划、测试、审查、验证固化为可复用流程，提升交付质量。",
+      "features": [
+        "内置 292 项技能与 68 个代理覆盖研发",
+        "统一记忆库支持跨代理上下文交接",
+        "AgentShield 扫描代理配置与密钥风险"
+      ],
+      "audience": "AI 编程代理用户、Claude Code 开发者、全栈工程师、DevOps 工程师、安全工程师"
+    },
+    {
+      "rank": 8,
+      "name": "orca",
+      "author": "stablyai",
+      "url": "https://github.com/stablyai/orca",
+      "stars": 78601,
+      "forks": 5140,
+      "weeklyStars": 6537,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Orca 是多智能体并行开发环境，可统一运行 Claude Code、Codex 等终端编码代理。它用隔离 worktree 和移动端协同，帮助开发者比较并合并多个 AI 方案。",
+      "features": [
+        "并行 worktree 隔离运行多个编码代理任务",
+        "手机监控代理进度并远程发送跟进指令",
+        "内置终端与浏览器并原生集成 GitHub 和 Linear"
+      ],
+      "audience": "AI 编程代理用户、全栈开发者、独立开发者、DevOps 工程师、技术负责人"
+    },
+    {
+      "rank": 9,
+      "name": "claude-code-templates",
+      "author": "davila7",
+      "url": "https://github.com/davila7/claude-code-templates",
+      "stars": 31874,
+      "forks": 3624,
+      "weeklyStars": 1041,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "面向 Claude Code 的 CLI 模板工具，提供智能体、命令、MCP、设置和钩子等可安装组件。帮助开发者快速配置并监控 AI 编程工作流，降低手工搭建成本。",
+      "features": [
+        "一键安装智能体、命令、MCP 等组件",
+        "内置分析、会话监控与健康检查工具",
+        "提供插件面板与远程对话安全访问"
+      ],
+      "audience": "Claude Code 用户、AI 编程开发者、前端工程师、DevOps 工程师"
+    },
+    {
+      "rank": 10,
+      "name": "open-code-review",
+      "author": "alibaba",
+      "url": "https://github.com/alibaba/open-code-review",
+      "stars": 41487,
+      "forks": 2981,
+      "weeklyStars": 5030,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "阿里巴巴开源的 AI 代码审查 CLI 工具，融合确定性流水线与 LLM Agent，输出行级精确评论。它针对通用 Agent 覆盖不全、位置漂移和成本高，以更高精准率降低误报与 Token 消耗。",
+      "features": [
+        "混合架构兼顾稳定约束与动态上下文检索",
+        "内置规则覆盖空指针、线程安全、XSS 与 SQL 注入",
+        "支持 Git diff、全文件扫描与 CI/CD 集成"
+      ],
+      "audience": "后端工程师、前端工程师、DevOps 工程师、安全工程师、开源维护者"
+    },
+    {
+      "rank": 11,
+      "name": "knowledge-work-plugins",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/knowledge-work-plugins",
+      "stars": 25649,
+      "forks": 3033,
+      "weeklyStars": 889,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 开源的 Claude 知识工作插件库，为销售、产品、财务等岗位打包技能、连接器和命令。可定制公司工具与流程，让 Claude 输出更专业一致，减少重复沟通。",
+      "features": [
+        "覆盖销售产品财务法务等11类岗位",
+        "内置MCP连接器打通常用办公工具",
+        "文件式配置可低成本定制公司流程"
+      ],
+      "audience": "知识工作者、产品经理、销售运营、数据分析师、Claude 开发者"
+    },
+    {
+      "rank": 12,
+      "name": "agent-skills",
+      "author": "addyosmani",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "stars": 99169,
+      "forks": 10415,
+      "weeklyStars": 2911,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 AI 编码代理的生产级工程技能包，内置 25 个覆盖开发全流程的工作流。它强制规格、测试、安全与发布纪律，让 AI 输出更接近生产质量而非原型。",
+      "features": [
+        "覆盖开发全生命周期的 25 个工程技能",
+        "支持多代理安装并自动匹配任务场景",
+        "强制规格测试安全与发布质量门禁"
+      ],
+      "audience": "AI 编码代理用户、前端工程师、全栈开发者、技术负责人、质量工程师"
+    },
+    {
+      "rank": 13,
+      "name": "pytorch",
+      "author": "pytorch",
+      "url": "https://github.com/pytorch/pytorch",
+      "stars": 103342,
+      "forks": 30525,
+      "weeklyStars": 255,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "PyTorch 是 Python 深度学习框架，提供 GPU 加速张量计算和动态自动求导神经网络。它兼顾灵活调试与高性能训练，支撑从科研原型到生产部署的模型开发。",
+      "features": [
+        "GPU 张量加速，替代 NumPy 高效计算",
+        "动态图自动求导，灵活构建神经网络",
+        "Python 优先设计，便于调试与自定义扩展"
+      ],
+      "audience": "深度学习研究者、算法工程师、AI 开发者、数据科学家"
+    },
+    {
+      "rank": 14,
+      "name": "CLI-Anything",
+      "author": "HKUDS",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "stars": 50576,
+      "forks": 4630,
+      "weeklyStars": 972,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "CLI-Anything 是面向 AI Agent 的软件命令行化框架，可将任意有源码的专业软件自动生成可调用 CLI。它用结构化命令、JSON 输出和真实后端调用，解决 AI 难以可靠操作 GUI 软件的问题。",
+      "features": [
+        "自动分析源码并生成完整 CLI 工具链",
+        "支持 JSON 输出与 REPL 交互双模式",
+        "直连真实软件后端保留完整专业功能"
+      ],
+      "audience": "AI Agent 开发者、自动化工程师、开源软件维护者、CLI 工具爱好者、科研计算人员"
+    },
+    {
+      "rank": 15,
+      "name": "quiche",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/quiche",
+      "stars": 12617,
+      "forks": 1149,
+      "weeklyStars": 769,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Cloudflare 开源的 Rust 实现，完整支持 QUIC 传输协议与 HTTP/3。提供低层连接、流式收发和 C API，便于构建高性能网络应用。",
+      "features": [
+        "实现 QUIC 与 HTTP/3 低层连接收发",
+        "提供流式 API 简化应用数据读写",
+        "提供 C API 便于 C/C++ 项目集成"
+      ],
+      "audience": "网络协议工程师、Rust 开发者、HTTP/3 应用开发者、系统程序员"
+    },
+    {
+      "rank": 16,
+      "name": "Octop",
+      "author": "TencentCloud",
+      "url": "https://github.com/TencentCloud/Octop",
+      "stars": 5022,
+      "forks": 596,
+      "weeklyStars": 1149,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Octop 是腾讯云开源的自托管多用户 AI 助手，支持多智能体、Web 控制台、CLI 与飞书/钉钉/QQ/Telegram 等 IM 集成。它让数据留在本地，为家庭和小团队提供隐私可控的智能协作环境。",
+      "features": [
+        "多智能体协作，按场景切换专家与MBTI人格",
+        "单进程启动，集成Web控制台、CLI与IM渠道",
+        "本地数据隔离，支持JWT多用户与工具审批"
+      ],
+      "audience": "个人开发者、家庭用户、小团队负责人、AI应用工程师、运维工程师"
+    },
+    {
+      "rank": 17,
+      "name": "treg",
+      "author": "superdesigndev",
+      "url": "https://github.com/superdesigndev/treg",
+      "stars": 3430,
+      "forks": 281,
+      "weeklyStars": 1687,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Treg 是面向 AI Agent 的工具目录与代理，将数千个外部 API、CLI 和技能统一为一个端点。它让 Agent 按任务调用工具并服务端注入凭证，免去注册、密钥泄露和重复集成。",
+      "features": [
+        "统一目录聚合3000多个工具端点",
+        "服务端注入密钥避免凭证泄露风险",
+        "团队安全共享工具CLI及技能包"
+      ],
+      "audience": "AI Agent 开发者、自动化工程师、SaaS 团队、数据运营、独立开发者"
+    },
+    {
+      "rank": 18,
+      "name": "univer",
+      "author": "dream-num",
+      "url": "https://github.com/dream-num/univer",
+      "stars": 18926,
+      "forks": 1614,
+      "weeklyStars": 3928,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Univer 是面向 AI Agent 的开源办公 SDK，整合表格、文档、幻灯片、画布与 PDF 运行时。它支持浏览器和 Node.js 同构集成，便于在自有产品中构建可嵌入的办公与自动化体验。",
+      "features": [
+        "插件化架构按需组合多种办公能力",
+        "Canvas 渲染引擎保障大型表格流畅",
+        "统一 Facade API 简化办公内容操作"
+      ],
+      "audience": "AI 应用开发者、SaaS 产品工程师、前端开发者、办公协作平台开发者、自动化工程师"
+    }
+  ]
+}

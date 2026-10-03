@@ -1,7 +1,17 @@
 {
   "gh": {
-    "count": 17,
+    "count": 18,
     "months": [
+      {
+        "label": "2026年10月",
+        "items": [
+          {
+            "date": "2026-10-03",
+            "count": 17,
+            "summary": "本周 GitHub Trending 收录 17 个热门仓库，涵盖 Dart·Go·JavaScript·Python·TypeScript 等领域。"
+          }
+        ]
+      },
       {
         "label": "2026年09月",
         "items": [

@@ -1,0 +1,316 @@
+{
+  "weekLabel": "2026年第40周",
+  "weekInfo": "2026 年第 40 周 / 2026-10-03",
+  "date": "2026-10-03",
+  "count": 17,
+  "totalCount": 17,
+  "coverSummary": "本周 GitHub Trending 收录 17 个热门仓库，涵盖 Dart·Go·JavaScript·Python·TypeScript 等领域。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "paperclip",
+      "author": "paperclipai",
+      "url": "https://github.com/paperclipai/paperclip",
+      "stars": 96379,
+      "forks": 16319,
+      "weeklyStars": 12825,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "The open-source app everyone uses to manage agents at work",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 2,
+      "name": "hindsight",
+      "author": "vectorize-io",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "stars": 44759,
+      "forks": 5870,
+      "weeklyStars": 16183,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Hindsight: Agent Memory That Learns",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 3,
+      "name": "VoiceStudio",
+      "author": "debpalash",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "stars": 52003,
+      "forks": 5792,
+      "weeklyStars": 16475,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 4,
+      "name": "ai-engineering-from-scratch",
+      "author": "rohitg00",
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "stars": 62727,
+      "forks": 10721,
+      "weeklyStars": 5600,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Learn it. Build it. Ship it for others.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 5,
+      "name": "flutter",
+      "author": "flutter",
+      "url": "https://github.com/flutter/flutter",
+      "stars": 179266,
+      "forks": 32866,
+      "weeklyStars": 228,
+      "language": "Dart",
+      "langColor": "#00B4AB",
+      "zhDesc": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 6,
+      "name": "impeccable",
+      "author": "pbakaus",
+      "url": "https://github.com/pbakaus/impeccable",
+      "stars": 74433,
+      "forks": 4485,
+      "weeklyStars": 3124,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "The design language that makes your AI harness better at design.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 7,
+      "name": "next.js",
+      "author": "vercel",
+      "url": "https://github.com/vercel/next.js",
+      "stars": 143017,
+      "forks": 33712,
+      "weeklyStars": 658,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "The React Framework",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 8,
+      "name": "claude-skills",
+      "author": "alirezarezvani",
+      "url": "https://github.com/alirezarezvani/claude-skills",
+      "stars": 27345,
+      "forks": 3853,
+      "weeklyStars": 832,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "380 Claude Code skills & agent skills & plugins (30+ Agents, 70+ custom commands, 380+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 9,
+      "name": "hyperframes",
+      "author": "heygen-com",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "stars": 55968,
+      "forks": 5041,
+      "weeklyStars": 2661,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Write HTML. Render video. Built for agents.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 10,
+      "name": "Octop",
+      "author": "TencentCloud",
+      "url": "https://github.com/TencentCloud/Octop",
+      "stars": 6421,
+      "forks": 791,
+      "weeklyStars": 1425,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "A smarter, self-hosted AI assistant — multi-user, multi-agent.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 11,
+      "name": "ax",
+      "author": "google",
+      "url": "https://github.com/google/ax",
+      "stars": 12928,
+      "forks": 640,
+      "weeklyStars": 1783,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "Google's open agentic orchestration runtime",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 12,
+      "name": "financial-services",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/financial-services",
+      "stars": 38565,
+      "forks": 5537,
+      "weeklyStars": 1073,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "暂无描述",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 13,
+      "name": "tilelang",
+      "author": "tile-ai",
+      "url": "https://github.com/tile-ai/tilelang",
+      "stars": 8255,
+      "forks": 831,
+      "weeklyStars": 732,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Domain-specific language designed to streamline the development of high-performance GPU/CPU/Accelerators kernels",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 14,
+      "name": "claude-code-action",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-code-action",
+      "stars": 9383,
+      "forks": 2184,
+      "weeklyStars": 417,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "暂无描述",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 15,
+      "name": "pytorch",
+      "author": "pytorch",
+      "url": "https://github.com/pytorch/pytorch",
+      "stars": 103631,
+      "forks": 31176,
+      "weeklyStars": 369,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 16,
+      "name": "MoneyPrinterTurbo",
+      "author": "harry0703",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+      "stars": 128116,
+      "forks": 20042,
+      "weeklyStars": 2533,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    },
+    {
+      "rank": 17,
+      "name": "yoinks",
+      "author": "pablostanley",
+      "url": "https://github.com/pablostanley/yoinks",
+      "stars": 3578,
+      "forks": 314,
+      "weeklyStars": 1415,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "yoink any video from your terminal. no shady ads.",
+      "features": [
+        "",
+        "",
+        ""
+      ],
+      "audience": ""
+    }
+  ]
+}

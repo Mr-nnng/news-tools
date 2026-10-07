@@ -795,11 +795,16 @@
     ]
   },
   "wallstreet": {
-    "count": 48,
+    "count": 49,
     "months": [
       {
         "label": "2026年10月",
         "items": [
+          {
+            "date": "2026-10-08",
+            "count": 1,
+            "summary": "见闻早餐 10 条"
+          },
           {
             "date": "2026-10-07",
             "count": 2,

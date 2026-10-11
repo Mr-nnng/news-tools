@@ -4,43 +4,43 @@
   "date": "2026-10-11",
   "count": 13,
   "totalCount": 13,
-  "coverSummary": "本周 GitHub Trending 收录 13 个热门仓库，涵盖 C·C++·Dart·JavaScript·Python·Shell·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 13 个热门仓库，涵盖 AI 智能体 · 持久记忆 · 视频渲染 · CAD 生成 · 跨平台 UI 等领域。AnyPS5 本周新增 21365 Star 领跑，skills 以 284661 Star 位居榜首。",
   "repos": [
     {
       "rank": 1,
       "name": "AnyPS5",
       "author": "boykopovar",
       "url": "https://github.com/boykopovar/AnyPS5",
-      "stars": 27146,
-      "forks": 2282,
+      "stars": 27154,
+      "forks": 2284,
       "weeklyStars": 21365,
       "language": "C++",
       "langColor": "#F34B7D",
-      "zhDesc": "Tool for automatic PS5 executables porting to Linux and Windows",
+      "zhDesc": "将 PS5 可执行文件自动移植到 Linux/Windows 的开源工具，通过重链接器转为原生格式并动态链接系统 prx 库，无需模拟器或独立运行时。性能接近原生，可用于游戏保存、互操作与兼容性研究。",
       "features": [
-        "",
-        "",
-        ""
+        "自动重链接生成目标平台原生可执行文件",
+        "prx 系统库动态链接，无模拟器与独立运行时",
+        "着色器重编译为 SPIR-V 并支持手柄键鼠输入"
       ],
-      "audience": ""
+      "audience": "游戏移植开发者、逆向工程与模拟器研究者、游戏保存与兼容性测试人员、图形与着色器开发者、Linux/Windows 游戏玩家"
     },
     {
       "rank": 2,
       "name": "skills",
       "author": "mattpocock",
       "url": "https://github.com/mattpocock/skills",
-      "stars": 284654,
+      "stars": 284661,
       "forks": 23819,
       "weeklyStars": 9179,
       "language": "Shell",
       "langColor": "#89E051",
-      "zhDesc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "zhDesc": "Matt Pocock 开源的 AI 编码代理技能集，覆盖需求对齐、TDD、调试、代码审查等真实工程流程。技能小巧可组合、适配任意模型，帮你摆脱失控的 vibe coding。",
       "features": [
-        "",
-        "",
-        ""
+        "grill 系列访谈让代理先对齐需求再动手",
+        "内置 TDD 红绿重构与系统化调试循环",
+        "架构巡检与双轴代码审查遏制代码腐化"
       ],
-      "audience": ""
+      "audience": "AI 编码代理用户、全栈工程师、技术负责人、独立开发者、研发效能工程师"
     },
     {
       "rank": 3,
@@ -52,49 +52,49 @@
       "weeklyStars": 740,
       "language": "C",
       "langColor": "#555555",
-      "zhDesc": "A native, user-mode, multi-process, graphical debugger.",
+      "zhDesc": "Epic Games 开源的原生用户态多进程图形调试器，目前支持 Windows x64 与 PDB 调试信息。项目还附带自研 RDI 调试信息格式与高性能 RAD 链接器，可显著加速大型项目的编译调试循环。",
       "features": [
-        "",
-        "",
-        ""
+        "原生多进程图形调试，支持 Windows x64",
+        "自研 RDI 格式替代 PDB/DWARF 解析",
+        "RAD 链接器大幅加速巨型项目链接"
       ],
-      "audience": ""
+      "audience": "C/C++ 开发者、游戏引擎工程师、编译器与工具链开发者、系统底层程序员"
     },
     {
       "rank": 4,
       "name": "claude-mem",
       "author": "thedotmack",
       "url": "https://github.com/thedotmack/claude-mem",
-      "stars": 99309,
+      "stars": 99311,
       "forks": 8701,
       "weeklyStars": 4035,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+      "zhDesc": "为 Claude Code 等 AI 编码代理提供跨会话持久记忆，自动捕捉代理每次操作，经 AI 压缩后注入未来会话。让代理在会话结束或重连后仍保持项目认知连续性，不必重复交代上下文。",
       "features": [
-        "",
-        "",
-        ""
+        "自动捕捉会话操作并生成语义摘要",
+        "MCP 三层检索约节省十倍 token",
+        "隐私标签过滤与可视化记忆流查看"
       ],
-      "audience": ""
+      "audience": "AI 编码代理用户、全栈开发者、DevOps 工程师、技术团队负责人、Claude Code 重度使用者"
     },
     {
       "rank": 5,
       "name": "hyperframes",
       "author": "heygen-com",
       "url": "https://github.com/heygen-com/hyperframes",
-      "stars": 60407,
+      "stars": 60410,
       "forks": 5395,
       "weeklyStars": 4081,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Write HTML. Render video. Built for agents.",
+      "zhDesc": "把 HTML、CSS 与可寻址动画渲染成确定性 MP4 视频的开源框架，由 HeyGen 团队开源。专为 AI 编码代理设计，让代理直接写 HTML 产出视频，无需 React 与构建步骤。",
       "features": [
-        "",
-        "",
-        ""
+        "HTML 原生编写，无需构建步骤即可预览",
+        "内置 21 个代理技能覆盖完整制作流程",
+        "确定性渲染，同输入同输出适配 CI"
       ],
-      "audience": ""
+      "audience": "AI 编码代理用户、视频自动化开发者、前端工程师、内容创作者、CI 流水线工程师"
     },
     {
       "rank": 6,
@@ -106,31 +106,31 @@
       "weeklyStars": 2068,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+      "zhDesc": "基于 tmux 的开源多智能体编排工具，用 YAML 定义由 Claude Code、Codex 等构成的持久化智能体团队。一条命令即可启动整套协作体系，把零散的终端会话变成有角色、共享上下文、职责明确的团队。",
       "features": [
-        "",
-        "",
-        ""
+        "YAML 声明拓扑，一条命令启动团队",
+        "同一 rig 内混用 Claude Code 与 Codex",
+        "TUI 查看拓扑状态并支持快照恢复"
       ],
-      "audience": ""
+      "audience": "AI 应用开发者、多智能体系统研究者、DevOps 工程师、技术团队负责人、LLM 工具链维护者"
     },
     {
       "rank": 7,
       "name": "plugins",
       "author": "cursor",
       "url": "https://github.com/cursor/plugins",
-      "stars": 10771,
+      "stars": 10772,
       "forks": 1026,
       "weeklyStars": 1110,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Cursor plugin specification and official plugins",
+      "zhDesc": "Cursor 官方插件仓库，为各类开发工具、框架与 SaaS 产品提供统一的插件规范及官方插件集合。每个插件独立成目录并通过统一清单接入技能、规则与 MCP 服务，帮助开发者快速扩展 AI 编程能力。",
       "features": [
-        "",
-        "",
-        ""
+        "统一插件规范与 marketplace 清单管理",
+        "覆盖开发工具、生产力与 SaaS 集成",
+        "内置 Agent 技能、规则与 MCP 服务"
       ],
-      "audience": ""
+      "audience": "AI 编程工具用户、插件开发者、Cursor 用户、DevOps 工程师、SaaS 集成开发者"
     },
     {
       "rank": 8,
@@ -142,31 +142,31 @@
       "weeklyStars": 2369,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Give your agent CAD superpowers.",
+      "zhDesc": "为 AI 编程助手赋予 CAD 超能力：用自然语言或图片生成 STEP、STL、GLB 等 3D 模型。内置可制造性检查、工程图纸、切片与打印对接，打通从设计到制造的闭环。",
       "features": [
-        "",
-        "",
-        ""
+        "自然语言或图片生成模型，导出 STEP/STL/GLB/3MF",
+        "内置 DFM、DfAM 检查与参数化工程图纸",
+        "对接 3D 打印、钣金、CNC 与切片工作流"
       ],
-      "audience": ""
+      "audience": "机械工程师、硬件开发者、机器人工程师、3D 打印爱好者、AI Agent 开发者"
     },
     {
       "rank": 9,
       "name": "flutter",
       "author": "flutter",
       "url": "https://github.com/flutter/flutter",
-      "stars": 179568,
+      "stars": 179569,
       "forks": 33608,
       "weeklyStars": 263,
       "language": "Dart",
       "langColor": "#00B4AB",
-      "zhDesc": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+      "zhDesc": "Google 开源的跨平台 UI 开发框架，用一套 Dart 代码库即可构建移动、Web 与桌面应用。凭借热重载与硬件加速渲染，大幅提升开发效率，实现原生级流畅体验。",
       "features": [
-        "",
-        "",
-        ""
+        "一套代码库跨 iOS/Android/Web/桌面",
+        "热重载实时预览改动无需重启应用",
+        "Skia/Impeller 硬件加速渲染流畅无卡顿"
       ],
-      "audience": ""
+      "audience": "移动应用开发者、前端工程师、跨平台产品团队、UI/UX 设计师、开源技术爱好者"
     },
     {
       "rank": 10,
@@ -178,13 +178,13 @@
       "weeklyStars": 2367,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "暂无描述",
+      "zhDesc": "T3 Code 是一个开源智能体控制面板，可通过手机、网页和 Electron 桌面端远程操控本机的 AI 编程智能体。兼容 Claude Code、Codex、Cursor 等已有订阅，性能出色且完全开源可 fork。",
       "features": [
-        "",
-        "",
-        ""
+        "一个控制台统一管理 Claude、Codex 等多家智能体",
+        "手机、网页、桌面多端远程接入本机智能体",
+        "完全开源，可自由 fork 定制自己的编辑器"
       ],
-      "audience": ""
+      "audience": "AI 编程开发者、独立开发者、远程办公工程师、DevOps 工程师、技术团队负责人"
     },
     {
       "rank": 11,
@@ -196,13 +196,13 @@
       "weeklyStars": 259,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "A context-compression plugin for small context windows (a 100K context is enough), token savings (5x fewer tokens), and month-long single sessions (billions of tokens).上下文压缩插件，兼顾小窗口(100k上下文足矣)省token(省5倍token)和超长会话(数月级别几十亿token单会话)。billion-context is all you need",
+      "zhDesc": "面向 AI 编程 Agent 的上下文压缩插件，代理在客户端与模型 API 之间，将已消费对话折叠为可逆的分层摘要。让 10 万上下文窗口跑通数十亿 token 的数月级单会话，同时节省约 5 倍 token 且保持前缀缓存健康。",
       "features": [
-        "",
-        "",
-        ""
+        "可逆分层摘要压缩，按需解压还原细节",
+        "兼容 Claude Code/Codex 等 20+ 主流客户端",
+        "前缀缓存友好，压缩开销仅约 2%"
       ],
-      "audience": ""
+      "audience": "AI 编程工具重度用户、Agent 框架开发者、LLM 基础设施工程师、成本敏感的团队、长会话研究开发者"
     },
     {
       "rank": 12,
@@ -214,13 +214,13 @@
       "weeklyStars": 7369,
       "language": "JavaScript",
       "langColor": "#F1E05A",
-      "zhDesc": "Self-hosted gym & body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
+      "zhDesc": "自托管的健身与体重训练记录应用，可制定每周计划、记录每组训练与体重，并通过肌群图查看哪些肌肉已训练、疲劳或退化。数据全部存放在自己的服务器，支持 Passkey 登录与多设备同步，无订阅、无广告、无遥测。",
       "features": [
-        "",
-        "",
-        ""
+        "5600+ 动作库，含动画演示与肌群筛选",
+        "渐进规则、1RM 估算与肌群疲劳热力图",
+        "Docker 一键自托管，多设备离线同步"
       ],
-      "audience": ""
+      "audience": "健身爱好者、自托管玩家、隐私敏感用户、健身教练、开源开发者"
     },
     {
       "rank": 13,
@@ -232,13 +232,13 @@
       "weeklyStars": 6564,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Next generation e2e testing framework for web and mobile apps.",
+      "zhDesc": "TesterArmy 开源的 AI 端到端测试框架，用自然语言描述目标即可让智能体驱动 Web 与移动应用完成操作，并可在同一测试中用定位器与断言校验结果。录制下来的动作在应用未变更时自动回放、无需调用模型，兼顾灵活性与执行成本。",
       "features": [
-        "",
-        "",
-        ""
+        "自然语言描述目标，智能体自动操作应用",
+        "动作录制与回放，避免重复调用模型",
+        "Web 与 iOS/Android 模拟器统一运行"
       ],
-      "audience": ""
+      "audience": "测试工程师、前端开发者、移动端开发者、QA 团队、DevOps 工程师"
     }
   ]
 }

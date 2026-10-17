@@ -1,0 +1,208 @@
+{
+  "weekLabel": "2026年第42周",
+  "weekInfo": "2026 年第 42 周 / 2026-10-17",
+  "date": "2026-10-17",
+  "count": 11,
+  "totalCount": 11,
+  "coverSummary": "本周 GitHub Trending 收录 12 个热门仓库，涵盖逆向工程 · AI 智能体技能 · 上下文压缩 · 图像视频创作 · 游戏移植 · 3D CAD 生成等领域。rea 本周新增 248962 Star 领跑，skills 以 294258 Star 位居总量榜首，AnyPS5 与 artcraft 分别以 20518、20267 的增量紧随其后。整体看，AI 智能体工具链与底层逆向分析、二进制移植成为本周最集中的方向。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "rea",
+      "author": "morluto",
+      "url": "https://github.com/morluto/rea",
+      "stars": 294144,
+      "forks": 74175,
+      "weeklyStars": 248962,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "REA 是一款通过 MCP 接入 AI 代理的逆向工程工具，可分析原生二进制、Electron 应用、.NET 程序集和网站。无需源码即可还原功能实现并给出证据，分析全程在本地完成。",
+      "features": [
+        "覆盖二进制、APK、固件等十余种目标类型",
+        "分析结果附带证据链与结论边界说明",
+        "本地运行不上传目标，可接 Hopper/Ghidra/IDA"
+      ],
+      "audience": "安全研究员、逆向工程师、渗透测试人员、AI 代理开发者、软件兼容性开发者"
+    },
+    {
+      "rank": 2,
+      "name": "artcraft",
+      "author": "storytold",
+      "url": "https://github.com/storytold/artcraft",
+      "stars": 30845,
+      "forks": 4897,
+      "weeklyStars": 20267,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "ArtCraft 是面向艺术家、设计师与影视创作者的交互式 AI 图像和视频创作 IDE，支持 2D 合成、3D 场景搭建与多模型调用。它把提示词生成升级为可视化创作，让构图、角色身份与镜头位置精确可控且可复现。",
+      "features": [
+        "2D 合成与 3D 场景搭建，构图深度可控",
+        "角色姿态与身份迁移，保持人物一致性",
+        "内置 62 款图像视频音乐与 3D 模型"
+      ],
+      "audience": "数字艺术家、概念设计师、影视创作者、AI 内容创作者、插画师"
+    },
+    {
+      "rank": 3,
+      "name": "AnyPS5",
+      "author": "boykopovar",
+      "url": "https://github.com/boykopovar/AnyPS5",
+      "stars": 40079,
+      "forks": 3589,
+      "weeklyStars": 20518,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "AnyPS5 可将 PS5 可执行文件自动移植到 Linux 和 Windows，通过重链接转为目标平台原生格式，无需模拟器或独立运行时。内置系统 prx 库与着色器转 SPIR-V 能力，服务于游戏保存与兼容性研究。",
+      "features": [
+        "重链接器转换为目标平台原生可执行格式",
+        "实现 PS5 系统 prx 库以支持动态链接",
+        "着色器重编译为 SPIR-V 并自动校验"
+      ],
+      "audience": "游戏保存研究者、逆向工程爱好者、跨平台移植开发者、模拟器开发者、Linux 与 Windows 玩家"
+    },
+    {
+      "rank": 4,
+      "name": "diagram-design",
+      "author": "cathrynlavery",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 56540,
+      "forks": 3591,
+      "weeklyStars": 9024,
+      "language": "HTML",
+      "langColor": "#E34C26",
+      "zhDesc": "面向 AI 编程代理的图表设计技能，用自然语言描述即生成自包含 HTML + SVG 编辑级图表，内置 45 种类型并自动套用你的品牌配色。解决 AI 出图千篇一律、缺乏设计品味的问题，成品可直接发布。",
+      "features": [
+        "45 种图表类型，含明暗与编辑级变体",
+        "读取网站自动匹配品牌配色与字体",
+        "支持重绘 draw.io、Mermaid 等旧图并导出"
+      ],
+      "audience": "技术博主、产品经理、解决方案架构师、全栈开发者、独立创业者"
+    },
+    {
+      "rank": 5,
+      "name": "hyperframes",
+      "author": "heygen-com",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "stars": 65451,
+      "forks": 5898,
+      "weeklyStars": 5601,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "HeyGen 开源的 HTML 原生视频框架，用 HTML/CSS 与可寻址动画定义合成，经无头 Chrome 与 FFmpeg 确定性渲染出 MP4。专为 AI 编码代理设计，附带 21 个生产技能与可复用组件目录。",
+      "features": [
+        "纯 HTML 加 data 属性定义视频，无需构建步骤",
+        "无头 Chrome 逐帧渲染，输出完全确定可复现",
+        "内置 21 个智能体技能与可复用组件目录"
+      ],
+      "audience": "前端开发者、AI 代理工具开发者、视频内容创作者、设计师、自动化内容工程师"
+    },
+    {
+      "rank": 6,
+      "name": "skills",
+      "author": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 294258,
+      "forks": 24668,
+      "weeklyStars": 11937,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "mattpocock 开源的 AI 编程智能体技能集，源自其日常 .agents 目录，专注真实工程而非氛围编码。提供需求对齐、共享语言、TDD、代码架构审查等可组合小技能，任何人都能改造自用。",
+      "features": [
+        "grill-me 需求拷问，先对齐再动手",
+        "grill-with-docs 建立共享术语表与 ADR",
+        "TDD 红绿重构与系统性调试排障"
+      ],
+      "audience": "AI 编程工具用户、全栈工程师、技术负责人、独立开发者、DevOps 工程师"
+    },
+    {
+      "rank": 7,
+      "name": "ghidra",
+      "author": "NationalSecurityAgency",
+      "url": "https://github.com/NationalSecurityAgency/ghidra",
+      "stars": 89758,
+      "forks": 10036,
+      "weeklyStars": 7510,
+      "language": "Java",
+      "langColor": "#B07219",
+      "zhDesc": "由美国国家安全局（NSA）开源并维护的软件逆向工程框架，集反汇编、反编译、图形化分析与脚本自动化于一体。支持多平台、多种处理器指令集与文件格式，是恶意代码分析与漏洞研究的主流工具。",
+      "features": [
+        "反汇编反编译与图形化分析一体化",
+        "支持多平台多种指令集与可执行格式",
+        "可用 Java 或 Python 编写扩展与脚本"
+      ],
+      "audience": "安全研究员、逆向工程师、恶意代码分析师、漏洞挖掘人员、CTF 参赛者"
+    },
+    {
+      "rank": 8,
+      "name": "context-mode",
+      "author": "mksglu",
+      "url": "https://github.com/mksglu/context-mode",
+      "stars": 30303,
+      "forks": 2149,
+      "weeklyStars": 4207,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "面向 AI 编码代理的上下文窗口优化 MCP 服务器，把工具原始输出留在沙箱，节省 98% 上下文占用。它还在会话压缩后自动恢复任务、文件与决策状态，并通过 MCP 与钩子在 17 个平台上强制路由。",
+      "features": [
+        "沙箱执行工具输出，仅 stdout 进入上下文",
+        "SQLite 持久化会话事件，压缩后自动恢复",
+        "覆盖 17 个 AI 编码平台并强制沙箱路由"
+      ],
+      "audience": "AI 应用开发者、Claude Code 用户、MCP 插件开发者、DevOps 工程师、AI 编程工具链维护者"
+    },
+    {
+      "rank": 9,
+      "name": "billion-context",
+      "author": "ranxianglei",
+      "url": "https://github.com/ranxianglei/billion-context",
+      "stars": 1573,
+      "forks": 125,
+      "weeklyStars": 779,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "面向 AI 编程代理的上下文压缩插件，以本地代理形式接入任意客户端与模型 API，把已消费对话折叠成可增量、可还原的分层摘要。让 10 万 token 的小窗口也能跑出数月超长会话，并省下约 5 倍 token。",
+      "features": [
+        "注入压缩工具，模型自主折叠与还原历史",
+        "token 消耗省约 5 倍，前缀缓存命中 95%",
+        "兼容 Claude Code、Codex、OpenCode 等客户端"
+      ],
+      "audience": "AI 编程工具重度用户、LLM 应用开发者、Agent 框架开发者、AI 基础设施工程师、成本敏感的研发团队"
+    },
+    {
+      "rank": 10,
+      "name": "claude-plugins-official",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "stars": 40821,
+      "forks": 4415,
+      "weeklyStars": 2328,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 官方维护的 Claude Code 插件精选目录，收录内部开发与第三方提交的高质量插件。通过统一市场和严格审核标准，让用户安全便捷地扩展 AI 编码能力。",
+      "features": [
+        "官方与社区插件统一市场，一键安装",
+        "外部插件须通过质量与安全审核",
+        "支持技能打包与插件名自动迁移"
+      ],
+      "audience": "Claude Code 用户、AI 应用开发者、插件开发者、DevOps 工程师、技术团队负责人"
+    },
+    {
+      "rank": 11,
+      "name": "text-to-cad",
+      "author": "earthtojake",
+      "url": "https://github.com/earthtojake/text-to-cad",
+      "stars": 21058,
+      "forks": 2077,
+      "weeklyStars": 2286,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "为 AI 智能体赋予 CAD 能力的插件与技能库，用自然语言或图片即可生成 STEP、STL、GLB、3MF 等 3D 模型。内置可制造性检查、工程图纸与切片打印流程，让智能体打通从建模到生产的全链路。",
+      "features": [
+        "自然语言或图片生成 STEP/STL 等模型",
+        "DFM 与 DfAM 可制造性检查及工程图纸",
+        "对接 3D 打印、钣金与 CNC 加工服务"
+      ],
+      "audience": "机械工程师、硬件产品设计师、机器人开发者、3D 打印爱好者、AI 智能体重度用户"
+    }
+  ]
+}

@@ -4,133 +4,133 @@
   "date": "2026-10-24",
   "count": 15,
   "totalCount": 15,
-  "coverSummary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 Java·Kotlin·Python·Rust·TypeScript 等领域。",
+  "coverSummary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 AI 编码智能体 · 软件逆向工程 · 多模态生成 · 科研智能体 · 自托管平台等领域。VoiceStudio 本周新增 12526 Star 领跑，rea 以 375073 Star 位居总量榜首。AI 编码智能体与插件生态仍是上榜主力，本地化语音、视频与科研技能库同步升温。",
   "repos": [
     {
       "rank": 1,
       "name": "rea",
       "author": "morluto",
       "url": "https://github.com/morluto/rea",
-      "stars": 375059,
-      "forks": 93790,
+      "stars": 375073,
+      "forks": 93794,
       "weeklyStars": 88243,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+      "zhDesc": "基于 MCP 的逆向工程工具，让 AI 智能体直接分析原生二进制、Electron 应用、.NET 与 APK 等目标。分析在本地运行，返回结论均附带证据和局限，帮你把感兴趣的功能复刻到自己的项目。",
       "features": [
-        "",
-        "",
-        ""
+        "统一 MCP 接口，智能体与终端共用同一套工作流",
+        "覆盖二进制、桌面应用、固件、Android 等多类目标",
+        "结论附带证据与未知项，本地分析不上传代码"
       ],
-      "audience": ""
+      "audience": "逆向工程师、安全研究员、AI 应用开发者、客户端开发者、软件考古爱好者"
     },
     {
       "rank": 2,
       "name": "claude-plugins-official",
       "author": "anthropics",
       "url": "https://github.com/anthropics/claude-plugins-official",
-      "stars": 44219,
+      "stars": 44218,
       "forks": 4647,
       "weeklyStars": 4250,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+      "zhDesc": "Anthropic 官方维护的 Claude Code 高质量插件目录，收录内部与第三方插件并支持通过 /plugin 命令直接安装。为开发者提供统一、可信的插件市场入口，避免零散寻找和甄别插件成本。",
       "features": [
-        "",
-        "",
-        ""
+        "官方精选插件市场，区分内部与第三方来源",
+        "支持 /plugin 命令一键安装与浏览发现",
+        "规范插件结构与命名迁移机制保障兼容"
       ],
-      "audience": ""
+      "audience": "Claude Code 用户、AI 应用开发者、插件开发者、技术团队负责人、开源贡献者"
     },
     {
       "rank": 3,
       "name": "ruflo",
       "author": "ruvnet",
       "url": "https://github.com/ruvnet/ruflo",
-      "stars": 78868,
+      "stars": 78870,
       "forks": 9260,
       "weeklyStars": 3349,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+      "zhDesc": "Ruflo 是面向 Claude Code 与 Codex 的智能体编排框架，内置 100+ 专业智能体、蜂群协作与向量记忆。它让多个智能体跨机器安全协同、从任务中自我学习，而不是孤立执行。",
       "features": [
-        "",
-        "",
-        ""
+        "100+ 专业智能体蜂群协同与共识调度",
+        "HNSW 向量记忆跨会话留存并自学习复用",
+        "零信任联邦让跨机器智能体安全协作"
       ],
-      "audience": ""
+      "audience": "AI 应用开发者、Claude Code 重度用户、多智能体系统研究者、DevOps 工程师、企业架构师"
     },
     {
       "rank": 4,
       "name": "skills",
       "author": "android",
       "url": "https://github.com/android/skills",
-      "stars": 9504,
+      "stars": 9506,
       "forks": 613,
       "weeklyStars": 1471,
       "language": "Kotlin",
       "langColor": "#A97BFF",
-      "zhDesc": "暂无描述",
+      "zhDesc": "Google 官方推出的 Android AI 技能库，以标准化的 SKILL.md 文件为 LLM 提供模块化指令与最佳实践。专门补齐模型在 Android 开发薄弱场景上的表现，可通过 Android CLI 或编辑器插件一键安装。",
       "features": [
-        "",
-        "",
-        ""
+        "标准化 SKILL.md 模块化指令，随取随用",
+        "聚焦 LLM 表现不佳的 Android 开发场景",
+        "支持 Android CLI 与 Claude、Codex 插件安装"
       ],
-      "audience": ""
+      "audience": "Android 开发者、AI 编程助手用户、移动端架构师、开发者工具链工程师"
     },
     {
       "rank": 5,
       "name": "opencode",
       "author": "anomalyco",
       "url": "https://github.com/anomalyco/opencode",
-      "stars": 220867,
+      "stars": 220868,
       "forks": 29523,
       "weeklyStars": 6765,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "The open source coding agent.",
+      "zhDesc": "OpenCode 是开源的终端 AI 编码智能体，可直接在命令行中读写代码、执行任务。内置 build 与 plan 两种模式，兼顾开发与只读分析，帮助开发者安全高效地把 AI 融入日常编码流程。",
       "features": [
-        "",
-        "",
-        ""
+        "终端原生交互，无需离开命令行即可编码",
+        "内置 build 与 plan 双智能体，Tab 键切换",
+        "支持 npm、Homebrew、Nix 等多渠道安装"
       ],
-      "audience": ""
+      "audience": "软件开发者、开源贡献者、DevOps 工程师、技术团队负责人、AI 编程爱好者"
     },
     {
       "rank": 6,
       "name": "orca",
       "author": "stablyai",
       "url": "https://github.com/stablyai/orca",
-      "stars": 104278,
-      "forks": 6584,
+      "stars": 104283,
+      "forks": 6583,
       "weeklyStars": 9545,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Orca is the place for working with a fleet of agents (e.g. Grok Bot, Claude Code). Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+      "zhDesc": "Orca 是面向并行 AI 编程智能体的桌面编排器，让 Claude Code、Codex、Grok 等命令行智能体各自在独立 git worktree 中同时运行。支持手机端远程监控、SSH 远程运行时与内嵌终端，让开发者用自有订阅高效管理成群的智能体。",
       "features": [
-        "",
-        "",
-        ""
+        "多智能体并行运行于独立 worktree 便于对比择优",
+        "手机伴侣应用随时监控并追加指令",
+        "内嵌浏览器设计模式点选元素直送提示词"
       ],
-      "audience": ""
+      "audience": "AI 编程工具重度用户、独立开发者、前端与全栈工程师、技术团队负责人、开源贡献者"
     },
     {
       "rank": 7,
       "name": "plugins",
       "author": "cursor",
       "url": "https://github.com/cursor/plugins",
-      "stars": 13839,
+      "stars": 13840,
       "forks": 1367,
       "weeklyStars": 1946,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Cursor plugin specification and official plugins",
+      "zhDesc": "Cursor 官方插件仓库，收录面向主流开发工具与 SaaS 产品的 Agent 插件规范与实现。每个插件独立目录并附带清单，让 AI 直接操作 GitHub、Salesforce、Google 全家桶等真实业务系统。",
       "features": [
-        "",
-        "",
-        ""
+        "插件独立清单与技能规则标准化组织",
+        "覆盖开发工具、办公协作与商业集成",
+        "内置 MCP 服务定义可直接接入使用"
       ],
-      "audience": ""
+      "audience": "Cursor 用户、AI 应用开发者、平台工程师、SaaS 集成开发者、技术团队负责人"
     },
     {
       "rank": 8,
@@ -142,13 +142,13 @@
       "weeklyStars": 3449,
       "language": "Rust",
       "langColor": "#DEA584",
-      "zhDesc": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "zhDesc": "为 AI 编码代理提供长期记忆与跨代理交接的统一方案。以 Git 版本化的 Markdown wiki 作为事实来源，默认零 LLM 调用，可在多个代理、多台机器和团队之间共享项目记忆。",
       "features": [
-        "",
-        "",
-        ""
+        "跨 20+ 编码代理共享记忆，交接一次性认领",
+        "Git 版本化 Markdown wiki 为事实来源，可 grep 可手改",
+        "零 LLM 调用完成记忆捕获与检索，支持自托管多用户"
       ],
-      "audience": ""
+      "audience": "AI 编程代理重度用户、使用 Claude Code/Codex 的开发者、需要团队共享记忆的工程团队、多机协作开发者、独立开发者"
     },
     {
       "rank": 9,
@@ -160,85 +160,85 @@
       "weeklyStars": 3303,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub:https://clianything.cc/",
+      "zhDesc": "港大数据智能实验室开源的项目，通过 7 阶段自动流水线把任意有源码的软件转换为 AI 智能体可直接调用的 CLI 工具。解决智能体难以操作专业软件的痛点，已有 40 余款工具、2400+ 测试全部通过。",
       "features": [
-        "",
-        "",
-        ""
+        "一条命令自动生成 CLI 并配套测试文档",
+        "封装真实软件内核保留完整专业能力",
+        "内置 JSON 输出与交互式 REPL 双模式"
       ],
-      "audience": ""
+      "audience": "AI 智能体开发者、自动化工程师、开源贡献者、科研人员、DevOps 工程师"
     },
     {
       "rank": 10,
       "name": "ComfyUI",
       "author": "Comfy-Org",
       "url": "https://github.com/Comfy-Org/ComfyUI",
-      "stars": 142455,
+      "stars": 142456,
       "forks": 16799,
       "weeklyStars": 4531,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world.",
+      "zhDesc": "ComfyUI 是基于节点图的模块化 AI 创作引擎，支持图像、视频、3D、音频等多模态生成工作流。它以极致的本地推理优化著称，4GB 显存即可流畅运行大型开源扩散模型，并提供 API 与 App Mode 接入生产环境。",
       "features": [
-        "",
-        "",
-        ""
+        "节点图可视化搭建与复用工作流，无需编码",
+        "极致显存优化，4GB 显存也能跑大模型",
+        "原生支持最新开源模型并可自定义节点扩展"
       ],
-      "audience": ""
+      "audience": "AI 绘画创作者、视觉设计师、算法工程师、内容生产团队、本地部署爱好者"
     },
     {
       "rank": 11,
       "name": "VoiceStudio",
       "author": "debpalash",
       "url": "https://github.com/debpalash/VoiceStudio",
-      "stars": 83912,
+      "stars": 83916,
       "forks": 9264,
       "weeklyStars": 12526,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages.",
+      "zhDesc": "完全本地运行的 ElevenLabs 开源替代品，支持声音克隆、语音设计、视频配音、听写转写与有声书制作，覆盖 646 种语言。数据全程留在本地硬件，无需上传云端，兼顾隐私与成本。",
       "features": [
-        "",
-        "",
-        ""
+        "声音克隆与语音设计，自定义专属音色",
+        "视频配音、听写转写与有声书批量生成",
+        "提供本地 API 与 MCP，可接入 AI 智能体"
       ],
-      "audience": ""
+      "audience": "内容创作者、播客与视频制作者、AI 应用开发者、隐私敏感型企业、有声书出版从业者"
     },
     {
       "rank": 12,
       "name": "hyperframes",
       "author": "heygen-com",
       "url": "https://github.com/heygen-com/hyperframes",
-      "stars": 71039,
+      "stars": 71041,
       "forks": 6417,
       "weeklyStars": 5553,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Write HTML. Render video. Built for agents.",
+      "zhDesc": "HyperFrames 是开源视频渲染框架，可将 HTML、CSS、媒体与可寻址动画确定性地渲染为 MP4 视频。专为 AI 编码智能体设计，无需 React 与构建步骤，浏览器即可即时预览。",
       "features": [
-        "",
-        "",
-        ""
+        "用 HTML 定义视频，无构建步骤浏览器直接预览",
+        "逐帧寻址的确定性渲染，同输入必得同输出",
+        "内置智能体技能与数百个可复用动效组件"
       ],
-      "audience": ""
+      "audience": "前端开发者、视频创作者、AI 智能体开发者、内容营销团队、自动化内容工程师"
     },
     {
       "rank": 13,
       "name": "scientific-agent-skills",
       "author": "K-Dense-AI",
       "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
-      "stars": 54327,
+      "stars": 54328,
       "forks": 4786,
       "weeklyStars": 3077,
       "language": "Python",
       "langColor": "#3572A5",
-      "zhDesc": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide. 177 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
+      "zhDesc": "为 AI Agent 提供 177 个经验证的科研技能和 100+ 科学数据库，覆盖生物、化学、医学、药物发现等领域。遵循 Agent Skills 开放标准，让 Cursor、Claude Code 等编码助手直接胜任真实科研工作流。",
       "features": [
-        "",
-        "",
-        ""
+        "177 个已验证技能，覆盖二十余个学科领域",
+        "100+ 科学数据库查询，带来源溯源与分页契约",
+        "兼容 Cursor、Claude Code 等 Agent Skills 开放标准"
       ],
-      "audience": ""
+      "audience": "科研人员、生物信息学家、药物研发人员、数据科学家、AI 应用开发者"
     },
     {
       "rank": 14,
@@ -250,13 +250,13 @@
       "weeklyStars": 4221,
       "language": "Java",
       "langColor": "#B07219",
-      "zhDesc": "Ghidra is a software reverse engineering (SRE) framework",
+      "zhDesc": "美国国家安全局研究部门开源的软件逆向工程框架，集反汇编、反编译、图形化与脚本化分析于一体。支持多平台多指令集，可交互或自动化运行，是恶意代码分析与漏洞研究的强大工具。",
       "features": [
-        "",
-        "",
-        ""
+        "反汇编、反编译与函数调用图分析",
+        "支持多种处理器指令集与可执行格式",
+        "Java/Python 脚本与扩展二次开发"
       ],
-      "audience": ""
+      "audience": "安全研究员、逆向工程师、恶意代码分析师、漏洞挖掘人员、CTF 参赛者"
     },
     {
       "rank": 15,
@@ -268,13 +268,13 @@
       "weeklyStars": 1094,
       "language": "TypeScript",
       "langColor": "#3178C6",
-      "zhDesc": "Open-source Grok Bot alternative. Choose your own model and sandbox.",
+      "zhDesc": "开源可自托管的 AI 智能体平台，机器人拥有独立会话、记忆、例行任务与历史记录，可自带模型与沙箱后端。作为 Grok Bot、Claude Duet 等闭源助手的替代方案，支持 Docker 一键部署及网页、桌面、移动多端访问。",
       "features": [
-        "",
-        "",
-        ""
+        "持久化机器人，独立记忆与例行任务",
+        "自带模型密钥，兼容多种沙箱后端",
+        "网页、桌面端与 iOS/Android 多端"
       ],
-      "audience": ""
+      "audience": "自托管爱好者、AI 应用开发者、隐私敏感团队、DevOps 工程师、技术型创业者"
     }
   ]
 }

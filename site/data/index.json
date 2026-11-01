@@ -1,7 +1,17 @@
 {
   "gh": {
-    "count": 21,
+    "count": 22,
     "months": [
+      {
+        "label": "2026年11月",
+        "items": [
+          {
+            "date": "2026-11-01",
+            "count": 15,
+            "summary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 AI 编程代理技能 · 安全审计 · 金融多智能体交易等领域。superpowers 以 310141 Star 位居总量榜首，hallmark 本周新增 12062 Star 领跑增量。编码智能体的审计、记忆与设计能力密集涌现。"
+          }
+        ]
+      },
       {
         "label": "2026年10月",
         "items": [

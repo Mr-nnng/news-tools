@@ -1,0 +1,280 @@
+{
+  "weekLabel": "2026年第44周",
+  "weekInfo": "2026 年第 44 周 / 2026-11-01",
+  "date": "2026-11-01",
+  "count": 15,
+  "totalCount": 15,
+  "coverSummary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 AI 编程代理技能 · 安全审计 · 金融多智能体交易等领域。superpowers 以 310141 Star 位居总量榜首，hallmark 本周新增 12062 Star 领跑增量。编码智能体的审计、记忆与设计能力密集涌现。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "hallmark",
+      "author": "Nutlope",
+      "url": "https://github.com/Nutlope/hallmark",
+      "stars": 44027,
+      "forks": 2321,
+      "weeklyStars": 12062,
+      "language": "CSS",
+      "langColor": "#663399",
+      "zhDesc": "Hallmark 是给 Claude Code、Cursor 等 AI 编程工具用的反「AI 味」设计技能，内置 50 套主题材质与真实浏览器检查。它按页面目标生成成品页面，并拦截假表单、空板块等机器痕迹，让产出不再一眼看出是 AI 生成。",
+      "features": [
+        "50 套主题材质，按任务自动搭配页面骨架",
+        "sloplint 八档宽度渲染检测，拦截 AI 设计套路",
+        "可抓取真实产品截图，支持重构与审计现有页面"
+      ],
+      "audience": "前端工程师、独立开发者、产品设计师、AI 编程工具用户、全栈创业者"
+    },
+    {
+      "rank": 2,
+      "name": "security-audit-skill",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "stars": 55460,
+      "forks": 3614,
+      "weeklyStars": 11908,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Cloudflare 开源的编码代理技能，可将 AI 编码助手改造为安全审计员，经侦察、漏洞猎取、候选验证、独立复核六个阶段输出机器可读结论。对抗式验证与多轮叠加机制显著提升漏洞发现覆盖率。",
+      "features": [
+        "六阶段审计流程内置独立对抗式验证",
+        "结构化 findings.json 配套 Node 校验器",
+        "多次运行叠加累积持续提升漏洞覆盖率"
+      ],
+      "audience": "安全工程师、渗透测试人员、代码审计员、DevSecOps 工程师、AI 编码代理使用者"
+    },
+    {
+      "rank": 3,
+      "name": "claude-seo",
+      "author": "AgriciDaniel",
+      "url": "https://github.com/AgriciDaniel/claude-seo",
+      "stars": 25094,
+      "forks": 3320,
+      "weeklyStars": 4814,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "面向 Claude Code 的免费开源 SEO 审计插件，内置 26 个子技能与 19 个专家代理，覆盖技术 SEO、E-E-A-T、Schema 与 AI 搜索优化。多代理并行，10 到 15 分钟输出按优先级排序的可执行行动方案。",
+      "features": [
+        "19 个专家代理并行审计技术、内容与 AI 搜索",
+        "检测并校验 Schema.org 标记，直接生成结构化数据",
+        "评估 AI Overviews 与 ChatGPT 的引用概率（GEO）"
+      ],
+      "audience": "SEO 机构从业者、企业内 SEO 团队、自由 SEO 顾问、电商运营、内容营销人员"
+    },
+    {
+      "rank": 4,
+      "name": "impeccable",
+      "author": "pbakaus",
+      "url": "https://github.com/pbakaus/impeccable",
+      "stars": 98426,
+      "forks": 5809,
+      "weeklyStars": 12031,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "为编码 AI Agent 提供设计词汇表与技能包，用 polish、bolder、critique、audit 等 24 个命令精确指挥界面打磨与评审。内置 62 条确定性规则检测「AI 味」设计，让生成的前端页面告别千篇一律的默认审美。",
+      "features": [
+        "24 个命令覆盖调优、评审、收尾与实时迭代",
+        "62 条确定性规则无需 LLM 即可识别设计问题",
+        "支持 Claude Code、Cursor、Copilot 等主流工具"
+      ],
+      "audience": "前端开发者、UI/UX 设计师、AI 编程工具重度用户、独立开发者、产品工程师"
+    },
+    {
+      "rank": 5,
+      "name": "superpowers",
+      "author": "obra",
+      "url": "https://github.com/obra/superpowers",
+      "stars": 310141,
+      "forks": 27594,
+      "weeklyStars": 5636,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "面向编码智能体的完整软件开发方法论，由一组可组合技能与引导指令构成，会话语境中自动触发。它强制先澄清需求、写设计与分步计划，再以 TDD 和子代理驱动实现，让长时间自主编码不偏离方案。",
+      "features": [
+        "头脑风暴自动澄清需求并产出设计文档",
+        "任务拆到 2-5 分钟粒度并附验证步骤",
+        "强制红绿重构 TDD 与子代理逐任务评审"
+      ],
+      "audience": "AI 编程工具用户、软件工程师、技术负责人、开源贡献者"
+    },
+    {
+      "rank": 6,
+      "name": "andrej-karpathy-skills",
+      "author": "multica-ai",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "stars": 227565,
+      "forks": 22707,
+      "weeklyStars": 4277,
+      "language": "",
+      "langColor": "",
+      "zhDesc": "一份为 Claude Code 设计的 CLAUDE.md 行为准则，源自 Andrej Karpathy 对 LLM 编程陷阱的观察。通过四条原则纠正模型乱假设、过度设计和误改无关代码等常见问题，显著提升生成代码质量。",
+      "features": [
+        "四原则约束：先思考、求简洁、外科式改动、目标驱动",
+        "提供插件与 CLAUDE.md 两种安装方式",
+        "附带 Cursor 规则，跨编辑器统一生效"
+      ],
+      "audience": "AI 编程工具用户、Claude Code 开发者、使用 Cursor 的工程师、技术负责人、独立开发者"
+    },
+    {
+      "rank": 7,
+      "name": "TradingAgents",
+      "author": "TauricResearch",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "stars": 119100,
+      "forks": 22786,
+      "weeklyStars": 5483,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "模拟真实交易公司分工的多智能体金融交易框架：分析师、研究员、交易员与风控团队围绕同一标的辩论后给出决策。基于 LangGraph 构建，支持多模型接入、回测评分与决策记忆复盘。",
+      "features": [
+        "多分析师并行协作，辩论后输出交易决策",
+        "支持 OpenAI、Gemini、Claude 等多家模型接入",
+        "内置回测网格与决策记忆，持续评估表现"
+      ],
+      "audience": "量化研究员、金融分析师、AI 多智能体开发者、投资策略研究人员、LLM 应用工程师"
+    },
+    {
+      "rank": 8,
+      "name": "skills",
+      "author": "jakubkrehel",
+      "url": "https://github.com/jakubkrehel/skills",
+      "stars": 9643,
+      "forks": 369,
+      "weeklyStars": 1272,
+      "language": "Markdown",
+      "langColor": "#083FA1",
+      "zhDesc": "一套面向 AI 编码助手的前端设计技能集，覆盖无障碍、排版、配色、布局、文案与 UI 细节。让 Agent 按专业设计规范审查和打磨界面，产出更精致可靠的产品体验。",
+      "features": [
+        "跨无障碍、排版、配色等维度一键审查整屏界面",
+        "给出圆角、阴影、光学对齐等精确数值规范",
+        "从 Figma 或截图还原设计并生成组件各状态"
+      ],
+      "audience": "前端工程师、UI 设计师、设计工程师、独立开发者、产品经理"
+    },
+    {
+      "rank": 9,
+      "name": "taste-skill",
+      "author": "Leonxlnx",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "stars": 107127,
+      "forks": 7246,
+      "weeklyStars": 4975,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "为编码智能体注入设计品味的 Agent Skill，提供艺术方向研究、真实参考图和浏览器实测校验。让 AI 生成的网页与仪表盘摆脱千篇一律的模板感，产出接近获奖站点的界面。",
+      "features": [
+        "20 种研究方向派单，一键生成差异化艺术方向",
+        "调用开放图库真实图片素材并自动标注版权",
+        "真实浏览器三档宽度检查，自评截图并修复"
+      ],
+      "audience": "前端工程师、独立开发者、UI 视觉设计师、AI 编程工具重度用户、产品设计师"
+    },
+    {
+      "rank": 10,
+      "name": "t3code",
+      "author": "pingdotgg",
+      "url": "https://github.com/pingdotgg/t3code",
+      "stars": 35837,
+      "forks": 8803,
+      "weeklyStars": 3718,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "T3 Code 是一个 AI 编程代理的统一控制面板，可通过 iOS、Android、网页和 Electron 桌面端远程操控本机的 Claude Code、Codex、Cursor 等代理。完全开源且注重性能与远程能力，让开发者在任意设备上随时接管多个智能体。",
+      "features": [
+        "一套界面统一接管 Claude、Codex、Cursor 等代理",
+        "手机、网页与桌面端实时远程访问本机代理",
+        "完全开源可自由分叉，脚本与包管理器一键安装"
+      ],
+      "audience": "独立开发者、AI 编程工具重度用户、远程办公工程师、开源爱好者、技术团队负责人"
+    },
+    {
+      "rank": 11,
+      "name": "claude-mem",
+      "author": "thedotmack",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "stars": 108035,
+      "forks": 9479,
+      "weeklyStars": 4575,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "为 Claude Code 等 AI 编程代理打造的持久化记忆压缩系统，自动记录会话中的工具操作并提炼成语义摘要。让代理跨会话延续项目上下文，免去重复解释，同时显著节省 token 开销。",
+      "features": [
+        "自动捕获会话操作并生成可检索的语义摘要",
+        "三层渐进式检索先看索引再取详情，省约十倍 token",
+        "兼容 Claude Code、Codex、Gemini、OpenCode 等多代理"
+      ],
+      "audience": "AI 编程代理重度用户、全栈开发者、独立开发者、AI 工具链开发者、技术团队负责人"
+    },
+    {
+      "rank": 12,
+      "name": "skills",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/skills",
+      "stars": 185949,
+      "forks": 21950,
+      "weeklyStars": 2389,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 官方开源的 Agent Skills 集合，通过指令、脚本与资源文件夹让 Claude 动态加载并稳定完成专项任务。内含生产在用的 docx/pdf/pptx/xlsx 技能实现，是开发者编写自定义技能的权威参考。",
+      "features": [
+        "文档技能覆盖 Word、PDF、PPT、Excel",
+        "创意设计、开发、企业办公多场景示例",
+        "附规范与模板，可快速编写自定义技能"
+      ],
+      "audience": "AI 应用开发者、Prompt 工程师、企业自动化团队、Claude 资深用户、技术文档工程师"
+    },
+    {
+      "rank": 13,
+      "name": "ECC",
+      "author": "affaan-m",
+      "url": "https://github.com/affaan-m/ECC",
+      "stars": 294152,
+      "forks": 43542,
+      "weeklyStars": 6380,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 Claude Code、Codex、Cursor 等 AI 编程助手的性能优化系统，内置 71 个智能体、314 项技能与记忆、安全扫描能力。用「计划-测试-审查-验证-记忆」闭环把一次性提示变成可复用的工程化工作流。",
+      "features": [
+        "71 个专职智能体覆盖规划、评审与构建修复",
+        "314 项技能按需加载，避免上下文膨胀",
+        "AgentShield 扫描提示、MCP 与密钥泄露风险"
+      ],
+      "audience": "AI 编程助手重度用户、独立开发者、技术团队负责人、DevOps 工程师、安全工程师"
+    },
+    {
+      "rank": 14,
+      "name": "dsh-purge",
+      "author": "YuJunZhiXue",
+      "url": "https://github.com/YuJunZhiXue/dsh-purge",
+      "stars": 14680,
+      "forks": 3397,
+      "weeklyStars": 6641,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "针对官方 DeepSeek Harness 的本地安全评估插件，支持按模型切换提示词、注入规则集并一键应用或还原补丁。用于区分宿主层拦截与模型拒答，仅允许回环与内网环境运行。",
+      "features": [
+        "按模型切换提示词，一键应用补丁",
+        "Clean/Drill 双面板与规则集管理",
+        "自动备份原文件，可随时还原卸载"
+      ],
+      "audience": "安全研究人员、红队工程师、模型对齐研究者、AI 应用开发者"
+    },
+    {
+      "rank": 15,
+      "name": "AstrBot",
+      "author": "AstrBotDevs",
+      "url": "https://github.com/AstrBotDevs/AstrBot",
+      "stars": 45367,
+      "forks": 3324,
+      "weeklyStars": 2137,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "开源的一体化 AI Agent 聊天机器人平台与开发框架，可接入 QQ、微信、飞书、Telegram 等主流即时通讯应用。内置多模型接入、千余插件市场与 Agent 沙箱，帮助个人和团队快速落地生产级 AI 应用。",
+      "features": [
+        "一站式接入 QQ、微信、飞书、Telegram 等十余平台",
+        "支持主流大模型及 MCP、知识库、人设等 Agent 能力",
+        "千余插件一键安装，内置沙箱保障代码安全执行"
+      ],
+      "audience": "AI 应用开发者、企业 IT 运维人员、社群运营者、自动化流程搭建者、技术爱好者"
+    }
+  ]
+}

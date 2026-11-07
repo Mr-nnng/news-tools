@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 22,
+    "count": 23,
     "months": [
       {
         "label": "2026年11月",
         "items": [
+          {
+            "date": "2026-11-07",
+            "count": 18,
+            "summary": "本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI 编程代理 · 智能体技能 · 界面设计 · 网页抓取 · 金融量化等领域。t3code 本周新增 16782 Star 领跑，superpowers 以 313652 Star 位居榜首；围绕编码代理的控制台、记忆压缩与技能框架成为本周最集中的方向。"
+          },
           {
             "date": "2026-11-01",
             "count": 15,

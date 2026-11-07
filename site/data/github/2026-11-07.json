@@ -1,0 +1,334 @@
+{
+  "weekLabel": "2026年第45周",
+  "weekInfo": "2026 年第 45 周 / 2026-11-07",
+  "date": "2026-11-07",
+  "count": 18,
+  "totalCount": 18,
+  "coverSummary": "本周 GitHub Trending 收录 18 个热门仓库，涵盖 AI 编程代理 · 智能体技能 · 界面设计 · 网页抓取 · 金融量化等领域。t3code 本周新增 16782 Star 领跑，superpowers 以 313652 Star 位居榜首；围绕编码代理的控制台、记忆压缩与技能框架成为本周最集中的方向。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "claude-mem",
+      "author": "thedotmack",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "stars": 114054,
+      "forks": 9892,
+      "weeklyStars": 8726,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "为 Claude Code 等 AI 编程代理打造的持久化记忆压缩系统，自动捕获会话中的工具使用与决策，用 AI 压缩成语义摘要并注入后续会话。让代理跨会话保持项目上下文记忆，无需重复解释背景。",
+      "features": [
+        "自动捕获会话操作并压缩为语义摘要",
+        "三层 MCP 搜索按需取详情省约 10 倍 token",
+        "支持 Claude Code、Codex、Gemini 等多代理"
+      ],
+      "audience": "AI 编程代理用户、Claude Code 开发者、独立开发者、技术团队负责人、MCP 工具开发者"
+    },
+    {
+      "rank": 2,
+      "name": "Claude-Code-Game-Studios",
+      "author": "Donchitos",
+      "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "stars": 36148,
+      "forks": 4760,
+      "weeklyStars": 6018,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "将 Claude Code 变身完整游戏开发工作室，内置 49 个专业代理与 74 个工作流技能，按真实工作室层级协作。为单人 AI 游戏开发补上设计评审、QA 关卡与规范约束，让从构思到发布全程有序可控。",
+      "features": [
+        "49 个代理按总监、主管、专家三级分工协作",
+        "74 个斜杠技能覆盖设计到发布全流程",
+        "钩子与路径规则自动强制代码质量标准"
+      ],
+      "audience": "独立游戏开发者、Claude Code 用户、游戏策划与系统设计师、小型游戏团队、AI 辅助编程爱好者"
+    },
+    {
+      "rank": 3,
+      "name": "t3code",
+      "author": "pingdotgg",
+      "url": "https://github.com/pingdotgg/t3code",
+      "stars": 49894,
+      "forks": 9753,
+      "weeklyStars": 16782,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "T3 Code 是一个 AI 编程代理的统一控制台，可通过 iOS、Android、网页和桌面端远程操控本机的 Claude Code、Codex、Cursor 等代理。它让多个代理订阅在同一界面中集中管理，并支持手机远程访问与后台常驻服务。",
+      "features": [
+        "统一接管 Claude Code、Codex、Cursor 等主流代理",
+        "手机与桌面多端远程控制本机运行中的代理",
+        "开源可自行分叉定制，支持后台服务与一键更新"
+      ],
+      "audience": "AI 编程开发者、全栈工程师、技术团队负责人、远程办公开发者、开源爱好者"
+    },
+    {
+      "rank": 4,
+      "name": "worktrunk",
+      "author": "max-sixty",
+      "url": "https://github.com/max-sixty/worktrunk",
+      "stars": 11810,
+      "forks": 455,
+      "weeklyStars": 2184,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Worktrunk 是专为并行 AI 代理工作流设计的 Git worktree 命令行管理工具。它用 wt switch、list、merge、remove 把工作树管理简化到与分支一样简单，还提供钩子自动化与写时复制缓存共享。",
+      "features": [
+        "三条核心命令让工作树操作与分支同样简单",
+        "钩子与 LLM 提交信息自动化本地工作流",
+        "写时复制共享构建缓存，多工作树免重复编译"
+      ],
+      "audience": "AI 编程代理用户、全栈开发者、DevOps 工程师、开源贡献者、技术团队负责人"
+    },
+    {
+      "rank": 5,
+      "name": "hallmark",
+      "author": "Nutlope",
+      "url": "https://github.com/Nutlope/hallmark",
+      "stars": 49667,
+      "forks": 2633,
+      "weeklyStars": 6900,
+      "language": "CSS",
+      "langColor": "#663399",
+      "zhDesc": "面向 Claude Code、Cursor、Codex 等 AI 编程工具的反「AI 味」设计技能。内置五十套主题材质，用真实浏览器按机器生成痕迹逐项检测，并由独立审查者复核，产出不像 AI 做的页面。",
+      "features": [
+        "五十套主题材质，页面按用途自动生成布局",
+        "八种宽度浏览器渲染检测 AI 生成痕迹",
+        "支持重设计与审计，保留原有内容与逻辑"
+      ],
+      "audience": "AI 编程工具用户、前端开发者、独立开发者、产品设计师、设计工程师"
+    },
+    {
+      "rank": 6,
+      "name": "skills",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/skills",
+      "stars": 188201,
+      "forks": 22198,
+      "weeklyStars": 3159,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 官方开源的 Agent Skills 仓库，用包含 SKILL.md 的文件夹教会 Claude 可复现地完成专项任务。含文档处理、创意设计、企业工作流等示例，是构建自定义技能的最佳参考。",
+      "features": [
+        "每个技能独立文件夹，SKILL.md 定义指令与元数据",
+        "开源 docx/pdf/pptx/xlsx 生产级文档技能实现",
+        "支持 Claude Code 插件市场一键安装试用"
+      ],
+      "audience": "AI 应用开发者、Claude 用户、提示词工程师、企业自动化团队、开源贡献者"
+    },
+    {
+      "rank": 7,
+      "name": "OpenMausBot",
+      "author": "milind-soni",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "stars": 15434,
+      "forks": 2170,
+      "weeklyStars": 6395,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源的 Grok Bot 替代品：在桌面聊天应用里组建一支 AI 机器人团队，每个机器人都有独立的性格、模型、云电脑和连接的应用。它本地优先运行在你自己已登录的 Claude、Codex、Grok CLI 上，对话数据存储在本机，敏感操作需要你批准。",
+      "features": [
+        "每个机器人独立配置模型与人格，可随时切换",
+        "内置云 Linux 桌面与隔离开放的本地虚拟机",
+        "Shell 命令与文件改动以卡片形式请求批准"
+      ],
+      "audience": "AI 智能体开发者、效率工具爱好者、自动化工作流用户、独立开发者、开源软件支持者"
+    },
+    {
+      "rank": 8,
+      "name": "impeccable",
+      "author": "pbakaus",
+      "url": "https://github.com/pbakaus/impeccable",
+      "stars": 104860,
+      "forks": 6231,
+      "weeklyStars": 8172,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "为编码智能体提供一套设计词汇表的工具，用 polish、bolder 等命令精准控制界面修改方向。内置 62 条确定性规则与评分式审查，在交付前拦截 AI 生成的同质化设计。",
+      "features": [
+        "24 个定向命令覆盖强化、收敛与润色",
+        "62 条确定性规则离线检测 AI 味设计",
+        "浏览器内选中元素实时切换变体并回写源码"
+      ],
+      "audience": "前端工程师、UI 设计师、独立开发者、AI 编程工具重度用户、产品经理"
+    },
+    {
+      "rank": 9,
+      "name": "superpowers",
+      "author": "obra",
+      "url": "https://github.com/obra/superpowers",
+      "stars": 313652,
+      "forks": 27901,
+      "weeklyStars": 4577,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "面向各类编码智能体的软件开发方法论与可组合技能框架，让 AI 先澄清需求再动手写代码。通过自动触发的技能约束智能体遵循 TDD、分阶段评审与子代理并行开发，产出可预测且经过验证的工程结果。",
+      "features": [
+        "自动触发技能：需求梳理到分支收尾全流程覆盖",
+        "强制红绿重构 TDD 与证据式验证",
+        "子代理并行开发加两阶段代码评审"
+      ],
+      "audience": "AI 编程工具用户、独立开发者、软件工程师、技术负责人、DevOps 工程师"
+    },
+    {
+      "rank": 10,
+      "name": "DeepTutor",
+      "author": "HKUDS",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "stars": 55976,
+      "forks": 6847,
+      "weeklyStars": 4588,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "HKUDS 开源的智能体原生个性化学习工作台，整合辅导问答、多引擎知识库检索、图书生成与研究、练习评测于一体。可审计的三层记忆持续积累学习画像，实现跨会话的终身个性化教学。",
+      "features": [
+        "多引擎 RAG 知识库，回答带源级引用",
+        "三层可审计记忆，个性化过程不黑箱",
+        "桌面端、Docker、CLI 与 IM 多端接入"
+      ],
+      "audience": "自学者、高校师生、AI 教育产品开发者、企业培训与知识管理团队、教育技术研究者"
+    },
+    {
+      "rank": 11,
+      "name": "Hyprland",
+      "author": "hyprwm",
+      "url": "https://github.com/hyprwm/Hyprland",
+      "stars": 40448,
+      "forks": 2167,
+      "weeklyStars": 1413,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "Hyprland 是一款完全独立、高度可定制的动态平铺 Wayland 合成器，兼具精美视觉效果与前沿特性。它不依赖 wlroots 等现有框架，提供强大插件系统、丰富布局与流畅动画，是追求桌面美学与性能用户的理想选择。",
+      "features": [
+        "渐变边框、模糊、动画与发光等丰富视觉特效",
+        "Dwindle/滚动/主栈等多种布局，支持 Lua 自定义",
+        "内置插件管理器，支持撕裂优化与 Socket IPC"
+      ],
+      "audience": "Linux 桌面用户、Wayland 爱好者、平铺窗口管理器用户、桌面美化玩家、C++ 开发者"
+    },
+    {
+      "rank": 12,
+      "name": "skills",
+      "author": "jakubkrehel",
+      "url": "https://github.com/jakubkrehel/skills",
+      "stars": 11301,
+      "forks": 439,
+      "weeklyStars": 1921,
+      "language": "Markdown",
+      "langColor": "#083FA1",
+      "zhDesc": "面向 AI 编码代理的界面技能集合，覆盖可访问性、布局、排版、配色、产品文案与 UI 打磨等主题。让代理按照成熟设计规范审查并修复界面，帮团队稳定产出高质量前端成果。",
+      "features": [
+        "多维度审查界面并输出排序问题报告",
+        "按精确数值打磨圆角、阴影、图标与动效",
+        "用色板、语义令牌与对比度构建配色系统"
+      ],
+      "audience": "前端工程师、UI/UX 设计师、设计工程师、独立开发者、AI 编码代理使用者"
+    },
+    {
+      "rank": 13,
+      "name": "OpenMontage",
+      "author": "calesthio",
+      "url": "https://github.com/calesthio/OpenMontage",
+      "stars": 77743,
+      "forks": 10347,
+      "weeklyStars": 4405,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "全球首个开源智能体视频制作系统，把 AI 编程助手变成完整的视频工作室。内置 12 条制作流水线与 100+ 工具、700+ 技能文件，可用免费公开素材剪出真正的实拍视频。",
+      "features": [
+        "12 条制作流水线覆盖讲解、纪录片、短片与配音本地化",
+        "100+ 工具接入 60 家供应商并七维评分自动择优",
+        "零 API Key 也能用本地 TTS 与免费实拍素材成片"
+      ],
+      "audience": "视频创作者、内容营销人员、AI 应用开发者、自媒体运营者、影视后期从业者"
+    },
+    {
+      "rank": 14,
+      "name": "pr-agent",
+      "author": "The-PR-Agent",
+      "url": "https://github.com/The-PR-Agent/pr-agent",
+      "stars": 15314,
+      "forks": 2130,
+      "weeklyStars": 1523,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "开源 AI 代码评审代理，可在 PR 中自动生成描述、审查代码并给出改进建议。支持 GitHub/GitLab/Bitbucket 等平台与多种大模型，可自托管，数据完全自主可控。",
+      "features": [
+        "一键生成 PR 描述、审查与改进建议",
+        "兼容 GitHub、GitLab、Bitbucket 等平台",
+        "支持主流大模型与 CLI、Docker 自托管"
+      ],
+      "audience": "后端开发者、代码评审负责人、DevOps 工程师、开源项目维护者、技术团队负责人"
+    },
+    {
+      "rank": 15,
+      "name": "openbot",
+      "author": "nightly-labs",
+      "url": "https://github.com/nightly-labs/openbot",
+      "stars": 6076,
+      "forks": 621,
+      "weeklyStars": 1808,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "本地优先的桌面 AI 团队工作台，可为每个 AI 代理分配独立工作区与会话，统一调度 Codex、Claude、Grok 等十余种 CLI 代理。通过任务队列、文件共享、内嵌浏览器和代理间通信，让多个 AI 像真实团队成员一样持久协作。",
+      "features": [
+        "多代理接入，统一管理 Codex、Claude、Grok 等",
+        "独立工作区与会话，支持代理互发消息协作",
+        "FIFO 任务队列，可暂停恢复且崩溃安全"
+      ],
+      "audience": "AI 应用开发者、自动化工程师、独立开发者、技术团队负责人、AI 研究者"
+    },
+    {
+      "rank": 16,
+      "name": "Scrapling",
+      "author": "D4Vinci",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "stars": 98874,
+      "forks": 10353,
+      "weeklyStars": 8372,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Python 全能网页抓取框架，集快速 HTTP 请求、隐身浏览器、智能解析与并发爬虫于一身。从单页提取到整站采集均可覆盖，内置反爬绕过、代理轮换与 MCP 服务，让爬虫开发高效省心。",
+      "features": [
+        "隐身浏览器自动绕过 Cloudflare 等反爬验证",
+        "并发爬虫支持暂停续爬、代理轮换与多格式导出",
+        "自适应元素定位，网站改版后仍能追踪目标"
+      ],
+      "audience": "数据工程师、爬虫开发者、AI 应用开发者、数据分析师、自动化集成开发者"
+    },
+    {
+      "rank": 17,
+      "name": "andrej-karpathy-skills",
+      "author": "multica-ai",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "stars": 230313,
+      "forks": 22918,
+      "weeklyStars": 3671,
+      "language": "",
+      "langColor": "",
+      "zhDesc": "一个 CLAUDE.md 文件，基于 Andrej Karpathy 对 LLM 编码陷阱的观察来约束 Claude Code 行为。用四条原则减少错误假设、过度设计与无关改动，让 AI 写代码更克制可靠。",
+      "features": [
+        "四原则约束：先思考、求简洁、外科式改动、目标驱动",
+        "有效抑制 AI 擅自假设与过度抽象膨胀",
+        "内置 Cursor 规则，支持插件或项目级安装"
+      ],
+      "audience": "Claude Code 使用者、AI 编程工具用户、提示词工程师、研发团队负责人、开源贡献者"
+    },
+    {
+      "rank": 18,
+      "name": "Kronos",
+      "author": "shiyu-coder",
+      "url": "https://github.com/shiyu-coder/Kronos",
+      "stars": 47078,
+      "forks": 7784,
+      "weeklyStars": 2984,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "首个面向金融市场 K 线语言的开源基础模型，基于全球 45 家以上交易所数据预训练。采用分层离散分词与自回归 Transformer 两阶段框架，为量化预测提供统一的开源底座。",
+      "features": [
+        "提供 4.1M 到 499M 多规格预训练模型可选",
+        "几行代码完成 OHLCV 预测与批量并行推理",
+        "内置 Qlib 微调与回测全流程脚本支持"
+      ],
+      "audience": "量化研究员、金融数据科学家、AI 算法工程师、量化交易开发者、金融科技产品经理"
+    }
+  ]
+}

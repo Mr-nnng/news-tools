@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 23,
+    "count": 24,
     "months": [
       {
         "label": "2026年11月",
         "items": [
+          {
+            "date": "2026-11-14",
+            "count": 15,
+            "summary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 开源情报 · AI 智能体 · 浏览器/桌面自动化 · 股票分析 · 物理仿真 等领域。sherlock 本周新增 13364 Star 领跑，Matt Pocock 的 skills 以 323862 Star 居首。"
+          },
           {
             "date": "2026-11-07",
             "count": 18,

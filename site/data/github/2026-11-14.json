@@ -1,0 +1,280 @@
+{
+  "weekLabel": "2026年第46周",
+  "weekInfo": "2026 年第 46 周 / 2026-11-14",
+  "date": "2026-11-14",
+  "count": 15,
+  "totalCount": 15,
+  "coverSummary": "本周 GitHub Trending 收录 15 个热门仓库，涵盖 开源情报 · AI 智能体 · 浏览器/桌面自动化 · 股票分析 · 物理仿真 等领域。sherlock 本周新增 13364 Star 领跑，Matt Pocock 的 skills 以 323862 Star 居首。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "sherlock",
+      "author": "sherlock-project",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "stars": 111186,
+      "forks": 12864,
+      "weeklyStars": 13364,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "开源情报工具，输入用户名即可在 400 多个社交网络中批量检索对应账号。可快速梳理同一用户名在各平台的注册痕迹，广泛用于 OSINT 调查与数字足迹排查。",
+      "features": [
+        "一键覆盖 400+ 社交网络的账号检索",
+        "支持多用户名批量、代理与超时配置",
+        "结果可导出 TXT、CSV、XLSX、JSON"
+      ],
+      "audience": "安全研究员、OSINT 调查人员、渗透测试工程师、新闻调查记者、隐私自查用户"
+    },
+    {
+      "rank": 2,
+      "name": "skills",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/skills",
+      "stars": 194163,
+      "forks": 22834,
+      "weeklyStars": 6169,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 官方开源的 Agent Skills 仓库，用 SKILL.md 指令文件夹教会 Claude 可复现地完成专项任务。内含生产级文档处理技能与完整规范模板，是构建自定义技能的最佳参考。",
+      "features": [
+        "涵盖创意设计、开发技术、企业办公等技能示例",
+        "开源 docx/pdf/pptx/xlsx 生产级文档技能",
+        "附技能规范、模板与 Claude Code 插件安装"
+      ],
+      "audience": "AI 应用开发者、提示词工程师、Claude 深度用户、企业自动化团队、技术文档工程师"
+    },
+    {
+      "rank": 3,
+      "name": "OpenMausBot",
+      "author": "milind-soni",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "stars": 22215,
+      "forks": 3082,
+      "weeklyStars": 7763,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源版 Grok Bot 替代品：通讯应用形态的桌面端，侧边栏每个机器人都是本机 Claude、Codex 或 Grok CLI 驱动的真实智能体。每个机器人有独立模型、云电脑与已连接应用，数据留在本机，无需新账号。",
+      "features": [
+        "每个机器人独立模型，对话中可随时切换",
+        "自带云电脑与本地 VM，可随时接管桌面",
+        "命令与文件改动先出审批卡片再执行"
+      ],
+      "audience": "AI 智能体开发者、效率工具重度用户、隐私敏感技术用户、独立开发者、开源爱好者"
+    },
+    {
+      "rank": 4,
+      "name": "agent-browser",
+      "author": "vercel-labs",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "stars": 50757,
+      "forks": 3528,
+      "weeklyStars": 4360,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Vercel Labs 出品的开源浏览器自动化 CLI，用 Rust 编写，让 AI 代理逐条执行命令驱动浏览器。页面以精简可访问性树快照返回，每个元素携带 @e1 式引用，解决代理读取和操作网页的可靠性问题。",
+      "features": [
+        "快照返回带引用的可访问性树，便于精确定位元素",
+        "后台守护进程常驻，浏览器跨命令保持打开状态",
+        "内置技能文档与 MCP 服务器，适配各类代理框架"
+      ],
+      "audience": "AI 代理开发者、自动化测试工程师、Rust 工具链爱好者、LLM 应用架构师、Web 数据采集工程师"
+    },
+    {
+      "rank": 5,
+      "name": "elephant-goldfish-model",
+      "author": "google",
+      "url": "https://github.com/google/elephant-goldfish-model",
+      "stars": 18649,
+      "forks": 1390,
+      "weeklyStars": 5560,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Google 开源的 AI 助手插件，让「大象」角色积累项目上下文起草设计文档，由「金鱼」角色以全新视角复审。可暴露隐含假设与盲点，让软件规格评审更严谨可靠。",
+      "features": [
+        "大象起草与金鱼复审分离，避免先入偏见",
+        "内置头脑风暴、起草、评审、漂移报告等技能",
+        "适配 Claude Code、Codex、Antigravity 等"
+      ],
+      "audience": "软件架构师、技术负责人、AI 编程工具用户、后端开发者、产品经理"
+    },
+    {
+      "rank": 6,
+      "name": "daily_stock_analysis",
+      "author": "ZhuLinsen",
+      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+      "stars": 71664,
+      "forks": 57311,
+      "weeklyStars": 3778,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于大模型的 A股/港股/美股/日股等多市场自选股智能分析系统，每日自动生成含评分、买卖点位与风险提示的决策仪表盘。内置免费行情与新闻源，可借 GitHub Actions 零成本定时运行并推送到多渠道。",
+      "features": [
+        "多市场行情聚合，AI 输出决策仪表盘",
+        "15 种内置策略，支持多轮追问与回测",
+        "六大渠道推送，Actions 零成本定时"
+      ],
+      "audience": "个人投资者、量化研究员、金融数据分析师、独立开发者、金融科技从业者"
+    },
+    {
+      "rank": 7,
+      "name": "auto-ontology",
+      "author": "NVIDIA",
+      "url": "https://github.com/NVIDIA/auto-ontology",
+      "stars": 12572,
+      "forks": 1032,
+      "weeklyStars": 4108,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "NVIDIA 开源的语义本体框架，从企业元数据自动生成知识图谱，为数据指标和关系提供可信业务语义。让 AI 智能体的查询可校验、可溯源，从根源解决数据分析结果不可靠的问题。",
+      "features": [
+        "自动从元数据生成图谱并协调口径冲突",
+        "自然语言转 SQL 并逐条校验溯源",
+        "支持 MCP、CLI 与 REST API 接入智能体"
+      ],
+      "audience": "数据工程师、AI 智能体开发者、数据分析师、数据治理负责人、平台架构师"
+    },
+    {
+      "rank": 8,
+      "name": "mujoco",
+      "author": "google-deepmind",
+      "url": "https://github.com/google-deepmind/mujoco",
+      "stars": 17879,
+      "forks": 2188,
+      "weeklyStars": 1764,
+      "language": "C++",
+      "langColor": "#F34B7D",
+      "zhDesc": "Google DeepMind 维护的通用物理引擎，专注于多关节体与接触动力学的高精度仿真。它是机器人学、生物力学与强化学习研究的业界标准工具，兼顾速度与准确性。",
+      "features": [
+        "高性能 C 运行时与 XML 模型编译器",
+        "Python 绑定、MJX/JAX 与 Unity 插件",
+        "内置交互式可视化与浏览器 WebAssembly 版本"
+      ],
+      "audience": "机器人研究者、强化学习算法工程师、生物力学研究人员、动画与图形开发者、仿真系统工程师"
+    },
+    {
+      "rank": 9,
+      "name": "skills",
+      "author": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 323862,
+      "forks": 27182,
+      "weeklyStars": 7599,
+      "language": "Shell",
+      "langColor": "#89E051",
+      "zhDesc": "Matt Pocock 开源的 AI 编程助手技能集，从需求对齐、TDD 到代码审查覆盖真实工程全流程。技能小巧、可组合、适配任意模型，帮你摆脱 vibe coding 式的失控开发。",
+      "features": [
+        "追问式需求对齐，开工前消除理解偏差与返工",
+        "内置 TDD 红绿重构循环与系统化 Bug 诊断流程",
+        "共享术语表与架构扫描遏制 AI 加速的代码熵增"
+      ],
+      "audience": "AI 编程重度用户、全栈工程师、技术负责人、独立开发者、开源贡献者"
+    },
+    {
+      "rank": 10,
+      "name": "agent-skills",
+      "author": "addyosmani",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "stars": 117171,
+      "forks": 12253,
+      "weeklyStars": 3502,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "面向 AI 编码代理的生产级技能包，将资深工程师的工作流、质量门禁与最佳实践封装为可复用的 Markdown 技能。覆盖规格、计划、编码、测试、评审到发布的全生命周期，防止 AI 代理跳过测试与安全审查。",
+      "features": [
+        "25 个技能覆盖开发全生命周期",
+        "9 个斜杠命令自动匹配所需技能",
+        "内置反借口表与验证门禁强制质量"
+      ],
+      "audience": "AI 编程工具用户、软件工程师、技术负责人、DevOps 工程师、开源贡献者"
+    },
+    {
+      "rank": 11,
+      "name": "security-audit-skill",
+      "author": "cloudflare",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "stars": 71959,
+      "forks": 4793,
+      "weeklyStars": 8829,
+      "language": "JavaScript",
+      "langColor": "#F1E05A",
+      "zhDesc": "Cloudflare 开源的编码智能体技能，可将 AI 代理变成安全审计员，按六阶段流程完成侦察、覆盖驱动的漏洞挖掘、候选验证与独立复核。产出机器可读且经独立校验的发现记录，多轮运行累积补全覆盖盲区。",
+      "features": [
+        "六阶段编排侦察挖掘验证与报告流程",
+        "发现记录由全新代理独立复核防误报",
+        "多轮审计累积叠加持续补全覆盖盲区"
+      ],
+      "audience": "安全工程师、渗透测试人员、应用安全架构师、AI 智能体开发者、DevSecOps 工程师"
+    },
+    {
+      "rank": 12,
+      "name": "zed",
+      "author": "zed-industries",
+      "url": "https://github.com/zed-industries/zed",
+      "stars": 94971,
+      "forks": 11696,
+      "weeklyStars": 2117,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "由 Atom 与 Tree-sitter 创始人打造的 Rust 高性能多人协作代码编辑器。GPU 渲染带来极低延迟，内置实时协作与 AI 辅助，重新定义流畅编码体验。",
+      "features": [
+        "Rust 编写 GPU 渲染，响应极快",
+        "实时多人协同编辑与共享工作区",
+        "内置 AI 助手与原生 LSP 支持"
+      ],
+      "audience": "软件开发者、开源贡献者、Rust 开发者、技术团队负责人、编程教育者"
+    },
+    {
+      "rank": 13,
+      "name": "claude-quickstarts",
+      "author": "anthropics",
+      "url": "https://github.com/anthropics/claude-quickstarts",
+      "stars": 20877,
+      "forks": 3490,
+      "weeklyStars": 1731,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "Anthropic 官方推出的 Claude API 快速上手项目集，涵盖客服代理、金融分析、浏览器与电脑操作、自主编码代理等可部署示例。每个示例都提供完整可运行的基础代码，帮助开发者跳过搭建环节、直接定制生产级 AI 应用。",
+      "features": [
+        "覆盖客服、金融、编码代理等十余个可运行示例",
+        "演示电脑与浏览器操作、工具集等前沿能力",
+        "包含托管代理与 MCP 服务端集成最佳实践"
+      ],
+      "audience": "AI 应用开发者、全栈工程师、产品经理、技术创业者、企业架构师"
+    },
+    {
+      "rank": 14,
+      "name": "agent-desktop",
+      "author": "vercel-labs",
+      "url": "https://github.com/vercel-labs/agent-desktop",
+      "stars": 23327,
+      "forks": 1727,
+      "weeklyStars": 5408,
+      "language": "Rust",
+      "langColor": "#DEA584",
+      "zhDesc": "Vercel Labs 推出的计算机操作 CLI，让 AI 代理通过系统无障碍树读取桌面应用界面并返回带 ref 的 JSON。无需截图或像素匹配即可精准点击输入，支持 macOS、Windows 与 Linux。",
+      "features": [
+        "无障碍树快照输出带 ref 的可操作 JSON",
+        "按 ref 执行点击输入并复读界面验证",
+        "默认无头操作不抢焦点，支持 MCP 与 C 库"
+      ],
+      "audience": "AI 代理开发者、RPA 工程师、自动化测试工程师、桌面应用开发者、LLM 应用工程师"
+    },
+    {
+      "rank": 15,
+      "name": "lobehub",
+      "author": "lobehub",
+      "url": "https://github.com/lobehub/lobehub",
+      "stars": 85405,
+      "forks": 16295,
+      "weeklyStars": 1126,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "LobeHub 是开源的超级智能体协作平台，可把 AI Agent 加入团队已在用的 Discord、Slack、飞书等聊天工具中。智能体自主认领任务，并通过每次反馈持续积累经验，越用越专业，同时支持自托管以保障数据安全。",
+      "features": [
+        "接入 Discord/Slack 等 IM，Agent 自主认领任务",
+        "多 Agent 顺序、并行、辩论式协同完成项目",
+        "支持 40+ 模型供应商与 Docker 一键自托管"
+      ],
+      "audience": "AI 应用开发者、技术团队负责人、产品经理、DevOps 运维工程师、独立开发者"
+    }
+  ]
+}

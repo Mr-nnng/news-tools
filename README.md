@@ -1,4 +1,4 @@
-﻿# News Tools
+# News Tools
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -132,8 +132,17 @@ python scripts/wallstreet_update.py --section premarket   # 美股盘前 21:30
 python scripts/wallstreet_update.py --section all         # 全量重建当日
 ```
 
-三个栏目使用互补不重叠的小时间窗抓取（00:00~08:00 / 08:00~13:00 / 13:00~22:00），
+三个栏目使用互不重叠（仅 morning/premarket 有意重叠 30 分钟兜底）的小时间窗抓取
+（00:00~08:00 / 08:00~13:30 / 13:00~23:30），
 每日聚合写入 `site/data/wallstreet/YYYY-MM-DD.json`，幂等可重复执行。
+
+> ⏳ **等发布（wait-for-publish）**：上游发布时刻会漂移（美国夏令时结束后，
+> 美股盘前从 20:45~21:05 漂到 21:48~22:01）。当条目还没发出来时，脚本会用
+> 单请求探测最新一页并轮询等待（预设：早餐 20 分钟 / 早间 25 分钟 / 盘前 45 分钟），
+> 命中后再做一次完整窗口抓取。可用 `--wait-minutes` / `--poll-seconds` 覆盖，
+> `--wait-minutes 0` 关闭等待。等待仅对「目标日期 == 今天」生效，补历史数据时自动跳过。
+>
+> 未取到任何数据时脚本以退出码 `1` 结束，让 CI 变红告警（不再静默跳过）。
 
 ### 新闻联播
 

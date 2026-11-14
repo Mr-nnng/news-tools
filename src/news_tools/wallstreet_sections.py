@@ -4,10 +4,14 @@ news_tools/wallstreet_sections.py — 华尔街见闻三栏目聚合逻辑
 定义栏目常量、抓取时间窗、当日聚合文件的读取/合并/保存。
 纯逻辑无网络请求，便于单元测试。
 
-时间窗设计：三个栏目互补覆盖全天且互不重叠，末端留缓冲容忍发布延迟：
+时间窗设计：起点与上一栏目的起点错开、末端留足缓冲容忍发布延迟：
     breakfast  00:00~08:00  期望 07:25
-    morning    08:00~13:00  期望 12:30
-    premarket  13:00~22:00  期望 21:30 前
+    morning    08:00~13:30  期望 12:30（实测偶发 12:35）
+    premarket  13:00~23:30  期望 21:30 前（美国夏令时结束后实测漂移到 22:00 之后）
+
+注意：morning 与 premarket 有意重叠 30 分钟（13:00~13:30），
+用于兜住早间汇总偶发的延迟发布；重叠区不会产生错误匹配，
+因为两个栏目靠标题区分，且每个栏目只取窗口内最新一条。
 """
 
 import json
@@ -29,11 +33,18 @@ SECTION_LABELS: dict[str, str] = {
     "premarket": "美股盘前",
 }
 
-# 栏目 → 抓取时间窗（CST，小时，[start, end)）
-SECTION_WINDOWS: dict[str, tuple[int, int]] = {
-    "breakfast": (0, 8),
-    "morning": (8, 13),
-    "premarket": (13, 22),
+# 栏目 → 抓取时间窗（CST，[start, end)，四元组为 (起时, 起分, 止时, 止分)）
+SECTION_WINDOWS: dict[str, tuple[int, int, int, int]] = {
+    "breakfast": (0, 0, 8, 0),
+    "morning": (8, 0, 13, 30),
+    "premarket": (13, 0, 23, 30),
+}
+
+# 各栏目「等发布」轮询的默认最长等待（分钟），由调用方按需覆盖
+SECTION_WAIT_MINUTES: dict[str, int] = {
+    "breakfast": 20,
+    "morning": 25,
+    "premarket": 45,
 }
 
 # 首页卡片摘要用短标签
@@ -67,16 +78,21 @@ def section_window(section: str, date_str: str) -> tuple[datetime, datetime]:
     """计算栏目在指定日期的抓取时间窗（CST）。"""
     if section not in SECTION_WINDOWS:
         raise ValueError(f"未知栏目: {section}")
-    start_h, end_h = SECTION_WINDOWS[section]
+    start_h, start_m, end_h, end_m = SECTION_WINDOWS[section]
     y, m, d = (int(x) for x in date_str.split("-"))
-    start = datetime(y, m, d, start_h, 0, tzinfo=CST)
-    end = datetime(y, m, d, end_h, 0, tzinfo=CST)
+    start = datetime(y, m, d, start_h, start_m, tzinfo=CST)
+    end = datetime(y, m, d, end_h, end_m, tzinfo=CST)
     return start, end
 
 
 def default_date_str() -> str:
     """默认目标日期：今天（CST）。"""
     return datetime.now(CST).strftime("%Y-%m-%d")
+
+
+def cst_date_of(timestamp: int) -> str:
+    """把快讯 display_time（unix 秒）转成 CST 日期字符串 YYYY-MM-DD。"""
+    return datetime.fromtimestamp(timestamp, tz=CST).strftime("%Y-%m-%d")
 
 
 def is_weekday(date_str: str) -> bool:

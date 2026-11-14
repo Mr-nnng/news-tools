@@ -281,6 +281,17 @@ def _find_cursor_for_time(
 # ═══════════════════════════════════════════════════════════════════
 
 
+def fetch_latest_page(limit: int = 100, score: int = 3) -> list[LiveItem]:
+    """获取指定 score 频道的最新一页快讯（cursor=1），不定位时间窗。
+
+    单次请求即可覆盖最近约 3~4 周该 score 的全部条目，适合做「栏目是否已发布」
+    的轻量轮询探测（比按时间窗二分定位省一个数量级的请求）。
+    """
+    data = _fetch_page(cursor=1, limit=limit, score=score)
+    items = data.get("data", {}).get("items", []) or []
+    return [LiveItem(**item) for item in items]
+
+
 def fetch_live_between(
     start_dt: datetime,
     end_dt: datetime,

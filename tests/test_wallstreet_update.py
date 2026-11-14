@@ -9,10 +9,12 @@
 - wallstreet_sections.build_wallstreet_summary：分组摘要
 """
 
+import io
 import json
 import sys
 import tempfile
-from datetime import timezone, timedelta
+from contextlib import redirect_stdout
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -27,6 +29,7 @@ from news_tools.wallstreet_sections import (
     SECTION_ORDER,
     SECTION_LABELS,
     section_window,
+    cst_date_of,
     is_weekday,
     load_daily_file,
     save_daily_file,
@@ -136,18 +139,25 @@ def test_parse_empty():
 
 def test_section_windows():
     start, end = section_window("breakfast", "2026-08-05")
-    assert (start.hour, end.hour) == (0, 8)
+    assert (start.hour, start.minute, end.hour, end.minute) == (0, 0, 8, 0)
     assert start.tzinfo is not None
 
-    start, end = section_window("premarket", "2026-08-05")
-    assert (start.hour, end.hour) == (13, 22)
+    # 上游早间汇总偶发 12:35 才发，窗口留到 13:30
+    start, end = section_window("morning", "2026-08-05")
+    assert (start.hour, end.hour, end.minute) == (8, 13, 30)
 
-    # 窗口互补不重叠
+    # 美国夏令时结束后盘前漂到 22:00 之后，窗口留到 23:30
+    start, end = section_window("premarket", "2026-08-05")
+    assert (start.hour, start.minute) == (13, 0)
+    assert (end.hour, end.minute) == (23, 30)
+
+    # 三段窗口首尾相接（morning 与 premarket 有意重叠 30 分钟兜底）
     b_start, b_end = section_window("breakfast", "2026-08-05")
     m_start, m_end = section_window("morning", "2026-08-05")
     p_start, p_end = section_window("premarket", "2026-08-05")
     assert b_end == m_start
-    assert m_end == p_start
+    assert m_start <= p_start <= m_end <= p_end
+    assert (m_end - p_start).total_seconds() == 30 * 60
 
 
 def test_section_window_invalid():
@@ -261,6 +271,75 @@ def test_is_weekday_weekends():
     assert is_weekday("2026-08-09") is False
 
 
+def test_cst_date_of():
+    # 2026-08-05 07:00 CST == 2026-08-04 23:00 UTC，必须按 CST 归日
+    ts = int(datetime(2026, 8, 5, 7, 0, tzinfo=CST).timestamp())
+    assert cst_date_of(ts) == "2026-08-05"
+    ts_prev = int(datetime(2026, 8, 4, 23, 59, tzinfo=CST).timestamp())
+    assert cst_date_of(ts_prev) == "2026-08-04"
+
+
+# ── wait_for_publish（等发布轮询）─────────────────────────────────────
+
+
+def test_wait_for_publish_disabled_returns_none():
+    import sys as _sys
+
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    import wallstreet_update as wu
+
+    assert wu.wait_for_publish("premarket", "2026-11-13", wait_minutes=0) is None
+
+
+def test_wait_for_publish_polls_until_appears():
+    import sys as _sys
+
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    import wallstreet_update as wu
+
+    pub = int(datetime(2026, 11, 13, 21, 52, tzinfo=CST).timestamp())
+    item = make_item(1, "周五美股盘前你需要了解的全球要闻", pub)
+    calls = {"n": 0}
+
+    def fake_latest(limit=100, score=3):
+        calls["n"] += 1
+        return [] if calls["n"] < 3 else [item]
+
+    orig_fetch, orig_sleep = wu.fetch_latest_page, wu.time.sleep
+    wu.fetch_latest_page = fake_latest
+    wu.time.sleep = lambda _s: None
+    try:
+        with redirect_stdout(io.StringIO()):
+            hit = wu.wait_for_publish("premarket", "2026-11-13", wait_minutes=5, poll_seconds=1)
+    finally:
+        wu.fetch_latest_page, wu.time.sleep = orig_fetch, orig_sleep
+
+    assert hit is not None and hit.id == 1
+    assert calls["n"] == 3, f"应轮询到第 3 次才命中，实际 {calls['n']}"
+
+
+def test_wait_for_publish_ignores_other_day():
+    """上一交易日的同名条目不能被当成今天的。"""
+    import sys as _sys
+
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    import wallstreet_update as wu
+
+    yesterday = int(datetime(2026, 11, 12, 22, 0, tzinfo=CST).timestamp())
+    item = make_item(2, "周四美股盘前你需要了解的全球要闻", yesterday)
+
+    orig_fetch, orig_sleep = wu.fetch_latest_page, wu.time.sleep
+    wu.fetch_latest_page = lambda limit=100, score=3: [item]
+    wu.time.sleep = lambda _s: None
+    try:
+        with redirect_stdout(io.StringIO()):
+            hit = wu.wait_for_publish("premarket", "2026-11-13", wait_minutes=0.02, poll_seconds=1)
+    finally:
+        wu.fetch_latest_page, wu.time.sleep = orig_fetch, orig_sleep
+
+    assert hit is None
+
+
 def test_is_weekday_invalid_returns_true():
     # 无法解析时保守放行（避免误拦截）
     assert is_weekday("") is True
@@ -287,6 +366,10 @@ def main() -> None:
         (test_load_daily_missing_file, "缺失文件骨架"),
         (test_section_constants, "栏目常量"),
         (test_build_wallstreet_summary_labels, "首页摘要文案"),
+        (test_cst_date_of, "CST 日期归日"),
+        (test_wait_for_publish_disabled_returns_none, "等发布（关闭时不等待）"),
+        (test_wait_for_publish_polls_until_appears, "等发布（轮询命中）"),
+        (test_wait_for_publish_ignores_other_day, "等发布（跨日不误判）"),
         (test_is_weekday_workdays, "工作日判断（工作日）"),
         (test_is_weekday_weekends, "工作日判断（周末）"),
         (test_is_weekday_invalid_returns_true, "工作日判断（非法日期放行）"),

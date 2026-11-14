@@ -19,6 +19,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # 含「等发布」轮询（最长 45 分钟），给 job 一个硬上限
+    timeout-minutes: 60
     permissions:
       contents: write
     steps:
@@ -46,9 +48,10 @@ jobs:
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "ℹ️  目标日期: $DATE"
 
+      # 脚本内置「等发布」轮询：条目未发布时按预设时长等待（见 SECTION_WAIT_MINUTES），
+      # 超时未取到数据会以退出码 1 结束本 job，让 CI 变红而不是静默跳过。
       - name: 运行早间汇总栏目更新
         id: update
-        continue-on-error: true
         run: |
           DATE="${{ steps.date.outputs.date }}"
           echo "🚀 开始更新 $DATE 华尔街见闻早间要闻汇总..."
@@ -56,6 +59,7 @@ jobs:
 
       - name: 检查是否生成了新数据
         id: check
+        if: always()
         run: |
           DATE="${{ steps.date.outputs.date }}"
           if [ -f "site/data/wallstreet/$DATE.json" ]; then
@@ -67,6 +71,7 @@ jobs:
           fi
 
       - name: 提交并推送变更
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

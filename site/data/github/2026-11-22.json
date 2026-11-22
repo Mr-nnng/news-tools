@@ -1,0 +1,244 @@
+{
+  "weekLabel": "2026年第47周",
+  "weekInfo": "2026 年第 47 周 / 2026-11-22",
+  "date": "2026-11-22",
+  "count": 13,
+  "totalCount": 13,
+  "coverSummary": "本周 GitHub Trending 收录 13 个热门仓库，涵盖 AI 编程协作 · Agent 工具与 MCP · 前端设计系统 · 个人金融 · 文档与视频处理等领域。univer 本周新增 7240 Star 领跑，last30days-skill 以 72122 Star 位居榜首。",
+  "repos": [
+    {
+      "rank": 1,
+      "name": "plannotator",
+      "author": "backnotprop",
+      "url": "https://github.com/backnotprop/plannotator",
+      "stars": 14207,
+      "forks": 1412,
+      "weeklyStars": 3396,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "面向 AI 编程代理的本地浏览器审阅工作台，可对计划、规格、HTML 产物与代码 diff 逐处批注。批注结果一键回传给代理，让人与多代理协作始终保持在回路中。",
+      "features": [
+        "计划与文档浏览器内批注后回传代理",
+        "本地改动与 GitHub/GitLab PR 差异审阅",
+        "统一收件箱汇聚多代理待决问题"
+      ],
+      "audience": "AI 编程代理用户、全栈工程师、技术负责人、代码审阅者、独立开发者"
+    },
+    {
+      "rank": 2,
+      "name": "stitch-skills",
+      "author": "google-labs-code",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "stars": 11533,
+      "forks": 1446,
+      "weeklyStars": 2431,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "面向 Google Stitch 的 Agent Skills 技能库，遵循 Agent Skills 开放标准，兼容 Claude Code、Cursor、Gemini CLI 等编码代理。可将 Stitch 设计稿一键转为 React、React Native 代码并统一设计系统，打通设计与开发流程。",
+      "features": [
+        "设计、构建、工具三大插件覆盖完整流程",
+        "Stitch 设计稿转 React/React Native 组件",
+        "DESIGN.md 设计系统提取与令牌统一管理"
+      ],
+      "audience": "前端开发者、UI/UX 设计师、全栈工程师、AI 编程代理用户"
+    },
+    {
+      "rank": 3,
+      "name": "modern-web-guidance-src",
+      "author": "GoogleChrome",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+      "stars": 9948,
+      "forks": 796,
+      "weeklyStars": 4400,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Google Chrome 团队维护的编码智能体技能包，涵盖 262 项现代 Web 特性与 200+ 真实开发用例。通过本地语义检索将专家指南注入 AI 上下文，让智能体摆脱过时写法，改用原生高性能 API。",
+      "features": [
+        "本地语义检索指南，零依赖可完全离线运行",
+        "覆盖 262 项现代特性与 200+ 真实开发场景",
+        "配套 Playwright 评测验证 AI 编码质量提升"
+      ],
+      "audience": "前端开发者、AI 编程工具用户、Web 性能优化工程师、技术负责人、开源贡献者"
+    },
+    {
+      "rank": 4,
+      "name": "open-code-review",
+      "author": "alibaba",
+      "url": "https://github.com/alibaba/open-code-review",
+      "stars": 55160,
+      "forks": 4573,
+      "weeklyStars": 4032,
+      "language": "Go",
+      "langColor": "#00ADD8",
+      "zhDesc": "阿里巴巴开源的 AI 代码评审 CLI 工具，采用确定性流水线加 LLM Agent 的混合架构，读取 Git diff 输出行级精准的评审批注。内置多语言规则集，在超大规模仓库下依然稳定高效。",
+      "features": [
+        "确定性流水线加 Agent 混合架构，覆盖与定位更准",
+        "内置多语言规则集，覆盖空指针、线程安全与注入风险",
+        "兼容 OpenAI 与 Anthropic，可接入 CI/CD 流水线"
+      ],
+      "audience": "后端开发者、代码评审负责人、DevOps 工程师、技术团队管理者"
+    },
+    {
+      "rank": 5,
+      "name": "last30days-skill",
+      "author": "mvanhorn",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "stars": 72122,
+      "forks": 6387,
+      "weeklyStars": 4198,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "一个 AI 智能体研究技能，可并行检索 Reddit、X、YouTube、HN、Polymarket 等数十个平台的近 30 天真实讨论，并按点赞、投注等真实参与度打分。解决传统搜索只覆盖编辑内容、各平台数据割裂的问题，一次输出有据可依的深度简报。",
+      "features": [
+        "数十平台并行检索，打破各平台数据孤岛",
+        "按真实互动与真金投注排序，而非 SEO",
+        "自动合并同一事件并附引用与出处"
+      ],
+      "audience": "AI 应用开发者、市场与竞品分析师、内容创作者、投资人、销售与商务拓展"
+    },
+    {
+      "rank": 6,
+      "name": "chrome-devtools-mcp",
+      "author": "ChromeDevTools",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "stars": 58717,
+      "forks": 4906,
+      "weeklyStars": 2795,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "谷歌 Chrome DevTools 团队推出的 MCP 服务器与 CLI 工具，让 Claude、Cursor 等编码智能体直接控制并检查真实 Chrome 浏览器。提供性能追踪、网络调试与可靠自动化能力，为 AI 编程助手补上深度浏览器调试的关键一环。",
+      "features": [
+        "录制性能追踪并提取可落地的优化洞察",
+        "分析网络请求、截图与源码映射控制台报错",
+        "基于 Puppeteer 自动等待结果的可靠自动化"
+      ],
+      "audience": "AI 编程助手用户、前端工程师、性能优化工程师、自动化测试开发者、Web 调试场景开发者"
+    },
+    {
+      "rank": 7,
+      "name": "claude-trading-skills",
+      "author": "tradermonty",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "stars": 7659,
+      "forks": 1481,
+      "weeklyStars": 3113,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "基于 Claude Skills 的个人投资者交易工作流工具箱，覆盖市场广度分析、选股筛选、仓位管理与交易复盘。它不替用户做买卖决策，而是把市场研判、风险控制和交易计划流程化，帮助建立可复用的决策纪律。",
+      "features": [
+        "数十个技能覆盖市场研判、选股与交易计划",
+        "五条工作流清单从每日看盘到月度复盘",
+        "不依赖付费数据 API 也能完成基础市场检查"
+      ],
+      "audience": "个人投资者、波段交易者、股息与 ETF 投资者、量化策略研究者、交易系统开发者"
+    },
+    {
+      "rank": 8,
+      "name": "ag-ui",
+      "author": "ag-ui-protocol",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "stars": 21052,
+      "forks": 2148,
+      "weeklyStars": 3792,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "AG-UI 是开放的轻量级事件协议，用统一的双向事件流标准化 AI Agent 与前端应用的连接。它解决 Agent 流式输出、工具调用、状态共享与人工介入等场景下的定制对接难题，同一 Agent 可驱动网页、移动端、终端或 Slack。",
+      "features": [
+        "基于类型化事件流，支持流式对话与生成式 UI",
+        "共享状态同步、前端工具调用与人工介入",
+        "提供 TS、Python、.NET SDK 及主流框架集成"
+      ],
+      "audience": "AI 应用开发者、前端工程师、Agent 框架开发者、全栈工程师、产品技术负责人"
+    },
+    {
+      "rank": 9,
+      "name": "astryx",
+      "author": "meta",
+      "url": "https://github.com/meta/astryx",
+      "stars": 31883,
+      "forks": 2503,
+      "weeklyStars": 3967,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "Meta 开源的设计系统，内置 150+ 无障碍 React 组件、主题体系与 CLI，已在内部 13000+ 应用验证。基于 React 19 与 StyleX，无样式锁定，同时面向人类开发者与 AI 助手设计。",
+      "features": [
+        "150+ 无障碍 React 组件开箱即用",
+        "主题即 CSS 变量，无需包裹或改源码",
+        "CLI 提供文档与脚手架，AI 助手同步可用"
+      ],
+      "audience": "前端工程师、UI 设计师、设计系统维护者、AI 辅助开发者"
+    },
+    {
+      "rank": 10,
+      "name": "HermesEnabler",
+      "author": "pookjw",
+      "url": "https://github.com/pookjw/HermesEnabler",
+      "stars": 2361,
+      "forks": 198,
+      "weeklyStars": 524,
+      "language": "Objective-C",
+      "langColor": "#438EFF",
+      "zhDesc": "在任意 Apple Watch 上解锁爱马仕官方表盘的工具，适用于 watchOS 27.0 至 27.3 beta 1。通过 IPA 侧载安装即可让非爱马仕机型用上官方表盘，无需越狱。",
+      "features": [
+        "一键为任意 Apple Watch 解锁爱马仕表盘",
+        "支持 macOS 侧载、Xcode 构建与 Windows 安装",
+        "内置 MobileGestalt 备份，可随时恢复"
+      ],
+      "audience": "Apple Watch 用户、越狱与侧载爱好者、iOS 开发者、表盘收藏玩家"
+    },
+    {
+      "rank": 11,
+      "name": "sure",
+      "author": "we-promise",
+      "url": "https://github.com/we-promise/sure",
+      "stars": 17186,
+      "forks": 1500,
+      "weeklyStars": 2041,
+      "language": "Ruby",
+      "langColor": "#701516",
+      "zhDesc": "基于已停止维护的 Maybe Finance 开源代码延续的个人财务管理应用，支持自行部署。涵盖净资产、现金流、支出追踪与 AI 助手问答，让你完全掌控自己的财务数据。",
+      "features": [
+        "净资产、现金流与支出可视化仪表盘",
+        "内置 AI 助手解答个人财务疑问",
+        "Docker 一键自托管，数据完全自主"
+      ],
+      "audience": "自托管爱好者、个人理财用户、全栈开发者、Ruby 工程师、财务数据爱好者"
+    },
+    {
+      "rank": 12,
+      "name": "univer",
+      "author": "dream-num",
+      "url": "https://github.com/dream-num/univer",
+      "stars": 31118,
+      "forks": 2838,
+      "weeklyStars": 7240,
+      "language": "TypeScript",
+      "langColor": "#3178C6",
+      "zhDesc": "开源 Office SDK，可将电子表格、文档编辑、公式计算与协作能力嵌入自有产品。基于可扩展插件架构与 Facade API，同时支持无头服务端处理与 AI 智能体接入。",
+      "features": [
+        "插件化架构快速嵌入表格与文档编辑器",
+        "内置公式引擎、渲染引擎与撤销重做系统",
+        "Facade API 打通无头处理与 Agent 集成"
+      ],
+      "audience": "前端工程师、Office 应用开发者、SaaS 产品团队、AI 智能体开发者、企业平台架构师"
+    },
+    {
+      "rank": 13,
+      "name": "ffmpeg-skill",
+      "author": "kajisho5",
+      "url": "https://github.com/kajisho5/ffmpeg-skill",
+      "stars": 9352,
+      "forks": 842,
+      "weeklyStars": 3598,
+      "language": "Python",
+      "langColor": "#3572A5",
+      "zhDesc": "为编码智能体提供本地视频编辑能力，内置 42 个 FFmpeg 工具与 MCP 服务器，可完成剪切、字幕、重构图与平台导出。全程离线、无需 API 密钥，执行后自动校验输出。",
+      "features": [
+        "42 个类型化工具覆盖剪切、字幕、音频与分发",
+        "契约从 argparse 自动派生，CLI 与 MCP 永不漂移",
+        "本地离线运行，执行后自动探针校验输出"
+      ],
+      "audience": "AI 智能体开发者、视频剪辑师、自媒体运营者、自动化工程师"
+    }
+  ]
+}

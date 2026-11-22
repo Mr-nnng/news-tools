@@ -1,10 +1,15 @@
 {
   "gh": {
-    "count": 24,
+    "count": 25,
     "months": [
       {
         "label": "2026年11月",
         "items": [
+          {
+            "date": "2026-11-22",
+            "count": 13,
+            "summary": "本周 GitHub Trending 收录 13 个热门仓库，涵盖 AI 编程协作 · Agent 工具与 MCP · 前端设计系统 · 个人金融 · 文档与视频处理等领域。univer 本周新增 7240 Star 领跑，last30days-skill 以 72122 Star 位居榜首。"
+          },
           {
             "date": "2026-11-14",
             "count": 15,

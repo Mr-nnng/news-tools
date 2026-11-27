@@ -1090,11 +1090,16 @@
     ]
   },
   "wallstreet": {
-    "count": 84,
+    "count": 85,
     "months": [
       {
         "label": "2026年11月",
         "items": [
+          {
+            "date": "2026-11-27",
+            "count": 1,
+            "summary": "早间汇总 5 条"
+          },
           {
             "date": "2026-11-26",
             "count": 2,
